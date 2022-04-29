@@ -130,7 +130,8 @@ void InputConfig::StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& sele
             break;
         }
 
-        else {
+        else 
+        {
             yMenu = yMenu;
             break;
         }
@@ -142,7 +143,8 @@ void InputConfig::StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& sele
             break;
         }
 
-        else {
+        else 
+        {
             yMenu = yMenu;
             break;
         }
@@ -154,6 +156,48 @@ void InputConfig::StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& sele
 
     case STOP:
         yMenu = yMenu;
+        break;
+    default:
+        break;
+    }
+}
+
+void InputConfig::CharSelectInputLogic(int& yCharSelect, const int numCharacters, bool& charSelect)
+{
+    switch (userInput)
+    {
+    case UP:
+        if (yCharSelect != 0)
+        {
+            yCharSelect--;
+            break;
+        }
+
+        else 
+        {
+            yCharSelect = yCharSelect;
+            break;
+        }
+
+    case DOWN:
+        if (yCharSelect != numCharacters - 1)
+        {
+            yCharSelect++;
+            break;
+        }
+
+        else 
+        {
+            yCharSelect = yCharSelect;
+            break;
+        }
+
+    case ENTER:
+        charSelect = true;
+        break;
+
+    case STOP:
+        yCharSelect = yCharSelect;
         break;
     default:
         break;

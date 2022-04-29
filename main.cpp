@@ -21,6 +21,7 @@ int main()
 		{
 			NewGame newGame;
 			newGame.CharacterSelect();
+			play = false;
 		}
 		else if (resumeGame) {
 			cout << "RESUMEEEE";

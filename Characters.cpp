@@ -5,6 +5,7 @@ using namespace std;
 
 void Characters::PrintMario()
 {
+    cout << "\n\n\n\n\n\n";
     cout << "               KKK0c..   ...    .xKN    \n";
     cout << "            WNd....';;:::d0kl:,....dW   \n";
     cout << "          MKl,,,,,,:ccoO0xcoO0d:'  lW   \n";
@@ -12,11 +13,11 @@ void Characters::PrintMario()
     cout << "      N0x;.......',.......           .lk\n";
     cout << "   WNKx' ......    .;::::,............  \n";
     cout << "   Wd........ .;;'..'''''.............  \n";
-    cout << " MWl  ........,;cldkOOOOdlokOOOo.   .lk\n";
-    cout << "MXxl:,,'.....',:lOKNWMNOxxxxxxKWO' 'cxX \n";
-    cout << "ko,.;ll:;,'..'cdONMMMMKc'cxo;'xWO' lW   \n";
-    cout << " .cdc,:od:'..':oxXWWMMKl;oOx:,xNO,.lKNW \n";
-    cout << " .cdc,:od:'..'',ckKXWWNXK00OkkO0Odl:,lK \n";
+    cout << " MWl  ........,;cldkOOOOdlokOOOo.   .lk" << "     STATS:\n";
+    cout << "MXxl:,,'.....',:lOKNWMNOxxxxxxKWO' 'cxX" << "     Power     :   17\n";
+    cout << "ko,.;ll:;,'..'cdONMMMMKc'cxo;'xWO' lW  " << "     Jump      :   11\n";
+    cout << " .cdc,:od:'..':oxXWWMMKl;oOx:,xNO,.lKNW" << "     Flwr Pw   :   13\n";
+    cout << " .cdc,:od:'..'',ckKXWWNXK00OkkO0Odl:,lK" << "     Speed     :   09\n";
     cout << "ko,.;loddol:'.:oxOOxllc;;lxkO000Oxd, ,0 \n";
     cout << " Xxl:,;:cokxolxOkoc;......,,;;::;,,...:l\n";
     cout << "   Wk;'..;oxkOO0kc;:::,'..          ..',\n";
@@ -46,18 +47,18 @@ void Characters::PrintMario()
 
 void Characters::PrintLuigi()
 {
-    cout << "\n                   0ooooooooooO           \n";
+    cout << "\n                   0ooooooooooO         \n";
     cout << "             N0OOOOl,',;;,,,,,cx0         \n";
     cout << "            WO;.'',lddk00kxdddc''k        \n";
     cout << "           OcclloooxxxOKXXX0xo:.'kM       \n";
     cout << "         xdoccloooo:,;;:cclc,'...;llllO   \n";
     cout << "       0d;;ldo:;;;,.                  ;O  \n";
     cout << "     Kc.;odoc;.                        ., \n";
-    cout << "     K:.,ll,..                          ' \n";
-    cout << "   0dl:;:lc.    .;:looooolllooool.    'lk \n";
-    cout << " 0Oo,,clc;,.  .':dkXWWXOxOKKOx0WNxcc:ck   \n";
-    cout << "0;.;cllo;.   .lxxxkXWMk. cKk' :X          \n";
-    cout << "0;.:dxO0l.   .lxk0KNWWk. cKk' ;X          \n";
+    cout << "     K:.,ll,..                          '" << "     STATS:\n";
+    cout << "   0dl:;:lc.    .;:looooolllooool.    'lk" << "     Power     :   12\n";
+    cout << " 0Oo,,clc;,.  .':dkXWWXOxOKKOx0WNxcc:ck  " << "     Jump      :   14\n";
+    cout << "0;.;cllo;.   .lxxxkXWMk. cKk' :X         " << "     Flwr Pw   :   14\n";
+    cout << "0;.:dxO0l.   .lxk0KNWWk. cKk' ;X         " << "     Speed     :   07\n";
     cout << " dclcoOKo.    .'l0KXXXOl:oOkolxKXOxxxkxdkX\n";
     cout << "  xo;:x0d,..  ';o0KKKKOdodxkOOOOOOOOOOd;lK\n";
     cout << "   occdxxxd;.,kKKKK0kOd;,cddddddddddddo:oX\n";
@@ -93,18 +94,18 @@ void Characters::PrintLuigi()
 
 void Characters::PrintToad()
 {
-    cout << "\n           WXXXXXXXo....................cKXXXXXXN           \n";
+    cout << "\n           WXXXXXXXo....................cKXXXXXXN         \n";
     cout << "          Wx'''''.'lO0000000000000000000o,''''''oNW         \n";
     cout << "       WXXXo.......oNMMWWWWWNNNNNNNNNNNNx.......c0XXN       \n";
     cout << "      Wx'''l0000000XWMMMWMW0ooooooooooooxO000000d,''oX      \n";
     cout << "   NXNXo...oWMMMMMMMMMMWNNNkc:::::::::::dXNNWWMMk'..c0XXNW  \n";
     cout << "  Wx,''lO00XWMMMMMMMMMM0oool:ccc::::::::clooONMMN000o,''oNW \n";
     cout << "  Wo   cXNNWWMMMMMMMMMWOc::::cc:::::::::::::xNWMMWWWx. .:0XX\n";
-    cout << "  Wo   ,looOWWWWMMMMMMWOc:::::c:::::::::::::xNWMMMWWO:,;,'''\n";
-    cout << "NXXl. .'::cxXNNWMMMMMMW0lccc::c:::::::::cccckNMMWNNNOc::'.  \n";
-    cout << "''',;;;;:::coooOWMMMMMMNXKKkc:::::::::::dKXXNWWWKdlol::c,   \n";
-    cout << "   ':::c::c:::ckWMMMWWWWWWWOlcccccccccccxNWWWWWW0c::::::,.  \n";
-    cout << "   .:c::::::::ckWMNXKXXXXX0OOOOOOOOOOOO0KXKKXXXkc::::::,.  \n";
+    cout << "  Wo   ,looOWWWWMMMMMMWOc:::::c:::::::::::::xNWMMMWWO:,;,'''" << "     STATS:\n";
+    cout << "NXXl. .'::cxXNNWMMMMMMW0lccc::c:::::::::cccckNMMWNNNOc::'.  " << "     Power     :   10\n";
+    cout << "''',;;;;:::coooOWMMMMMMNXKKkc:::::::::::dKXXNWWWKdlol::c,   " << "     Jump      :   10\n";
+    cout << "   ':::c::c:::ckWMMMWWWWWWWOlcccccccccccxNWWWWWW0c::::::,.  " << "     Flwr Pw   :   10\n";
+    cout << "   .:c::::::::ckWMNXKXXXXX0OOOOOOOOOOOO0KXKKXXXkc::::::,.   " << "     Speed     :   10\n";
     cout << "   .:::::::::::xNWWNKKK0OOOOOOOOOOOOOOOOOOOO0KKKklccc:::,.  \n";
     cout << "   .:::::::::::dKKXKKKKo'...................c0KK0OOOdc::'.  \n";
     cout << "   .:::::::ccccdKKK0OOOl....     ...     ...;k0O0KKKx:;:,...\n";
@@ -133,5 +134,5 @@ void Characters::PrintToad()
     cout << "          Wo               ......    ....   :N              \n";
     cout << "           o                                :NWW            \n";
 
-    cout << "\n     Toad: [T]\n\n\n";
+    cout << "\n     Toad: [T]\n\n\n\n";
 }

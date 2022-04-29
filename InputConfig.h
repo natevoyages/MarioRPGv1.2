@@ -12,6 +12,8 @@ public:
 
     void StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& titleMenu);
 
+    void CharSelectInputLogic(int& yCharSelect, const int numCharacters, bool& charSelect);
+
 
 
 private:

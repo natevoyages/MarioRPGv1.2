@@ -1,5 +1,4 @@
 #include "NewGame.h"
-#include "InputConfig.h"
 #include <windows.h>
 #include <iostream>
 
@@ -44,6 +43,20 @@ void NewGame::CharacterSelect()
 			}
 
 		}
-		cout << "\n        Press 'space to select\n";
+		cout << "\n        Press 'Space to select\n";
+		newGameInput.UserInput();
+		newGameInput.CharSelectInputLogic(yCharSelect, numCharacters, charSelect);
+	}
+	if (charSelect && yCharSelect == 0)
+	{
+		cout << "You have chosen Mario!\n";
+	}
+	else if (charSelect && yCharSelect == 1)
+	{
+		cout << "You have chosen Luigi!\n";
+	}
+	else if (charSelect && yCharSelect == 2)
+	{
+		cout << "You have chosen Toad!\n";
 	}
 }
