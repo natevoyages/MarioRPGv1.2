@@ -85,7 +85,7 @@ void StartMenu::TitleScreen()
         {
             system("cls");
             TitlePrint();
-            input.PressEnter2Continue(titleScreen);
+            input.PressEnterToContinue(titleScreen);
         }
     }
 }

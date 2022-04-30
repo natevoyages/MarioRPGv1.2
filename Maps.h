@@ -13,7 +13,7 @@ public:
 
 	void MapSetup();
 
-	void Map();
+	void PrintMap();
 
 private:
 	InputConfig mapsInput;
@@ -25,7 +25,7 @@ private:
 	const int width = 80;
 	const int height = 40;
 	bool newMap;
-	bool menuOpened;
+	bool menuToggled;
 	char userCharacter;
 	
 };

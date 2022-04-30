@@ -4,19 +4,24 @@
 Maps::Maps()
 {
     newMap = false;
+    menuToggled = false;
     xCoordinate = width / 2;
     yCoordinate = height - 1;
 }
 
 
-void Maps::Map()
+void Maps::PrintMap()
 {
     MapSetup();
     while (!newMap)
     {
         MapLogic();
-        mapsInput.UserInput();
-        mapsInput.GamePlayInputLogic(xCoordinate,yCoordinate);
+        mapsInput.UserInput(menuToggled);
+        mapsInput.GamePlayInputLogic(xCoordinate,yCoordinate, width, height);
+        /*while (menuToggled)
+        {
+        
+        }*/
     }
 }
 
@@ -54,9 +59,9 @@ void Maps::MapLogic()
         cout << "\n";
     }
 
-    for (int i = 0; i < width; i++)
+    for (int i = 0; i < width; i++) 
     {
-        if (i == width / 2 || i == (width / 2) + 1)
+        if (i == width / 2 || i == (width / 2) + 1) //exit for map
         {
             cout << "_";
         }

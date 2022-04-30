@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void InputConfig::UserInput()
+void InputConfig::UserInput(bool& menu)
 {
     if (_kbhit())
     {
@@ -53,7 +53,7 @@ void InputConfig::UserInput()
     }
 }
 
-void InputConfig::PressEnter2Continue(bool& titleScreen)
+void InputConfig::PressEnterToContinue(bool& titleScreen)
 {
 
     if (_kbhit())
@@ -71,48 +71,111 @@ void InputConfig::PressEnter2Continue(bool& titleScreen)
 }
 
 
-void InputConfig::GamePlayInputLogic(int& x, int& y) const
+void InputConfig::GamePlayInputLogic(int& x, int& y, int width, int height) const
 {
     switch (userInput)
     {
     case LEFT:
-        x--;
-        break;
+        if (x != 1) // lower limit is 0
+        {
+            x--;
+            break;
+        }
+        else
+        {
+            x = x;
+            break;
+        }
 
     case RUN_LEFT:
-        x -= 4;
-        break;
-
+        if (x > 5)
+        {
+            x -= 4;
+            break;
+        }
+        else
+        {
+            x = 1;
+            break;
+        }
     case RIGHT:
-        x++;
-        break;
+        if (x != width - 2) // upper limit is width - 2 since last char is at width - 1 
+        {
+            x++;
+            break;
+        }
+        else
+        {
+            x = x;
+            break;
+        }
 
     case RUN_RIGHT:
-        x += 4;
-        break;
+        if (x < width - 6)
+        {
+            x += 4;
+            break;
+        }
+        else
+        {
+            x = width - 2;
+            break;
+        }
+   
 
 
     case UP:
-        y--;
-        break;
+        if (y != 0) // upper limit is 0 for y
+        {
+            y--;
+            break;
+        }
+        else {
+            y = 0;
+            break;
+        }
 
     case RUN_UP:
-        y -= 2;
-        break;
+        if (y > 1)
+        {
+            y -= 2;
+            break;
+        }
+        else
+        {
+            y = 0;
+            break;
+        }
 
     case DOWN:
-        y++;
-        break;
+        if (y < height - 1)
+        {
+            y++;
+            break;
+        }
+        else 
+        {
+            y = height - 1;
+            break;
+        }
 
     case RUN_DOWN:
-        y += 2;
-        break;
-
+        if (y < height - 2)
+        {
+            y += 2;
+            break;
+        }
+        else
+        {
+            y = height - 1;
+            break;
+        }
 
     case STOP:
         x = x;
         y = y;
         break;
+
     default:
         break;
 

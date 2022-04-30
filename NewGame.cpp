@@ -101,6 +101,6 @@ void NewGame::NewGameDialouge()
 		cout << "             Press 'Space' to wake up";
 		Sleep(1500);
 		
-		newGameInput.PressEnter2Continue(enterNotPressed);
+		newGameInput.PressEnterToContinue(enterNotPressed);
 	}
 }

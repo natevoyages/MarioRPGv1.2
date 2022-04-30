@@ -4,11 +4,11 @@
 class InputConfig
 {
 public:
-    void UserInput();
+    void UserInput(bool& menu);
 
-    void PressEnter2Continue(bool& titleScreen);
+    void PressEnterToContinue(bool& titleScreen);
 
-    void GamePlayInputLogic(int& x, int& y) const;
+    void GamePlayInputLogic(int& x, int& y, int width, int height) const;
 
     void StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& titleMenu);
 
