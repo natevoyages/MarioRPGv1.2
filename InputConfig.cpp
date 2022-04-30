@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void InputConfig::UserInput(bool& menu)
+void InputConfig::UserInput() //fix me
 {
     if (_kbhit())
     {

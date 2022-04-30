@@ -16,7 +16,7 @@ void Maps::PrintMap()
     while (!newMap)
     {
         MapLogic();
-        mapsInput.UserInput(menuToggled);
+        mapsInput.UserInput();
         mapsInput.GamePlayInputLogic(xCoordinate,yCoordinate, width, height);
         /*while (menuToggled)
         {

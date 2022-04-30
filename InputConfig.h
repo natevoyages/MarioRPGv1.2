@@ -4,7 +4,7 @@
 class InputConfig
 {
 public:
-    void UserInput(bool& menu);
+    void UserInput();
 
     void PressEnterToContinue(bool& titleScreen);
 
