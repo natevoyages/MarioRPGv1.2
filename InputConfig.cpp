@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void InputConfig::UserInput() //fix me
+void InputConfig::UserInput()
 {
     if (_kbhit())
     {
@@ -45,6 +45,86 @@ void InputConfig::UserInput() //fix me
             userInput = ENTER;
             break;
 
+        }
+    }
+    else
+    {
+        userInput = STOP;
+    }
+}
+void InputConfig::UserInput(bool& menuOpen)
+{
+    if (_kbhit())
+    {
+        switch (_getch())
+        {
+        case 'a':
+            userInput = LEFT;
+            break;
+
+        case 'A':
+            userInput = RUN_LEFT;
+            break;
+
+        case 'd':
+            userInput = RIGHT;
+            break;
+
+        case 'D':
+            userInput = RUN_RIGHT;
+            break;
+
+        case 'w':
+            userInput = UP;
+            break;
+
+        case 'W':
+            userInput = RUN_UP;
+            break;
+        case 's':
+            userInput = DOWN;
+            break;
+
+        case 'S':
+            userInput = RUN_DOWN;
+            break;
+
+        case ' ':
+            menuOpen = true;
+            break;
+
+        }
+    }
+    else
+    {
+        userInput = STOP;
+    }
+}
+
+void InputConfig::MenuInput()
+{
+    if (_kbhit())
+    {
+        switch (_getch())
+        {
+        case 'w':
+            userInput = UP;
+            break;
+
+        case 's':
+            userInput = DOWN;
+            break;
+
+        case 'z':
+            userInput = ENTER;
+            break;
+
+        case 'x':
+            userInput = BACK;
+            break;
+
+        case ' ':
+            userInput = EXIT;
         }
     }
     else
@@ -261,6 +341,55 @@ void InputConfig::CharSelectInputLogic(int& yCharSelect, const int numCharacters
 
     case STOP:
         yCharSelect = yCharSelect;
+        break;
+    default:
+        break;
+    }
+}
+void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select)
+{
+    switch (userInput)
+    {
+    case UP:
+        if (yMenu != 0)
+        {
+            yMenu--;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case DOWN:
+        if (yMenu != numMenuOptions - 1)
+        {
+            yMenu++;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case ENTER:
+        select = true;
+        break;
+
+    case BACK:
+        select = false;
+        break;
+
+    case EXIT:
+        select = false;
+        break;
+
+    case STOP:
+        yMenu = yMenu;
         break;
     default:
         break;

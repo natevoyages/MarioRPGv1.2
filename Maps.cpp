@@ -1,5 +1,6 @@
 #include "Maps.h"
 #include "InputConfig.h"
+#include "InGameMenu.h"
 
 Maps::Maps()
 {
@@ -16,12 +17,12 @@ void Maps::PrintMap()
     while (!newMap)
     {
         MapLogic();
-        mapsInput.UserInput();
+        mapsInput.UserInput(menuToggled);
         mapsInput.GamePlayInputLogic(xCoordinate,yCoordinate, width, height);
-        /*while (menuToggled)
+        while (menuToggled)
         {
-        
-        }*/
+            inGame.PrintInGameMenu(menuToggled);
+        }
     }
 }
 

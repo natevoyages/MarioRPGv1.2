@@ -1,6 +1,7 @@
 #ifndef MAPS_H
 #define MAPS_H
 #include "InputConfig.h"
+#include "InGameMenu.h"
 #include <iostream>
 
 using namespace std;
@@ -17,6 +18,7 @@ public:
 
 private:
 	InputConfig mapsInput;
+	InGameMenu inGame;
 	int DesertMap[3]; // will fix later 
 	int SeaFloorMap[4]; //
 	int BowserCastle[5]; //
