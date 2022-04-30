@@ -1,4 +1,5 @@
 #include "StartMenu.h"
+#include "Maps.h"
 #include "NewGAme.h"
 #include <iostream>
 #include <conio.h>
@@ -12,6 +13,7 @@ int main()
 	bool startNewGame = false;
 	bool resumeGame = false;
 	StartMenu start;
+	Maps map;
 
 	while (play)
 	{
@@ -21,6 +23,8 @@ int main()
 		{
 			NewGame newGame;
 			newGame.CharacterSelect();
+			newGame.NewGameDialouge();
+			map.Map();
 			play = false;
 		}
 		else if (resumeGame) {

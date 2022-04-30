@@ -12,12 +12,18 @@ public:
 
 	void CharacterSelect();
 
+	void NewGameDialouge();
+
 private:
 	Characters select;
 	InputConfig newGameInput;
 	bool charSelect;
 	int yCharSelect;
+	bool enterNotPressed;
 	const int numCharacters = 3;
 	string characters[3];
+	string charactersCap[3];
+	string selectedCharacter;
+	string characterCap;
 };
 #endif

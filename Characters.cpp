@@ -136,3 +136,14 @@ void Characters::PrintToad()
 
     cout << "\n     Toad: [T]\n\n\n\n";
 }
+
+void Characters::SetCharacter(string character)
+{
+    characterName = character;
+
+}
+
+string Characters::GetCharacter()
+{
+    return characterName;
+}

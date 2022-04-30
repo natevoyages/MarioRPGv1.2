@@ -53,7 +53,7 @@ void InputConfig::UserInput()
     }
 }
 
-void InputConfig::TitleScreenInput(bool& titleScreen)
+void InputConfig::PressEnter2Continue(bool& titleScreen)
 {
 
     if (_kbhit())

@@ -8,10 +8,14 @@ using namespace std;
 NewGame::NewGame()
 {
 	charSelect = false;
+	enterNotPressed = true;
 	yCharSelect = 0;
-	characters[0] = "    Mario";
-	characters[1] = "    Luigi";
-	characters[2] = "    Toad ";
+	characters[0] = "Mario";
+	characters[1] = "Luigi";
+	characters[2] = "Toad";
+	charactersCap[0] = "MARIO";
+	charactersCap[1] = "LUIGI";
+	charactersCap[2] = "TOAD";
 }
 
 void NewGame::CharacterSelect()
@@ -32,7 +36,14 @@ void NewGame::CharacterSelect()
 		}
 		for (int i = 0; i < numCharacters; i++)
 		{
-			cout << characters[i];
+			if (i == 2)
+			{
+				cout << "     " << characters[i] << " ";
+			}
+			else
+			{
+				cout << "     " << characters[i];
+			}
 			if (yCharSelect == i)
 			{
 				cout << "   [*]\n";
@@ -49,14 +60,47 @@ void NewGame::CharacterSelect()
 	}
 	if (charSelect && yCharSelect == 0)
 	{
-		cout << "You have chosen Mario!\n";
+		system("cls");
+		select.PrintMario();
+		cout << "     You have chosen Mario!\n";
+		selectedCharacter = characters[0];
+		characterCap = charactersCap[0];
 	}
 	else if (charSelect && yCharSelect == 1)
 	{
-		cout << "You have chosen Luigi!\n";
+		system("cls");
+		select.PrintLuigi();
+		cout << "     You have chosen Luigi!\n";
+		selectedCharacter = characters[1];
+		characterCap = charactersCap[1];
 	}
 	else if (charSelect && yCharSelect == 2)
 	{
-		cout << "You have chosen Toad!\n";
+		system("cls");
+		select.PrintToad();
+		cout << "     You have chosen Toad!\n";
+		selectedCharacter = characters[2];
+		characterCap = charactersCap[2];
+	}
+	select.SetCharacter(selectedCharacter);
+	Sleep(1500);
+}
+
+void NewGame::NewGameDialouge()
+{
+	while (enterNotPressed)
+	{
+		system("cls");
+		cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" 
+			<< "                      " << selectedCharacter << "..?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+		cout << "             Press 'Space' to wake up";
+		Sleep(1500);
+		system("cls");
+		cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" 
+			<< "                      " << characterCap << "!!!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+		cout << "             Press 'Space' to wake up";
+		Sleep(1500);
+		
+		newGameInput.PressEnter2Continue(enterNotPressed);
 	}
 }

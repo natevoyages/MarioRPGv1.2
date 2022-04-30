@@ -6,7 +6,7 @@ class InputConfig
 public:
     void UserInput();
 
-    void TitleScreenInput(bool& titleScreen);
+    void PressEnter2Continue(bool& titleScreen);
 
     void GamePlayInputLogic(int& x, int& y) const;
 

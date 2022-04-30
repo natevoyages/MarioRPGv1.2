@@ -30,6 +30,9 @@
     <ClCompile Include="NewGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Maps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputConfig.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Characters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
