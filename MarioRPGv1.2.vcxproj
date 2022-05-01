@@ -143,20 +143,21 @@
     <ClCompile Include="InputConfig.cpp" />
     <ClCompile Include="Characters.cpp" />
     <ClCompile Include="NewGame.cpp" />
-    <ClCompile Include="Maps.cpp" />
+    <ClCompile Include="OverWorld.cpp" />
     <ClCompile Include="InGameMenu.cpp" />
+    <ClCompile Include="PlayerStats.cpp" />
+    <ClCompile Include="Items.cpp" />
     <ClCompile Include="StartMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PlayerStats.h" />
+    <ClInclude Include="Items.h" />
     <ClInclude Include="InGameMenu.h" />
-    <ClInclude Include="Maps.h" />
+    <ClInclude Include="OverWorld.h" />
     <ClInclude Include="NewGame.h" />
     <ClInclude Include="Characters.h" />
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="InputConfig.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="save.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

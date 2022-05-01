@@ -1,32 +1,37 @@
-#include "Maps.h"
+#include "OverWorld.h"
 #include "InputConfig.h"
 #include "InGameMenu.h"
 
-Maps::Maps()
+OverWorld::OverWorld()
 {
     newMap = false;
     menuToggled = false;
+    notGameOver = true;
     xCoordinate = width / 2;
     yCoordinate = height - 1;
 }
 
 
-void Maps::PrintMap(char charCharacter)
+void OverWorld::PrintOverWorld(char charCharacter,bool& play)
 {
-    MapSetup(charCharacter);
+    OverWorldSetup(charCharacter);
+    
     while (!newMap)
     {
-        MapLogic();
+        OverWorldLogic();
         mapsInput.UserInput(menuToggled);
         mapsInput.GamePlayInputLogic(xCoordinate,yCoordinate, width, height);
+        inGame.SetUpMenu();
         while (menuToggled)
         {
-            inGame.PrintInGameMenu(menuToggled);
+            inGame.PrintInGameMenu(menuToggled, notGameOver, newMap);
+            
         }
     }
+    play = notGameOver;
 }
 
-void Maps::MapLogic()
+void OverWorld::OverWorldLogic()
 {
     system("cls");
     for (int i = 0; i < width; i++)
@@ -73,7 +78,7 @@ void Maps::MapLogic()
     }
 }
 
-void Maps::MapSetup(char charCharacter)
+void OverWorld::OverWorldSetup(char charCharacter)
 {
     newMap = false;
     xCoordinate = width / 2;

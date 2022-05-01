@@ -20,7 +20,7 @@ private:
 	string characterName;
 	char characterChar;
 	int level;
-	int strength;
+	int power;
 	int jump;
 	int flowerPower;
 	int speed;

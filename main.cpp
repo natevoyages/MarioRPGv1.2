@@ -1,12 +1,10 @@
 #include "StartMenu.h"
-#include "Maps.h"
+#include "OverWorld.h"
 #include "NewGAme.h"
 #include <iostream>
-#include <conio.h>
 #include <windows.h>
-#include <string>
 #include <fstream>
-using namespace std; // this may be polluting the global namespace
+using namespace std; 
 
 
 int main()
@@ -15,7 +13,7 @@ int main()
 	bool startNewGame = false;
 	bool resumeGame = false;
 	StartMenu start;
-	Maps map;
+	OverWorld map;
 	ifstream in_file;
 	in_file.open("save.txt");
 	if (in_file.fail()) {
@@ -28,8 +26,7 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				map.PrintMap(newGame.GetCharacterChar());
-				play = false;
+				map.PrintOverWorld(newGame.GetCharacterChar(),play);
 			}
 		}
 	}
@@ -45,7 +42,7 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				map.PrintMap(newGame.GetCharacterChar());
+				map.PrintOverWorld(newGame.GetCharacterChar(), play);
 				play = false;
 			}
 			else if (resumeGame)
@@ -53,6 +50,7 @@ int main()
 				system("cls");
 				cout << "RESUMEEEE";
 			}
+			play = false;
 		}
 		return 0;
 	}

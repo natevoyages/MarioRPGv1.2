@@ -30,10 +30,16 @@
     <ClCompile Include="NewGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Maps.cpp">
+    <ClCompile Include="OverWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InGameMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,16 +56,17 @@
     <ClInclude Include="Characters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Maps.h">
+    <ClInclude Include="OverWorld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InGameMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="save.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <ClInclude Include="PlayerStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

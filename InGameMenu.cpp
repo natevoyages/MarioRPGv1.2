@@ -1,27 +1,26 @@
 #include "InGameMenu.h"
-#include "InputConfig.h"
 #include <iostream>
 #include <string>
+#include <windows.h>
 
 using namespace std;
 
 InGameMenu::InGameMenu()
 {
-	select = false;
-	yMenu = 0;
-	numMenuOptions = 5;
-	menuOptions[0] = "STATUS    ";
-	menuOptions[1] = "ITEMS     ";
-	menuOptions[2] = "GAME INFO ";
-	menuOptions[3] = "SAVE      ";
-	menuOptions[4] = "QUIT GAME ";
+	SetUpMenu();
 }
-
-void InGameMenu::MenuSetUp()
+void InGameMenu::SetUpMenu() 
 {
 	select = false;
 	yMenu = 0;
+	numMenuOptions = 4;
+	menuOptions[0] = "STATUS    ";
+	menuOptions[1] = "ITEMS     ";
+	menuOptions[2] = "GAME INFO ";
+	menuOptions[3] = "QUIT GAME ";
+	
 }
+
 
 void InGameMenu::PrintMenuBanner() {
 	cout << "\n\n\n\n\n\n";
@@ -33,7 +32,7 @@ void InGameMenu::PrintMenuBanner() {
 }
 
 
-void InGameMenu::PrintInGameMenu(bool& open)
+void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap)
 {
 		system("cls");
 		PrintMenuBanner();
@@ -54,32 +53,47 @@ void InGameMenu::PrintInGameMenu(bool& open)
 			cout << "\n\n";
 		}
 
-	if (select && yMenu == 0)
+	while (select && yMenu == 0 && open)
 	{
-		system("cls");
-		
+		menuInput.MenuInput();
+		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);
+		playerStats.PrintStats();
 
 	}
-	else if (select && yMenu == 1)
+	while (select && yMenu == 1 && open)
 	{
 		system("cls");
+		menuInput.MenuInput();
+		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);
+		items.PrintMenuItems();
 
 	}
-	else if (select && yMenu == 2)
+	while (select && yMenu == 2 && open)
 	{
 		system("cls");
+		menuInput.MenuInput();
+		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);
 	}
-	else if (select && yMenu == 3)
+	while (select && yMenu == 3 && open)
 	{
 		system("cls");
+		cout << "\n\n\n\n";
+		cout << "_/_/_/_/_/  _/                            _/                      _/      _/                    \n";
+		cout << "   _/      _/_/_/      _/_/_/  _/_/_/    _/  _/      _/_/_/        _/  _/    _/_/    _/    _/   \n";
+		cout << "  _/      _/    _/  _/    _/  _/    _/  _/_/      _/_/              _/    _/    _/  _/    _/    \n";
+		cout << " _/      _/    _/  _/    _/  _/    _/  _/  _/        _/_/          _/    _/    _/  _/    _/     \n";
+		cout << "_/      _/    _/    _/_/_/  _/    _/  _/    _/  _/_/_/            _/      _/_/      _/_/_/      \n";
+		cout << "\n\n\n\n";
+		cout << "    _/_/_/_/                        _/_/_/    _/                      _/                      _/\n";
+		cout << "   _/        _/_/    _/  _/_/      _/    _/  _/    _/_/_/  _/    _/      _/_/_/      _/_/_/  _/ \n";
+		cout << "  _/_/_/  _/    _/  _/_/          _/_/_/    _/  _/    _/  _/    _/  _/  _/    _/  _/    _/  _/  \n";
+		cout << " _/      _/    _/  _/            _/        _/  _/    _/  _/    _/  _/  _/    _/  _/    _/       \n";
+		cout << "_/        _/_/    _/            _/        _/    _/_/_/    _/_/_/  _/  _/    _/    _/_/_/  _/    \n";
+		cout << "                                                             _/                      _/         \n";
+		cout << "                                                        _/_/                    _/_/            \n";
+		notGameOver = false;
+		newMap = true;
+		open = false;
+	
 	}
-	else if (select && yMenu == 4)
-	{
-		system("cls");
-	}
-	else if (select && yMenu == 5)
-	{
-		system("cls");
-	}
-
 }

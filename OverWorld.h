@@ -1,20 +1,20 @@
-#ifndef MAPS_H
-#define MAPS_H
+#ifndef OVERWORLD_H
+#define OVERWORLD_H
 #include "InputConfig.h"
 #include "InGameMenu.h"
 #include <iostream>
 
 using namespace std;
-class Maps {
+class OverWorld {
 
 public:
-	Maps();
+	OverWorld();
 
-	void MapLogic();
+	void OverWorldLogic();
 
-	void MapSetup(char charCharacter);
+	void OverWorldSetup(char charCharacter);
 
-	void PrintMap(char charCharacter);
+	void PrintOverWorld(char charCharacter, bool& play);
 
 private:
 	InputConfig mapsInput;
@@ -28,6 +28,7 @@ private:
 	const int height = 40;
 	bool newMap;
 	bool menuToggled;
+	bool notGameOver;
 	char userCharacter;
 	
 };
