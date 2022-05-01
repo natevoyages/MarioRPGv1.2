@@ -12,9 +12,9 @@ public:
 
 	void MapLogic();
 
-	void MapSetup();
+	void MapSetup(char charCharacter);
 
-	void PrintMap();
+	void PrintMap(char charCharacter);
 
 private:
 	InputConfig mapsInput;

@@ -28,7 +28,7 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				map.PrintMap();
+				map.PrintMap(newGame.GetCharacterChar());
 				play = false;
 			}
 		}
@@ -45,7 +45,7 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				map.PrintMap();
+				map.PrintMap(newGame.GetCharacterChar());
 				play = false;
 			}
 			else if (resumeGame)

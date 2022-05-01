@@ -71,7 +71,6 @@ void NewGame::CharacterSelect()
 		characterCap = charactersCap[0];
 		selectedCharacterChar = charCharacters[0];
 		SetCharacterChar(selectedCharacterChar);
-		GetCharacterChar();
 	}
 	else if (charSelect && yCharSelect == 1)
 	{

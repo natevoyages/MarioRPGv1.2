@@ -11,9 +11,9 @@ Maps::Maps()
 }
 
 
-void Maps::PrintMap()
+void Maps::PrintMap(char charCharacter)
 {
-    MapSetup();
+    MapSetup(charCharacter);
     while (!newMap)
     {
         MapLogic();
@@ -73,10 +73,10 @@ void Maps::MapLogic()
     }
 }
 
-void Maps::MapSetup()
+void Maps::MapSetup(char charCharacter)
 {
     newMap = false;
     xCoordinate = width / 2;
     yCoordinate = height - 1;
-    userCharacter = 'M';
+    userCharacter = charCharacter;
 }
