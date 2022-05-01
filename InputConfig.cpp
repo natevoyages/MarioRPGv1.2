@@ -346,7 +346,7 @@ void InputConfig::CharSelectInputLogic(int& yCharSelect, const int numCharacters
         break;
     }
 }
-void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select)
+void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& menuToggled)
 {
     switch (userInput)
     {
@@ -385,7 +385,7 @@ void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select)
         break;
 
     case EXIT:
-        select = false;
+        menuToggled = false;
         break;
 
     case STOP:

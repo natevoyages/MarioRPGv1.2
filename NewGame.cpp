@@ -1,6 +1,7 @@
 #include "NewGame.h"
 #include <windows.h>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -16,6 +17,9 @@ NewGame::NewGame()
 	charactersCap[0] = "MARIO";
 	charactersCap[1] = "LUIGI";
 	charactersCap[2] = "TOAD";
+	charCharacters[0] = 'M';
+	charCharacters[1] = 'L';
+	charCharacters[2] = 'T';
 }
 
 void NewGame::CharacterSelect()
@@ -65,6 +69,9 @@ void NewGame::CharacterSelect()
 		cout << "     You have chosen Mario!\n";
 		selectedCharacter = characters[0];
 		characterCap = charactersCap[0];
+		selectedCharacterChar = charCharacters[0];
+		SetCharacterChar(selectedCharacterChar);
+		GetCharacterChar();
 	}
 	else if (charSelect && yCharSelect == 1)
 	{
@@ -73,6 +80,8 @@ void NewGame::CharacterSelect()
 		cout << "     You have chosen Luigi!\n";
 		selectedCharacter = characters[1];
 		characterCap = charactersCap[1];
+		selectedCharacterChar = charCharacters[1];
+		SetCharacterChar(selectedCharacterChar);
 	}
 	else if (charSelect && yCharSelect == 2)
 	{
@@ -81,6 +90,8 @@ void NewGame::CharacterSelect()
 		cout << "     You have chosen Toad!\n";
 		selectedCharacter = characters[2];
 		characterCap = charactersCap[2];
+		selectedCharacterChar = charCharacters[2];
+		SetCharacterChar(selectedCharacterChar);
 	}
 	select.SetCharacter(selectedCharacter);
 	Sleep(1500);
@@ -104,3 +115,14 @@ void NewGame::NewGameDialouge()
 		newGameInput.PressEnterToContinue(enterNotPressed);
 	}
 }
+
+void NewGame::SetCharacterChar(char characterChar) {
+	
+	selectedCharacterChar = characterChar;
+}
+char NewGame::GetCharacterChar()
+{
+	return selectedCharacterChar;
+}
+
+

@@ -18,7 +18,7 @@ public:
 
     void CharSelectInputLogic(int& yCharSelect, const int numCharacters, bool& charSelect);
 
-    void MenuInputLogic(int& yCharSelect, int numCharacters, bool& charSelect);
+    void MenuInputLogic(int& yCharSelect, int numCharacters, bool& charSelect, bool& menuToggled);
 
 
 

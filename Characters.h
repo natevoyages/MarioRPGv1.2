@@ -18,11 +18,15 @@ public:
 
 private:
 	string characterName;
+	char characterChar;
 	int level;
 	int strength;
 	int jump;
 	int flowerPower;
 	int speed;
+	int experiencePoints;
+	int coins;
+	int statPoints;
 
 };
 #endif

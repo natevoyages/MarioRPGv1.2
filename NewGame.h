@@ -14,6 +14,10 @@ public:
 
 	void NewGameDialouge();
 
+	void SetCharacterChar(char characterChar);
+
+	char GetCharacterChar();
+
 private:
 	Characters select;
 	InputConfig newGameInput;
@@ -21,6 +25,8 @@ private:
 	int yCharSelect;
 	bool enterNotPressed;
 	const int numCharacters = 3;
+	char selectedCharacterChar;
+	char charCharacters[3];
 	string characters[3];
 	string charactersCap[3];
 	string selectedCharacter;

@@ -5,7 +5,9 @@
 #include <conio.h>
 #include <windows.h>
 #include <string>
+#include <fstream>
 using namespace std; // this may be polluting the global namespace
+
 
 int main()
 {
@@ -14,24 +16,44 @@ int main()
 	bool resumeGame = false;
 	StartMenu start;
 	Maps map;
-
-	while (play)
-	{
-		start.TitleScreen();
-		start.TitleMenu(play, startNewGame, resumeGame);
-		if (startNewGame)
+	ifstream in_file;
+	in_file.open("save.txt");
+	if (in_file.fail()) {
+		while (play)
 		{
-			NewGame newGame;
-			newGame.CharacterSelect();
-			newGame.NewGameDialouge();
-			map.PrintMap();
-			play = false;
-		}
-		else if (resumeGame) {
-			cout << "RESUMEEEE";
+			start.TitleScreen();
+			start.TitleMenu(play, startNewGame);
+			if (startNewGame)
+			{
+				NewGame newGame;
+				newGame.CharacterSelect();
+				newGame.NewGameDialouge();
+				map.PrintMap();
+				play = false;
+			}
 		}
 	}
-	return 0;
+	else if( !(in_file.fail()) )
+	{
+		while (play)
+		{
+			start.SetResumeStartMenu();
+			start.TitleScreen();
+			start.TitleMenu(play, startNewGame, resumeGame);
+			if (startNewGame)
+			{
+				NewGame newGame;
+				newGame.CharacterSelect();
+				newGame.NewGameDialouge();
+				map.PrintMap();
+				play = false;
+			}
+			else if (resumeGame)
+			{
+				system("cls");
+				cout << "RESUMEEEE";
+			}
+		}
+		return 0;
+	}
 }
-
-

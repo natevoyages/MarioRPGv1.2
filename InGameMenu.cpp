@@ -38,7 +38,7 @@ void InGameMenu::PrintInGameMenu(bool& open)
 		system("cls");
 		PrintMenuBanner();
 		menuInput.MenuInput();
-		menuInput.MenuInputLogic(yMenu, numMenuOptions, select);
+		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);
 		for (int i = 0; i < numMenuOptions; i++)
 		{
 			cout << "	    	    	 " << menuOptions[i];
