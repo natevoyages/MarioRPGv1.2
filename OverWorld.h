@@ -3,6 +3,7 @@
 #include "InputConfig.h"
 #include "InGameMenu.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 class OverWorld {
@@ -10,7 +11,11 @@ class OverWorld {
 public:
 	OverWorld();
 
-	void OverWorldLogic();
+	void SaveGame();
+
+	void OverWorldPrintLogic();
+
+	void CollisonLogic();
 
 	void OverWorldSetup(char charCharacter);
 
@@ -19,13 +24,16 @@ public:
 private:
 	InputConfig mapsInput;
 	InGameMenu inGame;
+	int saveState[16];
 	int DesertMap[3]; // will fix later 
 	int SeaFloorMap[4]; //
 	int BowserCastle[5]; //
 	int xCoordinate;
 	int yCoordinate;
-	const int width = 80;
-	const int height = 40;
+	int saveXCoordinate;
+	int saveYCoordinate;
+	const int width = 60;
+	const int height = 30;
 	bool newMap;
 	bool menuToggled;
 	bool notGameOver;

@@ -43,7 +43,6 @@ int main()
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
 				map.PrintOverWorld(newGame.GetCharacterChar(), play);
-				play = false;
 			}
 			else if (resumeGame)
 			{

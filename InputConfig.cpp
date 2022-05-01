@@ -151,7 +151,7 @@ void InputConfig::PressEnterToContinue(bool& titleScreen)
 }
 
 
-void InputConfig::GamePlayInputLogic(int& x, int& y, int width, int height) const
+void InputConfig::GamePlayInputLogic(int& x, int& y, int width, int height)
 {
     switch (userInput)
     {

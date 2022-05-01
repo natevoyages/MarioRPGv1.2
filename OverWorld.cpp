@@ -9,6 +9,15 @@ OverWorld::OverWorld()
     notGameOver = true;
     xCoordinate = width / 2;
     yCoordinate = height - 1;
+    saveXCoordinate =  0;
+    saveYCoordinate = -1;
+}
+
+void OverWorld::SaveGame()
+{
+    ofstream save;
+    save.open("save.txt");
+    save << saveState[0];
 }
 
 
@@ -18,20 +27,20 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play)
     
     while (!newMap)
     {
-        OverWorldLogic();
+        OverWorldPrintLogic();
         mapsInput.UserInput(menuToggled);
         mapsInput.GamePlayInputLogic(xCoordinate,yCoordinate, width, height);
+        CollisonLogic();
         inGame.SetUpMenu();
         while (menuToggled)
         {
             inGame.PrintInGameMenu(menuToggled, notGameOver, newMap);
-            
         }
     }
     play = notGameOver;
 }
 
-void OverWorld::OverWorldLogic()
+void OverWorld::OverWorldPrintLogic()
 {
     system("cls");
     for (int i = 0; i < width; i++)
@@ -51,10 +60,15 @@ void OverWorld::OverWorldLogic()
             {
                 cout << "#";
             }
+
+            else if (i == saveYCoordinate && j == saveXCoordinate)
+            {
+                cout << "S";
+            }
+
             else if (i == yCoordinate && j == xCoordinate)
             {
                 cout << userCharacter;
-
             }
             else
             {
@@ -78,10 +92,20 @@ void OverWorld::OverWorldLogic()
     }
 }
 
+void OverWorld::CollisonLogic()
+{
+    if(xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate)
+    {
+        SaveGame();
+    }
+}
+
 void OverWorld::OverWorldSetup(char charCharacter)
 {
     newMap = false;
     xCoordinate = width / 2;
     yCoordinate = height - 1;
+    saveXCoordinate = width / 6;  //Makes save icon invisible     saveXCoordinate = 0;
+    saveYCoordinate = height - 7; //                              saveYCoordinate = -1;
     userCharacter = charCharacter;
 }

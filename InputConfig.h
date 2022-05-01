@@ -12,7 +12,7 @@ public:
 
     void PressEnterToContinue(bool& titleScreen);
 
-    void GamePlayInputLogic(int& x, int& y, int width, int height) const;
+    void GamePlayInputLogic(int& x, int& y, int width, int height);
 
     void StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& titleMenu);
 
