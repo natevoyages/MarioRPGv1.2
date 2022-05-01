@@ -12,11 +12,13 @@ int main()
 	bool play = true;
 	bool startNewGame = false;
 	bool resumeGame = false;
+	int map;
 	StartMenu start;
-	OverWorld map;
-	ifstream in_file;
-	in_file.open("save.txt");
-	if (in_file.fail()) {
+	OverWorld overWorld;
+
+	ifstream load;
+	load.open("save.dat");
+	if (load.fail()) {
 		while (play)
 		{
 			start.TitleScreen();
@@ -26,11 +28,11 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				map.PrintOverWorld(newGame.GetCharacterChar(),play);
+				overWorld.PrintOverWorld(newGame.GetCharacterChar(),play);
 			}
 		}
 	}
-	else if( !(in_file.fail()) )
+	else if( !(load.fail()) )
 	{
 		while (play)
 		{
@@ -42,14 +44,13 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				map.PrintOverWorld(newGame.GetCharacterChar(), play);
+				overWorld.PrintOverWorld(newGame.GetCharacterChar(), play);
 			}
 			else if (resumeGame)
 			{
-				system("cls");
-				cout << "RESUMEEEE";
+				load >> map;
+				overWorld.SetUpMap(map);
 			}
-			play = false;
 		}
 		return 0;
 	}

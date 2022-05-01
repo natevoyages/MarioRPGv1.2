@@ -14,6 +14,8 @@ public:
 
     void GamePlayInputLogic(int& x, int& y, int width, int height);
 
+    void HomeInputLogic(int& x, int& y, int width, int height,int bottomExitXCoordinateOne, int bottomExitXCoordinateTwo,int bottomExitYCoordinate);
+
     void StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& titleMenu);
 
     void CharSelectInputLogic(int& yCharSelect, const int numCharacters, bool& charSelect);
