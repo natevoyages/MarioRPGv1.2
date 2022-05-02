@@ -15,6 +15,8 @@ public:
 
 	void SaveGame();
 
+	void Shop();
+
 	void characterTracker();
 
 	void OverWorldPrintLogic();
@@ -52,6 +54,8 @@ private:
 	int saveYCoordinate;
 	int prevXCoordinate;
 	int prevYCoordinate;
+	int shopKeepXCoordinate;
+	int shopKeepYCoordinate;
 
 	int map;
 

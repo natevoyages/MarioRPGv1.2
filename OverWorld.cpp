@@ -20,7 +20,15 @@ OverWorld::OverWorld()
     yCoordinate = height - 1;
     saveXCoordinate =  0;
     saveYCoordinate = -1;
+    shopKeepXCoordinate = 0;
+    shopKeepYCoordinate = -1;
     map = 0;
+}
+
+void OverWorld::Shop()
+{
+    system("cls");
+    cout << "shop activated";
 }
 
 void OverWorld::SaveGame()
@@ -290,6 +298,11 @@ void OverWorld::OverWorldPrintLogic()
                     cout << "S";
                 }
 
+                else if (i == shopKeepYCoordinate && j == shopKeepXCoordinate)
+                {
+                    cout << "k";
+                }
+
                 else if (i == yCoordinate && j == xCoordinate)
                 {
                     cout << userCharacter;
@@ -314,6 +327,11 @@ void OverWorld::OverWorldPrintLogic()
                 else if (i == saveYCoordinate && j == saveXCoordinate)
                 {
                     cout << "S";
+                }
+
+                else if (i == shopKeepYCoordinate && j == shopKeepXCoordinate)
+                {
+                    cout << "k";
                 }
 
                 else if (i == yCoordinate && j == xCoordinate)
@@ -342,6 +360,11 @@ void OverWorld::OverWorldPrintLogic()
                     cout << "S";
                 }
 
+                else if (i == shopKeepYCoordinate && j == shopKeepXCoordinate)
+                {
+                    cout << "k";
+                }
+
                 else if (i == yCoordinate && j == xCoordinate)
                 {
                     cout << userCharacter;
@@ -361,6 +384,11 @@ void OverWorld::OverWorldPrintLogic()
                 else if (i == saveYCoordinate && j == saveXCoordinate)
                 {
                     cout << "S";
+                }
+
+                else if (i == shopKeepYCoordinate && j == shopKeepXCoordinate)
+                {
+                    cout << "k";
                 }
 
                 else if (i == yCoordinate && j == xCoordinate)
@@ -403,6 +431,12 @@ void OverWorld::CollisonLogic()
         SaveGame();
 
     }
+
+    if (xCoordinate == shopKeepXCoordinate && yCoordinate == shopKeepYCoordinate)
+    {
+        Shop();
+    }
+
     else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )
     {
         exitMap = true;
@@ -443,6 +477,8 @@ void OverWorld::NewGameHomeSetup(char charCharacter)  //used for newGame
     yCoordinate = height - 15;
     saveXCoordinate = width / 6;  //Makes save icon invisible     saveXCoordinate = 0;
     saveYCoordinate = height - 7; //                              saveYCoordinate = -1;
+    shopKeepXCoordinate = 0;
+    shopKeepYCoordinate = -1;
     userCharacter = charCharacter;
 }
 
@@ -460,7 +496,9 @@ void OverWorld::HomeSetup()
     xCoordinate = width / 2;
     yCoordinate = height - 1;
     saveXCoordinate = width / 6;      
-    saveYCoordinate = height - 7;                       
+    saveYCoordinate = height - 7; 
+    shopKeepXCoordinate = 0;
+    shopKeepYCoordinate = -1;
 }
 
 void OverWorld::DesertOneSetup()
@@ -478,6 +516,8 @@ void OverWorld::DesertOneSetup()
     yCoordinate = 0;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
+    shopKeepXCoordinate = 0;
+    shopKeepYCoordinate = -1;
 }
 
 void OverWorld::DesertTwoSetup()
@@ -495,6 +535,8 @@ void OverWorld::DesertTwoSetup()
     yCoordinate = 0;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
+    shopKeepXCoordinate = 0;
+    shopKeepYCoordinate = -1;
 }
 
 void OverWorld::DesertThreeSetup() 
@@ -512,6 +554,8 @@ void OverWorld::DesertThreeSetup()
     yCoordinate = 0;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
+    shopKeepXCoordinate = 0;
+    shopKeepYCoordinate = -1;
 }
 
 void OverWorld::ShopOneSetup()
@@ -527,8 +571,10 @@ void OverWorld::ShopOneSetup()
     exitMapWest = false;
     xCoordinate = 1;
     yCoordinate = height / 2;
-    saveXCoordinate = 0;
-    saveYCoordinate = -1;
+    saveXCoordinate = width - 3;
+    saveYCoordinate = 3;
+    shopKeepXCoordinate = width / 2;
+    shopKeepYCoordinate = height / 2;
 }
 
 
