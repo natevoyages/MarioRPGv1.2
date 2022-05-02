@@ -20,15 +20,15 @@ public:
 
 	void CollisonLogic();
 
-	void HomeSetup(char charCharacter);
+	void NewGameHomeSetup(char charCharacter);
 
 	void HomeSetup();
 
 	void DesertOneSetup();
 
-	void PrintOverWorld(char charCharacter, bool& play);
+	void PrintOverWorld(char charCharacter, bool& play, bool& notGAMEOVER);
 
-	void SetUpMap(int map);
+	void SetUpMap();
 
 private:
 	InputConfig mapsInput;
@@ -46,29 +46,21 @@ private:
 
 	int map;
 
-	// exit coordinates
-
-	int bottomExitXCoordinateOne; 
-	int bottomExitXCoordinateTwo;
-	int bottomExitYCoordinate;
-	int topExitXCoordinateOne;
-	int topExitXCoordinateTwo;
-	int topExitYCoordinate;
-	int leftExitXCoordinate;
-	int leftExitYCoordinateOne;
-	int leftExitYCoordinateTwo;
-	int rightExitXCoordinate;
-	int rightExitYCoordinateOne;
-	int rightExitYCoordinateTwo;
 	//
 	const int width = 60;
 	const int height = 30;
+	//
 	bool exitMap;
-	bool exitMapSouth;
 	bool exitMapNorth;
+	bool exitMapSouth;
 	bool exitMapEast;
 	bool exitMapWest;
 	//
+	bool northOpen;
+	bool southOpen;
+	bool eastOpen;
+	bool westOpen;
+
 	bool menuToggled;
 	bool notGameOver;
 	char userCharacter;

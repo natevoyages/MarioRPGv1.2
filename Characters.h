@@ -12,9 +12,6 @@ public:
 
 	void PrintToad();
 	
-	void SetCharacter(string character);
-
-	string GetCharacter();
 
 private:
 	string characterName;
@@ -24,6 +21,7 @@ private:
 	int jump;
 	int flowerPower;
 	int speed;
+	int defense;
 	int experiencePoints;
 	int coins;
 	int statPoints;

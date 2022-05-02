@@ -8,6 +8,14 @@ OverWorld::OverWorld()
     exitMap = false;
     menuToggled = false;
     notGameOver = true;
+    northOpen = false;
+    southOpen = false;
+    eastOpen = false;
+    westOpen = false;
+    exitMapNorth = false;
+    exitMapSouth = false;
+    exitMapEast = false;
+    exitMapWest = false;
     xCoordinate = width / 2;
     yCoordinate = height - 1;
     saveXCoordinate =  0;
@@ -42,16 +50,13 @@ void OverWorld::characterTracker()
 }
 
 
-void OverWorld::PrintOverWorld(char charCharacter,bool& play)
+void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER)
 {
-    while (notGameOver)
-    {
-        HomeSetup(charCharacter);
-        while (!exitMap)
+        if (!exitMap)
         {
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
-            mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, bottomExitYCoordinate);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             characterTracker();
             CollisonLogic();
             inGame.SetUpMenu();
@@ -60,29 +65,34 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play)
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
             }
         }
-        map = 1;
-        SetUpMap(map);
-        while (!exitMap)
+        else {
+            map = 1;
+        }
+        if (notGameOver && exitMap)
         {
-            OverWorldPrintLogic();
-            mapsInput.UserInput(menuToggled);
-            mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, bottomExitYCoordinate);
-            characterTracker();
-            CollisonLogic();
-            inGame.SetUpMenu();
-            while (menuToggled)
+            while (notGameOver)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                exitMap = false;
+                SetUpMap();
             }
         }
-        SetUpMap(map);
-
-        play = notGameOver;
-    }
+        else  if (!notGameOver)
+        {
+            notGAMEOVER = false;
+            play = false;
+        }
 }
 
-void OverWorld::SetUpMap(int map)
+
+void OverWorld::SetUpMap()
 {
+    ifstream load;
+    load.open("save.dat");
+    if (!(load.fail())) {
+        load >> map;
+        load.close();
+    }
+
     if (map == 0) 
     {
         HomeSetup();
@@ -90,7 +100,7 @@ void OverWorld::SetUpMap(int map)
         {
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
-            mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, bottomExitYCoordinate);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             characterTracker();
             CollisonLogic();
             inGame.SetUpMenu();
@@ -100,7 +110,7 @@ void OverWorld::SetUpMap(int map)
             }
         }
         map = 1;
-        SetUpMap(map);
+        SetUpMap();
     }
     else if (map == 1)
     {
@@ -109,7 +119,7 @@ void OverWorld::SetUpMap(int map)
             {
                 OverWorldPrintLogic();
                 mapsInput.UserInput(menuToggled);
-                mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, bottomExitYCoordinate);
+                mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
                 characterTracker();
                 CollisonLogic();
                 inGame.SetUpMenu();
@@ -118,7 +128,15 @@ void OverWorld::SetUpMap(int map)
                     inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
                 }
         }
-        SetUpMap(map);
+        if (exitMapNorth)
+        {
+            map = 0;
+        }
+        else if (exitMapSouth)
+        {
+            map = 2;
+        }
+
     }
     else if (map == 2)
     {
@@ -168,6 +186,10 @@ void OverWorld::SetUpMap(int map)
     {
 
     }
+    else if (map == 14) 
+    {
+        notGameOver = false;
+    }
 }
 
 void OverWorld::OverWorldPrintLogic()
@@ -175,7 +197,22 @@ void OverWorld::OverWorldPrintLogic()
     system("cls");
     for (int i = 0; i < width; i++)
     {
-        cout << "#";
+        if(northOpen)
+        {
+            if (i == width / 2 || i == (width / 2) + 1) //exit for map
+            {
+                cout << "_";
+            }
+            else
+            {
+                cout << "#";
+            }
+        }
+        else
+        {
+            cout << "#";
+        }
+
     }
 
     cout << "\n";
@@ -211,9 +248,16 @@ void OverWorld::OverWorldPrintLogic()
 
     for (int i = 0; i < width; i++) 
     {
-        if (i == width / 2 || i == (width / 2) + 1) //exit for map
+        if (southOpen) 
         {
-            cout << "_";
+            if (i == width / 2 || i == (width / 2) + 1) //exit for map
+            {
+                cout << "_";
+            }
+            else 
+            {
+                cout << "#";
+            }
         }
         else
         {
@@ -229,67 +273,79 @@ void OverWorld::CollisonLogic()
         SaveGame();
 
     }
-    else if ((xCoordinate == bottomExitXCoordinateOne && yCoordinate == bottomExitYCoordinate) || (xCoordinate == bottomExitXCoordinateTwo && yCoordinate == bottomExitYCoordinate))
+    else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )
     {
         exitMap = true;
         exitMapSouth = true;
 
     }
-    else if ((xCoordinate == topExitXCoordinateOne && yCoordinate == topExitYCoordinate) || (xCoordinate == topExitXCoordinateTwo && yCoordinate == topExitYCoordinate))
+    else if ((xCoordinate == width / 2 && yCoordinate == -1) || ((xCoordinate == width / 2 + 1) && yCoordinate == -1))
     {
         exitMap = true;
         exitMapNorth = true;
     }
 
-    else if ((xCoordinate == leftExitXCoordinate && yCoordinate == leftExitYCoordinateOne) || (xCoordinate == leftExitXCoordinate && yCoordinate == leftExitYCoordinateTwo))
+    else if (xCoordinate == 0 && yCoordinate == height / 2)
     {
         exitMap = true;
         exitMapEast = true;
     }
 
-    else if ((xCoordinate == rightExitXCoordinate && yCoordinate == rightExitYCoordinateOne) || (xCoordinate == rightExitXCoordinate && yCoordinate == rightExitYCoordinateTwo))
+    else if (xCoordinate == width - 1 && yCoordinate == height / 2)
     {
         exitMap = true;
         exitMapWest = true;
     }
 }
 
-void OverWorld::HomeSetup(char charCharacter)  //used for newGame
+void OverWorld::NewGameHomeSetup(char charCharacter)  //used for newGame
 {
     exitMap = false;
+    southOpen = true;
+    northOpen = false;
+    westOpen = false;
+    eastOpen = false;   
+    exitMapNorth = false;
+    exitMapSouth = false;
+    exitMapEast = false;
+    exitMapWest = false;
     xCoordinate = width / 2;
     yCoordinate = height - 15;
     saveXCoordinate = width / 6;  //Makes save icon invisible     saveXCoordinate = 0;
     saveYCoordinate = height - 7; //                              saveYCoordinate = -1;
-    bottomExitXCoordinateOne = width / 2; // fix me
-    bottomExitXCoordinateTwo = (width / 2) + 1; // fix me
-    bottomExitYCoordinate = height;
     userCharacter = charCharacter;
 }
 
 void OverWorld::HomeSetup()
 {
     exitMap = false;
+    southOpen = true;
+    northOpen = false;
+    westOpen = false;
+    eastOpen = false;
+    exitMapNorth = false;
+    exitMapSouth = false;
+    exitMapEast = false;
+    exitMapWest = false;
     xCoordinate = width / 2;
-    yCoordinate = height - 15;
+    yCoordinate = height - 1;
     saveXCoordinate = width / 6;      
     saveYCoordinate = height - 7;                       
-    bottomExitXCoordinateOne = width / 2; 
-    bottomExitXCoordinateTwo = (width / 2) + 1; 
-    bottomExitYCoordinate = height;
 }
 
 void OverWorld::DesertOneSetup()
 {
     exitMap = false;
+    southOpen = true;
+    northOpen = true;
+    westOpen = false;
+    eastOpen = false;
+    exitMapNorth = false;
+    exitMapSouth = false;
+    exitMapEast = false;
+    exitMapWest = false;
     xCoordinate = width / 2;
     yCoordinate = 0;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
-    bottomExitXCoordinateOne = width / 2;
-    bottomExitXCoordinateTwo = (width / 2) + 1;
-    bottomExitYCoordinate = height;
-    topExitXCoordinateOne = width / 2;
-    topExitXCoordinateTwo = (width / 2) + 1;
-    topExitYCoordinate = -1;
 }

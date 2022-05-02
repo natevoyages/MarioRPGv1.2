@@ -12,9 +12,9 @@ public:
 
     void PressEnterToContinue(bool& titleScreen);
 
-    void GamePlayInputLogic(int& x, int& y, int width, int height);
 
-    void HomeInputLogic(int& x, int& y, int width, int height,int bottomExitXCoordinateOne, int bottomExitXCoordinateTwo,int bottomExitYCoordinate);
+
+    void OverWorldInputLogic(int& x, int& y, int width, int height, bool northOpen, bool southOpen, bool eastOpen, bool westOpen);
 
     void StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& titleMenu);
 

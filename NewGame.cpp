@@ -70,7 +70,6 @@ void NewGame::CharacterSelect()
 		selectedCharacter = characters[0];
 		characterCap = charactersCap[0];
 		selectedCharacterChar = charCharacters[0];
-		SetCharacterChar(selectedCharacterChar);
 	}
 	else if (charSelect && yCharSelect == 1)
 	{
@@ -80,7 +79,6 @@ void NewGame::CharacterSelect()
 		selectedCharacter = characters[1];
 		characterCap = charactersCap[1];
 		selectedCharacterChar = charCharacters[1];
-		SetCharacterChar(selectedCharacterChar);
 	}
 	else if (charSelect && yCharSelect == 2)
 	{
@@ -90,9 +88,7 @@ void NewGame::CharacterSelect()
 		selectedCharacter = characters[2];
 		characterCap = charactersCap[2];
 		selectedCharacterChar = charCharacters[2];
-		SetCharacterChar(selectedCharacterChar);
 	}
-	select.SetCharacter(selectedCharacter);
 	Sleep(1500);
 }
 
@@ -115,10 +111,7 @@ void NewGame::NewGameDialouge()
 	}
 }
 
-void NewGame::SetCharacterChar(char characterChar) {
-	
-	selectedCharacterChar = characterChar;
-}
+
 char NewGame::GetCharacterChar()
 {
 	return selectedCharacterChar;

@@ -151,7 +151,7 @@ void InputConfig::PressEnterToContinue(bool& titleScreen)
 }
 
 
-void InputConfig::GamePlayInputLogic(int& x, int& y, int width, int height)
+/*void InputConfig::GamePlayInputLogic(int& x, int& y, int width, int height)
 {
     switch (userInput)
     {
@@ -260,24 +260,37 @@ void InputConfig::GamePlayInputLogic(int& x, int& y, int width, int height)
         break;
 
     }
-}
+}*/
 
-void InputConfig::HomeInputLogic(int& x, int& y, int width, int height, int bottomExitXCoordinateOne, int bottomExitXCoordinateTwo, int bottomExitYCoordinate)
+void InputConfig::OverWorldInputLogic(int& x, int& y, int width, int height, bool northOpen, bool southOpen, bool eastOpen, bool westOpen)
 {
     switch (userInput)
     {
     case LEFT:
-        if (x != 1) // lower limit is 0
-        {
-            x--;
-            break;
+        if (westOpen) {
+            if (x > 1 || (x == 1 && y == ( height / 2)) ) // lower limit is 0
+            {
+                x--;
+                break;
+            }
+            else
+            {
+                x = x;
+                break;
+            }
         }
-        else
-        {
-            x = x;
-            break;
+        else {
+            if (x > 1) // lower limit is 0
+            {
+                x--;
+                break;
+            }
+            else
+            {
+                x = x;
+                break;
+            }
         }
-
     case RUN_LEFT:
         if (x > 5)
         {
@@ -290,17 +303,31 @@ void InputConfig::HomeInputLogic(int& x, int& y, int width, int height, int bott
             break;
         }
     case RIGHT:
-        if (x != width - 2) // upper limit is width - 2 since last char is at width - 1 
-        {
-            x++;
-            break;
+        if (eastOpen) {
+            if (x < width -2  || (x == width - 2 && y == (height / 2))) // lower limit is 0
+            {
+                x--;
+                break;
+            }
+            else
+            {
+                x = x;
+                break;
+            }
         }
-        else
-        {
-            x = x;
-            break;
-        }
+        else {
 
+            if (x < width - 2) // upper limit is width - 2 since last char is at width - 1 
+            {
+                x++;
+                break;
+            }
+            else
+            {
+                x = x;
+                break;
+            }
+        }
     case RUN_RIGHT:
         if (x < width - 6)
         {
@@ -316,16 +343,29 @@ void InputConfig::HomeInputLogic(int& x, int& y, int width, int height, int bott
 
 
     case UP:
-        if (y != 0) // upper limit is 0 for y
+        if(northOpen) {
+            if (y > 0 || (y == 0 && x == width / 2) || (y == 0 && x == (width / 2) + 1) )  // upper limit is 0 for y
+            {
+                y--;
+                break;
+            }
+            else {
+                y = y;
+                break;
+            }
+        }
+        else
         {
-            y--;
-            break;
+            if (y > 0) // upper limit is 0 for y
+            {
+                y--;
+                break;
+            }
+            else {
+                y = y;
+                break;
+            }
         }
-        else {
-            y = 0;
-            break;
-        }
-
     case RUN_UP:
         if (y > 1)
         {
@@ -339,17 +379,29 @@ void InputConfig::HomeInputLogic(int& x, int& y, int width, int height, int bott
         }
 
     case DOWN:
-        if (y < height - 1 || (x == bottomExitXCoordinateOne && y == (height - 1)) || (x == bottomExitXCoordinateTwo && y == (height - 1)) )
-        {
-            y++;
-            break;
+        if (southOpen) {
+            if (y < height - 1 || (y == height - 1 && x == width / 2) || (y == height - 1 && x == (width / 2) + 1))  // upper limit is 0 for y
+            {
+                y++;
+                break;
+            }
+            else {
+                y = y;
+                break;
+            }
         }
-        else
-        {
-            y = height - 1;
-            break;
+        else {
+            if (y < height - 1)
+            {
+                y++;
+                break;
+            }
+            else
+            {
+                y = y;
+                break;
+            }
         }
-
     case RUN_DOWN:
         if (y < height - 2)
         {

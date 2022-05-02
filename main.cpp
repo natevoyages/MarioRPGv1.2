@@ -12,6 +12,7 @@ int main()
 	bool play = true;
 	bool startNewGame = false;
 	bool resumeGame = false;
+	bool notGameOver = true;
 	int map;
 	StartMenu start;
 	OverWorld overWorld;
@@ -28,12 +29,18 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				overWorld.PrintOverWorld(newGame.GetCharacterChar(),play);
+				overWorld.NewGameHomeSetup(newGame.GetCharacterChar());
+				while (notGameOver) 
+				{
+					overWorld.PrintOverWorld(newGame.GetCharacterChar(), play, notGameOver);
+				}
+				play = false;
 			}
 		}
 	}
 	else if( !(load.fail()) )
 	{
+		load.close();
 		while (play)
 		{
 			start.SetResumeStartMenu();
@@ -44,12 +51,16 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				overWorld.PrintOverWorld(newGame.GetCharacterChar(), play);
+				overWorld.NewGameHomeSetup(newGame.GetCharacterChar());
+				while (notGameOver)
+				{
+					overWorld.PrintOverWorld(newGame.GetCharacterChar(), play, notGameOver);
+				}
 			}
 			else if (resumeGame)
 			{
-				load >> map;
-				overWorld.SetUpMap(map);
+				overWorld.SetUpMap();
+				play = false;
 			}
 		}
 		return 0;

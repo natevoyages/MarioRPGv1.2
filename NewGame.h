@@ -14,8 +14,6 @@ public:
 
 	void NewGameDialouge();
 
-	void SetCharacterChar(char characterChar);
-
 	char GetCharacterChar();
 
 private:
