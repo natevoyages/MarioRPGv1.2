@@ -306,7 +306,7 @@ void InputConfig::OverWorldInputLogic(int& x, int& y, int width, int height, boo
         if (eastOpen) {
             if (x < width -2  || (x == width - 2 && y == (height / 2))) // lower limit is 0
             {
-                x--;
+                x++;
                 break;
             }
             else

@@ -141,15 +141,67 @@ void OverWorld::SetUpMap()
     }
     else if (map == 2)
     {
-
+        DesertTwoSetup();
+        while (!exitMap)
+        {
+            OverWorldPrintLogic();
+            mapsInput.UserInput(menuToggled);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+            characterTracker();
+            CollisonLogic();
+            inGame.SetUpMenu();
+            while (menuToggled)
+            {
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+            }
+        }
+        if (exitMapNorth)
+        {
+            map = 1;
+        }
+        else if (exitMapWest)
+        {
+            map = 3;
+        }
+        else if (exitMapEast)
+        {
+            map = 4;
+        }
     }
     else if (map == 3)
     {
+        DesertThreeSetup();
+        while (!exitMap)
+        {
+            OverWorldPrintLogic();
+            mapsInput.UserInput(menuToggled);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+            characterTracker();
+            CollisonLogic();
+            inGame.SetUpMenu();
+            while (menuToggled)
+            {
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+            }
+        }
 
     }
     else if (map == 4)
     {
-
+        ShopOneSetup();
+        while (!exitMap)
+        {
+            OverWorldPrintLogic();
+            mapsInput.UserInput(menuToggled);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+            characterTracker();
+            CollisonLogic();
+            inGame.SetUpMenu();
+            while (menuToggled)
+            {
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+            }
+        }
     }
     else if (map == 5)
     {
@@ -366,13 +418,13 @@ void OverWorld::CollisonLogic()
     else if (xCoordinate == 0 && yCoordinate == height / 2)
     {
         exitMap = true;
-        exitMapEast = true;
+        exitMapWest = true;
     }
 
     else if (xCoordinate == width - 1 && yCoordinate == height / 2)
     {
         exitMap = true;
-        exitMapWest = true;
+        exitMapEast = true;
     }
 }
 
@@ -427,6 +479,58 @@ void OverWorld::DesertOneSetup()
     saveXCoordinate = 0;
     saveYCoordinate = -1;
 }
+
+void OverWorld::DesertTwoSetup()
+{
+    exitMap = false;
+    southOpen = false;
+    northOpen = true;
+    westOpen = true;
+    eastOpen = true;
+    exitMapNorth = false;
+    exitMapSouth = false;
+    exitMapEast = false;
+    exitMapWest = false;
+    xCoordinate = width / 2;
+    yCoordinate = 0;
+    saveXCoordinate = 0;
+    saveYCoordinate = -1;
+}
+
+void OverWorld::DesertThreeSetup() 
+{
+    exitMap = false;
+    southOpen = false;
+    northOpen = true;
+    westOpen = false;
+    eastOpen = true;
+    exitMapNorth = false;
+    exitMapSouth = false;
+    exitMapEast = false;
+    exitMapWest = false;
+    xCoordinate = width / 2;
+    yCoordinate = 0;
+    saveXCoordinate = 0;
+    saveYCoordinate = -1;
+}
+
+void OverWorld::ShopOneSetup()
+{
+    exitMap = false;
+    southOpen = false;
+    northOpen = false;
+    westOpen = true;
+    eastOpen = false;
+    exitMapNorth = false;
+    exitMapSouth = false;
+    exitMapEast = false;
+    exitMapWest = false;
+    xCoordinate = 1;
+    yCoordinate = height / 2;
+    saveXCoordinate = 0;
+    saveYCoordinate = -1;
+}
+
 
 void OverWorld::PrintDesert()
 {

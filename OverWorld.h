@@ -31,6 +31,12 @@ public:
 
 	void DesertOneSetup();
 
+	void DesertTwoSetup();
+
+	void DesertThreeSetup();
+
+	void ShopOneSetup();
+
 	void PrintDesert();
 
 private:
