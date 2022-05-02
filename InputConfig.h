@@ -14,7 +14,9 @@ public:
 
     void GamePlayInputLogic(int& x, int& y, int width, int height);
 
-    void HomeInputLogic(int& x, int& y, int width, int height,int bottomExitXCoordinateOne, int bottomExitXCoordinateTwo,int bottomExitYCoordinate);
+    void HomeInputLogic(int& x, int& y, int width, int height,int bottomExitXCoordinateOne, int bottomExitXCoordinateTwo);
+
+    void NSExitInputLogic(int xCoordinate, int yCoordinate, int width, int height, int bottomExitXCoordinateOne, int bottomExitXCoordinateTwo, int topExitXCoordinateOne, int topExitCoordinateTwo);
 
     void StartMenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& titleMenu);
 

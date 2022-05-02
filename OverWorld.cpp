@@ -1,11 +1,15 @@
 #include "OverWorld.h"
-#include "InputConfig.h"
-#include "InGameMenu.h"
+
 
 
 OverWorld::OverWorld()
 {
+    newMap = false;
     exitMap = false;
+    exitMapSouth = false;
+    exitMapNorth = false;
+    exitMapEast = false;
+    exitMapWest = false;
     menuToggled = false;
     notGameOver = true;
     xCoordinate = width / 2;
@@ -21,7 +25,7 @@ void OverWorld::SaveGame()
         "Saving.", "Saving..", "Saving...", };
     ofstream save;
     save.open("save.dat");
-    save << map;
+    save << map << " "; // << userCharacter << " " << level << " " << power << " " ;
     save.close();
     for (int i = 0; i < 9; i++) 
     {
@@ -51,7 +55,7 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play)
         {
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
-            mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, bottomExitYCoordinate);
+            mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo);
             characterTracker();
             CollisonLogic();
             inGame.SetUpMenu();
@@ -61,28 +65,18 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play)
             }
         }
         map = 1;
-        SetUpMap(map);
-        while (!exitMap)
+        if (newMap)
         {
-            OverWorldPrintLogic();
-            mapsInput.UserInput(menuToggled);
-            mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, bottomExitYCoordinate);
-            characterTracker();
-            CollisonLogic();
-            inGame.SetUpMenu();
-            while (menuToggled)
-            {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
-            }
+            SetUpMap(map);
         }
-        SetUpMap(map);
 
         play = notGameOver;
     }
 }
 
-void OverWorld::SetUpMap(int map)
+void OverWorld::SetUpMap(int loadMap)
 {
+    map = loadMap;
     if (map == 0) 
     {
         HomeSetup();
@@ -90,7 +84,7 @@ void OverWorld::SetUpMap(int map)
         {
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
-            mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, bottomExitYCoordinate);
+            mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo);
             characterTracker();
             CollisonLogic();
             inGame.SetUpMenu();
@@ -105,20 +99,32 @@ void OverWorld::SetUpMap(int map)
     else if (map == 1)
     {
         DesertOneSetup();
+        PrintDesert();
         while (!exitMap)
             {
                 OverWorldPrintLogic();
                 mapsInput.UserInput(menuToggled);
-                mapsInput.HomeInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, bottomExitYCoordinate);
-                characterTracker();
+                mapsInput.NSExitInputLogic(xCoordinate, yCoordinate, width, height, bottomExitXCoordinateOne, bottomExitXCoordinateTwo, topExitXCoordinateOne, topExitXCoordinateTwo);
                 CollisonLogic();
                 inGame.SetUpMenu();
                 while (menuToggled)
                 {
                     inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
                 }
-        }
-        SetUpMap(map);
+            }
+
+         if (exitMapSouth)
+            {
+              map = 2;
+            }
+         else if (exitMapNorth)
+            {
+                map = 0;
+            }
+         if (newMap)
+         {
+            SetUpMap(map);
+         }
     }
     else if (map == 2)
     {
@@ -175,7 +181,14 @@ void OverWorld::OverWorldPrintLogic()
     system("cls");
     for (int i = 0; i < width; i++)
     {
-        cout << "#";
+        if (i == topExitXCoordinateOne || i == topExitXCoordinateTwo) //exit for map
+        {
+            cout << "_";
+        }
+        else 
+        {
+            cout << "#";
+        }
     }
 
     cout << "\n";
@@ -184,9 +197,11 @@ void OverWorld::OverWorldPrintLogic()
     {
         for (int j = 0; j < width; j++)
         {
-
-
-            if (j == 0 || j == (width - 1))
+            if ( (i == 0 && j == leftExitYCoordinateOne) || (i == 0 && j == leftExitYCoordinateTwo) )
+            {
+                cout << "|";
+            }
+            else if (j == 0 || j == (width - 1) )
             {
                 cout << "#";
             }
@@ -211,7 +226,7 @@ void OverWorld::OverWorldPrintLogic()
 
     for (int i = 0; i < width; i++) 
     {
-        if (i == width / 2 || i == (width / 2) + 1) //exit for map
+        if (i == bottomExitXCoordinateOne || i == bottomExitXCoordinateTwo) //exit for map
         {
             cout << "_";
         }
@@ -229,26 +244,30 @@ void OverWorld::CollisonLogic()
         SaveGame();
 
     }
-    else if ((xCoordinate == bottomExitXCoordinateOne && yCoordinate == bottomExitYCoordinate) || (xCoordinate == bottomExitXCoordinateTwo && yCoordinate == bottomExitYCoordinate))
+    else if ((xCoordinate == bottomExitXCoordinateOne && yCoordinate == height) || (xCoordinate == bottomExitXCoordinateTwo && yCoordinate == height))
     {
+        newMap = true;
         exitMap = true;
         exitMapSouth = true;
 
     }
-    else if ((xCoordinate == topExitXCoordinateOne && yCoordinate == topExitYCoordinate) || (xCoordinate == topExitXCoordinateTwo && yCoordinate == topExitYCoordinate))
+    else if ((xCoordinate == topExitXCoordinateOne && yCoordinate == 0) || (xCoordinate == topExitXCoordinateTwo && yCoordinate == 0))
     {
+        newMap = true;
         exitMap = true;
         exitMapNorth = true;
     }
 
-    else if ((xCoordinate == leftExitXCoordinate && yCoordinate == leftExitYCoordinateOne) || (xCoordinate == leftExitXCoordinate && yCoordinate == leftExitYCoordinateTwo))
+    else if ((xCoordinate == 0 && yCoordinate == leftExitYCoordinateOne) || (xCoordinate == 0 && yCoordinate == leftExitYCoordinateTwo))
     {
+        newMap = true;
         exitMap = true;
         exitMapEast = true;
     }
 
-    else if ((xCoordinate == rightExitXCoordinate && yCoordinate == rightExitYCoordinateOne) || (xCoordinate == rightExitXCoordinate && yCoordinate == rightExitYCoordinateTwo))
+    else if ((xCoordinate == width - 1 && yCoordinate == rightExitYCoordinateOne) || (xCoordinate == width - 1 && yCoordinate == rightExitYCoordinateTwo))
     {
+        newMap = true;
         exitMap = true;
         exitMapWest = true;
     }
@@ -256,40 +275,95 @@ void OverWorld::CollisonLogic()
 
 void OverWorld::HomeSetup(char charCharacter)  //used for newGame
 {
+    newMap = false;
     exitMap = false;
+    exitMapSouth = false;
+    exitMapNorth = false;
+    exitMapEast = false;
+    exitMapWest = false;
     xCoordinate = width / 2;
     yCoordinate = height - 15;
     saveXCoordinate = width / 6;  //Makes save icon invisible     saveXCoordinate = 0;
     saveYCoordinate = height - 7; //                              saveYCoordinate = -1;
     bottomExitXCoordinateOne = width / 2; // fix me
     bottomExitXCoordinateTwo = (width / 2) + 1; // fix me
-    bottomExitYCoordinate = height;
     userCharacter = charCharacter;
 }
 
 void OverWorld::HomeSetup()
 {
+    newMap = false;
     exitMap = false;
+    exitMapSouth = false;
+    exitMapNorth = false;
+    exitMapEast = false;
+    exitMapWest = false;
     xCoordinate = width / 2;
     yCoordinate = height - 15;
     saveXCoordinate = width / 6;      
     saveYCoordinate = height - 7;                       
     bottomExitXCoordinateOne = width / 2; 
     bottomExitXCoordinateTwo = (width / 2) + 1; 
-    bottomExitYCoordinate = height;
+}
+
+void OverWorld::PrintDesert()
+{
+    system("cls");
+    {
+        cout << "\n\n,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << ",,''''',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << "......,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << "....',,,,,;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << "...,;,,;,,:cll:,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
+        cout << "......'''',:c:'',,;;,,;;,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,;;,,,,,,,,,;;;,,,,;,,,,,,,,,;,,;,,,,,,,,\n";
+        cout << "  .............';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n";
+        cout << "..........,,,,,,;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,,,'',,,;;;;;;;,,,,'',,;;;;;;;;;;;;;;\n";
+        cout << "'',,,,,,,',coc,,;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,'......',,;;,'.......';;;;;;;;;;;;;;\n";
+        cout << ".',;;;;;;'.....,;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,,'..............',,;;;;;;;;;;;;;;;\n";
+        cout << "',;;;;;;;,''''',;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''........',;;;;;;;;;;;;;;;;;;;\n";
+        cout << "';;;:;;:;,;lol;,;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;,,'............,;;;;;;;;;;;;;;;;;;\n";
+        cout << ".,::;:::;'.'''.,;:::;;::::::::::::::::::::::::::::::::::::::::::::::::::::::::::;;:;,'.................,;:::::::::::::::\n";
+        cout << ".';:::::;'.....,;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::;,......'''...''... ...,::::::::::::::\n";
+        cout << ".';:::::;,;clc;,::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::,..','.........',;,... .;:::::::::::::\n";
+        cout << ".',::::::'.,;,.,::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::;;;::..........,::::;,..':::::::::::::\n";
+        cout << "..';c::c:,.....,::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::c:;....;,....,:::::::;;:::::::::::::\n";
+        cout << ".'';llodo:;:c:,;:cc:::::::::::::::::::ccc::::::::::::::::::::::::::ccc::c:::::ccllodolc;..;c:'...;c:::::::::::::::cccccc\n";
+        cout << "...;xxdoc,';c;';ccccccccccccc::::ccccllcclooollcccccc:cc:::::::::cloollcccccclodxxdo:;::;:ccc;..':c::::ccc:cc::ccloddxxx\n";
+        cout << "...;ooc;;'.....;lccccloollcccccccllloodxxxkkdc:cloddolcc::ccc::cloooollllllodxxxdl:;;:;;;:ccc,..,:lccccccccccclodooodxkk\n";
+        cout << "..'';:;;;,,;;;,;clolllllllllllloooddddddddlcc:;;;:coxxdolccccccloooollllodxxdolc:;;;;;;;;;;::,..':llllllllloodoc;'..'':l\n";
+        cout << "...',;;;;,,cl:,,;;:loodddddddddxxdddoolll:,'',,;;;;:cldxxdolllloolllooddxxdlc:;;;;;;;;;;;;;;,'..':dddddddddxxl,.........\n";
+        cout << ".''',;;;;'.....,;:;;;::cclllcccccccc:;,,,,''''',;;;:;;:ldxkxxxddlcodxxdolc:;,,,,;;;;;;;;;;;;,....,:clllllllc:...........\n";
+        cout << ",,,,,;;;;,'...',;;;;;;;;;;;;,,;;;;;;;,,,,,,,,,,,,,;;;;;;:coolool;;cllc:;;;;,,,,,;;;;;;;;;;;;,'',,,;;;;;;;;;;,..''.....'.\n";
+        cout << ":::::::::::c:::c:::::::::::cc::::::::::::::::::::::::::::::::::::::::::::::::cc:::::::::c::c:::::::::::::::::::::::c::::\n";
+        cout << ":::::::cc:cc::c::ccc::ccccccc::cccccc::::::::::::::::c:::c:ccc:::::cc:::::cc::::cccccccccc:cccc::cc:::cc:cc::cc:c::cc:::\n";
+        cout << "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n\n\n\n";
+
+        cout << "* * * * * * * * * * * * * * * * * * * * * * * * * D E S E R T   Z O N E * * * * * * * * * * * * * * * * * * * * * * * * *";
+        Sleep(2700);
+    }
 }
 
 void OverWorld::DesertOneSetup()
 {
+    newMap = false;
     exitMap = false;
+    exitMapSouth = false;
+    exitMapNorth = false;
+    exitMapEast = false;
+    exitMapWest = false;
     xCoordinate = width / 2;
     yCoordinate = 0;
-    saveXCoordinate = 0;
-    saveYCoordinate = -1;
+    saveXCoordinate = 500;
+    saveYCoordinate = 500;
     bottomExitXCoordinateOne = width / 2;
     bottomExitXCoordinateTwo = (width / 2) + 1;
-    bottomExitYCoordinate = height;
     topExitXCoordinateOne = width / 2;
     topExitXCoordinateTwo = (width / 2) + 1;
-    topExitYCoordinate = -1;
 }

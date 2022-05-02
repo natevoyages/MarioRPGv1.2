@@ -2,6 +2,8 @@
 #define OVERWORLD_H
 #include "InputConfig.h"
 #include "InGameMenu.h"
+#include "PlayerStats.h"
+#include "windows.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -24,19 +26,19 @@ public:
 
 	void HomeSetup();
 
+	void PrintDesert();
+
 	void DesertOneSetup();
 
 	void PrintOverWorld(char charCharacter, bool& play);
 
-	void SetUpMap(int map);
+	void SetUpMap(int loadMap);
 
 private:
 	InputConfig mapsInput;
 	InGameMenu inGame;
-	int saveState[16]; // fix later
-	int DesertMap[3]; // will fix later 
-	int SeaFloorMap[4]; //
-	int BowserCastle[5]; //
+	PlayerStats playerStats;
+
 	int xCoordinate;
 	int yCoordinate;
 	int saveXCoordinate;
@@ -50,19 +52,19 @@ private:
 
 	int bottomExitXCoordinateOne; 
 	int bottomExitXCoordinateTwo;
-	int bottomExitYCoordinate;
+
 	int topExitXCoordinateOne;
 	int topExitXCoordinateTwo;
-	int topExitYCoordinate;
-	int leftExitXCoordinate;
+
 	int leftExitYCoordinateOne;
 	int leftExitYCoordinateTwo;
-	int rightExitXCoordinate;
+
 	int rightExitYCoordinateOne;
 	int rightExitYCoordinateTwo;
 	//
 	const int width = 60;
 	const int height = 30;
+	bool newMap;
 	bool exitMap;
 	bool exitMapSouth;
 	bool exitMapNorth;

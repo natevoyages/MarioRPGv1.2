@@ -16,11 +16,11 @@ void Items::PrintMenuItems()
 	system("cls");
 	cout << "\n\n\n\n";
 	cout << "	    	   ITEMS" << "\n\n";
-	cout << "	    	   RdShrm: " << redMushroom << "\n\n";
+	cout << "	    	   RdShrm:        " << redMushroom << "\n\n";
 	cout << "	    	   MegaRdShrm:    " << megaRedMushroom << "\n\n";
-	cout << "	    	   GrnShrm:   " << greenMushroom << "\n\n";
-	cout << "	    	   Star:  " << star << "\n\n";
-	cout << "	    	   POWBlk:   " << powBlock << "\n\n";
+	cout << "	    	   GrnShrm:       " << greenMushroom << "\n\n";
+	cout << "	    	   Star:          " << star << "\n\n";
+	cout << "	    	   POWBlk:        " << powBlock << "\n\n";
 }
 
 void Items::UseRedMushroom()

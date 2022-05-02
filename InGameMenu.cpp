@@ -32,7 +32,7 @@ void InGameMenu::PrintMenuBanner() {
 }
 
 
-void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap)
+void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& exit)
 {
 		system("cls");
 		PrintMenuBanner();
@@ -92,7 +92,7 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap)
 		cout << "                                                             _/                      _/         \n";
 		cout << "                                                        _/_/                    _/_/            \n";
 		notGameOver = false;
-		newMap = true;
+		exit = true;
 		open = false;
 	
 	}
