@@ -39,7 +39,24 @@ public:
 
 	void ShopOneSetup();
 
+	void SeaFloorOneSetup();
+
+	void SeaFloorTwoSetup();
+
+	void SeaFloorThreeSetup();
+
+	void ShopTwoSetup();
+
+	void CastleOneSetup();
+
+	void CastleTwoSetup();
+
+	void CastleThreeSetup();
+
+
 	void PrintDesert();
+
+	void PrintSeaFloor();
 
 private:
 	InputConfig mapsInput;
