@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <windows.h>
 
 using namespace std;
 class OverWorld {
@@ -20,15 +21,17 @@ public:
 
 	void CollisonLogic();
 
-	void NewGameHomeSetup(char charCharacter);
-
-	void HomeSetup();
-
-	void DesertOneSetup();
-
 	void PrintOverWorld(char charCharacter, bool& play, bool& notGAMEOVER);
 
 	void SetUpMap();
+
+	void HomeSetup();
+
+	void NewGameHomeSetup(char charCharacter);
+
+	void DesertOneSetup();
+
+	void PrintDesert();
 
 private:
 	InputConfig mapsInput;
