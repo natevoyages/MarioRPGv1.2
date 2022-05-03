@@ -24,6 +24,10 @@ OverWorld::OverWorld()
     shopKeepYCoordinate = -1;
     map = 0;
 }
+ bool OverWorld::GetNotGameOver() const
+ {
+     return notGameOver;
+ }
 
 void OverWorld::Shop()
 {
@@ -61,7 +65,7 @@ void OverWorld::LoadGame()
     ifstream load;
     load.open("save.dat");
     if (!(load.fail())) {
-        load >> map;
+        load >> map >> userCharacter >> xCoordinate >> yCoordinate;// >> stringCharacter; fix me
         load.close();
     }
     else
@@ -76,7 +80,7 @@ void OverWorld::SaveGame()
         "Saving.", "Saving..", "Saving...", };
     ofstream save;
     save.open("save.dat");
-    save << map;
+    save << map << " " << userCharacter << " " << prevXCoordinate << " " << prevYCoordinate; // << stringCharacter; fix me
     save.close();
     for (int i = 0; i < 9; i++) 
     {
@@ -99,6 +103,7 @@ void OverWorld::characterTracker()
 
 void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER)
 {
+            map = 0;
         if (!exitMap)
         {
             OverWorldPrintLogic();

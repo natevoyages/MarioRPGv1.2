@@ -13,6 +13,8 @@ class OverWorld {
 public:
 	OverWorld();
 
+	bool GetNotGameOver() const;
+
 	void LoadGame();
 
 	void SaveGame();
@@ -100,6 +102,7 @@ private:
 	bool menuToggled;
 	bool notGameOver;
 	char userCharacter;
+	string stringCharacter;
 	
 };
 #endif

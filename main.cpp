@@ -63,6 +63,8 @@ int main()
 				while (notGameOver)
 				{
 					overWorld.SetUpMap();
+					play = overWorld.GetNotGameOver();
+					notGameOver = overWorld.GetNotGameOver();
 				}
 			}
 		}
