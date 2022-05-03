@@ -67,6 +67,8 @@ void StartMenu::PrintStartMenu()
 
     }
     cout << "\n         Press 'Space' to Select";
+    cout << "\n\n\n\n           'w' = UP        \n";
+    cout << "           's' = DOWN              ";
 }
 
 
