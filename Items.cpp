@@ -1,6 +1,4 @@
 #include "Items.h"
-#include <string>
-#include <iostream>
 using namespace std;
 Items::Items()
 {
@@ -22,11 +20,11 @@ void Items::PrintMenuItems()
 	cout << "	    	  _/_/_/      _/      _/_/_/_/  _/      _/  _/_/_/        _/    \n\n\n\n";
 
 
-	cout << "	    	   RdShrm: " << redMushroom << "\n\n";
+	cout << "	    	   RdShrm:        " << redMushroom << "\n\n";
 	cout << "	    	   MegaRdShrm:    " << megaRedMushroom << "\n\n";
-	cout << "	    	   GrnShrm:   " << greenMushroom << "\n\n";
-	cout << "	    	   Star:  " << star << "\n\n";
-	cout << "	    	   POWBlk:   " << powBlock << "\n\n";
+	cout << "	    	   GrnShrm:       " << greenMushroom << "\n\n";
+	cout << "	    	   Star:          " << star << "\n\n";
+	cout << "	    	   POWBlk:        " << powBlock << "\n\n";
 }
 
 void Items::UseRedMushroom()

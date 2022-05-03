@@ -1,6 +1,10 @@
 #ifndef ITEMS_H
 #define ITEMS_H
 
+#include <windows.h>
+#include <string>
+#include <iostream>
+
 class Items
 {
 public:

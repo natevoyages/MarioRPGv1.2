@@ -74,6 +74,7 @@ void StartMenu::TitleMenu(bool& play, bool& startNewGame)
 {
     while (titleMenu)
     {
+        Sleep(150);
         system("cls"); 
         PrintStartMenu();
         input.UserInput();
@@ -94,6 +95,7 @@ void StartMenu::TitleMenu(bool& play, bool& startNewGame, bool& resumeGame)
 {
     while (titleMenu)
     {
+        Sleep(150);
         system("cls");
         PrintStartMenu();
         input.UserInput();
@@ -119,6 +121,7 @@ void StartMenu::TitleScreen()
     while (titleScreen)
     {
         {
+            Sleep(150);
             system("cls");
             TitlePrint();
             input.PressEnterToContinue(titleScreen);

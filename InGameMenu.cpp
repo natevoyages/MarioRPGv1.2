@@ -52,6 +52,7 @@ void InGameMenu::PrintMenuBanner() {
 
 void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , PlayerStats& playerStats, Items& items)
 {
+	Sleep(150);
 		system("cls");
 		PrintMenuBanner();
 		menuInput.MenuInput();
@@ -74,6 +75,7 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , P
 
 	while (select && yMenu == 0 && open)
 	{
+		Sleep(150);
 		menuInput.MenuInput();
 		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);
 		playerStats.PrintStats();
@@ -81,6 +83,7 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , P
 	}
 	while (select && yMenu == 1 && open)
 	{
+		Sleep(150);
 		system("cls");
 		menuInput.MenuInput();
 		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);
@@ -89,6 +92,7 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , P
 	}
 	while (select && yMenu == 2 && open)
 	{
+		Sleep(150);
 		system("cls");
 		menuInput.MenuInput();
 		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);

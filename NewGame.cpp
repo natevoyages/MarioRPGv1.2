@@ -45,6 +45,7 @@ NewGame::NewGame()
 void NewGame::CharacterSelect()
 {
 	while (!charSelect) {
+		Sleep(150);
 		system("cls");
 		if (yCharSelect == 0)
 		{
