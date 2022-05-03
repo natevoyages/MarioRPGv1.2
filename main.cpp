@@ -29,7 +29,7 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				overWorld.NewGameHomeSetup(newGame.GetCharacterChar());
+				overWorld.NewGameHomeSetup(newGame.GetCharacterChar(), newGame.GetCharacterString(), newGame.GetHP(), newGame.GetPower(), newGame.GetJump(), newGame.GetFlwrPwr(), newGame.GetSpeed(), newGame.GetDefense());
 				while (notGameOver) 
 				{
 					overWorld.PrintOverWorld(newGame.GetCharacterChar(), play, notGameOver);
@@ -51,7 +51,7 @@ int main()
 				NewGame newGame;
 				newGame.CharacterSelect();
 				newGame.NewGameDialouge();
-				overWorld.NewGameHomeSetup(newGame.GetCharacterChar());
+				overWorld.NewGameHomeSetup(newGame.GetCharacterChar(), newGame.GetCharacterString(), newGame.GetHP(), newGame.GetPower(), newGame.GetJump(), newGame.GetFlwrPwr(), newGame.GetSpeed(), newGame.GetDefense());
 				while (notGameOver)
 				{
 					overWorld.PrintOverWorld(newGame.GetCharacterChar(), play, notGameOver);

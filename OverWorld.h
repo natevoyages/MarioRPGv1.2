@@ -35,7 +35,7 @@ public:
 
 	void HomeSetup();
 
-	void NewGameHomeSetup(char charCharacter);
+	void NewGameHomeSetup(char charCharacter, string character, int hp, int power, int jump, int flwrPwr,int speed, int defense);
 
 	void DesertOneSetup();
 
@@ -103,6 +103,13 @@ private:
 	bool notGameOver;
 	char userCharacter;
 	string stringCharacter;
+	int userLevel;
+	int userHealthPoints;
+	int userPower;
+	int userJump;
+	int userFlowerPower;
+	int userSpeed;
+	int userDefense;
 	
 };
 #endif

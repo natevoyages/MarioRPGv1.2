@@ -151,117 +151,6 @@ void InputConfig::PressEnterToContinue(bool& titleScreen)
 }
 
 
-/*void InputConfig::GamePlayInputLogic(int& x, int& y, int width, int height)
-{
-    switch (userInput)
-    {
-    case LEFT:
-        if (x != 1) // lower limit is 0
-        {
-            x--;
-            break;
-        }
-        else
-        {
-            x = x;
-            break;
-        }
-
-    case RUN_LEFT:
-        if (x > 5)
-        {
-            x -= 4;
-            break;
-        }
-        else
-        {
-            x = 1;
-            break;
-        }
-    case RIGHT:
-        if (x != width - 2) // upper limit is width - 2 since last char is at width - 1 
-        {
-            x++;
-            break;
-        }
-        else
-        {
-            x = x;
-            break;
-        }
-
-    case RUN_RIGHT:
-        if (x < width - 6)
-        {
-            x += 4;
-            break;
-        }
-        else
-        {
-            x = width - 2;
-            break;
-        }
-   
-
-
-    case UP:
-        if (y != 0) // upper limit is 0 for y
-        {
-            y--;
-            break;
-        }
-        else {
-            y = 0;
-            break;
-        }
-
-    case RUN_UP:
-        if (y > 1)
-        {
-            y -= 2;
-            break;
-        }
-        else
-        {
-            y = 0;
-            break;
-        }
-
-    case DOWN:
-        if (y < height - 1)
-        {
-            y++;
-            break;
-        }
-        else 
-        {
-            y = height - 1;
-            break;
-        }
-
-    case RUN_DOWN:
-        if (y < height - 2)
-        {
-            y += 2;
-            break;
-        }
-        else
-        {
-            y = height - 1;
-            break;
-        }
-
-    case STOP:
-        x = x;
-        y = y;
-        break;
-
-    default:
-        break;
-
-    }
-}*/
-
 void InputConfig::OverWorldInputLogic(int& x, int& y, int width, int height, bool northOpen, bool southOpen, bool eastOpen, bool westOpen)
 {
     switch (userInput)
@@ -514,7 +403,7 @@ void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, b
     switch (userInput)
     {
     case UP:
-        if (yMenu != 0)
+        if (yMenu != 0 && !select)
         {
             yMenu--;
             break;
@@ -527,7 +416,7 @@ void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, b
         }
 
     case DOWN:
-        if (yMenu != numMenuOptions - 1)
+        if (yMenu != numMenuOptions - 1 && !select)
         {
             yMenu++;
             break;

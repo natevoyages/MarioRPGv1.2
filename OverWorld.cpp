@@ -65,7 +65,7 @@ void OverWorld::LoadGame()
     ifstream load;
     load.open("save.dat");
     if (!(load.fail())) {
-        load >> map >> userCharacter >> xCoordinate >> yCoordinate;// >> stringCharacter; fix me
+        load >> map >> userCharacter >> stringCharacter >> xCoordinate >> yCoordinate; 
         load.close();
     }
     else
@@ -80,7 +80,7 @@ void OverWorld::SaveGame()
         "Saving.", "Saving..", "Saving...", };
     ofstream save;
     save.open("save.dat");
-    save << map << " " << userCharacter << " " << prevXCoordinate << " " << prevYCoordinate; // << stringCharacter; fix me
+    save << map << " " << userCharacter << " " << stringCharacter << " " << prevXCoordinate << " " << prevYCoordinate; 
     save.close();
     for (int i = 0; i < 9; i++) 
     {
@@ -687,7 +687,7 @@ void OverWorld::CollisonLogic()
     }
 }
  // Map setups
-void OverWorld::NewGameHomeSetup(char charCharacter)  //used for newGame
+void OverWorld::NewGameHomeSetup(char charCharacter, string character, int hp, int power, int jump, int flwrPwr, int speed, int defense)  //used for newGame
 {
     exitMap = false;
     southOpen = true;
@@ -705,7 +705,16 @@ void OverWorld::NewGameHomeSetup(char charCharacter)  //used for newGame
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
     userCharacter = charCharacter;
+    stringCharacter = character;
+    userLevel = 3;
+    userHealthPoints = hp;
+    userPower = power;
+    userJump = jump;
+    userFlowerPower = flwrPwr;
+    userSpeed = speed;
+    userDefense = defense;
     map = 0;
+
 }
 //  map 0
 void OverWorld::HomeSetup()
