@@ -20,7 +20,25 @@ void InGameMenu::SetUpMenu()
 	menuOptions[3] = "QUIT GAME ";
 	
 }
+void InGameMenu::PrintGameInfo() 
+{
+	cout << "\n\n\n\n\n\n";
 
+	cout << "	    	      _/_/_/  _/      _/  _/_/_/_/    _/_/        \n";
+	cout << "	    	        _/    _/_/    _/  _/        _/    _/  _/  \n";
+	cout << "	    	       _/    _/  _/  _/  _/_/_/    _/    _/       \n";
+	cout << "	    	      _/    _/    _/_/  _/        _/    _/        \n";
+	cout << "	    	   _/_/_/  _/      _/  _/          _/_/    _/     \n\n\n";
+
+
+
+	cout << "	    	  'S':                Save Point\n\n";
+	cout << "	    	  'k':                Shop Keep\n\n";
+	cout << "	    	  'B':                Boss\n\n";
+	cout << "	          '__' and '|':       Exits\n\n";
+	cout << "	    	  'M' or 'L' or 'T':  Your Character";
+
+}
 
 void InGameMenu::PrintMenuBanner() {
 	cout << "\n\n\n\n\n\n";
@@ -32,7 +50,7 @@ void InGameMenu::PrintMenuBanner() {
 }
 
 
-void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap)
+void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , PlayerStats& playerStats, Items& items)
 {
 		system("cls");
 		PrintMenuBanner();
@@ -52,6 +70,7 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap)
 			}
 			cout << "\n\n";
 		}
+		cout << "\n\n\n	    	  'z' = SELECT  'x' = BACK    SPACE = EXIT";
 
 	while (select && yMenu == 0 && open)
 	{
@@ -73,6 +92,7 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap)
 		system("cls");
 		menuInput.MenuInput();
 		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);
+		PrintGameInfo();
 	}
 	while (select && yMenu == 3 && open)
 	{

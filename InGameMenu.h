@@ -16,15 +16,15 @@ public:
 
 	void SetUpMenu();
 
+	void PrintGameInfo();
+
 	void PrintMenuBanner();
 
-	void PrintInGameMenu(bool& open, bool& play, bool& newMap);
+	void PrintInGameMenu(bool& open, bool& play, bool& newMap, PlayerStats& playerStats, Items& items);
 
 
 private:
 	InputConfig menuInput;
-	PlayerStats playerStats;
-	Items items;
 	bool select;
 	int yMenu;
 	int numMenuOptions;

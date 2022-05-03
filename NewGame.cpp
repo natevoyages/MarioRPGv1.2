@@ -93,6 +93,7 @@ void NewGame::CharacterSelect()
 		selectedCharacterChar = charCharacters[0];
 		selectHealthPoints = healthPoints[0];
 		selectPower = power[0];
+		selectJump = jump[0];
 		selectFlowerPower = flowerPower[0];
 		selectSpeed = speed[0];
 		selectDefense = defense[0];
@@ -107,6 +108,7 @@ void NewGame::CharacterSelect()
 		selectedCharacterChar = charCharacters[1];
 		selectHealthPoints = healthPoints[1];
 		selectPower = power[1];
+		selectJump = jump[1];
 		selectFlowerPower = flowerPower[1];
 		selectSpeed = speed[1];
 		selectDefense = defense[1];
@@ -121,6 +123,7 @@ void NewGame::CharacterSelect()
 		selectedCharacterChar = charCharacters[2];
 		selectHealthPoints = healthPoints[2];
 		selectPower = power[2];
+		selectJump = jump[2];
 		selectFlowerPower = flowerPower[2];
 		selectSpeed = speed[2];
 		selectDefense = defense[2];

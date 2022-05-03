@@ -2,6 +2,8 @@
 #define OVERWORLD_H
 #include "InputConfig.h"
 #include "InGameMenu.h"
+#include "PlayerStats.h"
+#include "Items.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -65,13 +67,13 @@ public:
 
 	void PrintCastle();
 
+	void PrintGameWin();
+
 private:
 	InputConfig mapsInput;
 	InGameMenu inGame;
-	int saveState[16]; // fix later
-	int DesertMap[3]; // will fix later 
-	int SeaFloorMap[4]; //
-	int BowserCastle[5]; //
+	PlayerStats playerStats;
+	Items items;
 	int xCoordinate;
 	int yCoordinate;
 	int saveXCoordinate;
@@ -110,6 +112,10 @@ private:
 	int userFlowerPower;
 	int userSpeed;
 	int userDefense;
+	int userEXP;
+	int userCoins;
+	int userStatPts;
+
 	
 };
 #endif

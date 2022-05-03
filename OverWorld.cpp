@@ -1,6 +1,5 @@
 #include "OverWorld.h"
-#include "InputConfig.h"
-#include "InGameMenu.h"
+
 
 
 OverWorld::OverWorld()
@@ -65,13 +64,16 @@ void OverWorld::LoadGame()
     ifstream load;
     load.open("save.dat");
     if (!(load.fail())) {
-        load >> map >> userCharacter >> stringCharacter >> xCoordinate >> yCoordinate; 
+        load >> map >> userCharacter >> stringCharacter >> xCoordinate >> yCoordinate;
         load.close();
     }
     else
     {
         cout << "\n\n\n\n\n\n\n\n\n\	    	  ERROR: COULD NOT READ SAVE";
+
     }
+    playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+        userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
 }
 
 void OverWorld::SaveGame()
@@ -114,7 +116,9 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
             map = 1;
@@ -149,7 +153,9 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
         if (exitMapSouth) 
@@ -173,7 +179,10 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+       
             }
         }
         if (exitMapNorth)
@@ -201,7 +210,9 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
         if (exitMapNorth)
@@ -232,7 +243,9 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
         if (exitMapNorth)
@@ -260,7 +273,9 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
         if (exitMapWest)
@@ -283,7 +298,9 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
         if (exitMapWest)
@@ -311,7 +328,9 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
         if (exitMapWest)
@@ -344,7 +363,9 @@ void OverWorld::SetUpMap()
            inGame.SetUpMenu();
            while (menuToggled)
            {
-              inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+               playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                   userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+              inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
            }
         }
        if (exitMapNorth)
@@ -372,7 +393,9 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
         if (exitMapNorth)
@@ -395,7 +418,9 @@ void OverWorld::SetUpMap()
            inGame.SetUpMenu();
            while (menuToggled)
            {
-               inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+               playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                   userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+               inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
            }
        }
 
@@ -424,7 +449,9 @@ void OverWorld::SetUpMap()
         inGame.SetUpMenu();
         while (menuToggled)
         {
-            inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+            inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
         }
     }
 
@@ -453,7 +480,9 @@ void OverWorld::SetUpMap()
             inGame.SetUpMenu();
             while (menuToggled)
             {
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
             }
         }
 
@@ -471,8 +500,8 @@ void OverWorld::SetUpMap()
     else if (map == 12)
     {
     system("cls");
-    cout << "Sorry! The Princess is in another Castle...\n";
-    Sleep(8000);
+    PrintGameWin();
+    Sleep(5000);
 
         notGameOver = false;
     }
@@ -647,6 +676,11 @@ void OverWorld::OverWorldPrintLogic()
             cout << "#";
         }
     }
+
+    cout << "\n\n\n\n           'w' = UP                    HOLD SHIFT + DIRECTION = RUN\n";
+    cout <<         "'a' = LEFT 's' = DOWN 'd' = RIGHT                PRESS SPACE = MENU";
+
+
 }
 
 void OverWorld::CollisonLogic()
@@ -713,8 +747,10 @@ void OverWorld::NewGameHomeSetup(char charCharacter, string character, int hp, i
     userFlowerPower = flwrPwr;
     userSpeed = speed;
     userDefense = defense;
+    userEXP = 0;
+    userCoins = 0;
+    userStatPts = 0;
     map = 0;
-
 }
 //  map 0
 void OverWorld::HomeSetup()
@@ -1089,4 +1125,61 @@ void OverWorld::PrintCastle() {
 
         cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * C A S T L E   Z O N E * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ";
         Sleep(2700);
+}
+
+
+
+void OverWorld::PrintGameWin()
+{
+    cout << "                     _|_|_|_|_|  _|    _|    _|_|    _|      _|  _|    _|      _|      _|    _|_|    _|    _|      _|      \n";
+    cout << "                         _|      _|    _|  _|    _|  _|_|    _|  _|  _|          _|  _|    _|    _|  _|    _|      _|      \n";
+    cout << "                         _|      _|_|_|_|  _|_|_|_|  _|  _|  _|  _|_|              _|      _|    _|  _|    _|      _|      \n";
+    cout << "                         _|      _|    _|  _|    _|  _|    _|_|  _|  _|            _|      _|    _|  _|    _|              \n";
+    cout << "                         _|      _|    _|  _|    _|  _|      _|  _|    _|          _|        _|_|      _|_|        _|      \n\n\n";
+
+    cout << "                                   _|_|_|    _|    _|  _|_|_|_|_|        _|_|    _|    _|  _|_|_|      \n";
+    cout << "                                   _|    _|  _|    _|      _|          _|    _|  _|    _|  _|    _|    \n";
+    cout << "                                   _|_|_|    _|    _|      _|          _|    _|  _|    _|  _|_|_|      \n";
+    cout << "                                   _|    _|  _|    _|      _|          _|    _|  _|    _|  _|    _|    \n";
+    cout << "                                   _|_|_|      _|_|        _|            _|_|      _|_|    _|    _|    \n\n\n";
+
+    cout << "                                  _|_|_|    _|_|_|    _|_|_|  _|      _|    _|_|_|  _|_|_|_|    _|_|_|    _|_|_|      \n";
+    cout << "                                  _|    _|  _|    _|    _|    _|_|    _|  _|        _|        _|        _|            \n";
+    cout << "                                  _|_|_|    _|_|_|      _|    _|  _|  _|  _|        _|_|_|      _|_|      _|_|        \n";
+    cout << "                                  _|        _|    _|    _|    _|    _|_|  _|        _|              _|        _|      \n";
+    cout << "                                  _|        _|    _|  _|_|_|  _|      _|    _|_|_|  _|_|_|_|  _|_|_|    _|_|_|        \n\n\n";
+
+    cout << "               _|_|_|    _|_|_|      _|_|_|  _|      _|        _|_|    _|      _|    _|_|    _|_|_|_|_|  _|    _|  _|_|_|_|  _|_|_|   \n";
+    cout << "                 _|    _|              _|    _|_|    _|      _|    _|  _|_|    _|  _|    _|      _|      _|    _|  _|        _|    _| \n";
+    cout << "                 _|      _|_|          _|    _|  _|  _|      _|_|_|_|  _|  _|  _|  _|    _|      _|      _|_|_|_|  _|_|_|    _|_|_|   \n";
+    cout << "                 _|          _|        _|    _|    _|_|      _|    _|  _|    _|_|  _|    _|      _|      _|    _|  _|        _|    _| \n";
+    cout << "               _|_|_|  _|_|_|        _|_|_|  _|      _|      _|    _|  _|      _|    _|_|        _|      _|    _|  _|_|_|_|  _|    _| \n\n\n";
+
+    cout << "                                            _|_|_|    _|_|      _|_|_|  _|_|_|_|_|  _|        _|_|_|_|      _|  \n";
+    cout << "                                          _|        _|    _|  _|            _|      _|        _|            _|  \n";
+    cout << "                                          _|        _|_|_|_|    _|_|        _|      _|        _|_|_|        _|  \n";
+    cout << "                                          _|        _|    _|        _|      _|      _|        _|                \n";
+    cout << "                                            _|_|_|  _|    _|  _|_|_|        _|      _|_|_|_|  _|_|_|_|      _|  \n\n";
+
+    cout << "                                                                    ........                         \n";                                                                        
+    cout << "                                                                .',ck000000Ol,,'.                    \n";                                                                        
+    cout << "                                                           .:OKxccoxKXOxk0KXkolcoKXx,                \n";                                                                      
+    cout << "                                                           .dNXOox0X0dlcclokKKkoxXWXo.               \n";                                                                        
+    cout << "                                                          .;lkKXXNNXkccccccoKNNNNXKkc;.              \n";                                                                        
+    cout << "                                                          'cclokNWWN0xlccldOXWWWXkolc:.              \n";                                                                       
+    cout << "                                                          'ccclxXWWWWN0kOOKNWWWWKdlcc:.              \n";                                                                        
+    cout << "                                                          ':lxOKNX0xd0KKKK0xdOKNNKOdc:.              \n";                                                                        
+    cout << "                                                           .oKKK0Ox;,dOOOOk:,oO000K0l.               \n";                                                                        
+    cout << "                                                           .oxc',okxdxdoddxxdkk:''ckl.               \n";                                                                        
+    cout << "                                                          ;dkkxl,:dxkxc;:cdkkxd,,lxkkd;              \n";                                                                        
+    cout << "                                                          .ckOOOx::ccoddoddddlcc;:xOOOk:.            \n";                                                                        
+    cout << "                                                          .;:coolccclddddddolccclooc:;.              \n";                                                                        
+    cout << "                                                             .;cccldkkOOOOOkxdcccc,.                 \n";                                                                        
+    cout << "                                                              .'codxOOkxxxxxkOOxddc'                 \n";                                                                        
+    cout << "                                                              .cKNNN0xoooookXNNNXl.                  \n";                                                                        
+    cout << "                                                            ...ckKNWNNNXXXXNWWWXOl'..                \n";                                                                        
+    cout << "                                                           ..,:cccd0XNWWMMWWWWXKklccc;..             \n";                                                                        
+    cout << "                                                          .,:ccccccldKWMMMMWWXxllcccc::;.            \n";                                                                        
+    cout << "                                                         ..,;:::::::cxO00000Okl;;::::::;.            \n";
+    
 }

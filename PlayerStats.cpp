@@ -8,27 +8,54 @@ PlayerStats::PlayerStats()
 {
 	characterName = "Mario";
     characterChar = 'M';
-	level = 3;
-	healthPoints = 25;
-	power = 15;
-	jump = 13;
-	flowerPower = 10;
-	speed = 9;
+	level = 0;
+	healthPoints = 0;
+	power = 0;
+	jump = 0;
+	flowerPower = 0;
+	speed = 0;
 	experiencePoints = 0;
     coins = 0;
-	statPoints = 3;
+	statPoints = 0;
+}
+
+void PlayerStats::SetPlayer(string character, char iconCharacter,int lvl, int hp, int pwr, int jmp, int flwrPwr, int spd, int def, int xp, int coin, int statPts)
+{
+	characterName = character;
+    characterChar = iconCharacter;
+	level = lvl;
+	healthPoints = hp;
+	power = pwr;
+	jump = jmp;
+	flowerPower = flwrPwr;
+	speed = spd;
+	defense = def;
+	experiencePoints = xp;
+	coins = coin;
+	statPoints = statPts;
+
+
 }
 
 void PlayerStats::PrintStats()
 {
 	system("cls");
 	cout << "\n\n\n\n";
+
+	cout << "      _/_/_/  _/_/_/_/_/    _/_/    _/_/_/_/_/  _/    _/    _/_/_/       \n";
+	cout << "   _/            _/      _/    _/      _/      _/    _/  _/            _/\n";
+	cout << "    _/_/        _/      _/_/_/_/      _/      _/    _/    _/_/           \n";
+	cout << "       _/      _/      _/    _/      _/      _/    _/        _/          \n";
+	cout << "_/_/_/        _/      _/    _/      _/        _/_/    _/_/_/        _/   \n\n\n\n";
+
+
 	cout << "	    	   " << characterName << " [" << characterChar << "]\n\n";
 	cout << "	    	   LEVEL: " << level << "\n\n";
 	cout << "	    	   HP:    " << healthPoints << "\n\n";
 	cout << "	    	   PWR:   " << power << "\n\n";
 	cout << "	    	   JUMP:  " << jump << "\n\n";
 	cout << "	    	   SPD:   " << speed << "\n\n";
+	cout << "	    	   DEF:   " << defense << "\n\n";
 	cout << "	    	   EXP:   " << experiencePoints << "\n\n\n";
 	cout << "	    	   COINS: " << coins << "\n\n\n";
 	cout << "	    	   STAT PTS:  " << statPoints << "\n\n";

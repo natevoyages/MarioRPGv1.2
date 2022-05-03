@@ -15,7 +15,13 @@ void Items::PrintMenuItems()
 {
 	system("cls");
 	cout << "\n\n\n\n";
-	cout << "	    	   ITEMS" << "\n\n";
+	cout << "	    	      _/_/_/  _/_/_/_/_/  _/_/_/_/  _/      _/    _/_/_/        \n";
+	cout << "	    	       _/        _/      _/        _/_/  _/_/  _/            _/ \n";
+	cout << "	    	      _/        _/      _/_/_/    _/  _/  _/    _/_/            \n";
+	cout << "	    	     _/        _/      _/        _/      _/        _/           \n";
+	cout << "	    	  _/_/_/      _/      _/_/_/_/  _/      _/  _/_/_/        _/    \n\n\n\n";
+
+
 	cout << "	    	   RdShrm: " << redMushroom << "\n\n";
 	cout << "	    	   MegaRdShrm:    " << megaRedMushroom << "\n\n";
 	cout << "	    	   GrnShrm:   " << greenMushroom << "\n\n";
