@@ -56,6 +56,19 @@ void OverWorld::ExitMapCoordinates()
     }
   
 }
+void OverWorld::LoadGame()
+{
+    ifstream load;
+    load.open("save.dat");
+    if (!(load.fail())) {
+        load >> map;
+        load.close();
+    }
+    else
+    {
+        cout << "\n\n\n\n\n\n\n\n\n\	    	  ERROR: COULD NOT READ SAVE";
+    }
+}
 
 void OverWorld::SaveGame()
 {
@@ -118,13 +131,6 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
 
 void OverWorld::SetUpMap()
 {
-    ifstream load;
-    load.open("save.dat");
-    if (!(load.fail())) {
-        load >> map;
-        load.close();
-    }
-
     if (map == 0)
     {
         HomeSetup();
@@ -143,6 +149,7 @@ void OverWorld::SetUpMap()
         }
         if (exitMapSouth) 
         {
+            PrintDesert();
             map = 1;
         }
         ExitMapCoordinates();
@@ -150,7 +157,6 @@ void OverWorld::SetUpMap()
 
     else if (map == 1)        // start of Desert maps
     {
-        PrintDesert();
         DesertOneSetup();
         while (!exitMap)
         {
@@ -226,6 +232,7 @@ void OverWorld::SetUpMap()
         }
         if (exitMapNorth)
         {
+            PrintSeaFloor();
             map = 5;
         }
         else if (exitMapEast)
@@ -260,7 +267,6 @@ void OverWorld::SetUpMap()
 
     else if (map == 5)        // start of Sea Floor maps
     {
-        PrintSeaFloor();
         SeaFloorOneSetup();
         while (!exitMap)
         {
@@ -281,6 +287,7 @@ void OverWorld::SetUpMap()
         }
         else if (exitMapSouth)
         {
+            PrintDesert();
             map = 3;
         }
         ExitMapCoordinates();
@@ -337,6 +344,7 @@ void OverWorld::SetUpMap()
         }
        if (exitMapNorth)
        {
+           PrintCastle();
            map = 9;
        }
        else if(exitMapEast)
@@ -392,6 +400,7 @@ void OverWorld::SetUpMap()
         }
         else if (exitMapSouth)
         {
+            PrintSeaFloor();
             map = 7;
         }
         ExitMapCoordinates();
@@ -878,6 +887,8 @@ void OverWorld::CastleOneSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
+    saveXCoordinate = 0;
+    saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
     map = 9;
@@ -1002,6 +1013,66 @@ void OverWorld::PrintSeaFloor()
     cout << "lodollolllllllllllcllllclllccllcclllclllccllclolccllcclllcllccllllcllllccloddoldoodxocclodollccccclllllccccclollcccllodddllolllooolccccccooooolcccllll\n";
     cout << "cloooooolcclllllllllcccllcclllccllcclllcclllcclllccllcclllccllccllllccclccodddddldxdooodolccccclllllccccccloolcccccldddddooolloolollccccccloollccccccl\n";
     cout << "lccllllllclcccclllcclllcccllccllllcclllcclllcclllcccllcclllcccclcccllcllcclloddddxdoodddocclllolllccccccloollccccc:coddodxolccclloolclcccc:cooolcccccc\n";
-    cout << "lllcclllllccclcccclllccclllcclllcccllllcllllc:clllccllllc:cllcclolllccccccccodddxxlccclddoloolllcccc:clooolcccccc:cllooooolccc:clloollccccc:cllolllccc\n";
+    cout << "lllcclllllccclcccclllccclllcclllcccllllcllllc:clllccllllc:cllcclolllccccccccodddxxlccclddoloolllcccc:clooolcccccc:cllooooolccc:clloollccccc:cllolllccc\n\n\n\n";
+
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * S E A  F L O O R  Z O N E * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ";
     Sleep(2700);
+}
+
+void OverWorld::PrintCastle() {
+        system("cls");
+        cout << "                                                ..                                                ..                                                  \n";
+        cout << "                                              .;o:.                                              'lc.                                                 \n";
+        cout << "                                              ,ddc.                     ....                     ,odc.                                                \n";
+        cout << "                                              ;ddo,                .';:llolc:;'.                .:ddc.                                                \n";
+        cout << "                                              ;ddo:.              ,ldxxdooollllc;.              'odoc.                                                \n";
+        cout << "                                              ;dddl,             .:loooooollcccc:,             .cxdoc.                                                \n";
+        cout << "                                              ,oddol,.  ,clll:;'';lodddxxxddddool:,.,;cllc;.  .:odol:.                                                \n";
+        cout << "                                              .looddl:,,oxxxxxxdooodxdddddddddddolloxxxxdol;';lddooc,.                                                \n";
+        cout << "                                              .;odddddolododddddddoodddddddddollldddddddooc:ldddool:.                                                 \n";
+        cout << "                   ,ol;..'clcc;...,;;.         .codddddlcccclooodddddoddddddolloddddooolcc:codooll:'.        .:oc,..,llc:,...;;;.                     \n";
+        cout << "                   ;dxdoodddoolcccc::'          'cllooolc:cc::cloodddodddddddoodddoolc:cc::loollc:,.         .cxxdooddooolccc:::.                     \n";
+        cout << "...                .:cccccccccc:::;;,.           .,:cccc::loc,',:clolcloddddocclllc:;;:llc:clc::;'.           ':ccccccccc::::;;'.                     \n";
+        cout << "......              ,loddddoolllcc::.              .';;;:lddl;....',',:looolc;,;;,'..'colc;;;;,..              ;ooddddoolllc::;.                      \n";
+        cout << "........            'cllllllc::::::;.                .':ldddo:'.......,:cc::;........,loolc;,..                ,clllllccc:::::,.                      \n";
+        cout << "........            .;::cc:c:::::;;'.                .codddddol:;;;;:coddooolc::;;:;:ldooolc:'.                .;cc:::::::::;;'                       \n";
+        cout << "........            .cxxkkxxxdoolc:,     .,,,;,''''';lddddoddddddddddddddddddddddddddddddooolc:;,,;,'''''..    .lxkkkxxxdollc:'                       \n";
+        cout << ".......             .cxkOkxoodoolc:,   .;dxxkxoloollccloolldddoloddddolodddooloddddolodddllllldxxkkdloollc;.   .lxOOkdlodollc:'                       \n";
+        cout << ".......             .ckOko'..;oolcc,   .dOOOOkooxxollc:ldocloodocoddodoclooodocoddodocloodocldkkkOOdodolllc,   .lkOkl. .:oolc:'                       \n";
+        cout << "..........          .cxOx,   .colc:;'',;lddddolloolcc::lxxooddxxollldxxooddxxxollodxxooodxdlcldddddlcllccc:;''';okkd'   .lolc:'                       \n";
+        cout << "............        .cxkx,    :olc:::cllcdkkxxllolllc:cxOOOOOOOOkdldOOOOOOOkkkxlok0OOkkOOOkdccdkOOkxlddoll:::clcokko.   .locc:'                       \n";
+        cout << "..............      .cxkkc'..,ldlc:;;:c:lxO00Oddkdool:cdxxxkxxkkxdlokxxxxxxxxxxllxkxxxxxkkkdclxOOOOxoxxolc:;;:::oxkx:'..;ooc::'                       \n";
+        cout << "...............   ...cxkOkkkxddolc:;;clcokOOOkddxdoooccoddoloodxxddolodddoolooolllddddoloooolokO00Okoddllc:::cc:lxkOkkxxdolc::,..   ......   .........\n";
+        cout << "....................'cxkOkxxdoollc::;clclxO0OOdoxxdoollxkOkxxkOOkOOkxxkOkkkxxxxkkkkkkkkkxxxkxdkOO00kooollc:::clcokOOkxxdollc::,.......................\n";
+        cout << "..............,lolc,'cxkkxxxdlcclc:::oddoloxOkdoxxxdoccloxkxooooxOkolooxOkdllooxOkolooxOkdloookOOO0koddlccclolccokOkxxxdlccl::,,clc:;.................\n";
+        cout << "..............:k0kdc;cdxdxOkxoccccc:cxOxoc:ldxloxxdolc;:cokxccccdkxlcccokxl::ccokxl:ccokkl:cccdkkkxdlodolcoxxoc:lxxdkOkxoccccc:cxdol:'................\n";
+        cout << "..............:k0OkxdxxxkOOkkkxxxxxxxkOkdlcloocclllcc;;cclllclxolllclddlllc:lddlllclddlllclddllddddlclllccoxkkxdxxxkOOkkkxxxxxxxxdol:'................\n";
+        cout << "..............;dxxkxxxkxkkxdxkkkkkkxxxxxdccdOkooxdool::clllloxOkdoloxOkdooodxkkdoooxkkdooodkdoxOOOOxodxolcodxkxxxxxxxxxxkkkkkkxddool:'................\n";
+        cout << "..............,coooolllloooooolloooolcllc:cdOkddxdoooc:codxxkOOOkkkOOOOOOOOOOOOOkOOOkkkOkkkkddkOOOOkdxxoc:clooolllloooooollooollloll:'................\n";
+        cout << "..............;dOOOOkxxxkOOOOkxxkkkkxxxdoccdOOddkxddoc:cldxxkkkOkkkkkOOOOOOkkkOOOkkOkxkOOkkkddkOOkkkdxdlccoxkOOxdxkOOOOOkxxkkkkxxkxo:'................\n";
+        cout << "..............;xOOOkl,,,lkOOOOOxc,,;oOOxo:cdOkdoxxxdo::clodxkxxkxxxxxxxkxkkxxxkxxxxxxxxkOkkOxdkOOOOkooolccoxkOxc,,;oOOOOOOd:,,;dOOxl;'................\n";
+        cout << "..............;oOOOx'   'xOOkkOo.   ;kOkoccxOkdoxkxdoc;clodxkxxkkkkkxkkxkkkkkkkkkxkkxolxkOOkxdkOO00kooolccldkOo.   ;kOOkkOl.  .cOOxo:'................\n";
+        cout << "..............:xOOOx;...;kOOkkOd'. .:OOxoccdxxooxxddoc;clodxkdoddoodoooodooddodddoodocldkkkOxodkkkkdoodolcoxkOd'. .:OOOkkOo....lOOkdc'................\n";
+        cout << "..............:xOOOkxollxOOOOkkkdoloxOkxdcclolcclllcc;;:lodxkdddlccllllllllllllllcodocldkOOOxllddddlclllccoxkOkdlloxOOOOkkkdolokOkxdc'................\n";
+        cout << ". ............:dxxxxxddddxxxxddddxxddxxdoccdkkooxdoll:;:clodxxkkolllllllcclllllcloxOxlcoxxxxdoxOOOOxodxolcodxxxdddddxxxxddddxxddxxdo:'................\n";
+        cout << "..............,loolllcccllllllccclllllllc:cdOkodxdoooc,,,,,;:okkolllccllcc:::lc:coxOxc;;;;;::lxOOOOkdddlccllllllcccllllllccclllclllc;'................\n";
+        cout << "..............,oxkkxdoodxxxkxdoodxxdooddl:cdOOddkddoo:':occo:;dkolllcldlc:::coo:coxOx:,lo:lo;:xOO00kddolccdxxkxdoodxxkkxdooxxxdooddl:'................\n";
+        cout << ".........   ..;x00OOOOOOOOOOOOOOOOOOOOOkdccdOOdoxxxdl;,coxdoc;lkollllllllllclllcldxOd;;ldddo:;oOOO0kdddlclk00OOOOOOOOOOOOOOOOOOOOkxo:.................\n";
+        cout << "      .....  .;x00OOkkOOOOOOOOkkkOkOOOkxoccxOkooxxdoc;',cccc,,clllllcclcc:::cll:coddc;';ccc:,,cdkO0kdxdlclk00OkkkOOOOOOOOkkkOkOOOkxo:.................\n";
+        cout << "             .;x000OOOOOOOOOOOkkkOOOOOkxdccdkxooxdcccc:lkxxkl:cc::llcldocc::cdo:clcccccdkxkxc:clldkxoddolok0O0OOOOOOOOOOOkkkOOOOOkxd:..               \n";
+        cout << "              ;x0OOOkkOOOOOOOOOOOOOOOOkxdcclolccc::c;,:d0KK0d:;;c:;ccldocc::cdo:,;cc;,lkKKKOo;,:c:clcllccok0OOOkkOOOOOOOOOOOOOOOOkxo:.                \n";
+        cout << "              ,x0OOOkkOOOOOOOOkkkOkOOOkxdccdkxoodc;;'';:cllc:;;;;;:cclolccc:coo:::::,,:ccllc:;,::lddoddolok00OOkOOOOOOOOOkkkOkOOOkxo:.                \n";
+        cout << "              ,oxxxxxdxxxxxxxxxxxxxxxxdol::lxdclol::;;cc'..,cc:cc:c::cccc:c:ccc:cllo::l:'..;c::oddxolooc:cdxxxxxxxxxdxxxxxxxxxxxxdol;.                \n";
+        cout << ",,,,,;,,,,,;,,:cccc:cc:ccccc::c::cccc::c:;:ccc::::::cccc;;;;:::c:;:::;:;;:;;;::;:::cc:cc;:;;:c::cccc::::;:cccc::c:ccccc::cc:::cc::c::;,,;,,;;,;,,,,,,;\n";
+        cout << ":::::::;:;:c:;::;;;:::;:::;:;:::;::;;;:::::::;:;:c::::;;;:::;::::::::;:;:::::::;;;:::;:::;;;:c:;::;:;:::;:::;;;:c::::;;;:::;;;::::::;:;:c:;::;;;:::;:c\n";
+        cout << "::clc;:ccc::lc:;:cc::clc;:ccc::lc:;:cc::cl:;:cc::clc:;:cc::clc::clc;:ccc::llc:;:cc::clc;:ccc::lc:;:cc::cl:;:cc::clc:;:cc::clc::clc;;:cc::lc:;:cc::clc;\n";
+        cout << "cclllcclllccllcclllcclllcclllccllcclllcclllcclllclllcclllcclllcclllcclllcclollclllcclllcclllccllcclllcclllcclllclllcclllcclllcclllcclllcclllclllcclllc\n";
+        cout << "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll\n";
+        cout << "llcccc::cccccclocc:ccc:cc::cclc::ccccccccccccc:cccccllccccccc:cccccccccccccccllccccccccccccllc::ccc::::ccll::cclccccccccccc:::cccclccccccccccccccccccc\n";
+        cout << ":;,;:;,,:::::;;:;,:::cc;,'';:cc;;;,;:;,,;;::::;,',:c:c:::,,,,;::::;,,,;;:::;::,,;;,,;::;::;;;,;:::c:;,',;cc:;;;;::,',;;::::;,';cc::::;,,,;:::::;,,,;;:\n";
+        cout << "',,,;,,',;;,,,.'',,;;;:;..',,;,,;,.',''',;;,,,;,',,,;;,;;,'',;::;,''''',,;,'',,,;;,',,;;,,'.',,;;,;:,.'',;,,;;'.,,''';;;,,;,'',,,;;,;;,',;;::;,''''',;\n";
+        cout << "..............................................................''...........................................................................''.........\n\n\n\n";
+
+        cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * C A S T L E   Z O N E * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ";
+        Sleep(2700);
 }

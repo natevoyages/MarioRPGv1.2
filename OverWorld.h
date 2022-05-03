@@ -13,6 +13,8 @@ class OverWorld {
 public:
 	OverWorld();
 
+	void LoadGame();
+
 	void SaveGame();
 
 	void Shop();
@@ -58,6 +60,8 @@ public:
 	void PrintDesert();
 
 	void PrintSeaFloor();
+
+	void PrintCastle();
 
 private:
 	InputConfig mapsInput;

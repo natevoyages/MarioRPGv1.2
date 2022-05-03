@@ -59,8 +59,11 @@ int main()
 			}
 			else if (resumeGame)
 			{
-				overWorld.SetUpMap();
-				play = false;
+				overWorld.LoadGame();
+				while (notGameOver)
+				{
+					overWorld.SetUpMap();
+				}
 			}
 		}
 		return 0;
