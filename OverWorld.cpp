@@ -31,6 +31,32 @@ void OverWorld::Shop()
     cout << "shop activated";
 }
 
+void OverWorld::ExitMapCoordinates()
+{ 
+    if (exitMapNorth)
+    {
+        xCoordinate = width / 2;
+        yCoordinate = height - 1;
+    }
+    else if(exitMapSouth)
+    {
+        xCoordinate = width / 2;
+        yCoordinate = 0;
+    }
+
+    else if (exitMapWest)
+    {
+        xCoordinate = width - 2;
+        yCoordinate = height / 2;
+    }
+    else if (exitMapEast)
+    {
+        xCoordinate = 1;
+        yCoordinate = height / 2;
+    }
+  
+}
+
 void OverWorld::SaveGame()
 {
     string saving[] = { "Saving.", "Saving..", "Saving...","Saving.", "Saving..", "Saving...",
@@ -73,9 +99,7 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
             }
         }
-        else {
             map = 1;
-        }
         if (notGameOver && exitMap)
         {
             while (notGameOver)
@@ -84,7 +108,7 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
                 SetUpMap();
             }
         }
-        else  if (!notGameOver)
+        if (!notGameOver)
         {
             notGAMEOVER = false;
             play = false;
@@ -117,7 +141,11 @@ void OverWorld::SetUpMap()
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
             }
         }
-        map = 1;
+        if (exitMapSouth) 
+        {
+            map = 1;
+        }
+        ExitMapCoordinates();
     }
 
     else if (map == 1)        // start of Desert maps
@@ -145,6 +173,7 @@ void OverWorld::SetUpMap()
         {
             map = 2;
         }
+        ExitMapCoordinates();
 
     }
 
@@ -176,6 +205,7 @@ void OverWorld::SetUpMap()
         {
             map = 4;
         }
+        ExitMapCoordinates();
     }
 
     else if (map == 3)
@@ -202,6 +232,7 @@ void OverWorld::SetUpMap()
         {
             map = 2;
         }
+        ExitMapCoordinates();
     }
 
     else if (map == 4)             // shop
@@ -224,12 +255,13 @@ void OverWorld::SetUpMap()
         {
             map = 2;
         }
+        ExitMapCoordinates();
     }
 
     else if (map == 5)        // start of Sea Floor maps
     {
-        SeaFloorOneSetup();
         PrintSeaFloor();
+        SeaFloorOneSetup();
         while (!exitMap)
         {
             OverWorldPrintLogic();
@@ -251,6 +283,7 @@ void OverWorld::SetUpMap()
         {
             map = 3;
         }
+        ExitMapCoordinates();
     }
 
     else if (map == 6)
@@ -281,6 +314,7 @@ void OverWorld::SetUpMap()
         {
             map = 8;
         }
+        ExitMapCoordinates();
     }
 
  
@@ -309,6 +343,7 @@ void OverWorld::SetUpMap()
        {
            map = 6;
        }
+       ExitMapCoordinates();
     }
 
     else if (map == 8)
@@ -331,6 +366,7 @@ void OverWorld::SetUpMap()
         {
             map = 6;
         }
+        ExitMapCoordinates();
     }
 
     else if (map == 9)
@@ -358,6 +394,7 @@ void OverWorld::SetUpMap()
         {
             map = 7;
         }
+        ExitMapCoordinates();
     }
     
     else if (map == 10)
@@ -375,7 +412,7 @@ void OverWorld::SetUpMap()
         {
             inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap);
         }
-
+    }
 
         if (exitMapNorth)
         {
@@ -385,8 +422,10 @@ void OverWorld::SetUpMap()
         {
             map = 9;
         }
+        ExitMapCoordinates();
+ 
     }
-    }
+
     else if (map == 11)
     {
         CastleThreeSetup();
@@ -412,7 +451,9 @@ void OverWorld::SetUpMap()
         {
             map = 10;
         }
+        ExitMapCoordinates();
     }
+
     else if (map == 12)
     {
     system("cls");
@@ -421,7 +462,6 @@ void OverWorld::SetUpMap()
 
         notGameOver = false;
     }
-
 }
 
 void OverWorld::OverWorldPrintLogic()
@@ -651,10 +691,12 @@ void OverWorld::NewGameHomeSetup(char charCharacter)  //used for newGame
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
     userCharacter = charCharacter;
+    map = 0;
 }
 //  map 0
 void OverWorld::HomeSetup()
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = true; // to map 1
     northOpen = false;
@@ -664,16 +706,16 @@ void OverWorld::HomeSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width / 2;
-    yCoordinate = height - 1;
     saveXCoordinate = width / 6;      
     saveYCoordinate = height - 7; 
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 0;
 }
 //  map 1
 void OverWorld::DesertOneSetup()
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = true;// to map 2
     northOpen = true;// back to map 1
@@ -683,16 +725,16 @@ void OverWorld::DesertOneSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width / 2;
-    yCoordinate = 0;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 1;
 }
 //  map 2
 void OverWorld::DesertTwoSetup()
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = false;
     northOpen = true; // back to map 2
@@ -702,16 +744,16 @@ void OverWorld::DesertTwoSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width / 2;
-    yCoordinate = 0;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 2;
 }
 //  map 3
 void OverWorld::DesertThreeSetup() 
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = false;
     northOpen = true; // to Sea Floor map 5
@@ -721,16 +763,16 @@ void OverWorld::DesertThreeSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width - 2;
-    yCoordinate = height / 2;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 3;
 }
 //  map 4
 void OverWorld::ShopOneSetup()
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = false;
     northOpen = false;
@@ -740,16 +782,16 @@ void OverWorld::ShopOneSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = 1;
-    yCoordinate = height / 2;
     saveXCoordinate = 8;
     saveYCoordinate = 8;
     shopKeepXCoordinate = width / 2;
     shopKeepYCoordinate = height / 2;
+    map = 4;
 }
 //  map 5
 void OverWorld::SeaFloorOneSetup()
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = true;  //back to map 3
     northOpen = false;
@@ -759,16 +801,16 @@ void OverWorld::SeaFloorOneSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width / 2;
-    yCoordinate = height;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 5;
 }
 //  map 6
 void OverWorld::SeaFloorTwoSetup()
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = true; // to shop map 8
     northOpen = false;
@@ -778,17 +820,17 @@ void OverWorld::SeaFloorTwoSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width - 2;
-    yCoordinate = height / 2;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 6;
 }
 
 // map 7
 void OverWorld::SeaFloorThreeSetup()
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = false;
     northOpen = true; // to Castle map 9
@@ -798,31 +840,31 @@ void OverWorld::SeaFloorThreeSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width - 2;
-    yCoordinate = height / 2;
+
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 7;
 }
 // map 8
 void OverWorld::ShopTwoSetup()
 {
+    ExitMapCoordinates();
     exitMap = false;
     southOpen = false;
     northOpen = true;  // back to map 6
     westOpen = false;
     eastOpen = false;
     exitMapNorth = false;
-    exitMapSouth = false;
+    exitMapSouth = false;                     // can save here
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = 1;
-    yCoordinate = height / 2;
     saveXCoordinate = 8;
     saveYCoordinate = 8;
     shopKeepXCoordinate = width / 2;
     shopKeepYCoordinate = height / 2;
+    map = 8;
 }
 //map 9
 void OverWorld::CastleOneSetup()
@@ -836,12 +878,9 @@ void OverWorld::CastleOneSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width / 2;
-    yCoordinate = 0;
-    saveXCoordinate = 0;
-    saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 9;
 }
 //map 10
 void OverWorld::CastleTwoSetup()
@@ -855,12 +894,11 @@ void OverWorld::CastleTwoSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width / 2;
-    yCoordinate = 0;
     saveXCoordinate = 10;
     saveYCoordinate = 10;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 10;
 }
 // map 11
 void OverWorld::CastleThreeSetup()
@@ -874,12 +912,11 @@ void OverWorld::CastleThreeSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    xCoordinate = width / 2;
-    yCoordinate = 0;
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    map = 11;
 }
 
 

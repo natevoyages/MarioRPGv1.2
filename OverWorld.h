@@ -17,6 +17,8 @@ public:
 
 	void Shop();
 
+	void ExitMapCoordinates();
+
 	void characterTracker();
 
 	void OverWorldPrintLogic();
@@ -53,7 +55,6 @@ public:
 
 	void CastleThreeSetup();
 
-
 	void PrintDesert();
 
 	void PrintSeaFloor();
@@ -75,6 +76,7 @@ private:
 	int shopKeepYCoordinate;
 
 	int map;
+	int prevMap;
 
 	//
 	const int width = 60;
