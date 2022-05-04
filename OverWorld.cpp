@@ -173,6 +173,7 @@ void OverWorld::SetUpMap()
             stepCounter = 0;
             Sleep(80);
             OverWorldPrintLogic();
+            cout << "\nSTEPS: " << stepCounter << "\n";
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             characterTracker();
@@ -201,11 +202,8 @@ void OverWorld::SetUpMap()
         {
 
             Sleep(80);
-            OverWorldPrintLogic();
-            mapsInput.UserInput(menuToggled);
-            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             mapsInput.StepCounter();
-            stepCounter = mapsInput.GetStepCount(stepCounter);
+            stepCounter = mapsInput.GetStepCount();
             if (stepCounter >= battle.GetBattleTrigger())
             {
                 battleState = true;
@@ -216,6 +214,10 @@ void OverWorld::SetUpMap()
                 }
                 mapsInput.StepCountReset();
             }
+            OverWorldPrintLogic();
+            cout << "\nSTEPS: " << stepCounter << "\n";
+            mapsInput.UserInput(menuToggled);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             characterTracker();
             CollisonLogic(); 
             inGame.SetUpMenu();
@@ -250,7 +252,7 @@ void OverWorld::SetUpMap()
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             mapsInput.StepCounter();
-            stepCounter = mapsInput.GetStepCount(stepCounter);
+            stepCounter = mapsInput.GetStepCount();
             if (stepCounter >= battle.GetBattleTrigger())
             {
                 battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
@@ -347,7 +349,7 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
            
-            stepCounter = mapsInput.GetStepCount(stepCounter);
+            stepCounter = mapsInput.GetStepCount();
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -379,7 +381,7 @@ void OverWorld::SetUpMap()
         SeaFloorTwoSetup();
         while (!exitMap)
         {
-            mapsInput.GetStepCount(stepCounter);
+            mapsInput.GetStepCount();
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -475,7 +477,7 @@ void OverWorld::SetUpMap()
        CastleOneSetup();
        while (!exitMap)
        {
-           mapsInput.GetStepCount(stepCounter);
+           mapsInput.GetStepCount();
            Sleep(80);
            OverWorldPrintLogic();
            mapsInput.UserInput(menuToggled);
@@ -508,7 +510,7 @@ void OverWorld::SetUpMap()
     CastleTwoSetup();
     while (!exitMap)
     {
-        mapsInput.GetStepCount(stepCounter);
+        mapsInput.GetStepCount();
         Sleep(80);
         OverWorldPrintLogic();
         mapsInput.UserInput(menuToggled);

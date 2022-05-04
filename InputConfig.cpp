@@ -4,6 +4,11 @@
 
 using namespace std;
 
+InputConfig::InputConfig()
+{
+    stepCount = 0;
+}
+
 void InputConfig::UserInput()
 {
     if (_kbhit())
@@ -154,7 +159,7 @@ void InputConfig::StepCounter()
 {
     if(userInput == LEFT || userInput == RIGHT || userInput == UP || userInput == DOWN)
     {
-        stepCount++;
+        stepCount++;  
     }
 
     else if(userInput == RUN_LEFT || userInput == RUN_RIGHT || userInput == RUN_UP || userInput == RUN_DOWN)
@@ -163,7 +168,7 @@ void InputConfig::StepCounter()
     }
 }
 
-int InputConfig::GetStepCount(int& steps)
+int InputConfig::GetStepCount()
 {
     return stepCount;
 }
@@ -175,7 +180,6 @@ void InputConfig::StepCountReset()
 
 void InputConfig::OverWorldInputLogic(int& x, int& y, int width, int height, bool northOpen, bool southOpen, bool eastOpen, bool westOpen)
 {
-    StepCounter();
     switch (userInput)
     {
     case LEFT:

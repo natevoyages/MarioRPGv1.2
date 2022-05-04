@@ -12,7 +12,7 @@ BattleMechanics::BattleMechanics()
 void BattleMechanics::SetBattleTrigger()
 {
 	srand(time(0));
-	stepTrigger = (rand() % 10) + 15; //  15 to 25 step to trigger battle
+	stepTrigger = (rand() % 14) + 20; //  20 to 33 step to trigger battle
 
 }
 
@@ -89,7 +89,8 @@ void BattleMechanics::EnemyTurn(double userBattleHP, double userJump, double use
 		Sleep(300);
 		PrintEnemyAttack();
 		PrintUserAttacked(userChar);
-		Sleep(350);
+		cout << "\nSTEPSTOTRIGGER:" << stepTrigger; //fix me
+		Sleep(1050);
 	}
 }
 
@@ -129,6 +130,8 @@ void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double u
 			//ESCAPED!
 			//FAILED TO ESCAPE!
 		}
+		Sleep(800);
+		cout << "\nSTEPSTOTRIGGER:" << stepTrigger; //fix me
 	}
 }
 
@@ -194,8 +197,8 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	else if (win)
 	{
 		cout << " You win!\n";
-		userXP = userXP + stats[8];
-		userCoins = userCoins + stats[9];
+		userXP = userXP + static_cast<int>(stats[8]);
+		userCoins = userCoins + static_cast<int>(stats[9]);
 	}
 
 }

@@ -4,6 +4,8 @@
 class InputConfig
 {
 public:
+    InputConfig();
+
     void UserInput();
 
     void UserInput(bool& menuOpen);
@@ -14,7 +16,7 @@ public:
 
     void StepCounter();
 
-    int GetStepCount(int& steps);
+    int GetStepCount();
 
     void StepCountReset();
 
