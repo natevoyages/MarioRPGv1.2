@@ -2,7 +2,75 @@
 
 BattleMechanics::BattleMechanics()
 {
-	//pending
+	enemyNum = -1;
+	stepTrigger = 999;
+	battleState = false;
+}
+
+void BattleMechanics::SetBattleTrigger()
+{
+	srand(time(0));
+	stepTrigger = rand() % 16 + 20; // 20 to 35 step to trigger battle
+
+}
+
+void BattleMechanics::BattleSetUp(int map)
+{
+	if (map == 1 || map == 2)
+	{
+		enemyNum = rand() % 3;
+		if (enemyNum == 0)
+		{
+			LoadShyGuy();
+		}
+		else if (enemyNum == 1)
+		{
+			LoadDesertGoomba();
+		}
+		else if (enemyNum == 2)
+		{
+			LoadPokey();
+		}
+	}
+	else if( map == 5 || map == 6)
+	{
+		enemyNum = rand() % 2;
+		if (enemyNum == 0)
+		{
+			LoadCheepCheep();
+		}
+		else if (enemyNum == 1)
+		{
+			LoadBlooper();
+		}
+	}
+	else if (map == 9 || map == 11)
+	{
+		enemyNum = rand() % 3;
+		if (enemyNum == 0)
+		{
+			LoadCastleGoomba();
+		}
+		else if (enemyNum == 1)
+		{
+			LoadKoopaTroopa();
+		}
+		else if (enemyNum == 2)
+		{
+			LoadBoo();
+		}
+	}
+	enemyNum = -1;
+}
+
+void BattleMechanics::BattleTriggered(int map, bool& notGameOver)
+{
+	while(battleState)
+	{
+		BattleSetUp(map);
+		
+	}
+	SetBattleTrigger();
 }
 
 void BattleMechanics::EnemyAttackLogic(double userDefense, double userSpeed, double userJump)

@@ -12,6 +12,12 @@ public:
 
 	BattleMechanics();
 
+	void SetBattleTrigger();
+
+	void BattleSetUp(int map);
+
+	void BattleTriggered(int map, bool& notGameOver);
+
 	void EnemyAttackLogic(double userDefense, double userSpeed, double userJump);
 
 	void LoadShyGuy();
@@ -40,7 +46,7 @@ public:
 
 private:
 	// lvl = 0,hp = 1,pwr = 2,jp = 3,flw = 4,spd = 5,def = 6 ,xpdrop = 7, hitRate = 8, critRate = 9
-	int shyGuyStats[10]{1, 40, 5 , 5, 5, 5, 4, 10, 65, 15};
+	int shyGuyStats[10]{1, 40, 5 , 5, 5, 5, 4, 10, 65, 15};  //fix ?
 
 	vector<double> desertGoombaStats{ 1, 39, 6, 6, 4, 5, 6 , 12, 65, 15 };
 
@@ -77,6 +83,15 @@ private:
 	double hitSuccess;
 
 	double critSuccess;
+
+	int stepTrigger;
+
+	int enemyNum;
+
+	bool battleState;
+
+	double battleHP;
+
 
 };
 #endif

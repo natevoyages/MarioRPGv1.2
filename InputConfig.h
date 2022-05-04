@@ -12,7 +12,9 @@ public:
 
     void PressEnterToContinue(bool& titleScreen);
 
+    void StepCounter();
 
+    int GetStepCount(int& steps);
 
     void OverWorldInputLogic(int& x, int& y, int width, int height, bool northOpen, bool southOpen, bool eastOpen, bool westOpen);
 
@@ -28,6 +30,8 @@ private:
 
     enum eInputs { STOP = 0, LEFT, RIGHT, UP, DOWN, RUN_LEFT, RUN_RIGHT, RUN_UP, RUN_DOWN, ENTER, BACK, EXIT };
     eInputs userInput;
+
+     int stepCount;
 };
 
 #endif

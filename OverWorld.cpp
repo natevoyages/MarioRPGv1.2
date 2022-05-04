@@ -23,6 +23,7 @@ OverWorld::OverWorld()
     shopKeepYCoordinate = -1;
     map = 0;
     bossesBeaten = 0;
+    stepCounter = 0;
 }
  bool OverWorld::GetNotGameOver() const
  {
@@ -108,8 +109,10 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
 {
             map = 0;
             bossesBeaten = 0;
+            stepCounter = 0;
         if (!exitMap)
         {
+            stepCounter = 0;
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -152,6 +155,7 @@ void OverWorld::SetUpMap()
         HomeSetup();
         while (!exitMap)
         {
+            stepCounter = 0;
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -179,6 +183,7 @@ void OverWorld::SetUpMap()
         DesertOneSetup();
         while (!exitMap)
         {
+            mapsInput.GetStepCount(stepCounter);
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -211,6 +216,7 @@ void OverWorld::SetUpMap()
         DesertTwoSetup();
         while (!exitMap)
         {
+            mapsInput.GetStepCount(stepCounter);
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -245,6 +251,7 @@ void OverWorld::SetUpMap()
         DesertThreeSetup();
         while (!exitMap)
         {
+            stepCounter = 0;
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -276,6 +283,7 @@ void OverWorld::SetUpMap()
         ShopOneSetup();
         while (!exitMap)
         {
+            stepCounter = 0;
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -302,6 +310,7 @@ void OverWorld::SetUpMap()
         SeaFloorOneSetup();
         while (!exitMap)
         {
+            mapsInput.GetStepCount(stepCounter);
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -333,6 +342,7 @@ void OverWorld::SetUpMap()
         SeaFloorTwoSetup();
         while (!exitMap)
         {
+            mapsInput.GetStepCount(stepCounter);
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -369,6 +379,7 @@ void OverWorld::SetUpMap()
        SeaFloorThreeSetup();
        while (!exitMap)
        {
+           stepCounter = 0;
            Sleep(80);
            OverWorldPrintLogic();
            mapsInput.UserInput(menuToggled);
@@ -400,6 +411,7 @@ void OverWorld::SetUpMap()
         ShopTwoSetup();
         while (!exitMap)
         {
+            stepCounter = 0;
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
@@ -426,6 +438,7 @@ void OverWorld::SetUpMap()
        CastleOneSetup();
        while (!exitMap)
        {
+           mapsInput.GetStepCount(stepCounter);
            Sleep(80);
            OverWorldPrintLogic();
            mapsInput.UserInput(menuToggled);
@@ -458,6 +471,7 @@ void OverWorld::SetUpMap()
     CastleTwoSetup();
     while (!exitMap)
     {
+        mapsInput.GetStepCount(stepCounter);
         Sleep(80);
         OverWorldPrintLogic();
         mapsInput.UserInput(menuToggled);
@@ -490,6 +504,7 @@ void OverWorld::SetUpMap()
         CastleThreeSetup();
         while (!exitMap)
         {
+            stepCounter = 0;
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);

@@ -150,9 +150,28 @@ void InputConfig::PressEnterToContinue(bool& titleScreen)
 
 }
 
+void InputConfig::StepCounter()
+{
+    if(userInput == LEFT || userInput == RIGHT || userInput == UP || userInput == DOWN)
+    {
+        stepCount++;
+    }
+
+    else if(userInput == RUN_LEFT || userInput == RUN_RIGHT || userInput == RUN_UP || userInput == RUN_DOWN)
+    {
+        stepCount += 4;
+    }
+}
+
+int InputConfig::GetStepCount(int& steps)
+{
+    return stepCount;
+}
+
 
 void InputConfig::OverWorldInputLogic(int& x, int& y, int width, int height, bool northOpen, bool southOpen, bool eastOpen, bool westOpen)
 {
+    StepCounter();
     switch (userInput)
     {
     case LEFT:

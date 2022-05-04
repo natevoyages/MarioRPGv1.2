@@ -25,6 +25,7 @@ private:
 	char characterChar;
 	int level;
 	int healthPoints;
+	int magicPoints;
 	int power;
 	int jump;
 	int flowerPower;
@@ -33,5 +34,7 @@ private:
 	int experiencePoints;
 	int coins;
 	int statPoints;
+	double BattleHP;
+	int BattleMP;
 };
 #endif

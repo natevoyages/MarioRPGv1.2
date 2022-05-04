@@ -82,6 +82,7 @@ private:
 	int prevYCoordinate;
 	int shopKeepXCoordinate;
 	int shopKeepYCoordinate;
+	int stepCounter;
 
 	int map;
 	int prevMap;
@@ -107,6 +108,7 @@ private:
 	string stringCharacter;
 	int userLevel;
 	int userHealthPoints;
+	int usermagicPoints;
 	int userPower;
 	int userJump;
 	int userFlowerPower;
@@ -115,6 +117,8 @@ private:
 	int userEXP;
 	int userCoins;
 	int userStatPts;
+	double userBattleHP;
+	int userBattleMP;
 
 	int bossesBeaten;
 	
