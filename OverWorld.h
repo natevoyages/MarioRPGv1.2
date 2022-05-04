@@ -116,6 +116,7 @@ private:
 	int userCoins;
 	int userStatPts;
 
+	int bossesBeaten;
 	
 };
 #endif
