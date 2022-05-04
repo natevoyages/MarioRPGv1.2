@@ -34,6 +34,8 @@ public:
 
 	void PrintOverWorld(char charCharacter, bool& play, bool& notGAMEOVER);
 
+	void IfBattleEncounted();
+
 	void SetUpMap();
 
 	void HomeSetup();

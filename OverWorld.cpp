@@ -161,10 +161,24 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
         }
 }
 
+void OverWorld::IfBattleEncounted()
+{
+    bool battleState = false;
+
+    if (stepCounter >= battle.GetBattleTrigger())
+    {
+        battleState = true;
+        while (battleState)
+        {
+            battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter);
+        }
+        mapsInput.StepCountReset();
+    }
+}
 
 void OverWorld::SetUpMap()
 {
-    bool battleState = false;
     if (map == 0)
     {
         HomeSetup();
@@ -204,16 +218,7 @@ void OverWorld::SetUpMap()
             Sleep(80);
             mapsInput.StepCounter();
             stepCounter = mapsInput.GetStepCount();
-            if (stepCounter >= battle.GetBattleTrigger())
-            {
-                battleState = true;
-                while (battleState)
-                {
-                    battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                        userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter);
-                }
-                mapsInput.StepCountReset();
-            }
+            IfBattleEncounted();
             OverWorldPrintLogic();
             cout << "\nSTEPS: " << stepCounter << "\n";
             mapsInput.UserInput(menuToggled);
