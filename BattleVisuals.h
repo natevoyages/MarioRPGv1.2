@@ -13,6 +13,12 @@ public:
 
 	void PrintEnemyIdle(int enemySignature);
 
+	void PrintUserAttack(char userChar);
+
+	void PrintUserAttacked(char userChar);
+
+	void PrintUserIdle(char userChar);
+
 private:
 
 
