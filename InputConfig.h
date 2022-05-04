@@ -28,6 +28,10 @@ public:
 
     void MenuInputLogic(int& yCharSelect, int numCharacters, bool& charSelect, bool& menuToggled);
 
+  
+
+    void BattleInputLogic(int& xMenu, int& yMenu, int& numXMenuOptions, int& numYMenuOptions, bool& select);
+
 
 
 private:

@@ -220,7 +220,7 @@ void OverWorld::SetUpMap()
             stepCounter = mapsInput.GetStepCount();
             IfBattleEncounted();
             OverWorldPrintLogic();
-            cout << "\nSTEPS: " << stepCounter << "\n";
+            cout << "\nSTEPS: " << stepCounter << "\n"; // fix me
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             characterTracker();

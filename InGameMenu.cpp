@@ -18,8 +18,8 @@ void InGameMenu::SetUpMenu()
 	menuOptions[1] = "ITEMS     ";
 	menuOptions[2] = "GAME INFO ";
 	menuOptions[3] = "QUIT GAME ";
-	
 }
+
 void InGameMenu::PrintGameInfo() 
 {
 	cout << "\n\n\n\n\n\n";

@@ -87,9 +87,9 @@ void BattleMechanics::EnemyTurn(double userBattleHP, double userJump, double use
 		PrintEnemyIdle();
 		PrintUserIdle(userChar);
 		Sleep(300);
+		system("cls");
 		PrintEnemyAttack();
 		PrintUserAttacked(userChar);
-		cout << "\nSTEPSTOTRIGGER:" << stepTrigger; //fix me
 		Sleep(1050);
 	}
 }
@@ -97,18 +97,27 @@ void BattleMechanics::EnemyTurn(double userBattleHP, double userJump, double use
 void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double userPower,
 	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar)
 {
+	bool optionSelected = false;
 	if (userBattleHP != 0 && stats[1] != 0)
 	{
-		system("cls");
-		PrintEnemyIdle();
-		PrintUserIdle(userChar);
+		while (!optionSelected) 
+		{
+			system("cls");
+			PrintEnemyIdle();
+			PrintUserIdle(userChar);
+			menu.PrintBattleMenu(attackSelected, spAttackSelected, itemSelected, runSelected);
+			optionSelected = menu.GetIfSelected();
+		}
+
 		UserBattleLogic(userBattleHP, userBattleMP, userPower, userJump, userFlowerPower, userSpeed, userDefense, userLevel); // may want to add level and xp;
+
 		if (attackSelected)
 		{
 			system("cls");
 			PrintEnemyAttacked();
 			PrintUserAttack(userChar);
 			cout << "Damage " << damage << "dealt !\n";
+
 		}
 
 		else if (spAttackSelected)
@@ -231,8 +240,8 @@ void BattleMechanics::SpeedsterGoesFirst(int userSpeed, bool& playerFirst)
 void BattleMechanics::UserBattleLogic(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed, double userDefense, int level)
 {
 	//jp = 3, spd = 5, def = 6;
-	damage = userPower * (10.0 / 10.0 + stats[6]);
-	specialDamage = userFlowerPower *((8.0 / 8.0 + stats[6]));
+	damage = userPower * (6.0 / 10.0 + stats[6]);
+	specialDamage = userFlowerPower *((7.0 / 8.0 + stats[6]));
 	critDamage = 1.5 * damage;
 	specialCrit = 1.5 * specialDamage;
 	hitSuccess = 85  + (userSpeed * (5.0 / 5.0 + stats[5]));   // 85 is the hit rate for users
@@ -241,8 +250,8 @@ void BattleMechanics::UserBattleLogic(double userBattleHP, int userBattleMP, dou
 
 void BattleMechanics::EnemyBattleMechanics(double userJump, double userSpeed, double userDefense)
 {//pwr = 2,jp = 3,flw = 4,spd = 5,hitRate = 8, critRate = 9
-	damage = stats[2] * (10.0 / 10.0 + userDefense);
-	specialDamage = stats[4] * ((8.0 / 8.0 + userDefense));
+	damage = stats[2] * (5.5 / 10.0 + userDefense);
+	specialDamage = stats[4] * ((5.0 / 8.0 + userDefense));
 	critDamage = 1.5 * damage;
 	specialCrit = 1.5 * specialDamage;
 	hitSuccess = stats[8] + (stats[5] * (5.0 / 5.0 + userSpeed));

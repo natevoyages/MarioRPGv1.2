@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattleMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="InputConfig.cpp" />
     <ClCompile Include="Characters.cpp" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleMechanics.h" />
+    <ClInclude Include="BattleMenu.h" />
     <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="InGameMenu.h" />

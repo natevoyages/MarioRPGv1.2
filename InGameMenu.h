@@ -28,6 +28,6 @@ private:
 	bool select;
 	int yMenu;
 	int numMenuOptions;
-	string menuOptions[5];
+	string menuOptions[4];
 };
 #endif
