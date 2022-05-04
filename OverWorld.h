@@ -4,6 +4,7 @@
 #include "InGameMenu.h"
 #include "PlayerStats.h"
 #include "Items.h"
+#include "BattleMechanics.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -76,6 +77,7 @@ private:
 	InGameMenu inGame;
 	PlayerStats playerStats;
 	Items items;
+	BattleMechanics battle;
 	int xCoordinate;
 	int yCoordinate;
 	int saveXCoordinate;
@@ -110,7 +112,7 @@ private:
 	string stringCharacter;
 	int userLevel;
 	int userHealthPoints;
-	int usermagicPoints;
+	int userMagicPoints;
 	int userPower;
 	int userJump;
 	int userFlowerPower;

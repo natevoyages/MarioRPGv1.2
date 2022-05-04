@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <windows.h>
 
 using namespace std;
 
@@ -14,20 +15,26 @@ public:
 
 	void SetBattleTrigger();
 
+	int GetBattleTrigger();
+
 	void BattleSetUp(int map);
 
-	void EnemyTurn(double userBattleHP, double userJump, double userSpeed, double userDefense);
+	void EnemyTurn(double userBattleHP, double userJump, double userSpeed, double userDefense, char userChar);
 
-	void PlayerTurn(double userBattleHP, int userBattleMP, double userJump, double userSpeed, double userDefense);
+	void PlayerTurn(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed,
+		double userDefense, int level, char userChar);
 
-	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
-		int& battleHP, int& battleMP, int& usercoins, int& userXP);
+	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
+		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar);
 
 	void SpeedsterGoesFirst(int userSpeed, bool& playerFirst);
 
-	void UserBattleLogic(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed, double userDefense);
+	void UserBattleLogic(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed,
+		double userDefense, int level);
 
-	void EnemyBattleLogic(double userJump, double userSpeed, double userDefense);
+	void EnemyBattleMechanics(double userJump, double userSpeed, double userDefense);
+
+	void EnemyBattleLogic();
 
 	void LoadShyGuy();
 
@@ -51,11 +58,23 @@ public:
 
 	void LoadKingBoo();
 
+	void PrintEnemyAttack();
+
+	void PrintEnemyAttacked();
+
+	void PrintEnemyIdle();
+
+	void PrintUserAttack(char userChar);
+
+	void PrintUserAttacked(char userChar);
+
+	void PrintUserIdle(char userChar);
+
 	
 
 protected:
 	// lvl = 0,hp = 1,pwr = 2,jp = 3,flw = 4,spd = 5,def = 6 ,xpdrop = 7, hitRate = 8, critRate = 9
-	int shyGuyStats[10]{1, 40, 5 , 5, 5, 5, 4, 10, 65, 15};  //fix ?
+	double shyGuyStats[10]{1, 40, 5 , 5, 5, 5, 4, 10, 65, 15};  //fix ?
 
 	vector<double> desertGoombaStats{ 1, 39, 6, 6, 4, 5, 6 , 12, 65, 15 };
 
@@ -99,9 +118,19 @@ protected:
 
 	bool battleState;
 
+	bool enemyPowAttack;
+
 	double battleHP;
 
 	int enemySignature;
+
+	bool attackSelected;
+
+	bool spAttackSelected;
+
+	bool itemSelected;
+
+	bool runSelected;
 
 
 };

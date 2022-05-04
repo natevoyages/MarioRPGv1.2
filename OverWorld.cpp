@@ -33,11 +33,15 @@ OverWorld::OverWorld()
 void OverWorld::Shop()
 {
     bool exit = false;
+    xCoordinate = prevXCoordinate;
+    yCoordinate = prevYCoordinate;
     system("cls");
     PrintShopKeep();
     Sleep(1500);
-    /*while (exit)
+    /*while (!exit)
     {
+         ShopMenu();
+
 
     }*/
 }
@@ -72,7 +76,8 @@ void OverWorld::LoadGame()
     ifstream load;
     load.open("save.dat");
     if (!(load.fail())) {
-        load >> bossesBeaten >> map >> userCharacter >> stringCharacter >> xCoordinate >> yCoordinate;
+        load >> bossesBeaten >> map >> userCharacter >> stringCharacter >> xCoordinate >> yCoordinate >> userLevel >> userHealthPoints >> userPower >> userJump >>
+            userFlowerPower >> userSpeed >> userDefense >> userEXP >> userCoins >> userStatPts;
         load.close();
     }
     else
@@ -90,7 +95,9 @@ void OverWorld::SaveGame()
         "Saving.", "Saving..", "Saving...", };
     ofstream save;
     save.open("save.dat");
-    save << bossesBeaten << map << " " << userCharacter << " " << stringCharacter << " " << prevXCoordinate << " " << prevYCoordinate; 
+    save << bossesBeaten << " " << map << " " << userCharacter << " " << stringCharacter << " " << prevXCoordinate << " " << prevYCoordinate
+        << " " << userLevel << " " << userHealthPoints << " " << userPower << " " << userJump << " " << userFlowerPower << " "
+        <<  userSpeed << " " << userDefense << " " << userEXP << " " << userCoins << " " << userStatPts;
     save.close();
     for (int i = 0; i < 9; i++) 
     {
@@ -103,7 +110,8 @@ void OverWorld::SaveGame()
 
 void OverWorld::characterTracker()
 {
-    if (!(xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate))
+    if (!(xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate) && 
+        !(xCoordinate == shopKeepXCoordinate && yCoordinate == shopKeepYCoordinate))
     {
         prevXCoordinate = xCoordinate;
         prevYCoordinate = yCoordinate;
@@ -156,6 +164,7 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
 
 void OverWorld::SetUpMap()
 {
+    bool battleState = false;
     if (map == 0)
     {
         HomeSetup();
@@ -186,16 +195,29 @@ void OverWorld::SetUpMap()
 
     else if (map == 1)        // start of Desert maps
     {
+        battle.SetBattleTrigger();
         DesertOneSetup();
         while (!exitMap)
         {
-            mapsInput.GetStepCount(stepCounter);
+
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+            mapsInput.StepCounter();
+            stepCounter = mapsInput.GetStepCount(stepCounter);
+            if (stepCounter >= battle.GetBattleTrigger())
+            {
+                battleState = true;
+                while (battleState)
+                {
+                    battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                        userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter);
+                }
+                mapsInput.StepCountReset();
+            }
             characterTracker();
-            CollisonLogic();
+            CollisonLogic(); 
             inGame.SetUpMenu();
             while (menuToggled)
             {
@@ -219,14 +241,22 @@ void OverWorld::SetUpMap()
 
     else if (map == 2)
     {
+        battle.SetBattleTrigger();
         DesertTwoSetup();
         while (!exitMap)
         {
-            mapsInput.GetStepCount(stepCounter);
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+            mapsInput.StepCounter();
+            stepCounter = mapsInput.GetStepCount(stepCounter);
+            if (stepCounter >= battle.GetBattleTrigger())
+            {
+                battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                    userBattleHP,  userBattleMP, userCoins, userEXP,  userLevel, userCoins, userCharacter);
+                mapsInput.StepCountReset();
+            }
             characterTracker();
             CollisonLogic();
             inGame.SetUpMenu();
@@ -316,7 +346,8 @@ void OverWorld::SetUpMap()
         SeaFloorOneSetup();
         while (!exitMap)
         {
-            mapsInput.GetStepCount(stepCounter);
+           
+            stepCounter = mapsInput.GetStepCount(stepCounter);
             Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);

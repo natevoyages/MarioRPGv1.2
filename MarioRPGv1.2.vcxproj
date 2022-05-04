@@ -148,12 +148,10 @@
     <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="BattleMechanics.cpp" />
-    <ClCompile Include="BattleVisuals.cpp" />
     <ClCompile Include="StartMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleMechanics.h" />
-    <ClInclude Include="BattleVisuals.h" />
     <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="InGameMenu.h" />

@@ -168,6 +168,10 @@ int InputConfig::GetStepCount(int& steps)
     return stepCount;
 }
 
+void InputConfig::StepCountReset()
+{
+    stepCount = 0;
+}
 
 void InputConfig::OverWorldInputLogic(int& x, int& y, int width, int height, bool northOpen, bool southOpen, bool eastOpen, bool westOpen)
 {
