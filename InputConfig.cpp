@@ -476,7 +476,7 @@ void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, b
 }
 
 
-void InputConfig::BattleInputLogic(int& xMenu, int& yMenu, int& numXMenuOptions, int& numYMenuOptions, bool& select)
+void InputConfig::BattleInputLogic( int& yMenu, int numMenuOptions, bool& select)
 {
     select = false;
     switch (userInput)
@@ -495,7 +495,7 @@ void InputConfig::BattleInputLogic(int& xMenu, int& yMenu, int& numXMenuOptions,
         }
 
     case DOWN:
-        if (yMenu != numYMenuOptions - 1 && !select)
+        if (yMenu != numMenuOptions - 1 && !select)
         {
             yMenu++;
             break;
@@ -504,31 +504,6 @@ void InputConfig::BattleInputLogic(int& xMenu, int& yMenu, int& numXMenuOptions,
         else
         {
             yMenu = yMenu;
-            break;
-        }
-    case LEFT:
-        if (yMenu != 0 && !select)
-        {
-            xMenu--;
-            break;
-        }
-
-        else
-        {
-            xMenu = xMenu;
-            break;
-        }
-
-    case RIGHT:
-        if (xMenu != numXMenuOptions - 1 && !select)
-        {
-            xMenu++;
-            break;
-        }
-
-        else
-        {
-            xMenu = xMenu;
             break;
         }
 

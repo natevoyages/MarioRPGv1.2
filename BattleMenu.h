@@ -10,6 +10,8 @@ using namespace std;
 class BattleMenu
 {
 public:
+	BattleMenu();
+
 	void SetUpMenu();
 
 	void PrintBattleMenu(bool& attackSelected, bool& spAttackSelected, bool& itemSelected, bool& runSelected);
@@ -19,12 +21,9 @@ private:
 	InputConfig menuInput;
 	bool select;
 	bool itemTabOpen;
-	int xMenu;
 	int yMenu;
-	int numXMenuOptions;
-	int numYMenuOptions;
-
-	string menuOptions[4];
+	int numBattleOptions;
+	string battleOptions[4];
 };
 
 

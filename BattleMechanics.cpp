@@ -100,6 +100,7 @@ void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double u
 	bool optionSelected = false;
 	if (userBattleHP != 0 && stats[1] != 0)
 	{
+		menu.SetUpMenu();
 		while (!optionSelected) 
 		{
 			system("cls");
@@ -125,7 +126,7 @@ void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double u
 			system("cls");
 			PrintEnemyAttacked();
 			PrintUserAttack(userChar);
-			cout << "Damage " << damage << "dealt !\n";
+			cout << "Damage " << specialDamage << "dealt !\n";
 		}
 
 		else if (itemSelected)

@@ -30,7 +30,7 @@ public:
 
   
 
-    void BattleInputLogic(int& xMenu, int& yMenu, int& numXMenuOptions, int& numYMenuOptions, bool& select);
+    void BattleInputLogic(int& yMenu, int numMenuOptions, bool& select);
 
 
 
