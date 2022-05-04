@@ -32,8 +32,14 @@ OverWorld::OverWorld()
 
 void OverWorld::Shop()
 {
+    bool exit = false;
     system("cls");
-    cout << "shop activated";
+    PrintShopKeep();
+    Sleep(1500);
+    /*while (exit)
+    {
+
+    }*/
 }
 
 void OverWorld::ExitMapCoordinates()
@@ -1161,6 +1167,57 @@ void OverWorld::PrintCastle() {
         Sleep(2700);
 }
 
+void OverWorld::PrintShopKeep()
+{
+    cout << "                              .. ...',,,,,,,,,,,,,,,,,'.. .,,'.                      .,'..                     \n";
+    cout << "                          .'cc;'',,,,,,,,,,,,,,,,,,,,,,,,''lxOko:.                  .dOOkx:                    \n";
+    cout << "                        .ck0d;',,,,,,,,,,,,,,,,,,,,,,,,,,,'',oKXX0d;.               .d000k,      .             \n";
+    cout << "                      ,d0XXx,',,,,,,,,,,,,,,,,,,,,,,,,,,,,,'.:0XXXXXOl.             .x00k: .,'',col;.          \n";
+    cout << "                    ,dKXXXKc.',,,,,,,,,,,,,,,,,,,,,,,,,,,,,'.:0XXXXXXX0o.           .,::,.  'coxxxxx:.         \n";
+    cout << "                  .l0XXXXX0:.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,'.lKXXXXXXXXX0l.     .........    .,::::;.          \n";
+    cout << "                 .xXXXXXXXKc.',,,,,,,,,,,,,,,,,,,,,,,,,,,,';lkXXXXXXXXXXXXk,   .,;;,;,,,,,'.   ..'''.  .''.    \n";
+    cout << "                 'oKXXXXXXXx,',,,,,,,,,,,,,,,,,,,,,,,,,,,';kKXXXXXXXXXXX0dc,.   ..........  .;loddo:..lkOOx,   \n";
+    cout << "                .',oKXXXXXXKx;',,,,,,,,,,,,,,,,,,,,,,,,,;oOXNXXXXXXXXXKd;',,,.    .,;::c:,..':oddd;.'dxlcokx'  \n";
+    cout << "               .,,';xXXXXXXXXOl,',,,,,,,,,,,,,,,,,,,',:oOXXXXXXXXXXXX0l,,,,,,,.   ;OkldKXKOo;.'cdc..od;,''lk:  \n";
+    cout << "              .,,,''oKXXXXXXXXXOoc;,'',,,,,,,,,',,;cokKXXXXXXXXXXXXXKo'',,,,,,,.  .lx::kOOOKOo'.c, ,xocxd,:xc  \n";
+    cout << "             .',,,,.lKXXXXXXXXXXXXKOxoollcccllodxO0XXXXXXXXXXXXXXXXXk;',,,,,,,,,.  .oo:clloOKk:... :kddOd,ck:  \n";
+    cout << "             .,,,,,.lKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKl'',,,,,,,,,'.  ;O0KKKXXKkc... ,xOOOc,ok;  \n";
+    cout << "             .,,,,,'oKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX0c',,,,,,,,,,,.   .,:d0KKOd, .. .:xkl,ckd.  \n";
+    cout << "             .,,,,',xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKl'',,,,,,,,,,.    .  .;c:'  ..  .;ccokk;   \n";
+    cout << "             .,,,,'c0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx,',,,,,,,,,,.   .,,'.   ......  'okkd,    \n";
+    cout << "             .,,,';kXXXXXXXXXXXXXXK0OkxxddddxxkO0KXXXXXXXXXXXXXXXXXXKl'',,,,,,,,,.   .,;;,'',,;;;;,'. .'.      \n";
+    cout << "              .'':kXXXXXXXXXXX0xocc:c::cccccc:::ccloxOKXXXXXXXXXXXXXX0l'',,,,,,,'.   .;;;;;;;;;;;;;,.  .....   \n";
+    cout << "               'l0XXXXXXXXX0o;,:codxkkkkkkkkkkkkxdoc::cokKXXXXXXXXXXXX0l,',,,,,,.    .,'',;;;;;;;;;;,',;;;;'   \n";
+    cout << "               :0XXXXXXXXXKc .ckkkkkkkkkkkkkkkkkkkkkkxoc;,lOKXXXXXXXXXXKxc,',,,.    ,::,.';;,'',',,,,;;,,..    \n";
+    cout << "               .l0XXXXXXXXd. :xkxloxkkkkkkkkdcldkkkkkkkkdc'',lOXXXXXXXXXXKOoc;.    .',,'',;;'.,cc::,'',.       \n";
+    cout << "                 ;kXXXXXXO, .dkx:..ckkkkkkkx;..ckkkkkkkkkkx:...oKXXXXXXXXXXXKo.   .,;;;;;;;;,'...,;,.',.       \n";
+    cout << "                  .:kXXXXo. ;xkd' .:kkkkkkko' .ckkkkkkkkkkko;. ;0XXXXXXXXXXOc.   .',,;,,;;;;,.      ....       \n";
+    cout << "                    .;d0O; .okkd' .ckkkkkkko. .lkkkkkkkkkkko;. ;0XXXXXXXXOc.     .. ... ...',. .,;,'   ..      \n";
+    cout << "                       .'. 'dkkx:.;oooxdodxd,.;dkkkkkkkkkkko;. ,OXXXXKOd;.       ..    .....   .clc,. .,,.     \n";
+    cout << "                           'dkkkxl,.  .. ..:odxkkkkkkkkkkkkl'. ,OKOdc,.    ..';:loc.  .,::;,'. .,c:.  ';;'     \n";
+    cout << "                           .:oxdc.          .cddllxkkkkkkkx,   .,'.       .cdxxxxxd:  .;:::::,..;:.  .,;;,.    \n";
+    cout << "                             ...              ..  ;xkkkkkx:            ..  ,dxxxxxxo,  '::::,..,;'  .,;;;;'    \n";
+    cout << "                              .                  .lkkkkkd,     ...   .',,.  .,;:::cc;. ..''.   .....,,,,;;,.   \n";
+    cout << "                               .    .;c:..     .cxkkkxo;.    .,,.   .,;'','........        ...'',,'.....,;,.   \n";
+    cout << "                                 .':dkkkxdl::clxkxdl;.      ....   .,;;. .,;,'....'''',,'...',;;;,......';,.   \n";
+    cout << "                    .,:cc:,.       .',;:::::::;,'..      ......   .,;;;'  .,'......,;;;'......,;;;,,,;;'..,.   \n";
+    cout << "                   'dkkkkkkd,                         .;oxxkxxdc.  .,;;,.  ';,,,'',;;;;,,'',,,;;;;;;;;;'  .    \n";
+    cout << "                  .lkkkkkkkko.   ..'ldocc:::'  .'''.  :xkkkkkkkko.  ';;;'. .,;;;;;;;;;;;;;;;;;;;;;;;;;;,.      \n";
+    cout << "                  .ckkkkkkkd,  ....lkkkkkkkkc..,;;,.  ,dkkkkkkkkd.  .;;;,.  ';'';;;;;;;;;;;;;;;;;;;;;;;,.      \n";
+    cout << "                   .okkkkkx;  ..  .,,,;;,,,,. .,;;;,.  :kkkkkkkx:  .,;;;,.  co,,llc::;;;,,;;;;;;;;;;;;;,.      \n";
+    cout << "                    .;cc:,.  .. .codddxxdddlc,..,;;;'  .:oxkkxd:.  ';;;;,.  ckloOOOkxdl,.,;;;;;;;;;;;;;,.      \n";
+    cout << "                            ....dXXXXXXXXXXXX0c.',,;,'.   ..'..    .',;;,.  cOOO00000Oo,cxxo:;;;;;;;;;;,.      \n";
+    cout << "                              .cKXXXXXXXXXXXXX0o,''..'.       ....   .',,.  cO0000000OkxO00kl;;;;;;;;;'.       \n";
+    cout << "                              .oXXXXXXXXXXXXXXXXOo:'...',.   .';;,'.   ...  ;k0000000000Oxol;',;;;;;,.         \n";
+    cout << "                               .oKXXXXXXXXXXXXOo:,'....,;.     .'''..        ,ldkkOOO000Oxoc'.'''...           \n";
+    cout << "                           ....  ,d0XXXXXXXX0l.   ....                          ..',,,,,,,,'.                  \n";
+    cout << "                         .,;;;;'.  .,cdxO00k;  .',;;;;,,'..                                                    \n";
+    cout << "                        .;;;;;;;;,'..   ....   ';;;;;;;;;;;,,.                                                 \n";
+    cout << "                        .;;;;;;;;;;;;,.        ';;;;;;;;;;;;;,.                                                \n";
+    cout << "                         .....''''....          ..',,,,,,,''..                                                 \n\n\n";
+
+    cout << "                        HELLO!  Could I interest you in my wares?                    \n";
+}
 
 
 void OverWorld::PrintGameWin()

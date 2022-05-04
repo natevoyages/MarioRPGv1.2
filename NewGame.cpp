@@ -80,6 +80,7 @@ void NewGame::CharacterSelect()
 
 		}
 		cout << "\n        Press 'Space to select\n";
+		cout << "\n\n        'w' = UP     's' = DOWN       \n";
 		newGameInput.UserInput();
 		newGameInput.CharSelectInputLogic(yCharSelect, numCharacters, charSelect);
 	}

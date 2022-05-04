@@ -16,9 +16,18 @@ public:
 
 	void BattleSetUp(int map);
 
-	void BattleTriggered(int map, bool& notGameOver);
+	void EnemyTurn(double userBattleHP, double userJump, double userSpeed, double userDefense);
 
-	void EnemyAttackLogic(double userDefense, double userSpeed, double userJump);
+	void PlayerTurn(double userBattleHP, int userBattleMP, double userJump, double userSpeed, double userDefense);
+
+	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
+		int& battleHP, int& battleMP, int& usercoins, int& userXP);
+
+	void SpeedsterGoesFirst(int userSpeed, bool& playerFirst);
+
+	void UserBattleLogic(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed, double userDefense);
+
+	void EnemyBattleLogic(double userJump, double userSpeed, double userDefense);
 
 	void LoadShyGuy();
 
@@ -44,7 +53,7 @@ public:
 
 	
 
-private:
+protected:
 	// lvl = 0,hp = 1,pwr = 2,jp = 3,flw = 4,spd = 5,def = 6 ,xpdrop = 7, hitRate = 8, critRate = 9
 	int shyGuyStats[10]{1, 40, 5 , 5, 5, 5, 4, 10, 65, 15};  //fix ?
 
@@ -91,6 +100,8 @@ private:
 	bool battleState;
 
 	double battleHP;
+
+	int enemySignature;
 
 
 };

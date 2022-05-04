@@ -67,6 +67,8 @@ public:
 
 	void PrintCastle();
 
+	void PrintShopKeep();
+
 	void PrintGameWin();
 
 private:
