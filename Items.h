@@ -33,6 +33,18 @@ public:
 
 	void UsePowBlock();
 
+	void BuyRedMushroom();
+
+	void BuyMegaRedMushroom();
+
+	void BuyStarDust();
+
+	void BuyGreenMushroom();
+
+	void BuyStar();
+
+	void BuyPowBlock();
+
 
 
 private:
