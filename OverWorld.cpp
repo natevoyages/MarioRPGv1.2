@@ -170,6 +170,7 @@ void OverWorld::IfBattleEncounted()
 
     if (stepCounter >= battle.GetBattleTrigger())
     {
+        Sleep(150);
         battleState = true;
         while (battleState)
         {
@@ -177,6 +178,7 @@ void OverWorld::IfBattleEncounted()
                 userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState);
         }
         mapsInput.StepCountReset();
+        Sleep(150);
     }
 }
 
@@ -189,7 +191,6 @@ void OverWorld::SetUpMap()
         {
             stepCounter = 0;
             OverWorldPrintLogic();
-            cout << "\nSTEPS: " << stepCounter << "\n";
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             characterTracker();
@@ -780,6 +781,7 @@ void OverWorld::OverWorldPrintLogic()
 
     cout << "\n\n\n\n           'w' = UP                    HOLD SHIFT + DIRECTION = RUN\n";
     cout <<         "'a' = LEFT 's' = DOWN 'd' = RIGHT                PRESS SPACE = MENU";
+    cout << "\nSTEPS: " << stepCounter << "\n";   // fix me
 
 
 }

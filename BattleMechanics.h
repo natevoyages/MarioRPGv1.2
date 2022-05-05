@@ -21,10 +21,12 @@ public:
 
 	void BattleSetUp(int map);
 
-	void EnemyTurn(double userBattleHP, double userJump, double userSpeed, double userDefense, char userChar);
+	void UserAttackAnimation(char userChar, double damage, double battleHP, int battleMP, int HP, int MP);
 
-	void PlayerTurn(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed,
-		double userDefense, int level, char userChar);
+	void EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense, char userChar, int userBattleMP, int userHP, int userMP);
+
+	void PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed,
+		double userDefense, int level, char userChar, int userHP, int userMP);
 
 	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
 		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState);
@@ -66,11 +68,11 @@ public:
 
 	void PrintEnemyIdle();
 
-	void PrintUserAttack(char userChar);
+	void PrintUserAttack(char userChar, int battleMP, int userHP, int userMP, double userBattleHP);
 
-	void PrintUserAttacked(char userChar);
+	void PrintUserAttacked(char userChar, int battleMP, int userHP, int userMP, double userBattleHP);
 
-	void PrintUserIdle(char userChar);
+	void PrintUserIdle(char userChar, int battleMP, int userHP, int userMP, double userBattleHP);
 
 	
 

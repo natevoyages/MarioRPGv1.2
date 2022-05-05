@@ -12,7 +12,7 @@ BattleMechanics::BattleMechanics()
 void BattleMechanics::SetBattleTrigger()
 {
 	srand(time(0));
-	stepTrigger = (rand() % 14) + 20; //  20 to 33 step to trigger battle
+	stepTrigger = (rand() % 14) + 30; //  30 to 43 step to trigger battle
 
 }
 
@@ -78,35 +78,54 @@ void BattleMechanics::BattleSetUp(int map)
 	enemyNum = -1;
 }
 
-void BattleMechanics::EnemyTurn(double userBattleHP, double userJump, double userSpeed, double userDefense,char userChar)
+
+void BattleMechanics::UserAttackAnimation(char userChar,double damage, double userBattleHP, int userBattleMP, int userHP, int userMP)
+{
+	system("cls");
+	PrintEnemyIdle();
+	PrintUserAttack(userChar, userBattleMP, userHP, userMP, userBattleHP);
+	Sleep(300);
+	system("cls");
+	PrintEnemyAttacked();
+	PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
+	cout << fixed << setprecision(2) << "\n         " << damage << " DAMAGE DEALT !\n";
+}
+
+
+void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense,char userChar, int userBattleMP, int userHP, int userMP)
 {
 	if (userBattleHP != 0 && stats[1] != 0) {
 		system("cls");
 		EnemyBattleMechanics(userJump, userSpeed, userDefense);
 		EnemyBattleLogic();
 		PrintEnemyIdle();
-		PrintUserIdle(userChar);
+		PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
 		Sleep(300);
 		system("cls");
 		PrintEnemyAttack();
-		PrintUserAttacked(userChar);
+		PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
+		Sleep(300);
+		system("cls");
+		PrintEnemyIdle();
+		PrintUserAttacked(userChar, userBattleMP, userHP, userMP, userBattleHP);
 		cout << fixed << setprecision(2) << "\n        " << damage << " DAMAGE TAKEN !\n";
 		Sleep(1050);
 	}
 }
 
-void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double userPower,
-	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar)
+void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower,
+	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP) 
 {
 	bool optionSelected = false;
-	if (userBattleHP != 0 && stats[1] != 0)
+	if (userBattleHP != 0 && stats[1] != 0)   // int battleMP, int userHP, int userMP, double& userBattleHP
 	{
 		menu.SetUpMenu();
 		while (!optionSelected) 
 		{
+			Sleep(300);
 			system("cls");
 			PrintEnemyIdle();
-			PrintUserIdle(userChar);
+			PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
 			menu.PrintBattleMenu(attackSelected, spAttackSelected, itemSelected, runSelected);
 			optionSelected = menu.GetIfSelected();
 		}
@@ -115,11 +134,9 @@ void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double u
 
 		if (attackSelected)
 		{
-			system("cls");
-			PrintEnemyAttacked();
-			PrintUserAttack(userChar);
-			cout << fixed << setprecision(2) <<  "\n         " << damage << " DAMAGE DEALT !\n";
+			UserAttackAnimation(userChar, damage, battleHP, userBattleMP,  userHP,  userMP);
 			stats[1] = stats[1] - damage;
+
 			if(stats[1] < 0)
 			{
 				stats[1] = 0;
@@ -130,10 +147,7 @@ void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double u
 
 		else if (spAttackSelected)
 		{
-			system("cls");
-			PrintEnemyAttacked();
-			PrintUserAttack(userChar);
-			cout << fixed << setprecision(2) << "\n         " << damage << " DAMAGE DEALT !\n";
+			UserAttackAnimation(userChar, damage, battleHP, userBattleMP, userHP, userMP);
 			stats[1] = stats[1] - specialDamage;
 			if (stats[1] < 0)
 			{
@@ -151,14 +165,14 @@ void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double u
 		{
 			system("cls");
 			PrintEnemyIdle();
-			PrintUserIdle(userChar);
+			PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
 			cout << "\n         OH NO! RUN FAILED!\n";
 			//ESCAPED!
 			//FAILED TO ESCAPE!
 		}
-		Sleep(1000);
-
+		
 	}
+	
 }
 
 void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
@@ -173,9 +187,11 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	if (!playerFirst) {
 		while (battleState)
 		{
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar);
+			Sleep(500);
+			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
+			Sleep(500);
 			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				 userJump, userFlowerPower, userSpeed,  userDefense, userLevel, userChar);
+				 userJump, userFlowerPower, userSpeed,  userDefense, userLevel, userChar, userHealthPoints, userMagicPoints);
 			if (userBattleHP == 0)
 			{
 				win = false;
@@ -196,9 +212,12 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	{
 		while (battleState)
 		{
+			Sleep(500);
 			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense,userChar);
+				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints);
+			Sleep(500);
+			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
+			Sleep(500);
 			if(userBattleHP == 0)
 			{
 				win = false;
@@ -221,9 +240,13 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	}
 	else if (win)
 	{
-		cout << "\n\n\n\n\n\n\n\                        YOU WIN !\n";
 		userXP = userXP + static_cast<int>(stats[8]);
 		userCoins = userCoins + static_cast<int>(stats[9]);
+		cout << "\n\n\n\n\n\n\n\                        YOU WIN !\n\n";
+		cout << "                        Gained :\n";
+		cout << "                        " << static_cast<int>(stats[8]) << "XP :\n";
+		cout << "                        " << static_cast<int>(stats[9]) << "Coins\n";
+		Sleep(5000);
 	}
 
 }
@@ -664,7 +687,7 @@ void BattleMechanics::PrintEnemyIdle()
 	}
 }
 
-void BattleMechanics::PrintUserAttack(char userChar)
+void BattleMechanics::PrintUserAttack(char userChar, int userBattleMP, int userHP, int userMP, double userBattleHP)
 {
 	if (userChar == 'M')
 	{          //"               " space to take out and add
@@ -702,8 +725,9 @@ void BattleMechanics::PrintUserAttack(char userChar)
 		cout << "                         ........',,,,,,,,,,,'.        \n";
 		cout << "                                  ..........           \n";
 
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/ "\n";
-		cout << "    MP : " << /*MagicPoints*/ "\n";
+		cout << "     MARIO\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 
 	}
 	else if (userChar == 'L')
@@ -748,8 +772,9 @@ void BattleMechanics::PrintUserAttack(char userChar)
 		cout << "                         .,,,..'::;;;:ccccc:'          \n";
 		cout << "                      .......           \n";
 
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/"\n";
-		cout << "    MP : " << /*MagicPoints*/"\n";
+		cout << "     LUIGI\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 	}
 	else if (userChar == 'T')
 	{
@@ -784,13 +809,13 @@ void BattleMechanics::PrintUserAttack(char userChar)
 		cout << "                              .;;;;;,'..     .;:;;;;;;.          \n";
 		cout << "                              ...'''''..     .'''',''..          \n";
 
-
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/ "\n";
-		cout << "    MP : " << /*MagicPoints*/  "\n";
+		cout << "     TOAD\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 	}
 }
 
-void BattleMechanics::PrintUserAttacked(char userChar)
+void BattleMechanics::PrintUserAttacked(char userChar, int userBattleMP, int userHP, int userMP, double userBattleHP)
 {
 	if (userChar == 'M')
 	{          //"               " space to take out and add
@@ -828,8 +853,9 @@ void BattleMechanics::PrintUserAttacked(char userChar)
 		cout << "..',,,,,,,,,,,'.        \n";
 		cout << "   ..........           \n";
 
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/ "\n";
-		cout << "    MP : " << /*MagicPoints*/ "\n";
+		cout << "     MARIO\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 
 	}
 	else if (userChar == 'L')
@@ -874,8 +900,9 @@ void BattleMechanics::PrintUserAttacked(char userChar)
 		cout << "'::;;;:ccccc:'          \n";
 		cout << "      .......           \n";
 
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/"\n";
-		cout << "    MP : " << /*MagicPoints*/"\n";
+		cout << "     LUIGI\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 	}
 	else if (userChar == 'T')
 	{          //"               " space to take out and add
@@ -910,14 +937,14 @@ void BattleMechanics::PrintUserAttacked(char userChar)
 		cout << ";;;;;,'..     .;:;;;;;;.          \n";
 		cout << "..'''''..     .'''',''..          \n";
 
-
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/ "\n";
-		cout << "    MP : " << /*MagicPoints*/  "\n";
+		cout << "     TOAD\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 	}
 
 }
 
-void BattleMechanics::PrintUserIdle(char userChar)
+void BattleMechanics::PrintUserIdle(char userChar, int userBattleMP, int userHP, int userMP, double userBattleHP)
 {
 	if (userChar == 'M')
 	{          //"               " space to take out and add
@@ -955,8 +982,9 @@ void BattleMechanics::PrintUserIdle(char userChar)
 		cout << "          ........',,,,,,,,,,,'.        \n";
 		cout << "                   ..........           \n";
 
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/ "\n";
-		cout << "    MP : " << /*MagicPoints*/ "\n";
+		cout << "     MARIO\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 
 	}
 	else if (userChar == 'L')
@@ -1001,8 +1029,9 @@ void BattleMechanics::PrintUserIdle(char userChar)
 		cout << "          .,,,..'::;;;:ccccc:'          \n";
 		cout << "                      .......           \n";
 
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/"\n";
-		cout << "    MP : " << /*MagicPoints*/"\n";
+		cout << "     LUIGI\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 	}
 	else if (userChar == 'T')
 	{
@@ -1037,9 +1066,9 @@ void BattleMechanics::PrintUserIdle(char userChar)
 		cout << "               .;;;;;,'..     .;:;;;;;;.          \n";
 		cout << "               ...'''''..     .'''',''..          \n";
 
-
-		cout << fixed << setprecision(2) << "    HP : " << /*HealthPoints*/ "\n";
-		cout << "    MP : " << /*MagicPoints*/  "\n";
+		cout << "     TOAD\n";
+		cout << fixed << setprecision(2) << "    HP : " << userBattleHP << "  /  " << userHP << "\n";
+		cout << "    MP : " << userBattleMP << "  /  " << userMP << "\n";
 	}
 
 }

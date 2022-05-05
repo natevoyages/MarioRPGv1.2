@@ -110,6 +110,7 @@ void InputConfig::MenuInput()
 {
     if (_kbhit())
     {
+
         switch (_getch())
         {
         case 'w':
@@ -129,6 +130,7 @@ void InputConfig::MenuInput()
             break;
 
         case ' ':
+            
             userInput = EXIT;
         }
     }
@@ -335,8 +337,6 @@ void InputConfig::OverWorldInputLogic(int& x, int& y, int width, int height, boo
         y = y;
         break;
 
-    default:
-        break;
 
     }
 }
@@ -421,8 +421,7 @@ void InputConfig::CharSelectInputLogic(int& yCharSelect, const int numCharacters
     case STOP:
         yCharSelect = yCharSelect;
         break;
-    default:
-        break;
+
     }
 }
 void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& menuToggled)
@@ -470,8 +469,7 @@ void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, b
     case STOP:
         yMenu = yMenu;
         break;
-    default:
-        break;
+
     }
 }
 
@@ -518,8 +516,7 @@ void InputConfig::BattleInputLogic( int& yMenu, int numMenuOptions, bool& select
     case STOP:
         yMenu = yMenu;
         break;
-    default:
-        break;
+
     }
 }
 
