@@ -131,7 +131,6 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
         if (!exitMap)
         {
             stepCounter = 0;
-            Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -189,7 +188,6 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
             stepCounter = 0;
-            Sleep(80);
             OverWorldPrintLogic();
             cout << "\nSTEPS: " << stepCounter << "\n";
             mapsInput.UserInput(menuToggled);
@@ -219,7 +217,6 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
 
-            Sleep(80);
             mapsInput.StepCounter();
             stepCounter = mapsInput.GetStepCount();
             IfBattleEncounted();
@@ -257,7 +254,6 @@ void OverWorld::SetUpMap()
         DesertTwoSetup();
         while (!exitMap)
         {
-            Sleep(80);
             mapsInput.StepCounter();
             stepCounter = mapsInput.GetStepCount();
             IfBattleEncounted();
@@ -296,7 +292,6 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
             stepCounter = 0;
-            Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -328,7 +323,6 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
             stepCounter = 0;
-            Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -356,7 +350,6 @@ void OverWorld::SetUpMap()
         {
            
             stepCounter = mapsInput.GetStepCount();
-            Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -388,7 +381,6 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
             mapsInput.GetStepCount();
-            Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -425,7 +417,6 @@ void OverWorld::SetUpMap()
        while (!exitMap)
        {
            stepCounter = 0;
-           Sleep(80);
            OverWorldPrintLogic();
            mapsInput.UserInput(menuToggled);
            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -457,7 +448,6 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
             stepCounter = 0;
-            Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -484,7 +474,6 @@ void OverWorld::SetUpMap()
        while (!exitMap)
        {
            mapsInput.GetStepCount();
-           Sleep(80);
            OverWorldPrintLogic();
            mapsInput.UserInput(menuToggled);
            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -517,7 +506,6 @@ void OverWorld::SetUpMap()
     while (!exitMap)
     {
         mapsInput.GetStepCount();
-        Sleep(80);
         OverWorldPrintLogic();
         mapsInput.UserInput(menuToggled);
         mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -550,7 +538,6 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
             stepCounter = 0;
-            Sleep(80);
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -588,6 +575,7 @@ void OverWorld::SetUpMap()
 
 void OverWorld::OverWorldPrintLogic()
 {
+    Sleep(100);
     system("cls");
     for (int i = 0; i < width; i++)
     {
