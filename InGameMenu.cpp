@@ -33,6 +33,7 @@ void InGameMenu::PrintGameInfo()
 
 
 	cout << "	    	  'S':                Save Point\n\n";
+	cout << "	    	  'b':                Bed\n\n";
 	cout << "	    	  'k':                Shop Keep\n\n";
 	cout << "	    	  'B':                Boss\n\n";
 	cout << "	          '__' and '|':       Exits\n\n";

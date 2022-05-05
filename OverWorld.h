@@ -88,6 +88,11 @@ private:
 	int prevYCoordinate;
 	int shopKeepXCoordinate;
 	int shopKeepYCoordinate;
+	int bossXCoordinate;
+	int bossYCoordinate;
+	int bedXCoordinate;
+	int bedYCoordinate;
+
 	int stepCounter;
 
 	int map;
