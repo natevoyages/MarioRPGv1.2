@@ -171,7 +171,7 @@ void OverWorld::IfBattleEncounted()
         while (battleState)
         {
             battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter);
+                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState);
         }
         mapsInput.StepCountReset();
     }
@@ -223,6 +223,7 @@ void OverWorld::SetUpMap()
             cout << "\nSTEPS: " << stepCounter << "\n"; // fix me
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+
             characterTracker();
             CollisonLogic(); 
             inGame.SetUpMenu();
@@ -253,17 +254,13 @@ void OverWorld::SetUpMap()
         while (!exitMap)
         {
             Sleep(80);
+            mapsInput.StepCounter();
+            stepCounter = mapsInput.GetStepCount();
+            IfBattleEncounted();
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
-            mapsInput.StepCounter();
-            stepCounter = mapsInput.GetStepCount();
-            if (stepCounter >= battle.GetBattleTrigger())
-            {
-                battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                    userBattleHP,  userBattleMP, userCoins, userEXP,  userLevel, userCoins, userCharacter);
-                mapsInput.StepCountReset();
-            }
+
             characterTracker();
             CollisonLogic();
             inGame.SetUpMenu();

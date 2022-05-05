@@ -10,6 +10,7 @@ BattleMenu::BattleMenu()
 void BattleMenu::SetUpMenu()
 {
 	select = false;
+	itemTabOpen = false;
 	yMenu = 0;
 
 	numBattleOptions = 4;
@@ -28,7 +29,7 @@ void BattleMenu::PrintBattleMenu(bool& attackSelected, bool& spAttackSelected, b
 	itemSelected = false;
 	runSelected = false;
 	menuInput.MenuInput();
-    menuInput.BattleInputLogic( yMenu, numBattleOptions, select);
+    menuInput.BattleInputLogic( yMenu, numBattleOptions, select,  itemTabOpen);
 
 	for (int i = 0; i < numBattleOptions; i++)
 	{
@@ -60,6 +61,15 @@ void BattleMenu::PrintBattleMenu(bool& attackSelected, bool& spAttackSelected, b
 	}
 	if (select && yMenu == 2)
 	{
+		/*itemTabOpen = true;
+		itemMenu.SetUp();
+	    while(itemTabOpen)
+		{
+			system("cls");
+			menuInput.itempMenu();
+
+		}*/
+	
 		itemSelected = true;
 
 	}

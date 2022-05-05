@@ -30,7 +30,15 @@ public:
 
   
 
-    void BattleInputLogic(int& yMenu, int numMenuOptions, bool& select);
+    void BattleInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& itemTabOpen);
+
+
+    void BattleItemMenuLogic(int& yMenu, int numItemOptions, bool& select, bool& itemTabOpen);
+
+
+    void OverWorldItemMenuLogic(int& yMenu, int numItemOptions, bool& select, bool& itemTabOpen);
+
+    void AddStatPointLogic(int& yMenu, int numStats, bool& select, bool& statsOpen);
 
 
 

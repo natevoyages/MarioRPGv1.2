@@ -2,6 +2,7 @@
 #define BATTLEMENU_H
 
 #include "InputConfig.h"
+#include "Items.h"
 #include <string>
 #include <windows.h>
 #include <iostream>

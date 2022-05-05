@@ -476,7 +476,7 @@ void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, b
 }
 
 
-void InputConfig::BattleInputLogic( int& yMenu, int numMenuOptions, bool& select)
+void InputConfig::BattleInputLogic( int& yMenu, int numMenuOptions, bool& select, bool& itemTabOpen)
 {
     select = false;
     switch (userInput)
@@ -496,6 +496,149 @@ void InputConfig::BattleInputLogic( int& yMenu, int numMenuOptions, bool& select
 
     case DOWN:
         if (yMenu != numMenuOptions - 1 && !select)
+        {
+            yMenu++;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case ENTER:
+        select = true;
+        break;
+
+    case BACK:
+        select = false;
+        break;
+
+    case STOP:
+        yMenu = yMenu;
+        break;
+    default:
+        break;
+    }
+}
+
+// fix this
+void InputConfig::BattleItemMenuLogic(int& yMenu, int numItemOptions, bool& select, bool& itemTabOpen)
+{
+    select = false;
+    switch (userInput)
+    {
+    case UP:
+        if (yMenu != 0 && !select)
+        {
+            yMenu--;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case DOWN:
+        if (yMenu != numItemOptions - 1 && !select)
+        {
+            yMenu++;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case ENTER:
+        select = true;
+        break;
+
+    case BACK:
+        select = false;
+        break;
+
+    case STOP:
+        yMenu = yMenu;
+        break;
+    default:
+        break;
+    }
+}
+
+
+void InputConfig::OverWorldItemMenuLogic(int& yMenu, int numItemOptions, bool& select, bool& itemTabOpen)
+{
+    select = false;
+    switch (userInput)
+    {
+    case UP:
+        if (yMenu != 0 && !select)
+        {
+            yMenu--;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case DOWN:
+        if (yMenu != numItemOptions - 1 && !select)
+        {
+            yMenu++;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case ENTER:
+        select = true;
+        break;
+
+    case BACK:
+        select = false;
+        break;
+
+    case STOP:
+        yMenu = yMenu;
+        break;
+    default:
+        break;
+    }
+}
+
+void InputConfig::AddStatPointLogic(int& yMenu, int numStats, bool& select, bool& statsOpen)
+{
+    select = false;
+    switch (userInput)
+    {
+    case UP:
+        if (yMenu != 0 && !select)
+        {
+            yMenu--;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case DOWN:
+        if (yMenu != numStats - 1 && !select)
         {
             yMenu++;
             break;

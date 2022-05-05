@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <windows.h>
+#include <iomanip>
 #include "BattleMenu.h"
 
 using namespace std;
@@ -26,7 +27,7 @@ public:
 		double userDefense, int level, char userChar);
 
 	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
-		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar);
+		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState);
 
 	void SpeedsterGoesFirst(int userSpeed, bool& playerFirst);
 
@@ -73,7 +74,7 @@ public:
 
 	
 
-protected:
+private:
 	BattleMenu menu;
 
 	// lvl = 0,hp = 1,pwr = 2,jp = 3,flw = 4,spd = 5,def = 6 ,xpdrop = 7, hitRate = 8, critRate = 9
