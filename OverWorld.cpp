@@ -81,7 +81,7 @@ void OverWorld::LoadGame()
     load.open("save.dat");
     if (!(load.fail())) {
         load >> bossesBeaten >> map >> userCharacter >> stringCharacter >> xCoordinate >> yCoordinate >> userLevel >> userHealthPoints >> userPower >> userJump >>
-            userFlowerPower >> userSpeed >> userDefense >> userEXP >> userCoins >> userStatPts;
+            userFlowerPower >> userSpeed >> userDefense >> userEXP >> userCoins >> userStatPts >> userBattleHP >> userBattleHP >> userMagicPoints;
         load.close();
     }
     else
@@ -101,7 +101,7 @@ void OverWorld::SaveGame()
     save.open("save.dat");
     save << bossesBeaten << " " << map << " " << userCharacter << " " << stringCharacter << " " << prevXCoordinate << " " << prevYCoordinate
         << " " << userLevel << " " << userHealthPoints << " " << userPower << " " << userJump << " " << userFlowerPower << " "
-        <<  userSpeed << " " << userDefense << " " << userEXP << " " << userCoins << " " << userStatPts;
+        <<  userSpeed << " " << userDefense << " " << userEXP << " " << userCoins << " " << userStatPts << " " << userBattleHP << " " << userBattleHP << " " << userMagicPoints;;
     save.close();
     for (int i = 0; i < 9; i++) 
     {
