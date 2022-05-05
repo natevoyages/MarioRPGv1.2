@@ -19,12 +19,13 @@ PlayerStats::PlayerStats()
 	statPoints = 0;
 }
 
-void PlayerStats::SetPlayer(string character, char iconCharacter,int lvl, int hp, int pwr, int jmp, int flwrPwr, int spd, int def, int xp, int coin, int statPts)
+void PlayerStats::SetPlayer(string character, char iconCharacter, int& lvl, int& userHP, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
+	int xp, int coin, int& statPts, double& userBattleHP, int userBattleMP, int& userMP)
 {
 	characterName = character;
     characterChar = iconCharacter;
 	level = lvl;
-	healthPoints = hp;
+	healthPoints = userHP;
 	power = pwr;
 	jump = jmp;
 	flowerPower = flwrPwr;
@@ -33,7 +34,9 @@ void PlayerStats::SetPlayer(string character, char iconCharacter,int lvl, int hp
 	experiencePoints = xp;
 	coins = coin;
 	statPoints = statPts;
-
+	battleHP = userBattleHP;
+	battleMP = userBattleMP;
+	magicPoints = userMP;
 
 }
 
@@ -51,14 +54,16 @@ void PlayerStats::PrintStats()
 
 	cout << "	    	   " << characterName << " [" << characterChar << "]\n\n";
 	cout << "	    	   LEVEL: " << level << "\n\n";
-	cout << "	    	   HP:    " << healthPoints << "\n\n";
+	cout << "	    	   HP:    " << battleHP << "  /  " << healthPoints << "\n\n";
+	cout << "	    	   MP:    " << battleMP << "  /  " << magicPoints << "\n\n";
 	cout << "	    	   PWR:   " << power << "\n\n";
-	cout << "	    	   JUMP:  " << jump << "\n\n";
+	cout << "	    	   JMP:   " << jump << "\n\n";
 	cout << "	    	   SPD:   " << speed << "\n\n";
 	cout << "	    	   DEF:   " << defense << "\n\n";
 	cout << "	    	   EXP:   " << experiencePoints << "\n\n\n";
 	cout << "	    	   COINS: " << coins << "\n\n\n";
 	cout << "	    	   STAT PTS:  " << statPoints << "\n\n";
+
 
 }
 
@@ -80,4 +85,9 @@ void PlayerStats::AddFlowerPowerPoint()
 void PlayerStats::AddSpeedPoint()
 {
 	speed++;
+}
+
+void PlayerStats::AddDefensePoint()
+{
+	defense++;
 }

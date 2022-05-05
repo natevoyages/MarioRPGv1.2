@@ -8,7 +8,8 @@ class PlayerStats
 public:
 	PlayerStats();
 
-	void SetPlayer(string character, char charCharacter, int lvl, int hp, int pwr, int jmp, int flwrPwr, int spd, int def,int xp, int coin, int statPts);
+	void SetPlayer(string character, char charCharacter, int& lvl, int& hp, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
+		int xp, int coin, int& statPts , double& userBattleHP, int userBattleMP, int& MP);
 
 	void PrintStats();
 
@@ -19,6 +20,8 @@ public:
 	void AddFlowerPowerPoint();
 
 	void AddSpeedPoint();
+
+	void AddDefensePoint();
 
 private:
 	string characterName;
@@ -34,7 +37,7 @@ private:
 	int experiencePoints;
 	int coins;
 	int statPoints;
-	double BattleHP;
-	int BattleMP;
+	double battleHP;
+	int battleMP;
 };
 #endif

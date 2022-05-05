@@ -99,6 +99,7 @@ void NewGame::CharacterSelect()
 		selectFlowerPower = flowerPower[0];
 		selectSpeed = speed[0];
 		selectDefense = defense[0];
+		selectBattleHP = static_cast<double>(healthPoints[0]);
 	}
 	else if (charSelect && yCharSelect == 1)
 	{
@@ -114,6 +115,7 @@ void NewGame::CharacterSelect()
 		selectFlowerPower = flowerPower[1];
 		selectSpeed = speed[1];
 		selectDefense = defense[1];
+		selectBattleHP = static_cast<double>(healthPoints[1]);
 	}
 	else if (charSelect && yCharSelect == 2)
 	{
@@ -129,7 +131,11 @@ void NewGame::CharacterSelect()
 		selectFlowerPower = flowerPower[2];
 		selectSpeed = speed[2];
 		selectDefense = defense[2];
+		selectBattleHP = static_cast<double>(healthPoints[1]);
 	}
+	magicPoints = 18;
+	battleMP = 18.0;
+
 	Sleep(1500);
 }
 
@@ -167,6 +173,11 @@ int NewGame::GetHP() const
 	return selectHealthPoints;
 }
 
+int NewGame::GetMP() const
+{
+	return magicPoints;
+}
+
 int NewGame::GetPower() const
 {
 	return selectPower;
@@ -193,3 +204,12 @@ int NewGame::GetDefense() const
 }
 
 
+int NewGame::GetBattleHP() const
+{
+	return selectBattleHP;
+}
+
+int NewGame::GetBattleMP() const
+{
+	return battleMP;
+}

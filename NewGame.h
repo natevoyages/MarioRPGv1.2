@@ -20,6 +20,8 @@ public:
 
 	int GetHP() const;
 
+	int GetMP() const;
+
 	int GetPower() const;
 
 	int GetJump() const;
@@ -29,6 +31,10 @@ public:
 	int GetSpeed() const;
 
 	int GetDefense() const;
+
+	int GetBattleHP() const;
+
+	int GetBattleMP() const;
 
 private:
 	Characters select;
@@ -55,5 +61,8 @@ private:
 	int selectFlowerPower;
 	int selectSpeed;
 	int selectDefense;
+	int magicPoints;
+	double  selectBattleHP;
+	int battleMP;
 };
 #endif
