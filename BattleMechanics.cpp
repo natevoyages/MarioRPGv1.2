@@ -90,6 +90,7 @@ void BattleMechanics::EnemyTurn(double userBattleHP, double userJump, double use
 		system("cls");
 		PrintEnemyAttack();
 		PrintUserAttacked(userChar);
+		cout << fixed << setprecision(2) << "\n        " << damage << " DAMAGE TAKEN !\n";
 		Sleep(1050);
 	}
 }
@@ -117,7 +118,7 @@ void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double u
 			system("cls");
 			PrintEnemyAttacked();
 			PrintUserAttack(userChar);
-			cout << fixed << setprecision(2) <<  "\n         DAMAGE " << damage << " DEALT !\n";
+			cout << fixed << setprecision(2) <<  "\n         " << damage << " DAMAGE DEALT !\n";
 			stats[1] = stats[1] - damage;
 			if(stats[1] < 0)
 			{
@@ -132,7 +133,7 @@ void BattleMechanics::PlayerTurn(double userBattleHP, int userBattleMP, double u
 			system("cls");
 			PrintEnemyAttacked();
 			PrintUserAttack(userChar);
-			cout << fixed << setprecision(2) << "\n         DAMAGE " << specialDamage << " DEALT !\n";
+			cout << fixed << setprecision(2) << "\n         " << damage << " DAMAGE DEALT !\n";
 			stats[1] = stats[1] - specialDamage;
 			if (stats[1] < 0)
 			{
@@ -374,7 +375,6 @@ void BattleMechanics::PrintEnemyAttack()
 {
 	if (enemySignature == 0)
 	{          //"               " space to take out and add
-		cout << fixed << setprecision(2) << "                                                      Lvl: 1 SHY GUY      HP:  " << stats[1] << "\n";
 		cout << "                                          .;ccccc,  ........            \n";
 		cout << "                                         ;kNMMMMMKx;...'''''....        \n";
 		cout << "                                        .xNXWMWXXNWo............        \n";
@@ -390,11 +390,11 @@ void BattleMechanics::PrintEnemyAttack()
 		cout << "                                          ....................          \n";
 		cout << "                                         .''''''''..  .'''''''.         \n";
 		cout << "                                         .,,,,,,,,,.  .,,,,,,,.         \n";
+		cout << fixed << setprecision(2) << "                                                      Lvl: 1 SHY GUY      HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 1)
 	{          //"               " space to take out and add
-		cout << fixed << setprecision(2) << "                                                           Lvl: 1 GOOMBA      HP:  " << stats[1] << "\n";
 		cout << "                                                    .''''''''''.  .             \n";
 		cout << "                                               ..    ,ldkkkOdl,    .            \n";
 		cout << "                                              ..   ..  :kkkk:  ..   ..          \n";
@@ -412,11 +412,12 @@ void BattleMechanics::PrintEnemyAttack()
 		cout << "                                         .',.      ,ck0000000Ko.     .,'.       \n";
 		cout << "                                        . .c'        ,cllclccl;.       c'. .    \n";
 		cout << "                                        .             ..      ..         .      \n";
+		cout << fixed << setprecision(2) << "                                                           Lvl: 1 GOOMBA      HP:  " << stats[1] << "\n";
+
 	}
 	else if (enemySignature == 2)
 	{          //"               " space to take out and add
-		cout << fixed << setprecision(2) << "                                                          Lvl: 2 POKEY      HP:  " << stats[1] << "\n";
-		cout << "                                                    .                     \n";
+ 		cout << "                                                    .                     \n";
 		cout << "                                                   ....                   \n";
 		cout << "                                        .          .....                  \n";
 		cout << "                                        ....      ...''.      ....        \n";
@@ -432,6 +433,8 @@ void BattleMechanics::PrintEnemyAttack()
 		cout << "                                          'lxxdc:::::::::::lxxd:.         \n";
 		cout << "                                           .'coxddxxxxxxxxdol;.           \n";
 		cout << "                                              ..';:cccc::;'.              \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 2 POKEY      HP:  " << stats[1] << "\n";
+
 	}
 	else if (enemySignature == 3)
 	{
@@ -472,7 +475,6 @@ void BattleMechanics::PrintEnemyAttacked()
 {
 	if (enemySignature == 0)
 	{          //"               " space to take out and add
-		cout << fixed << setprecision(2) << "                                                       Lvl: 1 SHY GUY      HP:  " << stats[1] << "\n";
 		cout << "                                                                         .;ccccc,  ........            \n";
 		cout << "                                                                        ;kNMMMMMKx;...'''''....        \n";
 		cout << "                                                                       .xNXWMWXXNWo............        \n";
@@ -488,11 +490,11 @@ void BattleMechanics::PrintEnemyAttacked()
 		cout << "                                                                         ....................          \n";
 		cout << "                                                                        .''''''''..  .'''''''.         \n";
 		cout << "                                                                        .,,,,,,,,,.  .,,,,,,,.         \n";
+		cout << fixed << setprecision(2) << "                                                      Lvl: 1 SHY GUY      HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 1)
 	{
-		cout << fixed << setprecision(2) << "                                                           Lvl: 1 GOOMBA      HP:  " << stats[1] << "\n";
 		cout << "                                                                                   .''''''''''.  .             \n";
 		cout << "                                                                              ..    ,ldkkkOdl,    .            \n";
 		cout << "                                                                             ..   ..  :kkkk:  ..   ..          \n";
@@ -510,10 +512,11 @@ void BattleMechanics::PrintEnemyAttacked()
 		cout << "                                                                        .',.      ,ck0000000Ko.     .,'.       \n";
 		cout << "                                                                       . .c'        ,cllclccl;.       c'. .    \n";
 		cout << "                                                                       .             ..      ..         .      \n";
+		cout << fixed << setprecision(2) << "                                                           Lvl: 1 GOOMBA      HP:  " << stats[1] << "\n";
+
 	}
 	else if (enemySignature == 2)
 	{
-		cout << fixed << setprecision(2) << "                                                       Lvl: 2 POKEY      HP:  " << stats[1] << "\n";
 		cout << "                                                                                   .                     \n";
 		cout << "                                                                                  ....                   \n";
 		cout << "                                                                       .          .....                  \n";
@@ -530,6 +533,8 @@ void BattleMechanics::PrintEnemyAttacked()
 		cout << "                                                                         'lxxdc:::::::::::lxxd:.         \n";
 		cout << "                                                                          .'coxddxxxxxxxxdol;.           \n";
 		cout << "                                                                             ..';:cccc::;'.              \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 2 POKEY      HP:  " << stats[1] << "\n";
+
 	}
 	else if (enemySignature == 3) {
 
@@ -563,7 +568,6 @@ void BattleMechanics::PrintEnemyIdle()
 {
 	if (enemySignature == 0)
 	{          //"               " space to take out and add
-		cout << fixed << setprecision(2) << "                                                       Lvl: 1 SHY GUY      HP:  " << stats[1] << "\n";
 		cout << "                                                          .;ccccc,  ........            \n";
 		cout << "                                                         ;kNMMMMMKx;...'''''....        \n";
 		cout << "                                                        .xNXWMWXXNWo............        \n";
@@ -579,11 +583,11 @@ void BattleMechanics::PrintEnemyIdle()
 		cout << "                                                          ....................          \n";
 		cout << "                                                         .''''''''..  .'''''''.         \n";
 		cout << "                                                         .,,,,,,,,,.  .,,,,,,,.         \n";
+		cout << fixed << setprecision(2) << "                                                      Lvl: 1 SHY GUY      HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 1)
 	{
-		cout << fixed << setprecision(2) << "                                                           Lvl: 1 GOOMBA      HP:  " << stats[1] << "\n";
 		cout << "                                                                    .''''''''''.  .             \n";
 		cout << "                                                               ..    ,ldkkkOdl,    .            \n";
 		cout << "                                                              ..   ..  :kkkk:  ..   ..          \n";
@@ -601,11 +605,12 @@ void BattleMechanics::PrintEnemyIdle()
 		cout << "                                                         .',.      ,ck0000000Ko.     .,'.       \n";
 		cout << "                                                        . .c'        ,cllclccl;.       c'. .    \n";
 		cout << "                                                        .             ..      ..         .      \n";
+		cout << fixed << setprecision(2) << "                                                           Lvl: 1 GOOMBA      HP:  " << stats[1] << "\n";
+
 	}
 	else if (enemySignature == 2)
 	{
-		cout << fixed << setprecision(2) << "                                                       Lvl: 2 POKEY      HP:  " << stats[1] << "\n";
-		cout << "                                                                    .                     \n";
+ 		cout << "                                                                    .                     \n";
 		cout << "                                                                   ....                   \n";
 		cout << "                                                        .          .....                  \n";
 		cout << "                                                        ....      ...''.      ....        \n";
@@ -621,6 +626,8 @@ void BattleMechanics::PrintEnemyIdle()
 		cout << "                                                          'lxxdc:::::::::::lxxd:.         \n";
 		cout << "                                                           .'coxddxxxxxxxxdol;.           \n";
 		cout << "                                                              ..';:cccc::;'.              \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 2 POKEY      HP:  " << stats[1] << "\n";
+
 	}
 	else if (enemySignature == 3)
 	{
