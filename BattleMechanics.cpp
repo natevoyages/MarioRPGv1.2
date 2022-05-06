@@ -1008,7 +1008,7 @@ void BattleMechanics::PrintEnemyIdle()
 
 	}
 	else if (enemySignature == 3)
-	{           //"                                                       "
+	{           
 		cout << "                                                              ........                     \n";
 		cout << "                                                              .cxOOOOOc''..                \n";
 		cout << "                                                               .:xxxxxxxxxd:'.             \n";

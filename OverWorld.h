@@ -22,6 +22,8 @@ public:
 
 	void SaveGame();
 
+	void BedRest();
+
 	void Shop();
 
 	void ExitMapCoordinates();

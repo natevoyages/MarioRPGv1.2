@@ -112,10 +112,28 @@ void OverWorld::SaveGame()
     yCoordinate = prevYCoordinate;
 }
 
+void OverWorld::BedRest()
+{
+    string resting[] = { "RESTING.", "RESTING..", "RESTING...","RESTING.", "RESTING..", "RESTING...",
+    "RESTING.", "RESTING..", "RESTING...", };
+    userBattleHP = static_cast<double>(userHealthPoints);
+    userBattleMP = static_cast<double>(userMagicPoints);
+    for (int i = 0; i < 9; i++)
+    {
+        system("cls");
+        cout << "\n\n\n\n\n\n\n\n\n\	    	  " << resting[i];
+    }
+    xCoordinate = prevXCoordinate;
+    yCoordinate = prevYCoordinate;
+
+}
+
 void OverWorld::characterTracker()
 {
     if (!(xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate) && 
-        !(xCoordinate == shopKeepXCoordinate && yCoordinate == shopKeepYCoordinate))
+        !(xCoordinate == shopKeepXCoordinate && yCoordinate == shopKeepYCoordinate) &&
+        !(xCoordinate == bedXCoordinate && yCoordinate == bedYCoordinate) && 
+        !(xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate))
     {
         prevXCoordinate = xCoordinate;
         prevYCoordinate = yCoordinate;
@@ -801,10 +819,7 @@ void OverWorld::CollisonLogic()
 
     else if (xCoordinate == bedXCoordinate && yCoordinate == bedYCoordinate)
     {
-        //Rest();                                                                             // fix me
-        system("cls");
-        cout << "RESTING";
-            Sleep(1000);
+        BedRest();
     }
 
     else if (xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate)// add second set of coordinates
