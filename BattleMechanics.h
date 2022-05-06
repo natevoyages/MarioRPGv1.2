@@ -79,30 +79,30 @@ public:
 private:
 	BattleMenu menu;
 
-	// lvl = 0,hp = 1,pwr = 2,jp = 3,flw = 4,spd = 5,def = 6 ,xpdrop = 7, hitRate = 8, critRate = 9
-	double shyGuyStats[10]{1, 40, 8 , 5, 5, 5, 4, 10, 65, 5};  //fix crit rates and coin drops
+	// lvl = 0,hp = 1,pwr = 2,jp = 3,flw = 4,spd = 5,def = 6 ,xpdrop = 7, hitRate = 8, critRate = 9, coins = 10
+	double shyGuyStats[11]{1, 40, 8 , 5, 5, 5, 4, 5, 65, 15, 3};  //fix crit rates and coin drops
 
-	double desertGoombaStats[10]{ 1, 39, 9, 6, 4, 5, 6 , 12, 65, 5 };
+	double desertGoombaStats[11]{ 1, 39, 9, 6, 4, 5, 6 , 8, 65, 15, 5 };
 
-	double pokeyStats[10]{ 2, 44, 10, 3, 9, 2, 9, 16, 65, 10 };
+	double pokeyStats[11]{ 2, 44, 10, 3, 9, 2, 9, 13, 65, 15 , 8};
 
-	double birdoStats[10]{ 5, 100, 19, 8, 14, 9, 15, 500, 75, 100 };
+	double birdoStats[11]{ 5, 100, 19, 8, 14, 9, 15, 500, 75, 30 , 300};
 
-	double cheepCheepStats[10]{ 3, 55, 12, 10, 7, 9, 8, 22, 65, 18 };
+	double cheepCheepStats[11]{ 3, 55, 12, 10, 7, 9, 8, 22, 65, 20 , 20};
 
-	double blooperStats[10]{ 4, 65, 10, 13, 9, 10, 8, 30, 68, 22 };
+	double blooperStats[11]{ 4, 65, 10, 13, 9, 10, 8, 28, 68, 20 , 23};
 
-	double mechaBlooperStats[10]{ 8, 150, 27, 13, 14, 8, 22, 2000, 79, 300};
+	double mechaBlooperStats[11]{ 8, 150, 27, 13, 14, 8, 22, 2000, 79, 33 , 750};
 
-	double castleGoombaStats[10]{ 5, 75, 16, 12, 11, 10, 11 , 45,  65, 19 };
+	double castleGoombaStats[11]{ 5, 75, 16, 12, 11, 10, 11 , 45,  65, 19 , 36};
 
-	double koopaTroopaStats[10]{ 6, 80, 17, 12, 11, 10, 15, 65, 65, 21 };
+	double koopaTroopaStats[11]{ 6, 80, 17, 12, 11, 10, 15, 50, 65, 21 , 41};
 
-	double booStats[10]{7, 90, 20, 12, 11, 10, 11, 90, 65, 15,};
+	double booStats[11]{7, 90, 20, 12, 11, 10, 11, 70, 65, 15, 49};
 
-	double kingBooStats[10]{11, 275, 32, 20, 28, 19, 25, 10000, 87, 42};
+	double kingBooStats[11]{11, 275, 32, 20, 28, 19, 25, 8000, 87, 42 , 1500};
 
-	double stats[10];
+	double stats[11];
 
 	double damage;
 

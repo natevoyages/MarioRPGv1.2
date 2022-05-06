@@ -244,8 +244,8 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		userCoins = userCoins + static_cast<int>(stats[9]);
 		cout << "\n\n\n\n\n\n\n\                        YOU WIN !\n\n";
 		cout << "                        Gained :\n";
-		cout << "                        " << static_cast<int>(stats[8]) << "XP :\n";
-		cout << "                        " << static_cast<int>(stats[9]) << "Coins\n";
+		cout << "                        " << static_cast<int>(stats[7]) << "XP :\n";
+		cout << "                        " << static_cast<int>(stats[10]) << "Coins\n";
 		Sleep(5000);
 	}
 
@@ -417,7 +417,7 @@ void BattleMechanics::PrintEnemyAttack()
 
 	}
 	else if (enemySignature == 1)
-	{          //"               " space to take out and add
+	{          //"                                       " space to take out and add
 		cout << "                                                    .''''''''''.  .             \n";
 		cout << "                                               ..    ,ldkkkOdl,    .            \n";
 		cout << "                                              ..   ..  :kkkk:  ..   ..          \n";
@@ -460,36 +460,210 @@ void BattleMechanics::PrintEnemyAttack()
 
 	}
 	else if (enemySignature == 3)
-	{
+	{          
+		cout << "                                             ........                     \n";
+		cout << "                                             .cxOOOOOc''..                \n";
+		cout << "                                              .:xxxxxxxxxd:'.             \n";
+		cout << "                                         .'..;dddlccccccccod,             \n";
+		cout << "                                       .'dN0d0WWW0dlcccccccc'..'''''.     \n";
+		cout << "                                       ;XXKXWNKNWMWkccccccccld0WWWWNd'.   \n";
+		cout << "                                       :XOckWOckWMWkccccccld0WMMMMMMWNc   \n";
+		cout << "                                       :X0x0WKx0WMWkccccld0WMMMMMMMW0d'   \n";
+		cout << "                                       .o0WXKXWMMN0dcc:ckWMMMMMMMMMN:     \n";
+		cout << "                                       ..oXOdk0K0xccc::cd0K0000KKKK0c.    \n";
+		cout << "                                       .coxOOxolccccccccccccccccccodkk;   \n";
+		cout << "                                         .'cxOOxolccccccccccccccccdO0O;   \n";
+		cout << "                                           .:dO0OkxxdoccccccccccccdOxl.   \n";
+		cout << "                                          .:ox000XWWW0xdlcccccccloxO:     \n";
+		cout << "                                         .cxKKKKXNMMMMWW0xddo:;,lOxc.     \n";
+		cout << "                                           'ddd0WMMMMMMMMW0dc'. .c.       \n";
+		cout << "                                               'oddddddddo'               \n";
+		cout << fixed << setprecision(2) << "                                                 Lvl: 3 CHEEP CHEEP   HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 4)
-	{
-
+	{           
+		cout << "                                                .lkkkkkkkkkkl.              \n";
+		cout << "                                               .l0WMMMMMMMMMMW0l.           \n";
+		cout << "                                             .c0MMMMMMMMMMMMMMMM0c.         \n";
+		cout << "                                           .c0WMMMMMMMMMMMMMMMMMMW0c.       \n";
+		cout << "                                         .lOWMMMMMMMMMMMMMMMMMMMMMMNOl.     \n";
+		cout << "                                         dWMMMMMWWWWWWWWWWWWWWWWMMMMMWd     \n";
+		cout << "                                        .dMMMWKo:llll:;;;;:llll:oKWMMMd.    \n";
+		cout << "                                         :ONM0; ,kxxO;    ;Oxxk, ;0MNO:     \n";
+		cout << "                                          .cKO' ;KOkK:    :KkOK; 'OKc.      \n";
+		cout << "                                            dNO:,cool,....,looc,:ONd        \n";
+		cout << "                                            dMMNKKKKXXXXXXXXKKKKNMMd        \n";
+		cout << "                                          .c0MMMMMMMMMMMMMMMMMMMMMM0c.      \n";
+		cout << "                                      ;kkk0NMMMMMMMMMMMMMMMMMMMMMMMMN0kkk;  \n";
+		cout << "                                      :kkk0NMMMMMMMMMMMMMMMMMMMMMMMMN0kkk:  \n";
+		cout << "                                          .cKMMMMMMMMMMMMMMMMMMMMMM0c.      \n";
+		cout << "                                          .oXWKol0WMMMWXXWMMMW0loKWXo.      \n";
+		cout << "                                          .oOo'  'kMWKl,,lKWMk'  'oOo.      \n";
+		cout << "                                                 .xMX:    :XMx.             \n";
+		cout << "                                                  .;,.    .,;.              \n";
+		cout << fixed << setprecision(2) << "                                                      Lvl: 4 BLOOPER HP:  " << stats[1] << "\n";
 	}
 	else if (enemySignature == 5)
-	{
-
+	{           
+		cout << "                                                     ..        ..                                  \n";
+		cout << "                                                ..  .'c;  ;::cc:'   ..                             \n";
+		cout << "                                              ...    .:cc:  coc;.                                  \n";
+		cout << "                                             ...   .'. .okc'           .                           \n";
+		cout << "                                              .....dKl..lxoll,      ....                           \n";
+		cout << "                                             ...,ox0X0Oo'....     .co,...                          \n";
+		cout << "                                         ..  .;cokOKXd;;:cccc,    .okoc;.....                      \n";
+		cout << "                                       ..,;;;:dOkkOKXl .oOkkOl.   .cxkOd:;;;,..                    \n";
+		cout << "                                      .. :OkkOkkkkO00o';dkkkkd,...'  coxkOOO: ..                   \n";
+		cout << "                                      .. :kkkkOOkddddddddddddddoooooc;   lxO: ..                   \n";
+		cout << "                                      .. :kkkO0Kd....................dXkl:    ..                   \n";
+		cout << "                                       ....:xOKXOolllllllllllllllllloOXKOd' ...                    \n";
+		cout << "                                         . .;;:::;;;;;;;;;;;;;;;;,;;;:::;;. .                      \n";
+		cout << "                                           ..  ..  ';;;;;;;;;;;,.  .     ..                        \n";
+		cout << "                                              ....'xXXXXXXXXXXXKl.'. ......                        \n";
+		cout << "                                             .. ,ox0XXXXXXXXXXXX0Oo.      ....                     \n";
+		cout << "                                       .',.      ,.,d00XXXXXXXXXKl..       ;o;...                  \n";
+		cout << "                                      ...,c'       .,lO00000000O;         .,. ..                   \n";
+		cout << "                                      .. ':'         .:clcccccc:.             ..                   \n";
+		cout << fixed << setprecision(2) << "                                                           Lvl: 5 GOOMBA      HP:  " << stats[1] << "\n";
 	}
 	else if (enemySignature == 6)
 	{
-
+	         // "             /                         "
+		cout << "                                         ,kOl.                             \n";
+		cout << "                                        'xNMk.                             \n";
+		cout << "                                       .:OWMk.',                           \n";
+		cout << "                                         cNMk'lOo'                         \n";
+		cout << "                                       ..dNMXkk0Oc.                        \n";
+		cout << "                                      .;l0WNX0000c.                        \n";
+		cout << "                                      :kodK0O00kl.                         \n";
+		cout << "                                      :OOo,,ckOo'.  ..;cc;.                \n";
+		cout << "                                      ,l,   ,xc;kc .:c;cc;c:.              \n";
+		cout << "                                           'ok;,Ko .lo;;;:oo;.             \n";
+		cout << "                                         .lkxclol::;;;:oo:;:o;             \n";
+		cout << "                                       .;oxOo.dO'.;;;lxxxdl;;.             \n";
+		cout << "                                         ..do.dO',do:;cddc;:l,             \n";
+		cout << "                                           ,,.dO,,ddxl;;;:lxd;             \n";
+		cout << "                                             .dNOc';lc,;;,cl,.             \n";
+		cout << "                                             .cKNk;;::;::;::,.             \n";
+		cout << "                                            .,.'ldoxKWNNNNWWNl             \n";
+		cout << "                                          .,dOdlc' .;ccllllll'             \n";
+		cout << "                                         'oxxxxkx;.   .;cccll,             \n";
+		cout << "                                         .........     .......             \n";
+		cout << fixed << setprecision(2) << "                                                     Lvl: 6 KOOPA    HP:  " << stats[1] << "\n";
 	}
 	else if (enemySignature == 7)
-	{
+	{        // "             /                         "
+		cout << "                                           ;,ck0OOO0O0Oo;;;          \n";
+		cout << "                                         ;d0KKNNNNNNNNNXKKkc,        \n";
+		cout << "                                        xd:kKoxNWWWWWWWNNXKxc,       \n";
+		cout << "                                       :x0c dO.:XMWWWNXxcc:,l0x:     \n";
+		cout << "                                       l0Ko,k0:lNWWWM0ld00d.;0Ol     \n";
+		cout << "                                       lOO0KK0KK0XWWWWXNN0o;o0o,     \n";
+		cout << "                                       lx:lxlcdo:kWWWWWWNxdKX00d     \n";
+		cout << "                                       lx:,;;;;,;kNWWWWWWWWNX00d     \n";
+		cout << "                                       ,:ol;;;;;:cxXWWWWWWWWNX0d     \n";
+		cout << "                                        oocdxloOdl0WWWWWNXX0xc,      \n";
+		cout << "                                          ;loxOKKK0KXXXXKkodc,       \n";
+		cout << "                                             'clclccllcll,           \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 7 BOO    HP:  " << stats[1] << "\n";
 
 	}
 	//bosses
 	else if (enemySignature == 8)
-	{
+
+	{          //"               " space to take out and add
+		cout << "                                                  ..                                  \n";
+		cout << "                                                 .ld;.     'cc;.                      \n";
+		cout << "                                                .co:;;'...:dxdl,.                     \n";
+		cout << "                                                .:l;,cc:;;:cclc,.                     \n";
+		cout << "                                              .lkkdx0KOkxo:;;;'.                      \n";
+		cout << "                                             .'ldc;oOk0KKOxl;,,.                      \n";
+		cout << "                                          .',;llc;:llodddol:,..                       \n";
+		cout << "                                         .''..':lodxdlc::ccc,.                        \n";
+		cout << "                                        .;......,cxO0kdoool:'.                        \n";
+		cout << "                                        .;.......:dkkxolodoc,.                        \n";
+		cout << "                                        .;'.....':oddolc:::;'                         \n";
+		cout << "                                         .;;''';:cc::,'''''.                          \n";
+		cout << "                                           ..,;;;,'.'''',,.                           \n";
+		cout << "                                              ...'.',;;;,'                            \n";
+		cout << "                                               .;ccclc;.                              \n";
+		cout << "                                             .,lddolcc,.                              \n";
+		cout << "                                        .'...:lol:;::c;.                              \n";
+		cout << "                                         .;,':ddc;:ccc;'..                            \n";
+		cout << "                                          .:k00dc;;,'''''..,,.                        \n";
+		cout << "                                           :0NWN0xl:'.',,,;;.                         \n";
+		cout << "                                          .;xKWWNKxc;:odol:.                          \n";
+		cout << "                                          ';;lkK0k:':dkxoc'                           \n";
+		cout << "                                          'c:;cool:,:lool:.                           \n";
+		cout << "                                           ';,''..',,'.....                           \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 5 BIRDO      HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 9)
-	{
+	{  
+		cout << "                                                                                      .,;,,;;,.          \n";
+		cout << "                                                                                  .,cdkO0KXXK0d.         \n";
+		cout << "                                                                              .':ok00KKKXNNNXKOo.        \n";
+		cout << "                                                                        ..;:coO0O000KXNNWNXNNX0Oo.       \n";
+		cout << "                                                                  .';ldkO0XXKKKK00KKXWWNXNNNNXK0kl.      \n";
+		cout << "                                                             .,:lxOKKXXXXXXXK0OO0KXXXXNNNNNXXKKKOkl.     \n";
+		cout << "                                                           'lkOOOOO00KK0OO00kxO0000XNNNNNXXXXKK0Oko,     \n";
+		cout << "                                                          .lxxdlllloxkkkkkkddxO0K0KXNXXXXXXXKKK0Okxl.    \n";
+		cout << "                                                          .lxoc;,'..',;::ccccoxkO00KKXKKKKKKK00OOkxd:.   \n";
+		cout << "                                                           .,:;'.............';:coxkO000000000OOOkxxo.   \n";
+		cout << "                                                             ....;oxdc'        ..';coxkOOOOOOOOkxxxdo:.  \n";
+		cout << "                                                             .  ,dKNXk:.          ..':odxxxxxxxxxddooc.  \n";
+		cout << "                                                            .   .;okdc'      .':c:'...,:lodddddddooool;. \n";
+		cout << "                                                           ..    ..''..     .,dKNKd,. ..,:looooooooolll' \n";
+		cout << "                                                         .,;,....';:;'..     'oOKOo,.   .',:cllllllllcc. \n";
+		cout << "                                                       .,ckkd:',:llc:;'...    .','.    ..;:;;;::cccccc:. \n";
+		cout << "                                                      .dkxddo;;cllc::;,.....         ..:oxdl:;,',,;;;,.  \n";
+		cout << "                                                      .codxko;;locc::;,',;loc;'.....,:oOK0kdlc:,,'..     \n";
+		cout << "                                                    .':c::cl:,':llcc:;';:ldkO0OkxddxkOK0Oxolccc::'       \n";
+		cout << "                                             ......,;;;;;;:;,,,,:c:;;;;lddxddxxxk0K0Okkxolccllc:,        \n";
+		cout << "                                          .,:clllllllc:::c;'.....'',:lodddddxxxxxxxxdoooooooolc'         \n";
+		cout << "                                       .';:::c:::c:cccccclc:;,,',;;;;:cllodddooddxxxxdddoollc,.          \n";
+		cout << "                                       ,,;:;::;;;;;:cclllllllllc::c:;'..',:codxdoollcccc:::,.            \n";
+		cout << "                                       .'.''''''',;:::::::::ccllllllcc;,;;:;;;lxxollc:;,'..              \n";
+		cout << "                                       ,;,,.......';;;::;;:cccllllllllc;',::,.':cllc:;'..                \n";
+		cout << "                                       ..,;;;:,..,'.'..',;::::::;::::;'.  ..  ..,::,...                  \n";
+		cout << "                                          ......,;;,,''''',;,;,,''''..         .''.                      \n";
+		cout << "                                                ..,;;:;,'...                  .                          \n";
+		cout << fixed << setprecision(2) << "                                                   Lvl: 8 MECHA BLOOPER HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 10)
 	{
+			
+		cout << "                                               .,'.      .lkc.       .',.                       \n";
+		cout << "                                                ..:l;. 'lllclod,   :dc..                        \n";
+		cout << "                                                 .o0x:;d0Ol,lKXx::ckXx.                         \n";
+		cout << "                                                 .cxkO0KXKo:oKXXXXX0Oo.                         \n";
+		cout << "                                                   .;k0KXXK0KXXXXX0:..                          \n";
+		cout << "                                                    .',,;;;;;;;;;;,.                            \n";
+		cout << "                                                    .:ccccccccccccccc,                          \n";
+		cout << "                                               .....lNMMMMMMMMMMMMMMM0;.....                    \n";
+		cout << "                                              .oXNXXNWMMMMMMMMMMMMMMMWNXNNK;                    \n";
+		cout << "                                            'xOXWMMMMMMMMMMMMMMMMMMMMMMMMMW0ko.                 \n";
+		cout << "                                            ;XWXO0NMN0OXMMMMMMMMMMMMMMMMMMMMMO.                 \n";
+		cout << "                                          .'lXWk;c0M0c,kWMMMMMMMMMWXKKKKNMMMM0:..               \n";
+		cout << "                                         .xNNWWk;cKM0c;kWMMMMMMMWWXc....dWMMMWNNo               \n";
+		cout << "                                         .OMMMWN0KNWNK0XWMMMMMMk;;:dkkkkd:lKMMMWo               \n";
+		cout << "                                         .OMNOkKWW0k0NWKkONMMMMOcco0MMMWo .OMMMWo               \n";
+		cout << "                                         .OM0c;d0Ol,lO0d;c0WMMMMMMMMMNK0o':0MMMWx'.             \n";
+		cout << "                                         .OM0c,,;;,,,;;;,c0WMMMMMMMMMO'.dXNWMMMMWN0,            \n";
+		cout << "                                         .OW0c,,,,,,,,,,,c0WMMMMMMMMMNOkXMMMMMMMMMX;            \n";
+		cout << "                                         .:dxxdc,,,,,,,,,;okKWMMMMMMMMMMMMMMMMMMMMX;            \n";
+		cout << "                                            'kKd;,;;;;;:lc;,oNMMMMMMMMMMMMMMMMMMNKO,            \n";
+		cout << "                                             .;;;;;;;;;xNKo;dNMMMMMMMMMMMMMMWWWWx..             \n";
+		cout << "                                             .,;;;;,lO0XWWX0XWMMMMMMMMMMMMNd;;;;.               \n";
+		cout << "                                           ..';;;;;,:ooooxXMMMMMMMMMMXxoool.                    \n";
+		cout << "                                          .';;;;;;;;.    .dK000K0000Kd.                         \n";
+		cout << "                                          .,;;;;;,,..     ............                          \n";
+		cout << "                                          .';,;,;'                                              \n";
+		cout << "                                            .....                                               \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 11 KING BOO  HP:  " << stats[1] << "\n";
 
 	}
 }
@@ -497,7 +671,7 @@ void BattleMechanics::PrintEnemyAttack()
 void BattleMechanics::PrintEnemyAttacked()
 {
 	if (enemySignature == 0)
-	{          //"               " space to take out and add
+	{          //"                                                                      " space to take out and add
 		cout << "                                                                         .;ccccc,  ........            \n";
 		cout << "                                                                        ;kNMMMMMKx;...'''''....        \n";
 		cout << "                                                                       .xNXWMWXXNWo............        \n";
@@ -560,37 +734,218 @@ void BattleMechanics::PrintEnemyAttacked()
 
 	}
 	else if (enemySignature == 3) {
+		      //"                                                                      " 
+		cout << "                                                                            ........                     \n";
+		cout << "                                                                            .cxOOOOOc''..                \n";
+		cout << "                                                                             .:xxxxxxxxxd:'.             \n";
+		cout << "                                                                        .'..;dddlccccccccod,             \n";
+		cout << "                                                                      .'dN0d0WWW0dlcccccccc'..'''''.     \n";
+		cout << "                                                                      ;XXKXWNKNWMWkccccccccld0WWWWNd'.   \n";
+		cout << "                                                                      :XOckWOckWMWkccccccld0WMMMMMMWNc   \n";
+		cout << "                                                                      :X0x0WKx0WMWkccccld0WMMMMMMMW0d'   \n";
+		cout << "                                                                      .o0WXKXWMMN0dcc:ckWMMMMMMMMMN:     \n";
+		cout << "                                                                      ..oXOdk0K0xccc::cd0K0000KKKK0c.    \n";
+		cout << "                                                                      .coxOOxolccccccccccccccccccodkk;   \n";
+		cout << "                                                                        .'cxOOxolccccccccccccccccdO0O;   \n";
+		cout << "                                                                          .:dO0OkxxdoccccccccccccdOxl.   \n";
+		cout << "                                                                         .:ox000XWWW0xdlcccccccloxO:     \n";
+		cout << "                                                                        .cxKKKKXNMMMMWW0xddo:;,lOxc.     \n";
+		cout << "                                                                          'ddd0WMMMMMMMMW0dc'. .c.       \n";
+		cout << "                                                                              'oddddddddo'               \n";
+		cout << fixed << setprecision(2) << "                                                 Lvl: 3 CHEEP CHEEP   HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 4) {
-
+		cout << "                                                                                .lkkkkkkkkkkl.              \n";
+		cout << "                                                                               .l0WMMMMMMMMMMW0l.           \n";
+		cout << "                                                                             .c0MMMMMMMMMMMMMMMM0c.         \n";
+		cout << "                                                                           .c0WMMMMMMMMMMMMMMMMMMW0c.       \n";
+		cout << "                                                                         .lOWMMMMMMMMMMMMMMMMMMMMMMNOl.     \n";
+		cout << "                                                                         dWMMMMMWWWWWWWWWWWWWWWWMMMMMWd     \n";
+		cout << "                                                                        .dMMMWKo:llll:;;;;:llll:oKWMMMd.    \n";
+		cout << "                                                                         :ONM0; ,kxxO;    ;Oxxk, ;0MNO:     \n";
+		cout << "                                                                          .cKO' ;KOkK:    :KkOK; 'OKc.      \n";
+		cout << "                                                                            dNO:,cool,....,looc,:ONd        \n";
+		cout << "                                                                            dMMNKKKKXXXXXXXXKKKKNMMd        \n";
+		cout << "                                                                          .c0MMMMMMMMMMMMMMMMMMMMMM0c.      \n";
+		cout << "                                                                      ;kkk0NMMMMMMMMMMMMMMMMMMMMMMMMN0kkk;  \n";
+		cout << "                                                                      :kkk0NMMMMMMMMMMMMMMMMMMMMMMMMN0kkk:  \n";
+		cout << "                                                                          .cKMMMMMMMMMMMMMMMMMMMMMM0c.      \n";
+		cout << "                                                                          .oXWKol0WMMMWXXWMMMW0loKWXo.      \n";
+		cout << "                                                                          .oOo'  'kMWKl,,lKWMk'  'oOo.      \n";
+		cout << "                                                                                 .xMX:    :XMx.             \n";
+		cout << "                                                                                  .;,.    .,;.              \n";
+		cout << fixed << setprecision(2) << "                                                      Lvl: 4 BLOOPER HP:  " << stats[1] << "\n";
 	}
 	else if (enemySignature == 5) {
-
+		cout << "                                                                                    ..        ..                                  \n";
+		cout << "                                                                               ..  .'c;  ;::cc:'   ..                             \n";
+		cout << "                                                                             ...    .:cc:  coc;.                                  \n";
+		cout << "                                                                            ...   .'. .okc'           .                           \n";
+		cout << "                                                                             .....dKl..lxoll,      ....                           \n";
+		cout << "                                                                            ...,ox0X0Oo'....     .co,...                          \n";
+		cout << "                                                                        ..  .;cokOKXd;;:cccc,    .okoc;.....                      \n";
+		cout << "                                                                      ..,;;;:dOkkOKXl .oOkkOl.   .cxkOd:;;;,..                    \n";
+		cout << "                                                                     .. :OkkOkkkkO00o';dkkkkd,...'  coxkOOO: ..                   \n";
+		cout << "                                                                     .. :kkkkOOkddddddddddddddoooooc;   lxO: ..                   \n";
+		cout << "                                                                     .. :kkkO0Kd....................dXkl:    ..                   \n";
+		cout << "                                                                      ....:xOKXOolllllllllllllllllloOXKOd' ...                    \n";
+		cout << "                                                                        . .;;:::;;;;;;;;;;;;;;;;,;;;:::;;. .                      \n";
+		cout << "                                                                          ..  ..  ';;;;;;;;;;;,.  .     ..                        \n";
+		cout << "                                                                             ....'xXXXXXXXXXXXKl.'. ......                        \n";
+		cout << "                                                                            .. ,ox0XXXXXXXXXXXX0Oo.      ....                     \n";
+		cout << "                                                                      .',.      ,.,d00XXXXXXXXXKl..       ;o;...                  \n";
+		cout << "                                                                     ...,c'       .,lO00000000O;         .,. ..                   \n";
+		cout << "                                                                     .. ':'         .:clcccccc:.             ..                   \n";
+		cout << fixed << setprecision(2) << "                                                           Lvl: 5 GOOMBA      HP:  " << stats[1] << "\n";
 	}
+
 	else if (enemySignature == 6) {
+		cout << "                                                                       ,kOl.                             \n";
+		cout << "                                                                      'xNMk.                             \n";
+		cout << "                                                                     .:OWMk.',                           \n";
+		cout << "                                                                       cNMk'lOo'                         \n";
+		cout << "                                                                     ..dNMXkk0Oc.                        \n";
+		cout << "                                                                    .;l0WNX0000c.                        \n";
+		cout << "                                                                    :kodK0O00kl.                         \n";
+		cout << "                                                                    :OOo,,ckOo'.  ..;cc;.                \n";
+		cout << "                                                                    ,l,   ,xc;kc .:c;cc;c:.              \n";
+		cout << "                                                                         'ok;,Ko .lo;;;:oo;.             \n";
+		cout << "                                                                       .lkxclol::;;;:oo:;:o;             \n";
+		cout << "                                                                     .;oxOo.dO'.;;;lxxxdl;;.             \n";
+		cout << "                                                                       ..do.dO',do:;cddc;:l,             \n";
+		cout << "                                                                         ,,.dO,,ddxl;;;:lxd;             \n";
+		cout << "                                                                           .dNOc';lc,;;,cl,.             \n";
+		cout << "                                                                           .cKNk;;::;::;::,.             \n";
+		cout << "                                                                          .,.'ldoxKWNNNNWWNl             \n";
+		cout << "                                                                        .,dOdlc' .;ccllllll'             \n";
+		cout << "                                                                       'oxxxxkx;.   .;cccll,             \n";
+		cout << "                                                                       .........     .......             \n";
+		cout << fixed << setprecision(2) << "                                                     Lvl: 6 KOOPA    HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 7) {
+		cout << "                                                                         ;,ck0OOO0O0Oo;;;          \n";
+		cout << "                                                                       ;d0KKNNNNNNNNNXKKkc,        \n";
+		cout << "                                                                      xd:kKoxNWWWWWWWNNXKxc,       \n";
+		cout << "                                                                     :x0c dO.:XMWWWNXxcc:,l0x:     \n";
+		cout << "                                                                     l0Ko,k0:lNWWWM0ld00d.;0Ol     \n";
+		cout << "                                                                     lOO0KK0KK0XWWWWXNN0o;o0o,     \n";
+		cout << "                                                                     lx:lxlcdo:kWWWWWWNxdKX00d     \n";
+		cout << "                                                                     lx:,;;;;,;kNWWWWWWWWNX00d     \n";
+		cout << "                                                                     ,:ol;;;;;:cxXWWWWWWWWNX0d     \n";
+		cout << "                                                                      oocdxloOdl0WWWWWNXX0xc,      \n";
+		cout << "                                                                        ;loxOKKK0KXXXXKkodc,       \n";
+		cout << "                                                                           'clclccllcll,           \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 7 BOO    HP:  " << stats[1] << "\n";
 
 	}
 	//bosses
 	else if (enemySignature == 8) {
+		cout << "                                                                                  ..                                  \n";
+		cout << "                                                                                 .ld;.     'cc;.                      \n";
+		cout << "                                                                                .co:;;'...:dxdl,.                     \n";
+		cout << "                                                                                .:l;,cc:;;:cclc,.                     \n";
+		cout << "                                                                              .lkkdx0KOkxo:;;;'.                      \n";
+		cout << "                                                                             .'ldc;oOk0KKOxl;,,.                      \n";
+		cout << "                                                                          .',;llc;:llodddol:,..                       \n";
+		cout << "                                                                         .''..':lodxdlc::ccc,.                        \n";
+		cout << "                                                                        .;......,cxO0kdoool:'.                        \n";
+		cout << "                                                                        .;.......:dkkxolodoc,.                        \n";
+		cout << "                                                                        .;'.....':oddolc:::;'                         \n";
+		cout << "                                                                         .;;''';:cc::,'''''.                          \n";
+		cout << "                                                                           ..,;;;,'.'''',,.                           \n";
+		cout << "                                                                              ...'.',;;;,'                            \n";
+		cout << "                                                                               .;ccclc;.                              \n";
+		cout << "                                                                             .,lddolcc,.                              \n";
+		cout << "                                                                        .'...:lol:;::c;.                              \n";
+		cout << "                                                                         .;,':ddc;:ccc;'..                            \n";
+		cout << "                                                                          .:k00dc;;,'''''..,,.                        \n";
+		cout << "                                                                           :0NWN0xl:'.',,,;;.                         \n";
+		cout << "                                                                          .;xKWWNKxc;:odol:.                          \n";
+		cout << "                                                                          ';;lkK0k:':dkxoc'                           \n";
+		cout << "                                                                          'c:;cool:,:lool:.                           \n";
+		cout << "                                                                           ';,''..',,'.....                           \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 5 BIRDO      HP:  " << stats[1] << "\n";
+	}
+	else if (enemySignature == 9)
+    {           
+                                                       
+		cout << "                                                                                                                      .,;,,;;,.          \n";
+		cout << "                                                                                                                  .,cdkO0KXXK0d.         \n";
+		cout << "                                                                                                              .':ok00KKKXNNNXKOo.        \n";
+		cout << "                                                                                                        ..;:coO0O000KXNNWNXNNX0Oo.       \n";
+		cout << "                                                                                                  .';ldkO0XXKKKK00KKXWWNXNNNNXK0kl.      \n";
+		cout << "                                                                                             .,:lxOKKXXXXXXXK0OO0KXXXXNNNNNXXKKKOkl.     \n";
+		cout << "                                                                                           'lkOOOOO00KK0OO00kxO0000XNNNNNXXXXKK0Oko,     \n";
+		cout << "                                                                                          .lxxdlllloxkkkkkkddxO0K0KXNXXXXXXXKKK0Okxl.    \n";
+		cout << "                                                                                          .lxoc;,'..',;::ccccoxkO00KKXKKKKKKK00OOkxd:.   \n";
+		cout << "                                                                                           .,:;'.............';:coxkO000000000OOOkxxo.   \n";
+		cout << "                                                                                             ....;oxdc'        ..';coxkOOOOOOOOkxxxdo:.  \n";
+		cout << "                                                                                             .  ,dKNXk:.          ..':odxxxxxxxxxddooc.  \n";
+		cout << "                                                                                            .   .;okdc'      .':c:'...,:lodddddddooool;. \n";
+		cout << "                                                                                           ..    ..''..     .,dKNKd,. ..,:looooooooolll' \n";
+		cout << "                                                                                         .,;,....';:;'..     'oOKOo,.   .',:cllllllllcc. \n";
+		cout << "                                                                                       .,ckkd:',:llc:;'...    .','.    ..;:;;;::cccccc:. \n";
+		cout << "                                                                                      .dkxddo;;cllc::;,.....         ..:oxdl:;,',,;;;,.  \n";
+		cout << "                                                                                      .codxko;;locc::;,',;loc;'.....,:oOK0kdlc:,,'..     \n";
+		cout << "                                                                                    .':c::cl:,':llcc:;';:ldkO0OkxddxkOK0Oxolccc::'       \n";
+		cout << "                                                                             ......,;;;;;;:;,,,,:c:;;;;lddxddxxxk0K0Okkxolccllc:,        \n";
+		cout << "                                                                          .,:clllllllc:::c;'.....'',:lodddddxxxxxxxxdoooooooolc'         \n";
+		cout << "                                                                       .';:::c:::c:cccccclc:;,,',;;;;:cllodddooddxxxxdddoollc,.          \n";
+		cout << "                                                                       ,,;:;::;;;;;:cclllllllllc::c:;'..',:codxdoollcccc:::,.            \n";
+		cout << "                                                                       .'.''''''',;:::::::::ccllllllcc;,;;:;;;lxxollc:;,'..              \n";
+		cout << "                                                                       ,;,,.......';;;::;;:cccllllllllc;',::,.':cllc:;'..                \n";
+		cout << "                                                                       ..,;;;:,..,'.'..',;::::::;::::;'.  ..  ..,::,...                  \n";
+		cout << "                                                                          ......,;;,,''''',;,;,,''''..         .''.                      \n";
+		cout << "                                                                                ..,;;:;,'...                  .                          \n";
+		cout << fixed << setprecision(2) << "                                                   Lvl: 8 MECHA BLOOPER HP:  " << stats[1] << "\n";
 
 	}
-	else if (enemySignature == 9) {
+	else if (enemySignature == 10) 
+    {           
+		cout << "                                                                            .,'.      .lkc.       .',.                       \n";
+		cout << "                                                                             ..:l;. 'lllclod,   :dc..                        \n";
+		cout << "                                                                              .o0x:;d0Ol,lKXx::ckXx.                         \n";
+		cout << "                                                                              .cxkO0KXKo:oKXXXXX0Oo.                         \n";
+		cout << "                                                                                .;k0KXXK0KXXXXX0:..                          \n";
+		cout << "                                                                                 .',,;;;;;;;;;;,.                            \n";
+		cout << "                                                                                 .:ccccccccccccccc,                          \n";
+		cout << "                                                                            .....lNMMMMMMMMMMMMMMM0;.....                    \n";
+		cout << "                                                                           .oXNXXNWMMMMMMMMMMMMMMMWNXNNK;                    \n";
+		cout << "                                                                         'xOXWMMMMMMMMMMMMMMMMMMMMMMMMMW0ko.                 \n";
+		cout << "                                                                         ;XWXO0NMN0OXMMMMMMMMMMMMMMMMMMMMMO.                 \n";
+		cout << "                                                                       .'lXWk;c0M0c,kWMMMMMMMMMWXKKKKNMMMM0:..               \n";
+		cout << "                                                                      .xNNWWk;cKM0c;kWMMMMMMMWWXc....dWMMMWNNo               \n";
+		cout << "                                                                      .OMMMWN0KNWNK0XWMMMMMMk;;:dkkkkd:lKMMMWo               \n";
+		cout << "                                                                      .OMNOkKWW0k0NWKkONMMMMOcco0MMMWo .OMMMWo               \n";
+		cout << "                                                                      .OM0c;d0Ol,lO0d;c0WMMMMMMMMMNK0o':0MMMWx'.             \n";
+		cout << "                                                                      .OM0c,,;;,,,;;;,c0WMMMMMMMMMO'.dXNWMMMMWN0,            \n";
+		cout << "                                                                      .OW0c,,,,,,,,,,,c0WMMMMMMMMMNOkXMMMMMMMMMX;            \n";
+		cout << "                                                                      .:dxxdc,,,,,,,,,;okKWMMMMMMMMMMMMMMMMMMMMX;            \n";
+		cout << "                                                                         'kKd;,;;;;;:lc;,oNMMMMMMMMMMMMMMMMMMNKO,            \n";
+		cout << "                                                                          .;;;;;;;;;xNKo;dNMMMMMMMMMMMMMMWWWWx..             \n";
+		cout << "                                                                          .,;;;;,lO0XWWX0XWMMMMMMMMMMMMNd;;;;.               \n";
+		cout << "                                                                        ..';;;;;,:ooooxXMMMMMMMMMMXxoool.                    \n";
+		cout << "                                                                       .';;;;;;;;.    .dK000K0000Kd.                         \n";
+		cout << "                                                                       .,;;;;;,,..     ............                          \n";
+		cout << "                                                                       .';,;,;'                                              \n";
+		cout << "                                                                         .....                                               \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 11 KING BOO  HP:  " << stats[1] << "\n";
+    
+	   
+    }
 
-	}
-	else if (enemySignature == 10) {
 
-	}
+
+
 }
 
 
 void BattleMechanics::PrintEnemyIdle()
 {
 	if (enemySignature == 0)
-	{          //"               " space to take out and add
+	{         //"                " space to take out and add
 		cout << "                                                          .;ccccc,  ........            \n";
 		cout << "                                                         ;kNMMMMMKx;...'''''....        \n";
 		cout << "                                                        .xNXWMWXXNWo............        \n";
@@ -632,7 +987,7 @@ void BattleMechanics::PrintEnemyIdle()
 
 	}
 	else if (enemySignature == 2)
-	{
+	{           
  		cout << "                                                                    .                     \n";
 		cout << "                                                                   ....                   \n";
 		cout << "                                                        .          .....                  \n";
@@ -653,36 +1008,209 @@ void BattleMechanics::PrintEnemyIdle()
 
 	}
 	else if (enemySignature == 3)
-	{
+	{           //"                                                       "
+		cout << "                                                              ........                     \n";
+		cout << "                                                              .cxOOOOOc''..                \n";
+		cout << "                                                               .:xxxxxxxxxd:'.             \n";
+		cout << "                                                          .'..;dddlccccccccod,             \n";
+		cout << "                                                        .'dN0d0WWW0dlcccccccc'..'''''.     \n";
+		cout << "                                                        ;XXKXWNKNWMWkccccccccld0WWWWNd'.   \n";
+		cout << "                                                        :XOckWOckWMWkccccccld0WMMMMMMWNc   \n";
+		cout << "                                                        :X0x0WKx0WMWkccccld0WMMMMMMMW0d'   \n";
+		cout << "                                                        .o0WXKXWMMN0dcc:ckWMMMMMMMMMN:     \n";
+		cout << "                                                        ..oXOdk0K0xccc::cd0K0000KKKK0c.    \n";
+		cout << "                                                        .coxOOxolccccccccccccccccccodkk;   \n";
+		cout << "                                                          .'cxOOxolccccccccccccccccdO0O;   \n";
+		cout << "                                                            .:dO0OkxxdoccccccccccccdOxl.   \n";
+		cout << "                                                           .:ox000XWWW0xdlcccccccloxO:     \n";
+		cout << "                                                          .cxKKKKXNMMMMWW0xddo:;,lOxc.     \n";
+		cout << "                                                            'ddd0WMMMMMMMMW0dc'. .c.       \n";
+		cout << "                                                                'oddddddddo'               \n";
+		cout << fixed << setprecision(2) << "                                                 Lvl: 3 CHEEP CHEEP   HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 4)
 	{
+		cout << "                                                                   .lkkkkkkkkkkl.              \n";
+		cout << "                                                                  .l0WMMMMMMMMMMW0l.           \n";
+		cout << "                                                                .c0MMMMMMMMMMMMMMMM0c.         \n";
+		cout << "                                                              .c0WMMMMMMMMMMMMMMMMMMW0c.       \n";
+		cout << "                                                            .lOWMMMMMMMMMMMMMMMMMMMMMMNOl.     \n";
+		cout << "                                                            dWMMMMMWWWWWWWWWWWWWWWWMMMMMWd     \n";
+		cout << "                                                           .dMMMWKo:llll:;;;;:llll:oKWMMMd.    \n";
+		cout << "                                                            :ONM0; ,kxxO;    ;Oxxk, ;0MNO:     \n";
+		cout << "                                                             .cKO' ;KOkK:    :KkOK; 'OKc.      \n";
+		cout << "                                                               dNO:,cool,....,looc,:ONd        \n";
+		cout << "                                                               dMMNKKKKXXXXXXXXKKKKNMMd        \n";
+		cout << "                                                             .c0MMMMMMMMMMMMMMMMMMMMMM0c.      \n";
+		cout << "                                                         ;kkk0NMMMMMMMMMMMMMMMMMMMMMMMMN0kkk;  \n";
+		cout << "                                                         :kkk0NMMMMMMMMMMMMMMMMMMMMMMMMN0kkk:  \n";
+		cout << "                                                             .cKMMMMMMMMMMMMMMMMMMMMMM0c.      \n";
+		cout << "                                                             .oXWKol0WMMMWXXWMMMW0loKWXo.      \n";
+		cout << "                                                             .oOo'  'kMWKl,,lKWMk'  'oOo.      \n";
+		cout << "                                                                    .xMX:    :XMx.             \n";
+		cout << "                                                                     .;,.    .,;.              \n";
+		cout << fixed << setprecision(2) << "                                                      Lvl: 4 BLOOPER HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 5)
-	{
+	{           
+		cout << "                                                                     ..        ..                                  \n";
+		cout << "                                                                ..  .'c;  ;::cc:'   ..                             \n";
+		cout << "                                                              ...    .:cc:  coc;.                                  \n";
+		cout << "                                                             ...   .'. .okc'           .                           \n";
+		cout << "                                                              .....dKl..lxoll,      ....                           \n";
+		cout << "                                                             ...,ox0X0Oo'....     .co,...                          \n";
+		cout << "                                                         ..  .;cokOKXd;;:cccc,    .okoc;.....                      \n";
+		cout << "                                                       ..,;;;:dOkkOKXl .oOkkOl.   .cxkOd:;;;,..                    \n";
+		cout << "                                                      .. :OkkOkkkkO00o';dkkkkd,...'  coxkOOO: ..                   \n";
+		cout << "                                                      .. :kkkkOOkddddddddddddddoooooc;   lxO: ..                   \n";
+		cout << "                                                      .. :kkkO0Kd....................dXkl:    ..                   \n";
+		cout << "                                                       ....:xOKXOolllllllllllllllllloOXKOd' ...                    \n";
+		cout << "                                                         . .;;:::;;;;;;;;;;;;;;;;,;;;:::;;. .                      \n";
+		cout << "                                                           ..  ..  ';;;;;;;;;;;,.  .     ..                        \n";
+		cout << "                                                              ....'xXXXXXXXXXXXKl.'. ......                        \n";
+		cout << "                                                             .. ,ox0XXXXXXXXXXXX0Oo.      ....                     \n";
+		cout << "                                                       .',.      ,.,d00XXXXXXXXXKl..       ;o;...                  \n";
+		cout << "                                                      ...,c'       .,lO00000000O;         .,. ..                   \n";
+		cout << "                                                      .. ':'         .:clcccccc:.             ..                   \n";
+		cout << fixed << setprecision(2) << "                                                           Lvl: 5 GOOMBA      HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 6)
-	{
+	{           
+		cout << "                                                         ,kOl.                             \n";
+		cout << "                                                        'xNMk.                             \n";
+		cout << "                                                       .:OWMk.',                           \n";
+		cout << "                                                         cNMk'lOo'                         \n";
+		cout << "                                                       ..dNMXkk0Oc.                        \n";
+		cout << "                                                      .;l0WNX0000c.                        \n";
+		cout << "                                                      :kodK0O00kl.                         \n";
+		cout << "                                                      :OOo,,ckOo'.  ..;cc;.                \n";
+		cout << "                                                      ,l,   ,xc;kc .:c;cc;c:.              \n";
+		cout << "                                                           'ok;,Ko .lo;;;:oo;.             \n";
+		cout << "                                                         .lkxclol::;;;:oo:;:o;             \n";
+		cout << "                                                       .;oxOo.dO'.;;;lxxxdl;;.             \n";
+		cout << "                                                         ..do.dO',do:;cddc;:l,             \n";
+		cout << "                                                           ,,.dO,,ddxl;;;:lxd;             \n";
+		cout << "                                                             .dNOc';lc,;;,cl,.             \n";
+		cout << "                                                             .cKNk;;::;::;::,.             \n";
+		cout << "                                                            .,.'ldoxKWNNNNWWNl             \n";
+		cout << "                                                          .,dOdlc' .;ccllllll'             \n";
+		cout << "                                                         'oxxxxkx;.   .;cccll,             \n";
+		cout << "                                                         .........     .......             \n";
+		cout << fixed << setprecision(2) << "                                                     Lvl: 6 KOOPA    HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 7)
 	{
+		cout << "                                                          ;,ck0OOO0O0Oo;;;          \n";
+		cout << "                                                        ;d0KKNNNNNNNNNXKKkc,        \n";
+		cout << "                                                       xd:kKoxNWWWWWWWNNXKxc,       \n";
+		cout << "                                                      :x0c dO.:XMWWWNXxcc:,l0x:     \n";
+		cout << "                                                      l0Ko,k0:lNWWWM0ld00d.;0Ol     \n";
+		cout << "                                                      lOO0KK0KK0XWWWWXNN0o;o0o,     \n";
+		cout << "                                                      lx:lxlcdo:kWWWWWWNxdKX00d     \n";
+		cout << "                                                      lx:,;;;;,;kNWWWWWWWWNX00d     \n";
+		cout << "                                                      ,:ol;;;;;:cxXWWWWWWWWNX0d     \n";
+		cout << "                                                       oocdxloOdl0WWWWWNXX0xc,      \n";
+		cout << "                                                         ;loxOKKK0KXXXXKkodc,       \n";
+		cout << "                                                            'clclccllcll,           \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 7 BOO    HP:  " << stats[1] << "\n";
 
 	}
 	//bosses
 	else if (enemySignature == 8)
-	{
-
+	{          
+		cout << "                                                                 ..                                  \n";
+		cout << "                                                                .ld;.     'cc;.                      \n";
+		cout << "                                                               .co:;;'...:dxdl,.                     \n";
+		cout << "                                                               .:l;,cc:;;:cclc,.                     \n";
+		cout << "                                                             .lkkdx0KOkxo:;;;'.                      \n";
+		cout << "                                                            .'ldc;oOk0KKOxl;,,.                      \n";
+		cout << "                                                         .',;llc;:llodddol:,..                       \n";
+		cout << "                                                        .''..':lodxdlc::ccc,.                        \n";
+		cout << "                                                       .;......,cxO0kdoool:'.                        \n";
+		cout << "                                                       .;.......:dkkxolodoc,.                        \n";
+		cout << "                                                       .;'.....':oddolc:::;'                         \n";
+		cout << "                                                        .;;''';:cc::,'''''.                          \n";
+		cout << "                                                          ..,;;;,'.'''',,.                           \n";
+		cout << "                                                             ...'.',;;;,'                            \n";
+		cout << "                                                              .;ccclc;.                              \n";
+		cout << "                                                            .,lddolcc,.                              \n";
+		cout << "                                                       .'...:lol:;::c;.                              \n";
+		cout << "                                                        .;,':ddc;:ccc;'..                            \n";
+		cout << "                                                         .:k00dc;;,'''''..,,.                        \n";
+		cout << "                                                          :0NWN0xl:'.',,,;;.                         \n";
+		cout << "                                                         .;xKWWNKxc;:odol:.                          \n";
+		cout << "                                                         ';;lkK0k:':dkxoc'                           \n";
+		cout << "                                                         'c:;cool:,:lool:.                           \n";
+		cout << "                                                          ';,''..',,'.....                           \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 5 BIRDO      HP:  " << stats[1] << "\n";
 	}
 	else if (enemySignature == 9)
 	{
+	cout << "                                                                                                      .,;,,;;,.          \n";
+	cout << "                                                                                                  .,cdkO0KXXK0d.         \n";
+	cout << "                                                                                              .':ok00KKKXNNNXKOo.        \n";
+	cout << "                                                                                        ..;:coO0O000KXNNWNXNNX0Oo.       \n";
+	cout << "                                                                                  .';ldkO0XXKKKK00KKXWWNXNNNNXK0kl.      \n";
+	cout << "                                                                             .,:lxOKKXXXXXXXK0OO0KXXXXNNNNNXXKKKOkl.     \n";
+	cout << "                                                                           'lkOOOOO00KK0OO00kxO0000XNNNNNXXXXKK0Oko,     \n";
+	cout << "                                                                          .lxxdlllloxkkkkkkddxO0K0KXNXXXXXXXKKK0Okxl.    \n";
+	cout << "                                                                          .lxoc;,'..',;::ccccoxkO00KKXKKKKKKK00OOkxd:.   \n";
+	cout << "                                                                           .,:;'.............';:coxkO000000000OOOkxxo.   \n";
+	cout << "                                                                             ....;oxdc'        ..';coxkOOOOOOOOkxxxdo:.  \n";
+	cout << "                                                                             .  ,dKNXk:.          ..':odxxxxxxxxxddooc.  \n";
+	cout << "                                                                            .   .;okdc'      .':c:'...,:lodddddddooool;. \n";
+	cout << "                                                                           ..    ..''..     .,dKNKd,. ..,:looooooooolll' \n";
+	cout << "                                                                         .,;,....';:;'..     'oOKOo,.   .',:cllllllllcc. \n";
+	cout << "                                                                       .,ckkd:',:llc:;'...    .','.    ..;:;;;::cccccc:. \n";
+	cout << "                                                                      .dkxddo;;cllc::;,.....         ..:oxdl:;,',,;;;,.  \n";
+	cout << "                                                                      .codxko;;locc::;,',;loc;'.....,:oOK0kdlc:,,'..     \n";
+	cout << "                                                                    .':c::cl:,':llcc:;';:ldkO0OkxddxkOK0Oxolccc::'       \n";
+	cout << "                                                             ......,;;;;;;:;,,,,:c:;;;;lddxddxxxk0K0Okkxolccllc:,        \n";
+	cout << "                                                          .,:clllllllc:::c;'.....'',:lodddddxxxxxxxxdoooooooolc'         \n";
+	cout << "                                                       .';:::c:::c:cccccclc:;,,',;;;;:cllodddooddxxxxdddoollc,.          \n";
+	cout << "                                                       ,,;:;::;;;;;:cclllllllllc::c:;'..',:codxdoollcccc:::,.            \n";
+	cout << "                                                       .'.''''''',;:::::::::ccllllllcc;,;;:;;;lxxollc:;,'..              \n";
+	cout << "                                                       ,;,,.......';;;::;;:cccllllllllc;',::,.':cllc:;'..                \n";
+	cout << "                                                       ..,;;;:,..,'.'..',;::::::;::::;'.  ..  ..,::,...                  \n";
+	cout << "                                                          ......,;;,,''''',;,;,,''''..         .''.                      \n";
+	cout << "                                                                ..,;;:;,'...                  .                          \n";
+	cout << fixed << setprecision(2) << "                                                   Lvl: 8 MECHA BLOOPER HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 10)
-	{
+	{         
+		cout << "                                                             .,'.      .lkc.       .',.                       \n";
+		cout << "                                                              ..:l;. 'lllclod,   :dc..                        \n";
+		cout << "                                                               .o0x:;d0Ol,lKXx::ckXx.                         \n";
+		cout << "                                                               .cxkO0KXKo:oKXXXXX0Oo.                         \n";
+		cout << "                                                                 .;k0KXXK0KXXXXX0:..                          \n";
+		cout << "                                                                  .',,;;;;;;;;;;,.                            \n";
+		cout << "                                                                  .:ccccccccccccccc,                          \n";
+		cout << "                                                             .....lNMMMMMMMMMMMMMMM0;.....                    \n";
+		cout << "                                                            .oXNXXNWMMMMMMMMMMMMMMMWNXNNK;                    \n";
+		cout << "                                                          'xOXWMMMMMMMMMMMMMMMMMMMMMMMMMW0ko.                 \n";
+		cout << "                                                          ;XWXO0NMN0OXMMMMMMMMMMMMMMMMMMMMMO.                 \n";
+		cout << "                                                        .'lXWk;c0M0c,kWMMMMMMMMMWXKKKKNMMMM0:..               \n";
+		cout << "                                                       .xNNWWk;cKM0c;kWMMMMMMMWWXc....dWMMMWNNo               \n";
+		cout << "                                                       .OMMMWN0KNWNK0XWMMMMMMk;;:dkkkkd:lKMMMWo               \n";
+		cout << "                                                       .OMNOkKWW0k0NWKkONMMMMOcco0MMMWo .OMMMWo               \n";
+		cout << "                                                       .OM0c;d0Ol,lO0d;c0WMMMMMMMMMNK0o':0MMMWx'.             \n";
+		cout << "                                                       .OM0c,,;;,,,;;;,c0WMMMMMMMMMO'.dXNWMMMMWN0,            \n";
+		cout << "                                                       .OW0c,,,,,,,,,,,c0WMMMMMMMMMNOkXMMMMMMMMMX;            \n";
+		cout << "                                                       .:dxxdc,,,,,,,,,;okKWMMMMMMMMMMMMMMMMMMMMX;            \n";
+		cout << "                                                          'kKd;,;;;;;:lc;,oNMMMMMMMMMMMMMMMMMMNKO,            \n";
+		cout << "                                                           .;;;;;;;;;xNKo;dNMMMMMMMMMMMMMMWWWWx..             \n";
+		cout << "                                                           .,;;;;,lO0XWWX0XWMMMMMMMMMMMMNd;;;;.               \n";
+		cout << "                                                         ..';;;;;,:ooooxXMMMMMMMMMMXxoool.                    \n";
+		cout << "                                                        .';;;;;;;;.    .dK000K0000Kd.                         \n";
+		cout << "                                                        .,;;;;;,,..     ............                          \n";
+		cout << "                                                        .';,;,;'                                              \n";
+		cout << "                                                          .....                                               \n";
+		cout << fixed << setprecision(2) << "                                                       Lvl: 11 KING BOO  HP:  " << stats[1] << "\n";
 
 	}
 }
