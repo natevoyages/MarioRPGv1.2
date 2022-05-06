@@ -840,7 +840,7 @@ void OverWorld::CollisonLogic()
     }
 }
  // Map setups
-void OverWorld::NewGameHomeSetup(char charCharacter, string character, int hp, int power, int jump, int flwrPwr, int speed, int defense)  //used for newGame
+void OverWorld::NewGameHomeSetup(char charCharacter, string character, int hp, int power, int jump, int flwrPwr, int speed, int defense, double battleHP, int mp, int battleMP)  //used for newGame
 {
     exitMap = false;
     southOpen = true;
@@ -865,6 +865,9 @@ void OverWorld::NewGameHomeSetup(char charCharacter, string character, int hp, i
     stringCharacter = character;
     userLevel = 3;
     userHealthPoints = hp;
+    userBattleHP = battleHP;
+    userMagicPoints = mp;
+    userBattleMP = battleMP;
     userPower = power;
     userJump = jump;
     userFlowerPower = flwrPwr;

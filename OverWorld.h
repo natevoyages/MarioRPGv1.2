@@ -40,7 +40,7 @@ public:
 
 	void HomeSetup();
 
-	void NewGameHomeSetup(char charCharacter, string character, int hp, int power, int jump, int flwrPwr,int speed, int defense);
+	void NewGameHomeSetup(char charCharacter, string character, int hp, int power, int jump, int flwrPwr,int speed, int defense, double battleHP, int mp, int battleMP);
 
 	void DesertOneSetup();
 
