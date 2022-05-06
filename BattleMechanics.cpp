@@ -38,7 +38,86 @@ void BattleMechanics::BossBattleSetUp(int& bossesBeaten)
 		LoadKingBoo();
 		enemySignature = 10;
 	}
-	enemySignature = -1;
+
+	
+}
+void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
+	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState)
+{
+
+	bool playerFirst = false;
+	bool win = false;
+	bool escape = false;
+
+	BossBattleSetUp(bossesBeaten);
+	SpeedsterGoesFirst(userSpeed, playerFirst);
+	if (!playerFirst) {
+		while (battleState)
+		{
+			Sleep(500);
+			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
+			Sleep(500);
+			PlayerTurn(userBattleHP, userBattleMP, userPower,
+				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints);
+			if (userBattleHP == 0)
+			{
+				win = false;
+				battleState = false;
+			}
+			else if (stats[1] == 0)
+			{
+				win = true;
+				battleState = false;
+			}
+			else if (escape)
+			{
+				battleState = false;
+			}
+		}
+	}
+	else
+	{
+		while (battleState)
+		{
+			Sleep(500);
+			PlayerTurn(userBattleHP, userBattleMP, userPower,
+				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints);
+			Sleep(500);
+			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
+			Sleep(500);
+			if (userBattleHP == 0)
+			{
+				win = false;
+				battleState = false;
+			}
+			else if (stats[1] == 0)
+			{
+				win = true;
+				battleState = false;
+			}
+			else if (escape)
+			{
+				battleState = false;
+			}
+		}
+	}
+	SetBattleTrigger();
+	if (!win && !escape) {
+		notGameOver = false;
+	}
+	else if (win)
+	{// 7 and 10 are xp and coins respectfully
+		userXP = userXP + static_cast<int>(stats[7]);
+		userCoins = userCoins + static_cast<int>(stats[10]);
+		bossesBeaten++;
+		cout << "\n\n\n\n\n\n\n\                        YOU WIN !\n\n";
+		cout << "                        Gained :\n";
+		cout << "                        " << static_cast<int>(stats[7]) << " XP \n";
+		cout << "                        " << static_cast<int>(stats[10]) << " Coins\n";
+		Sleep(5000);
+	}
+		
+
 }
 
 void BattleMechanics::BattleSetUp(int map)

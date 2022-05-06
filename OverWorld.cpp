@@ -824,10 +824,19 @@ void OverWorld::CollisonLogic()
 
     else if ((xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) || (xCoordinate == (bossXCoordinate + 1) && yCoordinate == bossYCoordinate))// add second set of coordinates
     {
-        //BossBattle();                                                                              // fix me
-        system("cls");
-        cout << "BOSS BATTLEEEEE";
-            Sleep(1000);
+        bool battleState = true;
+
+            while (battleState)
+            {
+                battle.BossBattleTriggered(bossesBeaten, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState);
+            }
+            bossXCoordinate = 0;
+            bossYCoordinate = -1;
+            saveXCoordinate = width / 2;
+            saveYCoordinate = height / 2;
+            xCoordinate = prevXCoordinate;
+            yCoordinate = prevYCoordinate;
     }
 
     else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )
@@ -1153,8 +1162,8 @@ void OverWorld::CastleTwoSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    saveXCoordinate = 10;
-    saveYCoordinate = 10;
+    saveXCoordinate = 0;
+    saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
     bossXCoordinate = 0;
@@ -1193,7 +1202,6 @@ void OverWorld::CastleThreeSetup()
         saveYCoordinate = height /2;
     }
 }
-
 
 void OverWorld::PrintDesert()
 {

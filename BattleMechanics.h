@@ -21,6 +21,9 @@ public:
 
 	void BossBattleSetUp(int& bossesBeaten);
 
+	void BossBattleTriggered(int& bossesBeaten, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
+		double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState);
+
 	void BattleSetUp(int map);
 
 	void UserAttackAnimation(char userChar, double damage, double battleHP, int battleMP, int HP, int MP);
