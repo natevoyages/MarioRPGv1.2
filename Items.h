@@ -17,33 +17,35 @@ public:
 
 	void PrintMenuItems();
 
-	void BattleItemMenuLogic();
+	void PrintBattleItemMenuLogic();
 
-	void OverWorldMenuItemLogic();
+	void PrintOverWorldMenuItemLogic();
 
-	void UseRedMushroom();
+	void ShopMenu(int& coins);
 
-	void UseMegaRedMushroom();
+	void UseRedMushroom(double& battleHP, int hp);
 
-	void UseStarDust();
+	void UseMegaRedMushroom(double& battleHP, int hp);
 
-	void UseGreenMushroom();
+	void UseStarDust(int& battleMP, int mp);
 
-	void UseStar();
+	void UseGreenMushroom(int& hp);
 
-	void UsePowBlock();
+	void UseStar(int& coins);
 
-	void BuyRedMushroom();
+	void UsePowBlock(double& damage);
 
-	void BuyMegaRedMushroom();
+	void BuyRedMushroom(int& coins);
 
-	void BuyStarDust();
+	void BuyMegaRedMushroom(int& coins);
 
-	void BuyGreenMushroom();
+	void BuyStarDust(int& coins);
 
-	void BuyStar();
+	void BuyGreenMushroom(int& coins);
 
-	void BuyPowBlock();
+	void BuyStar(int& coins);
+
+	void BuyPowBlock(int& coins);
 
 
 
@@ -62,6 +64,7 @@ private:
 	int numOverWorldItemOptions;
 	string battleItemOptions[4];
 	string overworldItemOptions[6];
+	int yMenu;
 
 };
 #endif

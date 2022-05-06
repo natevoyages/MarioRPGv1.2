@@ -17,6 +17,7 @@ void Items::BattleTabSetUp()
 	battleItemOptions[1] = "	    	   MegaRdShrm:    ";
 	battleItemOptions[2] = "	    	   StarDust:      ";
 	battleItemOptions[3] = "	    	   POWBlk:        ";
+	yMenu = 0;
 }
 
 void Items::OverWorldSetUp()
@@ -28,6 +29,7 @@ void Items::OverWorldSetUp()
 	 overworldItemOptions[3] = "	    	   GreenShrm:     ";
 	 overworldItemOptions[4] = "	    	   Star:          ";
 	 overworldItemOptions[5] = "	    	   POWBlk:        ";
+	 yMenu = 0;
 	 
 
 }
@@ -50,108 +52,156 @@ void Items::PrintMenuItems()
 	cout << "	    	   Star:          " << star << "\n\n";
 	cout << "	    	   POWBlk:        " << powBlock << "\n\n";
 
-	cout << "	    	   Press 'z' to access inventory        \n\n";
+	cout << "	    	   Press 'z' to access inventory   Press 'x' = BACK     \n\n";
 
 }
 
-void Items::BattleItemMenuLogic()
+void Items::PrintBattleItemMenuLogic()
 {
+	system("cls");
+	cout << "\n\n\n\n";
+	cout << "	    	      _/_/_/  _/_/_/_/_/  _/_/_/_/  _/      _/    _/_/_/        \n";
+	cout << "	    	       _/        _/      _/        _/_/  _/_/  _/            _/ \n";
+	cout << "	    	      _/        _/      _/_/_/    _/  _/  _/    _/_/            \n";
+	cout << "	    	     _/        _/      _/        _/      _/        _/           \n";
+	cout << "	    	  _/_/_/      _/      _/_/_/_/  _/      _/  _/_/_/        _/    \n\n\n\n";
+
+	for(int i = 0; i < numBattleItemOptions; i++)
+	{
+		if (i == yMenu) 
+		{
+			cout << battleItemOptions[i] << "   [*]\n\n";
+		}
+		else 
+		{
+			cout << battleItemOptions[i] << "   [ ]\n\n";
+		}
+	}
+
+	cout << "	    	   Press 'z' = SELECT              Press 'x' = BACK     \n\n";
 }
 
-void Items::OverWorldMenuItemLogic()
+void Items::PrintOverWorldMenuItemLogic()
 {
+	system("cls");
+	cout << "\n\n\n\n";
+	cout << "	    	      _/_/_/  _/_/_/_/_/  _/_/_/_/  _/      _/    _/_/_/        \n";
+	cout << "	    	       _/        _/      _/        _/_/  _/_/  _/            _/ \n";
+	cout << "	    	      _/        _/      _/_/_/    _/  _/  _/    _/_/            \n";
+	cout << "	    	     _/        _/      _/        _/      _/        _/           \n";
+	cout << "	    	  _/_/_/      _/      _/_/_/_/  _/      _/  _/_/_/        _/    \n\n\n\n";
+
+	for (int i = 0; i < numBattleItemOptions; i++)
+	{
+		if (i == yMenu)
+		{
+			cout << overworldItemOptions[i] << "   [*]\n\n";
+		}
+		else
+		{
+			cout << overworldItemOptions[i] << "   [ ]\n\n";
+		}
+	}
+	cout << "	    	   Press 'z' = SELECT              Press 'x' = BACK     \n\n";
+}
+
+void Items::ShopMenu(int& coins) {
+
 }
 
 
-void Items::UseRedMushroom()
+void Items::UseRedMushroom(double& battleHP, int hp)
 {
 	redMushroom--;
-	/*if ((HP - battleHP) >= 15)
+	if ((hp - battleHP) >= 15)
 	{
 		battleHP += 15;
 	}
 	else
 	{
-		battleHP = HP;
-	}*/
+		battleHP = hp;
+	}
 }
 
-void Items::UseMegaRedMushroom()
+void Items::UseMegaRedMushroom(double& battleHP, int hp)
 {
 	megaRedMushroom--;
-	/*if ((HP - battleHP) >= 50)
-{
-	battleHP += 50;
-}
-else
-{
-	battleHP = HP;
-}*/
+	if ((hp - battleHP) >= 50)
+	{
+		battleHP += 50;
+	}
+	else
+	{
+		battleHP = hp;
+	}
 }
 
-void Items::UseStarDust()
+void Items::UseStarDust(int& battleMP, int mp)
 {
 	starDust--;
-	/*if ((MP - battleMP) >= 15)
-{
-	battleMP += 15;
-}
-else
-{
-	battleMP = MP;
-}*/
+	if ((mp - battleMP) >= 15) {
+		battleMP += 10;
+	}
+	else
+	{
+		battleMP = mp;
+	}
 }
 
-void Items::UseGreenMushroom()
+
+
+
+void Items::UseGreenMushroom(int& hp)
 {
 	greenMushroom--;
-	//HP++;
+	hp++;
 }
 
-void Items::UseStar()
+void Items::UseStar(int& stepCount)
 {
 	star--;
-	//stepCount -= 300;
+	stepCount = 0;
+	stepCount -= 300;
 }
 
-void Items::UsePowBlock()
+void Items::UsePowBlock(double& damage)
 {
 	powBlock--;
-	//damage = 50;
+	damage = 50.0;
 }
 
-void Items::BuyRedMushroom()
+void Items::BuyRedMushroom(int& coins)
 {
 	redMushroom++;
-	//coins -= 20;
+	coins -= 20;
 }
 
-void Items::BuyMegaRedMushroom()
+void Items::BuyMegaRedMushroom(int& coins)
 {
 	megaRedMushroom++;
-	//coins -= 100;
+	coins -= 100;
 }
 
-void Items::BuyStarDust()
+void Items::BuyStarDust(int& coins)
 {
 	starDust++;
-	//coins -= 40;
+	coins -= 40;
 }
 
-void Items::BuyGreenMushroom()
+void Items::BuyGreenMushroom(int& coins)
 {
 	greenMushroom++;
-	//coins -= 1500;
+	coins -= 1500;
 }
 
-void Items::BuyStar()
+void Items::BuyStar(int& coins)
 {
 	star++;
-	//coins -= 300
+	coins -= 300;
 }
 
-void Items::BuyPowBlock()
+void Items::BuyPowBlock(int& coins)
 {
 	powBlock++;
-	//coins -= 800
+	coins -= 500;
 }
