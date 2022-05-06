@@ -21,6 +21,26 @@ int BattleMechanics::GetBattleTrigger()
 	return stepTrigger;
 }
 
+void BattleMechanics::BossBattleSetUp(int& bossesBeaten)
+{
+	if (bossesBeaten == 0)
+	{
+		LoadBirdo();
+		enemySignature = 8;
+	}
+	else if (bossesBeaten == 1)
+	{
+		LoadMechaBlooper();
+		enemySignature = 9;
+	}
+	else if (bossesBeaten == 2)
+	{
+		LoadKingBoo();
+		enemySignature = 10;
+	}
+	enemySignature = -1;
+}
+
 void BattleMechanics::BattleSetUp(int map)
 {
 	if (map == 1 || map == 2)
@@ -134,7 +154,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		if (attackSelected)
 		{
-			UserAttackAnimation(userChar, damage, battleHP, userBattleMP,  userHP,  userMP);
+			UserAttackAnimation(userChar, damage, userBattleHP, userBattleMP,  userHP,  userMP);
 			stats[1] = stats[1] - damage;
 
 			if(stats[1] < 0)
@@ -147,7 +167,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		else if (spAttackSelected)
 		{
-			UserAttackAnimation(userChar, damage, battleHP, userBattleMP, userHP, userMP);
+			UserAttackAnimation(userChar, specialDamage, userBattleHP, userBattleMP, userHP, userMP);
 			stats[1] = stats[1] - specialDamage;
 			if (stats[1] < 0)
 			{
@@ -239,13 +259,13 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		notGameOver = false;
 	}
 	else if (win)
-	{
-		userXP = userXP + static_cast<int>(stats[8]);
-		userCoins = userCoins + static_cast<int>(stats[9]);
+	{// 7 and 10 are xp and coins respectfully
+		userXP = userXP + static_cast<int>(stats[7]);
+		userCoins = userCoins + static_cast<int>(stats[10]);
 		cout << "\n\n\n\n\n\n\n\                        YOU WIN !\n\n";
 		cout << "                        Gained :\n";
-		cout << "                        " << static_cast<int>(stats[7]) << "XP :\n";
-		cout << "                        " << static_cast<int>(stats[10]) << "Coins\n";
+		cout << "                        " << static_cast<int>(stats[7]) << " XP \n";
+		cout << "                        " << static_cast<int>(stats[10]) << " Coins\n";
 		Sleep(5000);
 	}
 
@@ -313,7 +333,7 @@ void BattleMechanics::EnemyBattleLogic()
 
 void BattleMechanics::LoadShyGuy()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = shyGuyStats[i];
 	}
@@ -321,7 +341,7 @@ void BattleMechanics::LoadShyGuy()
 
 void BattleMechanics::LoadDesertGoomba( )
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = desertGoombaStats[i];
 	}
@@ -329,49 +349,49 @@ void BattleMechanics::LoadDesertGoomba( )
 
 void BattleMechanics::LoadPokey()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = pokeyStats[i];
 	}
 }
 void BattleMechanics::LoadBirdo()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = birdoStats[i];
 	}
 }
 void BattleMechanics::LoadCheepCheep()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = cheepCheepStats[i];
 	}
 }
 void BattleMechanics::LoadBlooper()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = blooperStats[i];
 	}
 }
 void BattleMechanics::LoadMechaBlooper()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = mechaBlooperStats[i];
 	}
 }
 void BattleMechanics::LoadCastleGoomba()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = castleGoombaStats[i];
 	}
 }
 void BattleMechanics::LoadKoopaTroopa()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = koopaTroopaStats[i];
 	}
@@ -379,7 +399,7 @@ void BattleMechanics::LoadKoopaTroopa()
 
 void BattleMechanics::LoadBoo()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = booStats[i];
 	}
@@ -387,7 +407,7 @@ void BattleMechanics::LoadBoo()
 
 void BattleMechanics::LoadKingBoo()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 11; i++)
 	{
 		stats[i] = kingBooStats[i];
 	}

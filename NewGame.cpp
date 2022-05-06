@@ -131,7 +131,7 @@ void NewGame::CharacterSelect()
 		selectFlowerPower = flowerPower[2];
 		selectSpeed = speed[2];
 		selectDefense = defense[2];
-		selectBattleHP = static_cast<double>(healthPoints[1]);
+		selectBattleHP = static_cast<double>(healthPoints[2]);
 	}
 	magicPoints = 18;
 	battleMP = 18.0;

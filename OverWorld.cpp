@@ -81,7 +81,7 @@ void OverWorld::LoadGame()
     load.open("save.dat");
     if (!(load.fail())) {
         load >> bossesBeaten >> map >> userCharacter >> stringCharacter >> xCoordinate >> yCoordinate >> userLevel >> userHealthPoints >> userPower >> userJump >>
-            userFlowerPower >> userSpeed >> userDefense >> userEXP >> userCoins >> userStatPts >> userBattleHP >> userBattleHP >> userMagicPoints;
+            userFlowerPower >> userSpeed >> userDefense >> userEXP >> userCoins >> userStatPts >> userBattleHP >> userBattleMP >> userMagicPoints;
         load.close();
     }
     else
@@ -101,7 +101,7 @@ void OverWorld::SaveGame()
     save.open("save.dat");
     save << bossesBeaten << " " << map << " " << userCharacter << " " << stringCharacter << " " << prevXCoordinate << " " << prevYCoordinate
         << " " << userLevel << " " << userHealthPoints << " " << userPower << " " << userJump << " " << userFlowerPower << " "
-        <<  userSpeed << " " << userDefense << " " << userEXP << " " << userCoins << " " << userStatPts << " " << userBattleHP << " " << userBattleHP << " " << userMagicPoints;;
+        <<  userSpeed << " " << userDefense << " " << userEXP << " " << userCoins << " " << userStatPts << " " << userBattleHP << " " << userBattleMP << " " << userMagicPoints;
     save.close();
     for (int i = 0; i < 9; i++) 
     {
@@ -822,7 +822,7 @@ void OverWorld::CollisonLogic()
         BedRest();
     }
 
-    else if (xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate)// add second set of coordinates
+    else if ((xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) || (xCoordinate == (bossXCoordinate + 1) && yCoordinate == bossYCoordinate))// add second set of coordinates
     {
         //BossBattle();                                                                              // fix me
         system("cls");
@@ -979,11 +979,20 @@ void OverWorld::DesertThreeSetup()
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
-    bossXCoordinate = width / 2;
-    bossYCoordinate = 0;
+    bossXCoordinate = 0;
+    bossYCoordinate = -1;
     bedXCoordinate = 0;
     bedYCoordinate = -1;
     map = 3;
+    if (bossesBeaten == 0) {
+        bossXCoordinate = width / 2;
+        bossYCoordinate = 0;
+    }
+    else {
+        saveXCoordinate = width / 2;
+        saveYCoordinate = height / 2;
+    }
+
 }
 //  map 4
 void OverWorld::ShopOneSetup()
@@ -1072,12 +1081,20 @@ void OverWorld::SeaFloorThreeSetup()
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
-    shopKeepYCoordinate = -1;
+    shopKeepYCoordinate = -1;    
     bossXCoordinate = 0;
     bossYCoordinate = -1;
     bedXCoordinate = 0;
     bedYCoordinate = -1;
     map = 7;
+    if (bossesBeaten == 1) {
+        bossXCoordinate = width / 2;
+        bossYCoordinate = 0;
+    }
+    else {
+        saveXCoordinate = width / 2;
+        saveYCoordinate = height / 2;
+    }
 }
 // map 8
 void OverWorld::ShopTwoSetup()
@@ -1096,6 +1113,10 @@ void OverWorld::ShopTwoSetup()
     saveYCoordinate = 8;
     shopKeepXCoordinate = width / 2;
     shopKeepYCoordinate = height / 2;
+    bossXCoordinate = 0;
+    bossYCoordinate = -1;
+    bedXCoordinate = 0;
+    bedYCoordinate = -1;
     map = 8;
 }
 //map 9
@@ -1114,6 +1135,10 @@ void OverWorld::CastleOneSetup()
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    bossXCoordinate = 0;
+    bossYCoordinate = -1;
+    bedXCoordinate = 0;
+    bedYCoordinate = -1;
     map = 9;
 }
 //map 10
@@ -1132,6 +1157,10 @@ void OverWorld::CastleTwoSetup()
     saveYCoordinate = 10;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    bossXCoordinate = 0;
+    bossYCoordinate = -1;
+    bedXCoordinate = 0;
+    bedYCoordinate = -1;
     map = 10;
 }
 // map 11
@@ -1150,7 +1179,19 @@ void OverWorld::CastleThreeSetup()
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
+    bossXCoordinate = 0;
+    bossYCoordinate = -1;
+    bedXCoordinate = 0;
+    bedYCoordinate = -1;
     map = 11;
+    if(bossesBeaten == 2){
+        bossXCoordinate = width / 2;
+        bossYCoordinate = 0;
+    }
+    else {
+        saveXCoordinate = width /2;
+        saveYCoordinate = height /2;
+    }
 }
 
 

@@ -19,6 +19,8 @@ public:
 
 	int GetBattleTrigger();
 
+	void BossBattleSetUp(int& bossesBeaten);
+
 	void BattleSetUp(int map);
 
 	void UserAttackAnimation(char userChar, double damage, double battleHP, int battleMP, int HP, int MP);
@@ -125,8 +127,6 @@ private:
 	bool battleState;
 
 	bool enemyPowAttack;
-
-	double battleHP;
 
 	int enemySignature;
 

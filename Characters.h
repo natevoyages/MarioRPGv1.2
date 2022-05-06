@@ -14,17 +14,6 @@ public:
 	
 
 private:
-	string characterName;
-	char characterChar;
-	int level;
-	int power;
-	int jump;
-	int flowerPower;
-	int speed;
-	int defense;
-	int experiencePoints;
-	int coins;
-	int statPoints;
 
 };
 #endif
