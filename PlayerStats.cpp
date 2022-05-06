@@ -70,24 +70,29 @@ void PlayerStats::PrintStats()
 void PlayerStats::AddPowerPoint()
 {
 	power++;
+	statPoints--;
 }
 
 void PlayerStats::AddJumpPoint()
 {
 	jump++;
+	statPoints--;
 }
 
 void PlayerStats::AddFlowerPowerPoint()
 {
 	flowerPower++;
+	statPoints--;
 }
 
 void PlayerStats::AddSpeedPoint()
 {
 	speed++;
+	statPoints--;
 }
 
 void PlayerStats::AddDefensePoint()
 {
 	defense++;
+	statPoints--;
 }
