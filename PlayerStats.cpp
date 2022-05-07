@@ -196,4 +196,5 @@ void PlayerStats::UseGreenMushroom(int& greenMushroom)
 {
 	greenMushroom--;
 	healthPoints++;
+	battleHP = healthPoints;
 }

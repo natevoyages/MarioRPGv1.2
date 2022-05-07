@@ -61,15 +61,7 @@ void BattleMenu::PrintBattleMenu(bool& attackSelected, bool& spAttackSelected, b
 	}
 	if (select && yMenu == 2)
 	{
-		/*itemTabOpen = true;
-		itemMenu.SetUp();
-	    while(itemTabOpen)
-		{
-			system("cls");
-			menuInput.itempMenu();
 
-		}*/
-	
 		itemSelected = true;
 
 	}

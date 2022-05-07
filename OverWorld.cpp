@@ -198,7 +198,7 @@ void OverWorld::IfBattleEncounted()
         while (battleState)
         {
             battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState);
+                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items);
         }
         mapsInput.StepCountReset();
         Sleep(150);
@@ -902,7 +902,7 @@ void OverWorld::CollisonLogic()
             while (battleState)
             {
                 battle.BossBattleTriggered(bossesBeaten, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState);
+                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState,items);
             }
             bossXCoordinate = 0;
             bossYCoordinate = -1;

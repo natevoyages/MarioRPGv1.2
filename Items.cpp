@@ -3,11 +3,11 @@ using namespace std;
 Items::Items()
 {
 	redMushroom = 3;
-	megaRedMushroom = 0; 
-	starDust = 0;
-	greenMushroom = 0;
+	megaRedMushroom = 5; 
+	starDust = 5;
+	greenMushroom = 5;
 	star = 1;
-	powBlock = 0;
+	powBlock = 5;
 }
 
 void Items::BattleTabSetUp()
@@ -65,7 +65,7 @@ void Items::PrintMenuItems()
 
 }
 
-void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats)
+void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double& battleHP, int& battleMP, int userHP, int userMP, double& damage)
 {
 	system("cls");
 	cout << "\n\n\n\n";
@@ -145,9 +145,9 @@ void Items::PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, Play
 		{
 			playerStats.UseMegaRedMushroom(megaRedMushroom);
 			cout << "	    	   ITEM USED\n\n";
+		}
 			Sleep(600);
 			selectedItem = false;
-		}
 	}
 	if (yItemMenu == 2 && selectedItem)
 	{
@@ -157,15 +157,15 @@ void Items::PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, Play
 		}
 		else if (playerStats.GetPlayerBattleMP() == playerStats.GetPlayerMP())
 		{
-			cout << "	    	   HP FULL\n\n";
+			cout << "	    	   MP FULL\n\n";
 		}
 		else
 		{
 			playerStats.UseStarDust(starDust);
 			cout << "	    	   ITEM USED\n\n";
+		}
 			Sleep(600);
 			selectedItem = false;
-		}
 	}
 	if (yItemMenu == 3 && selectedItem)
 		{

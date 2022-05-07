@@ -18,7 +18,7 @@ public:
 
 	void PrintMenuItems();
 
-	void PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats);
+	void PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double& battleHP, int& battleMP, int userHP, int userMP, double& damage);
 
 	void PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats, int& menuStep);
 

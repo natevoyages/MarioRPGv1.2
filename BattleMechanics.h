@@ -22,7 +22,7 @@ public:
 	void BossBattleSetUp(int& bossesBeaten);
 
 	void BossBattleTriggered(int& bossesBeaten, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-		double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState);
+		double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items);
 
 	void BattleSetUp(int map);
 
@@ -31,10 +31,10 @@ public:
 	void EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense, char userChar, int userBattleMP, int userHP, int userMP);
 
 	void PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed,
-		double userDefense, int level, char userChar, int userHP, int userMP);
+		double userDefense, int level, char userChar, int userHP, int userMP, Items& battleItems);
 
 	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
-		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState);
+		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items);
 
 	void SpeedsterGoesFirst(int userSpeed, bool& playerFirst);
 
@@ -83,6 +83,8 @@ public:
 
 private:
 	BattleMenu menu;
+	
+	InputConfig battleInput;
 
 	// lvl = 0,hp = 1,pwr = 2,jp = 3,flw = 4,spd = 5,def = 6 ,xpdrop = 7, hitRate = 8, critRate = 9, coins = 10
 	double shyGuyStats[11]{1, 40, 8 , 5, 5, 5, 4, 5, 65, 15, 3};  //fix crit rates and coin drops

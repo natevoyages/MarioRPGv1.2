@@ -42,9 +42,9 @@ void BattleMechanics::BossBattleSetUp(int& bossesBeaten)
 	
 }
 void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState)
+	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items)
 {
-
+	Items battleItems = items;
 	bool playerFirst = false;
 	bool win = false;
 	bool escape = false;
@@ -58,7 +58,7 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
 			Sleep(500);
 			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints);
+				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems);
 			if (userBattleHP == 0)
 			{
 				win = false;
@@ -81,7 +81,7 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 		{
 			Sleep(500);
 			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints);
+				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems);
 			Sleep(500);
 			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
 			Sleep(500);
@@ -116,6 +116,7 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 		cout << "                        " << static_cast<int>(stats[10]) << " Coins\n";
 		Sleep(5000);
 	}
+	items = battleItems;
 		
 
 }
@@ -213,7 +214,7 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 }
 
 void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower,
-	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP) 
+	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP, Items& battleItems) 
 {
 	bool optionSelected = false;
 	if (userBattleHP != 0 && stats[1] != 0)   // int battleMP, int userHP, int userMP, double& userBattleHP
@@ -256,7 +257,22 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		else if (itemSelected)
 		{
-			//PrintItemMenu();
+			double battleHP = userBattleHP;  
+			int battleMP = userBattleMP;
+			int hp = userHP;
+			int mp = userMP;
+			double userDamage = damage;
+			int yMenu = 0;
+			bool optionSelected = false;
+			battleItems.BattleTabSetUp();
+			while(!optionSelected) 
+			{
+				battleInput.MenuInput();
+				//battleInput.ItemMenuInputLogic(yMenu, battleItems.GetNumOptions(), select, open, selectedItem, itemUse);         fix me
+				battleItems.PrintBattleItemMenuLogic(yMenu, optionSelected, battleHP, battleMP, hp, mp, damage);
+			}
+			
+			
 		}
 
 
@@ -275,8 +291,9 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 }
 
 void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState)
+	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items)
 {
+	Items battleItems = items;
 	bool playerFirst = false;
 	bool win = false;
 	bool escape = false;
@@ -290,7 +307,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
 			Sleep(500);
 			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				 userJump, userFlowerPower, userSpeed,  userDefense, userLevel, userChar, userHealthPoints, userMagicPoints);
+				 userJump, userFlowerPower, userSpeed,  userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems);
 			if (userBattleHP == 0)
 			{
 				win = false;
@@ -313,7 +330,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		{
 			Sleep(500);
 			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints);
+				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems);
 			Sleep(500);
 			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
 			Sleep(500);
