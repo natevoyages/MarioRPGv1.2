@@ -20,9 +20,11 @@ public:
 
 	void PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats);
 
-	void PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats);
+	void PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats, int& menuStep);
 
 	void ShopMenu(int& coins);
+
+	int GetNumOptions() const;
 
 	void UseStar(int& coins);
 

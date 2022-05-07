@@ -90,7 +90,7 @@ void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, PlayerS
 	cout << "	    	   Press 'z' = SELECT              Press 'x' = BACK     \n\n";
 }
 
-void Items::PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats)
+void Items::PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats, int& menuStep)
 {
 	system("cls");
 	cout << "\n\n\n\n";
@@ -127,56 +127,91 @@ void Items::PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, Play
 			playerStats.UseRedMushroom(redMushroom);
 			cout << "	    	   ITEM USED\n\n";
 		}
+		Sleep(600);
 		selectedItem = false;
 	}
 
 	if (yItemMenu == 1 && selectedItem)
 	{
-		if (overworldItemQuantity[0] == 0)
+		if (overworldItemQuantity[1] == 0)
 		{
 			cout << "	    	   You posses ZERO of this item\n\n";
+		}
+		else if (playerStats.GetPlayerBattleHP() == playerStats.GetPlayerHP())
+		{
+			cout << "	    	   HP FULL\n\n";
+		}
+		else
+		{
+			playerStats.UseMegaRedMushroom(megaRedMushroom);
+			cout << "	    	   ITEM USED\n\n";
+			Sleep(600);
+			selectedItem = false;
 		}
 	}
 	if (yItemMenu == 2 && selectedItem)
 	{
-		if (overworldItemQuantity[0] == 0)
+		if (overworldItemQuantity[2] == 0)
 		{
 			cout << "	    	   You posses ZERO of this item\n\n";
 		}
+		else if (playerStats.GetPlayerBattleMP() == playerStats.GetPlayerMP())
+		{
+			cout << "	    	   HP FULL\n\n";
+		}
+		else
+		{
+			playerStats.UseStarDust(starDust);
+			cout << "	    	   ITEM USED\n\n";
+			Sleep(600);
+			selectedItem = false;
+		}
 	}
-	/*else if (battleMP == magicPoints)
-	{
-		cout << "	    	   MP FULL\n\n";                      //fix me
-	}
-	else
-	{
-		playerStats.UseRedMushroom(redMushroom);
-		cout << "	    	   ITEM USED\n\n";
-	}*/
 	if (yItemMenu == 3 && selectedItem)
-	{
-		if (overworldItemQuantity[0] == 0)
 		{
-			cout << "	    	   You posses ZERO of this item\n\n";
+			if (overworldItemQuantity[3] == 0)
+			{
+				cout << "	    	   You posses ZERO of this item\n\n";
+			}
+			else
+			{
+				playerStats.UseGreenMushroom(greenMushroom);
+				cout << "	    	   ITEM USED\n\n";
+			}
+			Sleep(600);
+			selectedItem = false;
 		}
-	}
-	if (yItemMenu == 4 && selectedItem) {
-		if (overworldItemQuantity[0] == 0) {
-			cout << "	    	   You posses ZERO of this item\n\n";
+	if (yItemMenu == 4 && selectedItem)
+		{
+			if (overworldItemQuantity[0] == 0) {
+				cout << "	    	   You posses ZERO of this item\n\n";
+			}
+			else
+			{
+				UseStar(menuStep);
+				cout << "	    	   ITEM USED\n\n";
+			}
+			Sleep(600);
+			selectedItem = false;
 		}
-	}
-	if (yItemMenu == 5 && selectedItem) {
-		if (overworldItemQuantity[0] == 0) {
-			cout << "	    	   You posses ZERO of this item\n\n";
+	if (yItemMenu == 5 && selectedItem)
+		{
+			cout << "	    	   CANNOT BE USED OUTSIDE BATTLE\n\n";
+			Sleep(600);
+			selectedItem = false;
 		}
-	}
 
 }
 
-void Items::ShopMenu(int& coins) {
+void Items::ShopMenu(int& coins) 
+{
 
 }
 
+int Items::GetNumOptions() const
+{
+	return numBattleItemOptions;
+}
 
 void Items::UseStar(int& stepCount)
 {

@@ -40,42 +40,47 @@ void PlayerStats::SetPlayer(string character, char iconCharacter, int& lvl, int&
 
 }
 
-double PlayerStats::GetPlayerBattleHP()
+double PlayerStats::GetPlayerBattleHP() const
 {
 	return battleHP;
 }
 
-int PlayerStats::GetPlayerHP() 
+int PlayerStats::GetPlayerHP() const
 {
 	return healthPoints;
 }
 
-int PlayerStats::GetPlayerBattleMP() 
+int PlayerStats::GetPlayerBattleMP() const
 {
 	return battleMP;
 }
 
-int PlayerStats::GetPowStat() 
+int PlayerStats::GetPlayerMP() const
+{
+	return magicPoints;
+}
+
+int PlayerStats::GetPowStat() const
 {
 	return power;
 }
 
-int PlayerStats::GetJmpStat() 
+int PlayerStats::GetJmpStat() const
 {
 	return jump;
 }
 
-int PlayerStats::GetFpwStat() 
+int PlayerStats::GetFpwStat() const
 {
 	return flowerPower;
 }
 
-int PlayerStats::GetSpdStat() 
+int PlayerStats::GetSpdStat() const
 {
 	return speed;
 }
 
-int PlayerStats::GetDefStat() 
+int PlayerStats::GetDefStat() const
 {
 	return defense;
 }

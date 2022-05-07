@@ -11,21 +11,23 @@ public:
 	void SetPlayer(string character, char charCharacter, int& lvl, int& hp, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
 		int xp, int coin, int& statPts , double& userBattleHP, int userBattleMP, int& MP);
 
-	double GetPlayerBattleHP();
+	double GetPlayerBattleHP() const;
 
-	int GetPlayerHP();
+	int GetPlayerHP() const;
 
-	int GetPlayerBattleMP();
+	int GetPlayerBattleMP() const;
 
-	int GetPowStat();
+	int GetPlayerMP() const;
 
-	int GetJmpStat();
+	int GetPowStat() const;
 
-	int GetFpwStat();
+	int GetJmpStat() const;
 
-	int GetSpdStat();
+	int GetFpwStat() const;
 
-	int GetDefStat();
+	int GetSpdStat() const;
+
+	int GetDefStat() const;
 
 	void PrintStats();
 

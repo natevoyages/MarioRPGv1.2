@@ -18,6 +18,8 @@ public:
 
     int GetStepCount();
 
+    void SetStepCount(int steps);
+
     void StepCountReset();
 
     void OverWorldInputLogic(int& x, int& y, int width, int height, bool northOpen, bool southOpen, bool eastOpen, bool westOpen);

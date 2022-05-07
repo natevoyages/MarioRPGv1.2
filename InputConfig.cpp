@@ -175,6 +175,11 @@ int InputConfig::GetStepCount()
     return stepCount;
 }
 
+void InputConfig::SetStepCount(int steps)
+{
+    stepCount = steps;
+}
+
 void InputConfig::StepCountReset()
 {
     stepCount = 0;

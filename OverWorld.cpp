@@ -145,10 +145,12 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
 {
             map = 0;
             bossesBeaten = 0;
-            stepCounter = 0;
         if (!exitMap)
         {
-            stepCounter = 0;
+            if (stepCounter > 0)
+            {
+                stepCounter = 0;
+            }
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -159,8 +161,10 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
+
             }
         }
         if (exitMapSouth)
@@ -208,7 +212,10 @@ void OverWorld::SetUpMap()
         HomeSetup();
         while (!exitMap)
         {
-            stepCounter = 0;
+            if (stepCounter > 0) 
+            {
+                stepCounter = 0;
+            }
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -219,8 +226,10 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
+
             }
         }
         if (exitMapSouth) 
@@ -253,8 +262,9 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
        
             }
         }
@@ -290,8 +300,9 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
             }
         }
         if (exitMapNorth)
@@ -314,7 +325,10 @@ void OverWorld::SetUpMap()
         DesertThreeSetup();
         while (!exitMap)
         {
-            stepCounter = 0;
+            if (stepCounter > 0)
+            {
+                stepCounter = 0;
+            }
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -325,8 +339,10 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
+
             }
         }
         if (exitMapNorth)
@@ -346,7 +362,10 @@ void OverWorld::SetUpMap()
         ShopOneSetup();
         while (!exitMap)
         {
-            stepCounter = 0;
+            if (stepCounter > 0)
+            {
+                stepCounter = 0;
+            }
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -357,8 +376,10 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
+
             }
         }
         if (exitMapWest)
@@ -385,8 +406,9 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
             }
         }
         if (exitMapWest)
@@ -417,8 +439,9 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
             }
         }
         if (exitMapWest)
@@ -443,7 +466,10 @@ void OverWorld::SetUpMap()
        SeaFloorThreeSetup();
        while (!exitMap)
        {
-           stepCounter = 0;
+           if (stepCounter > 0)
+           {
+               stepCounter = 0;
+           }
            OverWorldPrintLogic();
            mapsInput.UserInput(menuToggled);
            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -454,8 +480,10 @@ void OverWorld::SetUpMap()
            {
                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-              inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+              inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
               SetStats();
+              mapsInput.SetStepCount(stepCounter);
+
            }
         }
        if (exitMapNorth)
@@ -475,7 +503,10 @@ void OverWorld::SetUpMap()
         ShopTwoSetup();
         while (!exitMap)
         {
-            stepCounter = 0;
+            if (stepCounter > 0)
+            {
+                stepCounter = 0;
+            }
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -486,8 +517,10 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
+
             }
         }
         if (exitMapNorth)
@@ -513,8 +546,9 @@ void OverWorld::SetUpMap()
            {
                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-               inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+               inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                SetStats();
+               mapsInput.SetStepCount(stepCounter);
            }
        }
 
@@ -546,8 +580,9 @@ void OverWorld::SetUpMap()
         {
             playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                 userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-            inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+            inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
             SetStats();
+            mapsInput.SetStepCount(stepCounter);
         }
     }
 
@@ -568,7 +603,10 @@ void OverWorld::SetUpMap()
         CastleThreeSetup();
         while (!exitMap)
         {
-            stepCounter = 0;
+            if (stepCounter > 0)
+            {
+                stepCounter = 0;
+            }
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -579,8 +617,10 @@ void OverWorld::SetUpMap()
             {
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
+                mapsInput.SetStepCount(stepCounter);
+
             }
         }
 

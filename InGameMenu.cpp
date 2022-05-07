@@ -51,8 +51,9 @@ void InGameMenu::PrintMenuBanner() {
 }
 
 
-void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , PlayerStats& playerStats, Items& items)
+void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , PlayerStats& playerStats, Items& items, int& stepCounter)
 {
+	int menuStep = stepCounter;
 	Sleep(150);
 		system("cls");
 		PrintMenuBanner();
@@ -95,8 +96,8 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , P
 		while (itemUse) {
 			items.OverWorldSetUp();
 			menuInput.MenuInput();
-			menuInput.ItemMenuInputLogic(yItemMenu, numMenuOptions, select, open, selectedItem, itemUse);
-			items.PrintOverWorldMenuItemLogic(yItemMenu, selectedItem, playerStats);
+			menuInput.ItemMenuInputLogic(yItemMenu, items.GetNumOptions() , select, open, selectedItem, itemUse);
+			items.PrintOverWorldMenuItemLogic(yItemMenu, selectedItem, playerStats, menuStep);
 		}
 	}
 	while (select && yMenu == 2 && open)
@@ -129,4 +130,5 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , P
 		open = false;
 	
 	}
+	stepCounter = menuStep;
 }

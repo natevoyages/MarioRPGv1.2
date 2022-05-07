@@ -20,7 +20,7 @@ public:
 
 	void PrintMenuBanner();
 
-	void PrintInGameMenu(bool& open, bool& play, bool& newMap, PlayerStats& playerStats, Items& items);
+	void PrintInGameMenu(bool& open, bool& play, bool& newMap, PlayerStats& playerStats, Items& items, int& stepCounter);
 
 
 private:
