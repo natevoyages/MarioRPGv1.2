@@ -84,12 +84,20 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , P
 	}
 	while (select && yMenu == 1 && open)
 	{
+		bool selectedItem = false;
+		bool itemUse = false;
+		int yItemMenu = 0;
 		Sleep(150);
 		system("cls");
 		menuInput.MenuInput();
-		menuInput.MenuInputLogic(yMenu, numMenuOptions, select, open);
+		menuInput.ItemMenuInputLogic (yItemMenu, numMenuOptions, select, open, selectedItem, itemUse);
 		items.PrintMenuItems();
-
+		while (itemUse) {
+			items.OverWorldSetUp();
+			menuInput.MenuInput();
+			menuInput.ItemMenuInputLogic(yItemMenu, numMenuOptions, select, open, selectedItem, itemUse);
+			items.PrintOverWorldMenuItemLogic(yItemMenu, selectedItem, playerStats);
+		}
 	}
 	while (select && yMenu == 2 && open)
 	{

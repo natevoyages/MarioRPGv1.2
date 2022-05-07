@@ -40,6 +40,46 @@ void PlayerStats::SetPlayer(string character, char iconCharacter, int& lvl, int&
 
 }
 
+double PlayerStats::GetPlayerBattleHP()
+{
+	return battleHP;
+}
+
+int PlayerStats::GetPlayerHP() 
+{
+	return healthPoints;
+}
+
+int PlayerStats::GetPlayerBattleMP() 
+{
+	return battleMP;
+}
+
+int PlayerStats::GetPowStat() 
+{
+	return power;
+}
+
+int PlayerStats::GetJmpStat() 
+{
+	return jump;
+}
+
+int PlayerStats::GetFpwStat() 
+{
+	return flowerPower;
+}
+
+int PlayerStats::GetSpdStat() 
+{
+	return speed;
+}
+
+int PlayerStats::GetDefStat() 
+{
+	return defense;
+}
+
 void PlayerStats::PrintStats()
 {
 	system("cls");
@@ -58,6 +98,7 @@ void PlayerStats::PrintStats()
 	cout << "	    	   MP:    " << battleMP << "  /  " << magicPoints << "\n\n";
 	cout << "	    	   PWR:   " << power << "\n\n";
 	cout << "	    	   JMP:   " << jump << "\n\n";
+	cout << "	    	   FPW:   " << flowerPower << "\n\n";
 	cout << "	    	   SPD:   " << speed << "\n\n";
 	cout << "	    	   DEF:   " << defense << "\n\n";
 	cout << "	    	   EXP:   " << experiencePoints << "\n\n\n";
@@ -95,4 +136,59 @@ void PlayerStats::AddDefensePoint()
 {
 	defense++;
 	statPoints--;
+}
+
+
+void PlayerStats::UseRedMushroom(int& redMushroom)
+{
+	if ((healthPoints - battleHP) >= 15)
+	{
+		redMushroom--;
+		battleHP += 15;
+	}
+	else if (battleHP == healthPoints)
+	{
+		cout << "	    	   HP FULL\n\n";
+	}
+
+	else
+	{
+		redMushroom--;
+		battleHP = healthPoints;
+	}
+}
+
+void PlayerStats::UseMegaRedMushroom(int& megaRedMushroom)
+{
+	megaRedMushroom--;
+	if ((healthPoints - battleHP) >= 50)
+	{
+		battleHP += 50;
+	}
+	else if (battleHP == healthPoints)
+	{
+		cout << "	    	   HP FULL\n\n";
+	}
+	else
+	{
+		battleHP = healthPoints;
+	}
+}
+
+void PlayerStats::UseStarDust(int& starDust)
+{
+	starDust--;
+	if ((magicPoints - battleMP) >= 15) {
+		battleMP += 10;
+	}
+	else
+	{
+		battleMP = magicPoints;
+	}
+}
+
+void PlayerStats::UseGreenMushroom(int& greenMushroom)
+{
+	greenMushroom--;
+	healthPoints++;
 }

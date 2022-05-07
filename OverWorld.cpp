@@ -160,6 +160,7 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
         if (exitMapSouth)
@@ -219,6 +220,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
         if (exitMapSouth) 
@@ -252,6 +254,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
        
             }
         }
@@ -288,6 +291,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
         if (exitMapNorth)
@@ -322,6 +326,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
         if (exitMapNorth)
@@ -353,6 +358,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
         if (exitMapWest)
@@ -380,6 +386,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
         if (exitMapWest)
@@ -411,6 +418,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
         if (exitMapWest)
@@ -447,6 +455,7 @@ void OverWorld::SetUpMap()
                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
               inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+              SetStats();
            }
         }
        if (exitMapNorth)
@@ -478,6 +487,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
         if (exitMapNorth)
@@ -504,6 +514,7 @@ void OverWorld::SetUpMap()
                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+               SetStats();
            }
        }
 
@@ -536,6 +547,7 @@ void OverWorld::SetUpMap()
             playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                 userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
             inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+            SetStats();
         }
     }
 
@@ -568,6 +580,7 @@ void OverWorld::SetUpMap()
                 playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                     userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items);
+                SetStats();
             }
         }
 
@@ -590,6 +603,26 @@ void OverWorld::SetUpMap()
 
         notGameOver = false;
     }
+}
+
+void OverWorld::SetStats()
+{
+    userBattleHP = playerStats.GetPlayerBattleHP();
+
+    userHealthPoints = playerStats.GetPlayerHP();
+    
+    userBattleMP = playerStats.GetPlayerBattleMP();
+
+    userPower = playerStats.GetPowStat();
+    
+    userJump = playerStats.GetJmpStat();
+
+    userFlowerPower = playerStats.GetFpwStat();
+
+    userSpeed = playerStats.GetSpdStat();
+
+    userDefense = playerStats.GetDefStat();
+ 
 }
 
 void OverWorld::OverWorldPrintLogic()

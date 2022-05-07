@@ -459,15 +459,84 @@ void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, b
         break;
 
     case BACK:
-        select = false;
-        break;
-
+        if (select) {
+            select = false;
+            break;
+        }
+        else {
+            menuToggled = false;
+            break;
+        }
     case EXIT:
         menuToggled = false;
         break;
 
     case STOP:
         yMenu = yMenu;
+        break;
+
+    }
+}
+
+void InputConfig::ItemMenuInputLogic(int& yItemMenu, int numMenuOptions, bool& select, bool& open, bool& selectedItem , bool& itemUse)
+{
+    switch (userInput)
+    {
+    case UP:
+        if (yItemMenu != 0 && !selectedItem)
+        {
+            yItemMenu--;
+            break;
+        }
+
+        else
+        {
+            yItemMenu = yItemMenu;
+            break;
+        }
+
+    case DOWN:
+        if (yItemMenu != numMenuOptions - 1 && !selectedItem)
+        {
+            yItemMenu++;
+            break;
+        }
+
+        else
+        {
+            yItemMenu = yItemMenu;
+            break;
+        }
+
+    case ENTER:
+        if (!itemUse) 
+        {
+            itemUse = true;
+            break;
+        }
+        else
+        {
+        selectedItem = true;
+        break;
+        }
+
+    case BACK:
+        if (itemUse)
+        {
+            itemUse = false;
+            break;
+
+        }
+        else {
+            select = false;
+            break;
+        }
+    case EXIT:
+        open = false;
+        break;
+
+    case STOP:
+        yItemMenu = yItemMenu;
         break;
 
     }

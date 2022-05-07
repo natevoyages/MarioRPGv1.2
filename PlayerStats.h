@@ -11,6 +11,22 @@ public:
 	void SetPlayer(string character, char charCharacter, int& lvl, int& hp, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
 		int xp, int coin, int& statPts , double& userBattleHP, int userBattleMP, int& MP);
 
+	double GetPlayerBattleHP();
+
+	int GetPlayerHP();
+
+	int GetPlayerBattleMP();
+
+	int GetPowStat();
+
+	int GetJmpStat();
+
+	int GetFpwStat();
+
+	int GetSpdStat();
+
+	int GetDefStat();
+
 	void PrintStats();
 
 	void AddPowerPoint();
@@ -22,6 +38,14 @@ public:
 	void AddSpeedPoint();
 
 	void AddDefensePoint();
+
+	void UseRedMushroom(int& redMushroom);
+
+	void UseMegaRedMushroom(int& megaRedMushroom);
+
+	void UseStarDust(int& starDust);
+
+	void UseGreenMushroom(int& greenMushroom);
 
 private:
 	string characterName;

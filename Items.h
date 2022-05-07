@@ -1,6 +1,7 @@
 #ifndef ITEMS_H
 #define ITEMS_H
 #include "InputConfig.h"
+#include "PlayerStats.h"
 #include <windows.h>
 #include <string>
 #include <iostream>
@@ -17,19 +18,11 @@ public:
 
 	void PrintMenuItems();
 
-	void PrintBattleItemMenuLogic();
+	void PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats);
 
-	void PrintOverWorldMenuItemLogic();
+	void PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats);
 
 	void ShopMenu(int& coins);
-
-	void UseRedMushroom(double& battleHP, int hp);
-
-	void UseMegaRedMushroom(double& battleHP, int hp);
-
-	void UseStarDust(int& battleMP, int mp);
-
-	void UseGreenMushroom(int& hp);
 
 	void UseStar(int& coins);
 
@@ -63,8 +56,9 @@ private:
 	int numBattleItemOptions;
 	int numOverWorldItemOptions;
 	string battleItemOptions[4];
+	int battleItemQuantity[4];
 	string overworldItemOptions[6];
-	int yMenu;
+	int overworldItemQuantity[6];
 
 };
 #endif

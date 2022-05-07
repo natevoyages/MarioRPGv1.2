@@ -17,7 +17,11 @@ void Items::BattleTabSetUp()
 	battleItemOptions[1] = "	    	   MegaRdShrm:    ";
 	battleItemOptions[2] = "	    	   StarDust:      ";
 	battleItemOptions[3] = "	    	   POWBlk:        ";
-	yMenu = 0;
+	
+	battleItemQuantity[0] = redMushroom;
+	battleItemQuantity[1] =	megaRedMushroom;
+	battleItemQuantity[2] = starDust;
+	battleItemQuantity[3] = powBlock;
 }
 
 void Items::OverWorldSetUp()
@@ -29,7 +33,12 @@ void Items::OverWorldSetUp()
 	 overworldItemOptions[3] = "	    	   GreenShrm:     ";
 	 overworldItemOptions[4] = "	    	   Star:          ";
 	 overworldItemOptions[5] = "	    	   POWBlk:        ";
-	 yMenu = 0;
+	 overworldItemQuantity[0] = redMushroom;
+	 overworldItemQuantity[1] = megaRedMushroom;
+	 overworldItemQuantity[2] = starDust;
+	 overworldItemQuantity[3] = greenMushroom;
+	 overworldItemQuantity[4] = star;
+	 overworldItemQuantity[5] = powBlock;
 	 
 
 }
@@ -47,7 +56,7 @@ void Items::PrintMenuItems()
 
 	cout << "	    	   RedShrm:       " << redMushroom << "\n\n";
 	cout << "	    	   MegaRdShrm:    " << megaRedMushroom << "\n\n";
-	cout << "	    	   StarDust:      " << star << "\n\n";
+	cout << "	    	   StarDust:      " << starDust << "\n\n";
 	cout << "	    	   GreenShrm:     " << greenMushroom << "\n\n";
 	cout << "	    	   Star:          " << star << "\n\n";
 	cout << "	    	   POWBlk:        " << powBlock << "\n\n";
@@ -56,7 +65,7 @@ void Items::PrintMenuItems()
 
 }
 
-void Items::PrintBattleItemMenuLogic()
+void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats)
 {
 	system("cls");
 	cout << "\n\n\n\n";
@@ -68,20 +77,20 @@ void Items::PrintBattleItemMenuLogic()
 
 	for(int i = 0; i < numBattleItemOptions; i++)
 	{
-		if (i == yMenu) 
+		if (i == yItemMenu)
 		{
-			cout << battleItemOptions[i] << "   [*]\n\n";
+			cout << battleItemOptions[i] << " " << battleItemQuantity[i] << "  [*]\n\n";
 		}
 		else 
 		{
-			cout << battleItemOptions[i] << "   [ ]\n\n";
+			cout << battleItemOptions[i] << " " << battleItemQuantity[i] << "  [ ]\n\n";
 		}
 	}
 
 	cout << "	    	   Press 'z' = SELECT              Press 'x' = BACK     \n\n";
 }
 
-void Items::PrintOverWorldMenuItemLogic()
+void Items::PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats)
 {
 	system("cls");
 	cout << "\n\n\n\n";
@@ -93,69 +102,81 @@ void Items::PrintOverWorldMenuItemLogic()
 
 	for (int i = 0; i < numBattleItemOptions; i++)
 	{
-		if (i == yMenu)
+		if (i == yItemMenu)
 		{
-			cout << overworldItemOptions[i] << "   [*]\n\n";
+			cout << overworldItemOptions[i] << " " << overworldItemQuantity[i] << "  [*]\n\n";
 		}
 		else
 		{
-			cout << overworldItemOptions[i] << "   [ ]\n\n";
+			cout << overworldItemOptions[i] << " " << overworldItemQuantity[i] << "  [ ]\n\n";
 		}
 	}
 	cout << "	    	   Press 'z' = SELECT              Press 'x' = BACK     \n\n";
+	if (yItemMenu == 0 && selectedItem)
+	{
+		if (overworldItemQuantity[0] == 0)
+		{
+			cout << "	    	   You posses ZERO of this item\n\n";
+		}
+		else if (playerStats.GetPlayerBattleHP() == playerStats.GetPlayerHP())
+		{
+			cout << "	    	   HP FULL\n\n";
+		}
+		else
+		{
+			playerStats.UseRedMushroom(redMushroom);
+			cout << "	    	   ITEM USED\n\n";
+		}
+		selectedItem = false;
+	}
+
+	if (yItemMenu == 1 && selectedItem)
+	{
+		if (overworldItemQuantity[0] == 0)
+		{
+			cout << "	    	   You posses ZERO of this item\n\n";
+		}
+	}
+	if (yItemMenu == 2 && selectedItem)
+	{
+		if (overworldItemQuantity[0] == 0)
+		{
+			cout << "	    	   You posses ZERO of this item\n\n";
+		}
+	}
+	/*else if (battleMP == magicPoints)
+	{
+		cout << "	    	   MP FULL\n\n";                      //fix me
+	}
+	else
+	{
+		playerStats.UseRedMushroom(redMushroom);
+		cout << "	    	   ITEM USED\n\n";
+	}*/
+	if (yItemMenu == 3 && selectedItem)
+	{
+		if (overworldItemQuantity[0] == 0)
+		{
+			cout << "	    	   You posses ZERO of this item\n\n";
+		}
+	}
+	if (yItemMenu == 4 && selectedItem) {
+		if (overworldItemQuantity[0] == 0) {
+			cout << "	    	   You posses ZERO of this item\n\n";
+		}
+	}
+	if (yItemMenu == 5 && selectedItem) {
+		if (overworldItemQuantity[0] == 0) {
+			cout << "	    	   You posses ZERO of this item\n\n";
+		}
+	}
+
 }
 
 void Items::ShopMenu(int& coins) {
 
 }
 
-
-void Items::UseRedMushroom(double& battleHP, int hp)
-{
-	redMushroom--;
-	if ((hp - battleHP) >= 15)
-	{
-		battleHP += 15;
-	}
-	else
-	{
-		battleHP = hp;
-	}
-}
-
-void Items::UseMegaRedMushroom(double& battleHP, int hp)
-{
-	megaRedMushroom--;
-	if ((hp - battleHP) >= 50)
-	{
-		battleHP += 50;
-	}
-	else
-	{
-		battleHP = hp;
-	}
-}
-
-void Items::UseStarDust(int& battleMP, int mp)
-{
-	starDust--;
-	if ((mp - battleMP) >= 15) {
-		battleMP += 10;
-	}
-	else
-	{
-		battleMP = mp;
-	}
-}
-
-
-
-
-void Items::UseGreenMushroom(int& hp)
-{
-	greenMushroom--;
-	hp++;
-}
 
 void Items::UseStar(int& stepCount)
 {
