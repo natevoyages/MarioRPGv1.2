@@ -31,7 +31,7 @@ public:
 	void EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense, char userChar, int userBattleMP, int userHP, int userMP);
 
 	void PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed,
-		double userDefense, int level, char userChar, int userHP, int userMP, Items& battleItems);
+		double userDefense, int level, char userChar, int userHP, int userMP, Items& battleItems, bool& playerTurnOver);
 
 	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
 		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items);

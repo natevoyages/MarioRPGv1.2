@@ -2,11 +2,11 @@
 using namespace std;
 Items::Items()
 {
-	redMushroom = 3;
+	redMushroom = 5;
 	megaRedMushroom = 5; 
 	starDust = 5;
 	greenMushroom = 5;
-	star = 1;
+	star = 5;
 	powBlock = 5;
 }
 
@@ -65,7 +65,7 @@ void Items::PrintMenuItems()
 
 }
 
-void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double& battleHP, int& battleMP, int userHP, int userMP, double& damage)
+void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double& battleHP, int& battleMP, int userHP, int userMP, double& damage, bool& notExit, bool& successfullySelected, bool& itemSelected)
 {
 	system("cls");
 	cout << "\n\n\n\n";
@@ -85,6 +85,100 @@ void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double&
 		{
 			cout << battleItemOptions[i] << " " << battleItemQuantity[i] << "  [ ]\n\n";
 		}
+	}
+
+	if (yItemMenu == 0 && selectedItem)
+	{
+		if (overworldItemQuantity[0] == 0)
+		{
+			cout << "	    	   You posses ZERO of this item\n\n";
+			selectedItem = false;
+			yItemMenu == 0;
+		}
+		else if (battleHP == userHP)
+		{
+			cout << "	    	   HP FULL\n\n";
+			selectedItem = false;
+			yItemMenu == 0;
+		}
+		else
+		{
+			UseRedMushroom(battleHP, userHP);
+			cout << "	    	   ITEM USED\n\n";
+			itemSelected = false;
+			successfullySelected = true;
+
+		}
+		Sleep(600);
+
+	}
+
+	if (yItemMenu == 1 && selectedItem)
+	{
+		if (overworldItemQuantity[1] == 0)
+		{
+			cout << "	    	   You posses ZERO of this item\n\n";
+			selectedItem = false;
+			yItemMenu == 1;
+		}
+		else if (battleHP == userHP)
+		{
+			cout << "	    	   HP FULL\n\n";
+			selectedItem = false;
+			yItemMenu == 1;
+		}
+		else
+		{
+			UseMegaRedMushroom(battleHP, userHP);
+			cout << "	    	   ITEM USED\n\n";
+			itemSelected = false;
+			successfullySelected = true;
+		}
+		Sleep(600);
+	}
+	if (yItemMenu == 2 && selectedItem)
+	{
+		if (overworldItemQuantity[2] == 0)
+		{
+			cout << "	    	   You posses ZERO of this item\n\n";
+			selectedItem = false;
+			yItemMenu == 2;
+		}
+		else if (battleMP == userMP)
+		{
+			cout << "	    	   MP FULL\n\n";
+			selectedItem = false;
+			yItemMenu == 2;
+		}
+		else
+		{
+			UseStarDust(battleMP, userMP);
+			cout << "	    	   ITEM USED\n\n";
+			itemSelected = false;
+			successfullySelected = true;
+		}
+		Sleep(600);
+		selectedItem = false;
+	}
+	if (yItemMenu == 3 && selectedItem)
+	{
+		if (overworldItemQuantity[5] == 0)
+		{
+			cout << "	    	   You posses ZERO of this item\n\n";
+			selectedItem = false;
+			yItemMenu == 3;
+		}
+		else
+		{
+			UsePowBlock(damage);
+			cout << "	    	   ITEM USED\n\n";
+			cout << "	    	   50 DAMAGE DEALT\n";
+		
+			itemSelected = false;
+			successfullySelected = true;
+		}
+		Sleep(600);
+		
 	}
 
 	cout << "	    	   Press 'z' = SELECT              Press 'x' = BACK     \n\n";
@@ -213,10 +307,60 @@ int Items::GetNumOptions() const
 	return numBattleItemOptions;
 }
 
+
+void Items::UseRedMushroom(double& battleHP, int healthPoints)
+{
+	if ((healthPoints - battleHP) >= 15)
+	{
+		redMushroom--;
+		battleHP += 15;
+	}
+
+	else
+	{
+		redMushroom--;
+		battleHP = healthPoints;
+	}
+}
+
+void Items::UseMegaRedMushroom(double& battleHP, int healthPoints)
+{
+	if ((healthPoints - battleHP) >= 50)
+	{
+		megaRedMushroom--;
+		battleHP += 50;
+		
+	}
+	else
+	{
+		megaRedMushroom--;
+		battleHP = healthPoints;
+		
+	}
+}
+
+void Items::UseStarDust(int& battleMP, int magicPoints)
+{
+	
+	if ((magicPoints - battleMP) >= 15) {
+		battleMP += 10;
+		starDust--;
+	}
+	else
+	{
+		starDust--;
+		battleMP = magicPoints;
+
+	}
+}
+
+
+
+
+
 void Items::UseStar(int& stepCount)
 {
 	star--;
-	stepCount = 0;
 	stepCount -= 300;
 }
 

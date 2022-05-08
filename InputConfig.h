@@ -30,6 +30,8 @@ public:
 
     void MenuInputLogic(int& yCharSelect, int numCharacters, bool& charSelect, bool& menuToggled);
 
+    void BattleItemMenuInputLogic(int& yItemMenu, int numMenuOptions, bool& notExited, bool& selectedItem, bool& succesfullySlected, bool& itemSelected);
+
     void ItemMenuInputLogic(int& yItemMenu, int numMenuOptions, bool& select, bool& open, bool& selectedItem, bool& itemUse);
 
   

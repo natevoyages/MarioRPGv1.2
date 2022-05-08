@@ -54,11 +54,14 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 	if (!playerFirst) {
 		while (battleState)
 		{
+			bool playerTurnOver = false;
 			Sleep(500);
 			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
 			Sleep(500);
-			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems);
+			while (!playerTurnOver) {
+				PlayerTurn(userBattleHP, userBattleMP, userPower,
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver);
+			}
 			if (userBattleHP == 0)
 			{
 				win = false;
@@ -79,9 +82,12 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 	{
 		while (battleState)
 		{
+			bool playerTurnOver = false;
 			Sleep(500);
-			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems);
+			while (!playerTurnOver) {
+				PlayerTurn(userBattleHP, userBattleMP, userPower,
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver);
+			}
 			Sleep(500);
 			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
 			Sleep(500);
@@ -194,7 +200,7 @@ void BattleMechanics::UserAttackAnimation(char userChar,double damage, double us
 
 void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense,char userChar, int userBattleMP, int userHP, int userMP)
 {
-	if (userBattleHP != 0 && stats[1] != 0) {
+	if (userBattleHP !=0  && stats[1] != 0) {
 		system("cls");
 		EnemyBattleMechanics(userJump, userSpeed, userDefense);
 		EnemyBattleLogic();
@@ -209,12 +215,12 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		PrintEnemyIdle();
 		PrintUserAttacked(userChar, userBattleMP, userHP, userMP, userBattleHP);
 		cout << fixed << setprecision(2) << "\n        " << damage << " DAMAGE TAKEN !\n";
-		Sleep(1050);
+		Sleep(350);
 	}
 }
 
 void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower,
-	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP, Items& battleItems) 
+	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP, Items& battleItems ,bool& playerTurnOver) 
 {
 	bool optionSelected = false;
 	if (userBattleHP != 0 && stats[1] != 0)   // int battleMP, int userHP, int userMP, double& userBattleHP
@@ -230,7 +236,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			optionSelected = menu.GetIfSelected();
 		}
 
-		UserBattleLogic(userBattleHP, userBattleMP, userPower, userJump, userFlowerPower, userSpeed, userDefense, userLevel); // may want to add level and xp;
+		UserBattleLogic(userBattleHP, userBattleMP, userPower, userJump, userFlowerPower, userSpeed, userDefense, userLevel); 
 
 		if (attackSelected)
 		{
@@ -241,7 +247,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			{
 				stats[1] = 0;
 			}
-			
+			playerTurnOver = true;
 
 		}
 
@@ -253,30 +259,52 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			{
 				stats[1] = 0;
 			}
+			playerTurnOver = true;
 		}
 
-		else if (itemSelected)
+		while (itemSelected)
 		{
-			double battleHP = userBattleHP;  
+			double battleHP = userBattleHP;
 			int battleMP = userBattleMP;
 			int hp = userHP;
 			int mp = userMP;
 			double userDamage = damage;
 			int yMenu = 0;
-			bool optionSelected = false;
+			bool successfullySelected = false;
+			bool notExited = true;
+			bool selected = false;
+			damage = 0;
 			battleItems.BattleTabSetUp();
-			while(!optionSelected) 
+			while (!successfullySelected)
 			{
 				battleInput.MenuInput();
-				//battleInput.ItemMenuInputLogic(yMenu, battleItems.GetNumOptions(), select, open, selectedItem, itemUse);         fix me
-				battleItems.PrintBattleItemMenuLogic(yMenu, optionSelected, battleHP, battleMP, hp, mp, damage);
+				battleInput.BattleItemMenuInputLogic(yMenu, battleItems.GetNumOptions(), notExited, selected, successfullySelected, itemSelected);
+				battleItems.PrintBattleItemMenuLogic(yMenu, selected, battleHP, battleMP, hp, mp, damage, notExited, successfullySelected, itemSelected);
 			}
-			
-			
+
+			if (successfullySelected && !notExited)
+			{
+				playerTurnOver = false;
+				optionSelected = false;
+			}
+			else
+			{
+				playerTurnOver = true;
+				if (damage == 50)
+				{
+					stats[1] = stats[1] - damage;
+					if (stats[1] < 0)
+					{
+						stats[1] = 0;
+					}
+				}
+			}
+
+
 		}
 
 
-		else if (runSelected)
+		if (runSelected)
 		{
 			system("cls");
 			PrintEnemyIdle();
@@ -284,8 +312,12 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			cout << "\n         OH NO! RUN FAILED!\n";
 			//ESCAPED!
 			//FAILED TO ESCAPE!
+			playerTurnOver = true;
 		}
 		
+	}
+	else {
+		playerTurnOver = true;
 	}
 	
 }
@@ -303,11 +335,15 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	if (!playerFirst) {
 		while (battleState)
 		{
+			bool playerTurnOver = false;
 			Sleep(500);
 			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
 			Sleep(500);
-			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				 userJump, userFlowerPower, userSpeed,  userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems);
+			while (!playerTurnOver) {
+				PlayerTurn(userBattleHP, userBattleMP, userPower,
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver);
+			}
+		
 			if (userBattleHP == 0)
 			{
 				win = false;
@@ -328,9 +364,12 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	{
 		while (battleState)
 		{
+			bool playerTurnOver = false;
 			Sleep(500);
-			PlayerTurn(userBattleHP, userBattleMP, userPower,
-				userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems);
+			while (!playerTurnOver) {
+				PlayerTurn(userBattleHP, userBattleMP, userPower,
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver);
+			}
 			Sleep(500);
 			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
 			Sleep(500);

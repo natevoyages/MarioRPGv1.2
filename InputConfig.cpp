@@ -482,6 +482,57 @@ void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, b
 
     }
 }
+void InputConfig::BattleItemMenuInputLogic(int& yItemMenu, int numMenuOptions, bool& notExited, bool& selectedItem , bool& succesfullySelected, bool& itemSelected)
+{
+    switch (userInput)
+    {
+    case UP:
+        if (yItemMenu != 0 && !selectedItem)
+        {
+            yItemMenu--;
+            break;
+        }
+
+        else
+        {
+            yItemMenu = yItemMenu;
+            break;
+        }
+
+    case DOWN:
+        if (yItemMenu != numMenuOptions - 1 && !selectedItem)
+        {
+            yItemMenu++;
+            break;
+        }
+
+        else
+        {
+            yItemMenu = yItemMenu;
+            break;
+        }
+
+    case ENTER:
+       selectedItem = true;
+       break;
+
+    case BACK:
+         notExited = false;
+         itemSelected = false;
+         succesfullySelected = true;
+         
+        break;
+
+
+    case STOP:
+        yItemMenu = yItemMenu;
+        break;
+
+    }
+}
+
+
+
 
 void InputConfig::ItemMenuInputLogic(int& yItemMenu, int numMenuOptions, bool& select, bool& open, bool& selectedItem , bool& itemUse)
 {

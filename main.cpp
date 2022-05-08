@@ -13,7 +13,6 @@ int main()
 	bool startNewGame = false;
 	bool resumeGame = false;
 	bool notGameOver = true;
-	int map;
 	StartMenu start;
 	OverWorld overWorld;
 

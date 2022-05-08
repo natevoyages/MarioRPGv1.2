@@ -18,7 +18,14 @@ public:
 
 	void PrintMenuItems();
 
-	void PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double& battleHP, int& battleMP, int userHP, int userMP, double& damage);
+	void PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double& battleHP, int& battleMP, int userHP, int userMP, double& damage, bool& notExit, bool& successfullySelected, bool& itemSelected);
+
+	void UseRedMushroom(double& battleHP, int healthPoints);
+
+	void UseMegaRedMushroom(double& battleHP, int healthPoints);
+
+	void UseStarDust(int& battleMP, int magicPoints);
+
 
 	void PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats, int& menuStep);
 
