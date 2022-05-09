@@ -150,6 +150,8 @@ void OverWorld::characterTracker()
 
 void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER)
 {
+    playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+        userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
             map = 0;
             bossesBeaten = 0;
         if (!exitMap)
@@ -207,10 +209,13 @@ void OverWorld::IfBattleEncounted()
             battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
                 userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items);
         }
+   
         mapsInput.StepCountReset();
         Sleep(150);
         playerStats.LevelUp(userEXP);
         SetStats();
+        playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+            userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
          }
 }
 
@@ -260,10 +265,8 @@ void OverWorld::SetUpMap()
             stepCounter = mapsInput.GetStepCount();
             IfBattleEncounted();
             OverWorldPrintLogic();
-            cout << "\nSTEPS: " << stepCounter << "\n"; // fix me
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
-
             characterTracker();
             CollisonLogic(); 
             inGame.SetUpMenu();
@@ -400,11 +403,14 @@ void OverWorld::SetUpMap()
 
     else if (map == 5)        // start of Sea Floor maps
     {
+        battle.SetBattleTrigger();
         SeaFloorOneSetup();
         while (!exitMap)
         {
            
+            mapsInput.StepCounter();
             stepCounter = mapsInput.GetStepCount();
+            IfBattleEncounted();
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -434,10 +440,13 @@ void OverWorld::SetUpMap()
 
     else if (map == 6)
     {
+        battle.SetBattleTrigger();
         SeaFloorTwoSetup();
         while (!exitMap)
         {
-            mapsInput.GetStepCount();
+            mapsInput.StepCounter();
+            stepCounter = mapsInput.GetStepCount();
+            IfBattleEncounted();
             OverWorldPrintLogic();
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -541,10 +550,13 @@ void OverWorld::SetUpMap()
 
     else if (map == 9)
     {
+       battle.SetBattleTrigger();
        CastleOneSetup();
        while (!exitMap)
        {
-           mapsInput.GetStepCount();
+           mapsInput.StepCounter();
+           stepCounter = mapsInput.GetStepCount();
+           IfBattleEncounted();
            OverWorldPrintLogic();
            mapsInput.UserInput(menuToggled);
            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -575,10 +587,13 @@ void OverWorld::SetUpMap()
     
     else if (map == 10)
     {
+    battle.SetBattleTrigger();
     CastleTwoSetup();
     while (!exitMap)
     {
-        mapsInput.GetStepCount();
+        mapsInput.StepCounter();
+        stepCounter = mapsInput.GetStepCount();
+        IfBattleEncounted();
         OverWorldPrintLogic();
         mapsInput.UserInput(menuToggled);
         mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
@@ -925,6 +940,9 @@ void OverWorld::CollisonLogic()
             yCoordinate = prevYCoordinate;
             playerStats.LevelUp(userEXP);
             SetStats();
+            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+
     }
 
     else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )

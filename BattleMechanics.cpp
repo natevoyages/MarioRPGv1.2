@@ -48,6 +48,9 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 	bool playerFirst = false;
 	bool win = false;
 	bool escape = false;
+	int layerOneBattleMP = userBattleMP;
+	double layerOneBattleHP = userBattleHP;
+
 
 	BossBattleSetUp(bossesBeaten);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
@@ -56,13 +59,13 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 		{
 			bool playerTurnOver = false;
 			Sleep(500);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints, escape);
+			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
 			while (!playerTurnOver) {
-				PlayerTurn(userBattleHP, userBattleMP, userPower,
+				PlayerTurn(layerOneBattleHP, layerOneBattleMP, userPower,
 					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
-			if (userBattleHP == 0)
+			if (layerOneBattleHP == 0)
 			{
 				win = false;
 				battleState = false;
@@ -85,11 +88,11 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 			bool playerTurnOver = false;
 			Sleep(500);
 			while (!playerTurnOver) {
-				PlayerTurn(userBattleHP, userBattleMP, userPower,
-					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
+				PlayerTurn(layerOneBattleHP, layerOneBattleMP, userPower,
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, layerOneBattleMP, battleItems, playerTurnOver, escape);
 			}
 			Sleep(500);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints, escape);
+			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
 			if (userBattleHP == 0)
 			{
@@ -123,6 +126,8 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 		Sleep(5000);
 	}
 	items = battleItems;
+	userBattleMP = layerOneBattleMP;
+	userBattleHP = layerOneBattleHP;
 		
 
 }
@@ -162,7 +167,7 @@ void BattleMechanics::BattleSetUp(int map)
 			enemySignature = 4;
 		}
 	}
-	else if (map == 9 || map == 11)
+	else if (map == 9 || map == 10)
 	{
 		enemyNum = rand() % 3;
 		if (enemyNum == 0)
@@ -215,7 +220,9 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 {
 	bool successHit = false;
 	bool successCrit = false;
-	if ((userBattleHP !=0  && stats[1] != 0) && !escape) {
+	double layerTwoBattleHP = userBattleHP;
+	int layerTwoBattleMP = userBattleMP;
+	if ((layerTwoBattleHP !=0  && stats[1] != 0) && !escape) {
 		system("cls");
 		EnemyBattleMechanics(userJump, userSpeed, userDefense);
 		HitChance(hitSuccess, successHit);
@@ -239,15 +246,15 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 			damage = specialDamage;
 		}
 		PrintEnemyIdle();
-		PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
+		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 		Sleep(300);
 		system("cls");
 		PrintEnemyAttack();
-		PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
+		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 		Sleep(300);
 		system("cls");
 		PrintEnemyIdle();
-		PrintUserAttacked(userChar, userBattleMP, userHP, userMP, userBattleHP);
+		PrintUserAttacked(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 
 		if (successHit && successCrit)
 		{
@@ -261,6 +268,10 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 			cout << fixed << setprecision(2) << "\n        " << damage << " DAMAGE TAKEN !\n";
 		}
 		Sleep(350);
+		layerTwoBattleHP = layerTwoBattleHP - damage;
+
+		userBattleHP = layerTwoBattleHP;
+		userBattleMP = layerTwoBattleMP;
 
 	}
 }
@@ -269,6 +280,9 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP, Items& battleItems ,bool& playerTurnOver,bool& escape)
 {
 	bool optionSelected = false;
+	double layerTwoBattleHP = userBattleHP;
+	int layerTwoBattleMP = userBattleMP;
+
 	if ((userBattleHP != 0 && stats[1] != 0) && !escape)   // int battleMP, int userHP, int userMP, double& userBattleHP
 	{
 		menu.SetUpMenu();
@@ -277,12 +291,12 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			Sleep(300);
 			system("cls");
 			PrintEnemyIdle();
-			PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
+			PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 			menu.PrintBattleMenu(attackSelected, spAttackSelected, itemSelected, runSelected);
 			optionSelected = menu.GetIfSelected();
 		}
 
-		UserBattleLogic(userBattleHP, userBattleMP, userPower, userJump, userFlowerPower, userSpeed, userDefense, userLevel); 
+		UserBattleLogic(layerTwoBattleHP, layerTwoBattleMP, userPower, userJump, userFlowerPower, userSpeed, userDefense, userLevel);
 
 		if (attackSelected)
 		{
@@ -302,7 +316,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 					damage = critDamage;
 				}
 			}
-			UserAttackAnimation(userChar, damage, userBattleHP, userBattleMP,  userHP,  userMP);
+			UserAttackAnimation(userChar, damage, layerTwoBattleHP, layerTwoBattleMP,  userHP,  userMP);
 			stats[1] = stats[1] - damage;
 
 			if(stats[1] < 0)
@@ -315,8 +329,8 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		else if (spAttackSelected)
 		{
-			if (userBattleMP >= 3) {
-				userBattleMP = userBattleMP - 3;
+			if (layerTwoBattleMP >= 3) {
+				layerTwoBattleMP = layerTwoBattleMP - 3;
 				userSuccessHit = false;
 				userSuccessCrit = false;
 				HitChance(hitSuccess, userSuccessHit);
@@ -333,7 +347,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 						damage = specialCrit;
 					}
 				}
-				UserAttackAnimation(userChar, specialDamage, userBattleHP, userBattleMP, userHP, userMP);
+				UserAttackAnimation(userChar, specialDamage, layerTwoBattleHP, layerTwoBattleMP, userHP, userMP);
 				stats[1] = stats[1] - damage;
 				if (stats[1] < 0)
 				{
@@ -345,7 +359,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			{
 				system("cls");
 				PrintEnemyIdle();
-				PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
+				PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 				cout << "\n         NOT ENOUGH MP!\n";
 				Sleep(300);
 				playerTurnOver = false;
@@ -356,10 +370,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		while (itemSelected)
 		{
-			double battleHP = userBattleHP;
-			int battleMP = userBattleMP;
-			int hp = userHP;
-			int mp = userMP;
+
 			double userDamage = damage;
 			int yMenu = 0;
 			bool successfullySelected = false;
@@ -371,7 +382,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			{
 				battleInput.MenuInput();
 				battleInput.BattleItemMenuInputLogic(yMenu, battleItems.GetNumOptions(), notExited, selected, successfullySelected, itemSelected);
-				battleItems.PrintBattleItemMenuLogic(yMenu, selected, battleHP, battleMP, hp, mp, damage, notExited, successfullySelected, itemSelected);
+				battleItems.PrintBattleItemMenuLogic(yMenu, selected, layerTwoBattleHP, layerTwoBattleMP, userHP, userMP, damage, notExited, successfullySelected, itemSelected);
 			}
 
 			if (successfullySelected && !notExited)
@@ -402,7 +413,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			RunAwayChance(escapeSucess, runAway);
 			system("cls");
 			PrintEnemyIdle();
-			PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
+			PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 			if (runAway)
 			{
 				cout << "\n         YOU RAN AWAY!\n";
@@ -421,6 +432,8 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 		playerTurnOver = true;
 	}
 	
+	userBattleHP = layerTwoBattleHP;
+	userBattleMP = layerTwoBattleMP;
 }
 
 void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
@@ -430,6 +443,8 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	bool playerFirst = false;
 	bool win = false;
 	bool escape = false;
+	int layerOneBattleMP = userBattleMP;
+	double layerOneBattleHP = userBattleHP;
 
 	BattleSetUp(map);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
@@ -438,14 +453,14 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		{
 			bool playerTurnOver = false;
 			Sleep(500);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints, escape);
+			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
 			while (!playerTurnOver) {
-				PlayerTurn(userBattleHP, userBattleMP, userPower,
+				PlayerTurn(layerOneBattleHP, layerOneBattleMP, userPower,
 					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
 		
-			if (userBattleHP == 0)
+			if (layerOneBattleHP == 0)
 			{
 				win = false;
 				battleState = false;
@@ -468,13 +483,13 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 			bool playerTurnOver = false;
 			Sleep(500);
 			while (!playerTurnOver) {
-				PlayerTurn(userBattleHP, userBattleMP, userPower,
+				PlayerTurn(layerOneBattleHP, layerOneBattleMP, userPower,
 					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
 			Sleep(500);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints, escape);
+			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
-			if(userBattleHP == 0)
+			if(layerOneBattleHP == 0)
 			{
 				win = false;
 				battleState = false;
@@ -505,6 +520,8 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		Sleep(5000);
 	}
 	items = battleItems;
+	userBattleHP = layerOneBattleHP;
+	userBattleMP = layerOneBattleMP;
 }
 
 void BattleMechanics::CritChance(double& critSucess, bool success) 
