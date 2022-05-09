@@ -19,6 +19,11 @@ PlayerStats::PlayerStats()
 	statPoints = 0;
 }
 
+void PlayerStats::SetPlayer(double& userBattleHP, int& userBattleMP)
+{
+	battleHP = userBattleHP;
+	battleMP = userBattleMP;
+}
 
 void PlayerStats::SetPlayer(string character, char iconCharacter, int& lvl, int& userHP, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
 	int xp, int coin, int& statPts, double& userBattleHP, int userBattleMP, int& userMP)

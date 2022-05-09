@@ -437,7 +437,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 }
 
 void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items)
+	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats)
 {
 	Items battleItems = items;
 	bool playerFirst = false;
@@ -445,6 +445,20 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	bool escape = false;
 	int layerOneBattleMP = userBattleMP;
 	double layerOneBattleHP = userBattleHP;
+	PlayerStats battleStats = playerStats;
+	string character;
+	if (userChar =='M')
+	{
+		character = "Mario";
+	}
+	else if (userChar == 'L')
+	{
+		character = "Luigi";
+	}
+	else if (userChar == 'T')
+	{
+		character = "Toad";
+	}
 
 	BattleSetUp(map);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
@@ -518,10 +532,14 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		cout << "                        " << static_cast<int>(stats[7]) << " XP \n";
 		cout << "                        " << static_cast<int>(stats[10]) << " Coins\n";
 		Sleep(5000);
+		
 	}
+
+	battleStats.SetPlayer(layerOneBattleHP, layerOneBattleMP);
 	items = battleItems;
 	userBattleHP = layerOneBattleHP;
 	userBattleMP = layerOneBattleMP;
+	playerStats = battleStats;
 }
 
 void BattleMechanics::CritChance(double& critSucess, bool success) 

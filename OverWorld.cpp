@@ -207,7 +207,7 @@ void OverWorld::IfBattleEncounted()
         while (battleState)
         {
             battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items);
+                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats);
         }
    
         mapsInput.StepCountReset();

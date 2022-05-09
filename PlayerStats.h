@@ -9,6 +9,8 @@ class PlayerStats
 public:
 	PlayerStats();
 
+	void SetPlayer(double& userBattleHP, int& userBattleMP);
+
 	void SetPlayer(string character, char charCharacter, int& lvl, int& hp, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
 		int xp, int coin, int& statPts , double& userBattleHP, int userBattleMP, int& MP);
 
