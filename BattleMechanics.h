@@ -22,7 +22,7 @@ public:
 	void BossBattleSetUp(int& bossesBeaten);
 
 	void BossBattleTriggered(int& bossesBeaten, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-		double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items);
+		double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats);
 
 	void BattleSetUp(int map);
 

@@ -42,7 +42,7 @@ void BattleMechanics::BossBattleSetUp(int& bossesBeaten)
 	
 }
 void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items)
+	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats)
 {
 	Items battleItems = items;
 	bool playerFirst = false;
@@ -50,7 +50,7 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 	bool escape = false;
 	int layerOneBattleMP = userBattleMP;
 	double layerOneBattleHP = userBattleHP;
-
+	PlayerStats battleStats = playerStats;
 
 	BossBattleSetUp(bossesBeaten);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
@@ -125,9 +125,11 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 		cout << "                        " << static_cast<int>(stats[10]) << " Coins\n";
 		Sleep(5000);
 	}
+	battleStats.SetPlayer(layerOneBattleHP, layerOneBattleMP);
 	items = battleItems;
 	userBattleMP = layerOneBattleMP;
 	userBattleHP = layerOneBattleHP;
+	playerStats = battleStats;
 		
 
 }
@@ -446,19 +448,6 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	int layerOneBattleMP = userBattleMP;
 	double layerOneBattleHP = userBattleHP;
 	PlayerStats battleStats = playerStats;
-	string character;
-	if (userChar =='M')
-	{
-		character = "Mario";
-	}
-	else if (userChar == 'L')
-	{
-		character = "Luigi";
-	}
-	else if (userChar == 'T')
-	{
-		character = "Toad";
-	}
 
 	BattleSetUp(map);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
@@ -474,7 +463,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
 		
-			if (layerOneBattleHP == 0)
+			if (layerOneBattleHP <= 0)
 			{
 				win = false;
 				battleState = false;
@@ -503,7 +492,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 			Sleep(500);
 			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
-			if(layerOneBattleHP == 0)
+			if(layerOneBattleHP <= 0)
 			{
 				win = false;
 				battleState = false;

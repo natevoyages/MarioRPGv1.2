@@ -930,7 +930,7 @@ void OverWorld::CollisonLogic()
             while (battleState)
             {
                 battle.BossBattleTriggered(bossesBeaten, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState,items);
+                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState,items, playerStats);
             }
             bossXCoordinate = 0;
             bossYCoordinate = -1;
