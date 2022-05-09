@@ -36,6 +36,12 @@ public:
 	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
 		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items);
 
+	void CritChance(double& critSucess, int success);
+
+	void HitChance(double& hitSuccess, bool success);
+
+	void RunAwayChance(double& escapeSuccess, bool& success);
+
 	void SpeedsterGoesFirst(int userSpeed, bool& playerFirst);
 
 	void UserBattleLogic(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed,

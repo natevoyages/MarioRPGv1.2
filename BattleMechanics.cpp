@@ -200,10 +200,31 @@ void BattleMechanics::UserAttackAnimation(char userChar,double damage, double us
 
 void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense,char userChar, int userBattleMP, int userHP, int userMP)
 {
+	bool successHit = false;
+	bool successCrit = false;
 	if (userBattleHP !=0  && stats[1] != 0) {
 		system("cls");
 		EnemyBattleMechanics(userJump, userSpeed, userDefense);
+		HitChance(hitSuccess, successHit);
+		if (!successHit)
+		{
+			damage = 0;
+		}
+		else
+		{
+
+			CritChance(hitSuccess, successHit);
+			if (successHit)
+			{
+				damage = critDamage;
+				specialDamage = specialCrit;
+			}
+		}
 		EnemyBattleLogic();
+		if (!enemyPowAttack)
+		{
+			damage = specialDamage;
+		}
 		PrintEnemyIdle();
 		PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
 		Sleep(300);
@@ -214,8 +235,20 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		system("cls");
 		PrintEnemyIdle();
 		PrintUserAttacked(userChar, userBattleMP, userHP, userMP, userBattleHP);
-		cout << fixed << setprecision(2) << "\n        " << damage << " DAMAGE TAKEN !\n";
+
+		if (successHit && successCrit)
+		{
+			cout << fixed << setprecision(2) << "\n        " << damage << " CRITICAL DAMAGE TAKEN !\n";
+		}
+		else if(!successHit)
+		{
+			cout << "\n         ATTACK MISSED!\n";
+		}
+		else {
+			cout << fixed << setprecision(2) << "\n        " << damage << " DAMAGE TAKEN !\n";
+		}
 		Sleep(350);
+
 	}
 }
 
@@ -406,6 +439,33 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	items = battleItems;
 }
 
+void BattleMechanics::CritChance(double& critSucess, int success) 
+{
+	srand(time(0));
+	if ((rand() % 100) + 1 < critSucess)
+	{
+		success = true;
+	}
+}
+
+void BattleMechanics::HitChance(double& hitSuccess, bool success) 
+{
+	srand(time(0));
+	if ((rand() % 100) + 1 < hitSuccess)
+	{
+		success = true;
+	}
+}
+
+void BattleMechanics::RunAwayChance(double& escapeSuccess, bool& success)
+{
+	srand(time(0));
+	if((rand() % 100) + 1 < escapeSuccess)
+	{
+		success = true;
+	}
+}
+
 void BattleMechanics::SpeedsterGoesFirst(int userSpeed, bool& playerFirst)
 {
 	int coinFlip = -1;
@@ -438,8 +498,8 @@ void BattleMechanics::UserBattleLogic(double userBattleHP, int userBattleMP, dou
 	specialDamage = userFlowerPower * (19.2 / (15 + stats[6]));
 	critDamage = 1.5 * damage;
 	specialCrit = 1.5 * specialDamage;
-	hitSuccess = 85  + (userSpeed * (5.0 / 7.2 + stats[5]));   // 85 is the hit rate for users
-	critSuccess = 45 + (userJump * (5.0 / 5.0 + stats[3])); //45 is the crit rate for users
+	hitSuccess = 85  + (userSpeed - stats[5]);   // 85 is the hit rate for users
+	critSuccess = 45 + (userJump - stats[3]); //45 is the crit rate for users
 }
 
 void BattleMechanics::EnemyBattleMechanics(double userJump, double userSpeed, double userDefense)
@@ -448,8 +508,8 @@ void BattleMechanics::EnemyBattleMechanics(double userJump, double userSpeed, do
 	specialDamage = stats[4] * (5.0 / (15.0 + userDefense));
 	critDamage = 1.5 * damage;
 	specialCrit = 1.5 * specialDamage;
-	hitSuccess = stats[8] + (stats[5] * (5.0 / 5.0 + userSpeed));
-	critSuccess = stats[9] + (stats[3] * (5.0 / 5.0 + userJump));
+	hitSuccess = stats[8] + (stats[5] - userSpeed);
+	critSuccess = stats[9] + (stats[3] - userJump);
 }
 
 void BattleMechanics::EnemyBattleLogic()
