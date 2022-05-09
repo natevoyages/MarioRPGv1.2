@@ -136,5 +136,6 @@ private:
 	int userBattleMP;
 
 	int bossesBeaten;
+
 };
 #endif

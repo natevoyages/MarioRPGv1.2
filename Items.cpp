@@ -488,7 +488,7 @@ void Items::UseRedMushroom(double& battleHP, int healthPoints)
 	if ((healthPoints - battleHP) >= 15)
 	{
 		redMushroom--;
-		battleHP += 15;
+		battleHP = battleHP + 15;
 	}
 
 	else
@@ -503,7 +503,7 @@ void Items::UseMegaRedMushroom(double& battleHP, int healthPoints)
 	if ((healthPoints - battleHP) >= 50)
 	{
 		megaRedMushroom--;
-		battleHP += 50;
+		battleHP = battleHP + 50;
 		
 	}
 	else
@@ -518,7 +518,7 @@ void Items::UseStarDust(int& battleMP, int magicPoints)
 {
 	
 	if ((magicPoints - battleMP) >= 15) {
-		battleMP += 10;
+		battleMP == battleMP + 10;
 		starDust--;
 	}
 	else
@@ -536,7 +536,7 @@ void Items::UseStarDust(int& battleMP, int magicPoints)
 void Items::UseStar(int& stepCount)
 {
 	star--;
-	stepCount -= 300;
+	stepCount = -300;
 }
 
 void Items::UsePowBlock(double& damage)

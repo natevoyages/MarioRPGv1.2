@@ -56,11 +56,11 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 		{
 			bool playerTurnOver = false;
 			Sleep(500);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
+			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
 			while (!playerTurnOver) {
 				PlayerTurn(userBattleHP, userBattleMP, userPower,
-					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver);
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
 			if (userBattleHP == 0)
 			{
@@ -86,10 +86,10 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 			Sleep(500);
 			while (!playerTurnOver) {
 				PlayerTurn(userBattleHP, userBattleMP, userPower,
-					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver);
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
 			Sleep(500);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
+			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
 			if (userBattleHP == 0)
 			{
@@ -194,15 +194,28 @@ void BattleMechanics::UserAttackAnimation(char userChar,double damage, double us
 	system("cls");
 	PrintEnemyAttacked();
 	PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
-	cout << fixed << setprecision(2) << "\n         " << damage << " DAMAGE DEALT !\n";
+	if (userSuccessHit) {
+		if (userSuccessCrit)
+		{
+			cout << fixed << setprecision(2) << "\n         " << damage << " CRITICAL DAMAGE DEALT !\n";
+		}
+
+		else 
+		{
+			cout << fixed << setprecision(2) << "\n         " << critDamage << " DAMAGE DEALT !\n";
+		}
+	}
+	else{
+		cout << fixed << setprecision(2) << "\n         MISSED! NO DAMAGE DEALT !\n";
+	}
 }
 
 
-void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense,char userChar, int userBattleMP, int userHP, int userMP)
+void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense,char userChar, int userBattleMP, int userHP, int userMP, bool& escape)
 {
 	bool successHit = false;
 	bool successCrit = false;
-	if (userBattleHP !=0  && stats[1] != 0) {
+	if ((userBattleHP !=0  && stats[1] != 0) && !escape) {
 		system("cls");
 		EnemyBattleMechanics(userJump, userSpeed, userDefense);
 		HitChance(hitSuccess, successHit);
@@ -253,10 +266,10 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 }
 
 void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower,
-	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP, Items& battleItems ,bool& playerTurnOver) 
+	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP, Items& battleItems ,bool& playerTurnOver,bool& escape)
 {
 	bool optionSelected = false;
-	if (userBattleHP != 0 && stats[1] != 0)   // int battleMP, int userHP, int userMP, double& userBattleHP
+	if ((userBattleHP != 0 && stats[1] != 0) && !escape)   // int battleMP, int userHP, int userMP, double& userBattleHP
 	{
 		menu.SetUpMenu();
 		while (!optionSelected) 
@@ -273,6 +286,22 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		if (attackSelected)
 		{
+			userSuccessHit = false;
+			userSuccessCrit = false;
+			HitChance(hitSuccess, userSuccessHit);
+			if (!userSuccessHit)
+			{
+				damage = 0;
+			}
+			else
+			{
+				damage = damage;
+				CritChance(critSuccess, userSuccessHit);
+				if (userSuccessCrit)
+				{
+					damage = critDamage;
+				}
+			}
 			UserAttackAnimation(userChar, damage, userBattleHP, userBattleMP,  userHP,  userMP);
 			stats[1] = stats[1] - damage;
 
@@ -286,13 +315,43 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		else if (spAttackSelected)
 		{
-			UserAttackAnimation(userChar, specialDamage, userBattleHP, userBattleMP, userHP, userMP);
-			stats[1] = stats[1] - specialDamage;
-			if (stats[1] < 0)
-			{
-				stats[1] = 0;
+			if (userBattleMP >= 3) {
+				userBattleMP = userBattleMP - 3;
+				userSuccessHit = false;
+				userSuccessCrit = false;
+				HitChance(hitSuccess, userSuccessHit);
+				if (!userSuccessHit)
+				{
+					damage = 0;
+				}
+				else
+				{
+					damage = specialDamage;
+					CritChance(critSuccess, userSuccessCrit);
+					if (userSuccessCrit)
+					{
+						damage = specialCrit;
+					}
+				}
+				UserAttackAnimation(userChar, specialDamage, userBattleHP, userBattleMP, userHP, userMP);
+				stats[1] = stats[1] - damage;
+				if (stats[1] < 0)
+				{
+					stats[1] = 0;
+				}
+				playerTurnOver = true;
 			}
-			playerTurnOver = true;
+			else
+			{
+				system("cls");
+				PrintEnemyIdle();
+				PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
+				cout << "\n         NOT ENOUGH MP!\n";
+				Sleep(300);
+				playerTurnOver = false;
+				optionSelected = false;
+
+			}
 		}
 
 		while (itemSelected)
@@ -336,16 +395,25 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		}
 
-
+		
 		if (runSelected)
 		{
+			bool runAway = false;
+			RunAwayChance(escapeSucess, runAway);
 			system("cls");
 			PrintEnemyIdle();
 			PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
-			cout << "\n         OH NO! RUN FAILED!\n";
-			//ESCAPED!
-			//FAILED TO ESCAPE!
+			if (runAway)
+			{
+				cout << "\n         YOU RAN AWAY!\n";
+			}
+			else
+			{
+				cout << "\n         OH NO! RUN FAILED!\n";
+			}
+
 			playerTurnOver = true;
+			escape = true;
 		}
 		
 	}
@@ -370,11 +438,11 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		{
 			bool playerTurnOver = false;
 			Sleep(500);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
+			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
 			while (!playerTurnOver) {
 				PlayerTurn(userBattleHP, userBattleMP, userPower,
-					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver);
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
 		
 			if (userBattleHP == 0)
@@ -401,10 +469,10 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 			Sleep(500);
 			while (!playerTurnOver) {
 				PlayerTurn(userBattleHP, userBattleMP, userPower,
-					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver);
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
 			Sleep(500);
-			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints);
+			EnemyTurn(userBattleHP, userJump, userSpeed, userDefense, userChar, userBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
 			if(userBattleHP == 0)
 			{
@@ -439,19 +507,17 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	items = battleItems;
 }
 
-void BattleMechanics::CritChance(double& critSucess, int success) 
+void BattleMechanics::CritChance(double& critSucess, bool success) 
 {
-	srand(time(0));
-	if ((rand() % 100) + 1 < critSucess)
+	if ((rand() % 100) < critSucess)
 	{
 		success = true;
 	}
 }
 
-void BattleMechanics::HitChance(double& hitSuccess, bool success) 
+void BattleMechanics::HitChance(double& hitSuccess, bool& success) 
 {
-	srand(time(0));
-	if ((rand() % 100) + 1 < hitSuccess)
+	if ((rand() % 100) < hitSuccess)
 	{
 		success = true;
 	}
@@ -459,8 +525,7 @@ void BattleMechanics::HitChance(double& hitSuccess, bool success)
 
 void BattleMechanics::RunAwayChance(double& escapeSuccess, bool& success)
 {
-	srand(time(0));
-	if((rand() % 100) + 1 < escapeSuccess)
+	if((rand() % 100) < escapeSuccess)
 	{
 		success = true;
 	}
@@ -498,8 +563,9 @@ void BattleMechanics::UserBattleLogic(double userBattleHP, int userBattleMP, dou
 	specialDamage = userFlowerPower * (19.2 / (15 + stats[6]));
 	critDamage = 1.5 * damage;
 	specialCrit = 1.5 * specialDamage;
-	hitSuccess = 85  + (userSpeed - stats[5]);   // 85 is the hit rate for users
+	hitSuccess = 85 + (userSpeed - stats[5]);   // 85 is the hit rate for users
 	critSuccess = 45 + (userJump - stats[3]); //45 is the crit rate for users
+	escapeSucess = (userSpeed - stats[5]) + 65;
 }
 
 void BattleMechanics::EnemyBattleMechanics(double userJump, double userSpeed, double userDefense)
