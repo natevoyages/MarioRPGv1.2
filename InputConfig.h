@@ -28,6 +28,8 @@ public:
 
     void CharSelectInputLogic(int& yCharSelect, const int numCharacters, bool& charSelect);
 
+    void ShopMenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& menuToggled);
+
     void MenuInputLogic(int& yCharSelect, int numCharacters, bool& charSelect, bool& menuToggled);
 
     void BattleItemMenuInputLogic(int& yItemMenu, int numMenuOptions, bool& notExited, bool& selectedItem, bool& succesfullySlected, bool& itemSelected);

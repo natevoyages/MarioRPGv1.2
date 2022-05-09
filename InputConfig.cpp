@@ -429,6 +429,53 @@ void InputConfig::CharSelectInputLogic(int& yCharSelect, const int numCharacters
 
     }
 }
+
+void InputConfig::ShopMenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& exit)
+{
+    switch (userInput)
+    {
+    case UP:
+        if (yMenu != 0 && !select)
+        {
+            yMenu--;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case DOWN:
+        if (yMenu != numMenuOptions - 1 && !select)
+        {
+            yMenu++;
+            break;
+        }
+
+        else
+        {
+            yMenu = yMenu;
+            break;
+        }
+
+    case ENTER:
+        select = true;
+        break;
+
+    case BACK:
+         exit = true;
+         break;
+
+    case STOP:
+        yMenu = yMenu;
+        break;
+
+    }
+}
+
+
 void InputConfig::MenuInputLogic(int& yMenu, int numMenuOptions, bool& select, bool& menuToggled)
 {
     switch (userInput)

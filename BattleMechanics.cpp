@@ -403,7 +403,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		cout << "                        " << static_cast<int>(stats[10]) << " Coins\n";
 		Sleep(5000);
 	}
-
+	items = battleItems;
 }
 
 void BattleMechanics::SpeedsterGoesFirst(int userSpeed, bool& playerFirst)

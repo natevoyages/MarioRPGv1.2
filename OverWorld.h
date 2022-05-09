@@ -18,13 +18,13 @@ public:
 
 	bool GetNotGameOver() const;
 
+	void Shop(int& coins);
+
 	void LoadGame();
 
 	void SaveGame();
 
 	void BedRest();
-
-	void Shop();
 
 	void ExitMapCoordinates();
 
@@ -136,6 +136,5 @@ private:
 	int userBattleMP;
 
 	int bossesBeaten;
-	
 };
 #endif

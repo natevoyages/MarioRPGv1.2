@@ -43,6 +43,28 @@ void Items::OverWorldSetUp()
 
 }
 
+void Items::ShopSetup() {
+	numBattleItemOptions = 6;
+	overworldItemOptions[0] = "	    	   RedShrm:       ";
+	overworldItemOptions[1] = "	    	   MegaRdShrm:    ";
+	overworldItemOptions[2] = "	    	   StarDust:      ";
+	overworldItemOptions[3] = "	    	   GreenShrm:     ";
+	overworldItemOptions[4] = "	    	   Star:          ";
+	overworldItemOptions[5] = "	    	   POWBlk:        ";
+	overworldItemPrice[0] = 20;
+	overworldItemPrice[1] = 40;
+	overworldItemPrice[2] =  100;
+	overworldItemPrice[3] = 1500;
+	overworldItemPrice[4] = 300;
+	overworldItemPrice[5] =  500;
+	stringPrice[0] = "20";
+	stringPrice[1] = "40";
+	stringPrice[2] = "100";
+	stringPrice[3] = "1500";
+	stringPrice[4] = "300";
+	stringPrice[5] = "500";
+}
+
 void Items::PrintMenuItems()
 {
 	system("cls");
@@ -297,9 +319,162 @@ void Items::PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, Play
 
 }
 
-void Items::ShopMenu(int& coins) 
-{
 
+void Items::ShopMenu(int& yItemMenu, bool& selectedItem, int& coins, bool& Exit)
+{
+	system("cls");
+	cout << "\n\n\n\n";
+	cout << "	  	    	    	         _/_/_/  _/    _/    _/_/    _/_/_/           \n";
+	cout << "	 	    	     	      _/        _/    _/  _/    _/  _/    _/      _/  \n";
+	cout << "	 	    	     	       _/_/    _/_/_/_/  _/    _/  _/_/_/             \n";
+	cout << "		    	      	         _/  _/    _/  _/    _/  _/                   \n";
+	cout << "	    	  	    	  _/_/_/    _/    _/    _/_/    _/            _/      \n\n\n\n";
+	for (int i = 0; i < numBattleItemOptions; i++)
+	{
+		if (i == yItemMenu)
+		{
+			if (i < 2)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(8) << "[*]\n\n";
+			}
+			else if (i == 2)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(7) << "[*]\n\n";
+			}
+
+			else if (i == 3)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(6) << "[*]\n\n";
+			}
+
+			else if (i == 5)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(7) << "[*]\n\n";
+			}
+
+			else if (i == 4)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(7) << "[*]\n\n";
+			}
+
+		}
+
+		else
+		{
+			if (i < 2)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(8) << "[ ]\n\n";
+			}
+			else if (i == 2) 
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(7) << "[ ]\n\n";
+			}
+
+			else if (i == 3)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(6) << "[ ]\n\n";
+			}
+
+			else if (i == 5)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(7) << "[ ]\n\n";
+			}
+
+			else if (i == 4)
+			{
+				cout << overworldItemOptions[i] << " " << stringPrice[i] << setw(7) << "[ ]\n\n";
+			}
+		}
+	}
+	cout << "	    	   Press 'z' = SELECT              Press 'x' = BACK     \n\n";
+	if (yItemMenu == 0 && selectedItem)
+	{
+		if (overworldItemPrice[0] > coins)
+		{
+				cout << "	    	   NOT ENOUGH COINS\n\n";
+		}
+		else
+		{
+				BuyRedMushroom(coins);
+				cout << "	    	   THANK YOU!\n\n";
+		}
+	
+		Sleep(600);
+		selectedItem = false;
+	}
+
+	if (yItemMenu == 1 && selectedItem)
+	{
+		if (overworldItemPrice[1] > coins)
+		{
+			cout << "	    	   NOT ENOUGH COINS\n\n";
+		}
+		else
+		{
+			BuyMegaRedMushroom(coins);
+			cout << "	    	   THANK YOU!\n\n";
+		}
+		Sleep(600);
+		selectedItem = false;
+	}
+	if (yItemMenu == 2 && selectedItem)
+	{
+		if (overworldItemPrice[2] > coins)
+		{
+			cout << "	    	   NOT ENOUGH COINS\n\n";
+		}
+		else
+		{
+			BuyStarDust(coins);
+			cout << "	    	   THANK YOU!\n\n";
+		}
+		Sleep(600);
+		selectedItem = false;
+	}
+	if (yItemMenu == 3 && selectedItem)
+	{
+		if (overworldItemPrice[3] > coins)
+		
+		{
+			cout << "	    	   NOT ENOUGH COINS\n\n";
+		}
+		else
+		{
+			BuyGreenMushroom(coins);
+			cout << "	    	   THANK YOU!\n\n";
+		}
+		Sleep(600);
+		selectedItem = false;
+	}
+	if (yItemMenu == 4 && selectedItem)
+	{
+		if (overworldItemPrice[4] > coins)
+
+		{
+			cout << "	    	   NOT ENOUGH COINS\n\n";
+		}
+		else
+		{
+			BuyStar(coins);
+			cout << "	    	   THANK YOU!\n\n";
+		}
+		Sleep(600);
+		selectedItem = false;
+	}
+	if (yItemMenu == 5 && selectedItem)
+	{
+		if (overworldItemPrice[5] > coins)
+
+		{
+			cout << "	    	   NOT ENOUGH COINS\n\n";
+		}
+		else
+		{
+			BuyPowBlock(coins);
+			cout << "	    	   THANK YOU!\n\n";
+		}
+		Sleep(600);
+	}
 }
 
 int Items::GetNumOptions() const

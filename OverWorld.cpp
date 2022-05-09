@@ -34,20 +34,27 @@ OverWorld::OverWorld()
      return notGameOver;
  }
 
-void OverWorld::Shop()
+void OverWorld::Shop(int& coins)
 {
+    int shopCoins = coins;
+    int numMenuOptions = 6;
     bool exit = false;
+    bool selected = false;
+    int yMenu = 0;
     xCoordinate = prevXCoordinate;
     yCoordinate = prevYCoordinate;
     system("cls");
     PrintShopKeep();
     Sleep(1500);
-    /*while (!exit)
+    items.ShopSetup();
+    while (!exit)
     {
-         ShopMenu();
-
-
-    }*/
+        Sleep(75);
+        mapsInput.MenuInput();
+        mapsInput.ShopMenuInputLogic(yMenu, numMenuOptions, selected, exit);
+        items.ShopMenu(yMenu, selected, shopCoins, exit);
+    }
+    coins = shopCoins;
 }
 
 void OverWorld::ExitMapCoordinates()
@@ -887,7 +894,7 @@ void OverWorld::CollisonLogic()
 
     else if (xCoordinate == shopKeepXCoordinate && yCoordinate == shopKeepYCoordinate)
     {
-        Shop();
+        Shop(userCoins);
     }
 
     else if (xCoordinate == bedXCoordinate && yCoordinate == bedYCoordinate)

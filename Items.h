@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 class Items
@@ -15,6 +16,8 @@ public:
 	void BattleTabSetUp();
 
 	void OverWorldSetUp();
+
+	void ShopSetup();
 
 	void PrintMenuItems();
 
@@ -29,7 +32,8 @@ public:
 
 	void PrintOverWorldMenuItemLogic(int& yItemMenu, bool& selectedItem, PlayerStats& playerStats, int& menuStep);
 
-	void ShopMenu(int& coins);
+
+	void ShopMenu(int& yItemMenu, bool& selectedItem, int& coins, bool& Exit);
 
 	int GetNumOptions() const;
 
@@ -68,6 +72,8 @@ private:
 	int battleItemQuantity[4];
 	string overworldItemOptions[6];
 	int overworldItemQuantity[6];
+	int overworldItemPrice[6];
+	string stringPrice[6];
 
 };
 #endif
