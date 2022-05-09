@@ -209,6 +209,9 @@ void OverWorld::IfBattleEncounted()
         }
         mapsInput.StepCountReset();
         Sleep(150);
+        playerStats.LevelUp(userEXP);
+        playerStats.TransferPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+            userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
     }
 }
 
@@ -917,6 +920,9 @@ void OverWorld::CollisonLogic()
             saveYCoordinate = height / 2;
             xCoordinate = prevXCoordinate;
             yCoordinate = prevYCoordinate;
+            playerStats.LevelUp(userEXP);
+            playerStats.TransferPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
     }
 
     else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )

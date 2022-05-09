@@ -19,6 +19,24 @@ PlayerStats::PlayerStats()
 	statPoints = 0;
 }
 
+void PlayerStats::TransferPlayer(string character, char iconCharacter, int& lvl, int& userHP, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
+	int xp, int coin, int& statPts, double& userBattleHP, int userBattleMP, int& userMP)
+{
+	lvl = level;
+	userHP = healthPoints;
+	pwr = power;
+	jmp = jump;
+	flwrPwr = flowerPower;
+	spd = speed;
+	def = defense;
+	xp = experiencePoints;
+    coin = coins;
+	statPts = statPoints;
+	userBattleHP = battleHP;
+	userBattleMP = battleMP;
+	userMP = magicPoints;
+}
+
 void PlayerStats::SetPlayer(string character, char iconCharacter, int& lvl, int& userHP, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
 	int xp, int coin, int& statPts, double& userBattleHP, int userBattleMP, int& userMP)
 {
@@ -197,4 +215,45 @@ void PlayerStats::UseGreenMushroom(int& greenMushroom)
 	greenMushroom--;
 	healthPoints++;
 	battleHP = healthPoints;
+}
+
+void PlayerStats::LevelUpStats()
+{
+	statPoints = statPoints + 3;
+	healthPoints = healthPoints + 2;
+	magicPoints = magicPoints + 3;
+	power = power + 2;
+	jump = jump + 2;
+	flowerPower =  flowerPower +2;
+	speed = speed + 2;
+	defense = defense + 1;
+
+	battleHP = healthPoints;
+}
+
+void PlayerStats::LevelUp(int experiencePoints)
+{
+	int newLevel = 3;
+	int numLevelUps = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if(experiencePoints >= eXPThresholds[i])
+		{
+			newLevel++;
+		}
+	}
+	while (level < newLevel)
+	{
+		numLevelUps++;
+		system("cls");
+		level++;
+		cout << "\n\n\n\n            LEVEL UP +" << numLevelUps << "\n\n";
+
+		LevelUpStats();
+		Sleep(450);
+		system("cls");
+		cout << "\n\n\n\n            LEVEL UP \n\n";
+		Sleep(200);
+	}
+
 }
