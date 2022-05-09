@@ -9,8 +9,6 @@ class PlayerStats
 public:
 	PlayerStats();
 
-	void TransferPlayer(string character, char iconCharacter, int& lvl, int& userHP, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def, int xp, int coin, int& statPts, double& userBattleHP, int userBattleMP, int& userMP);
-
 	void SetPlayer(string character, char charCharacter, int& lvl, int& hp, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
 		int xp, int coin, int& statPts , double& userBattleHP, int userBattleMP, int& MP);
 
@@ -31,6 +29,8 @@ public:
 	int GetSpdStat() const;
 
 	int GetDefStat() const;
+
+	int GetLevel() const;
 
 	void PrintStats();
 

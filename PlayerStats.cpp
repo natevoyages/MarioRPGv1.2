@@ -19,23 +19,6 @@ PlayerStats::PlayerStats()
 	statPoints = 0;
 }
 
-void PlayerStats::TransferPlayer(string character, char iconCharacter, int& lvl, int& userHP, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
-	int xp, int coin, int& statPts, double& userBattleHP, int userBattleMP, int& userMP)
-{
-	lvl = level;
-	userHP = healthPoints;
-	pwr = power;
-	jmp = jump;
-	flwrPwr = flowerPower;
-	spd = speed;
-	def = defense;
-	xp = experiencePoints;
-    coin = coins;
-	statPts = statPoints;
-	userBattleHP = battleHP;
-	userBattleMP = battleMP;
-	userMP = magicPoints;
-}
 
 void PlayerStats::SetPlayer(string character, char iconCharacter, int& lvl, int& userHP, int& pwr, int& jmp, int& flwrPwr, int& spd, int& def,
 	int xp, int coin, int& statPts, double& userBattleHP, int userBattleMP, int& userMP)
@@ -101,6 +84,10 @@ int PlayerStats::GetSpdStat() const
 int PlayerStats::GetDefStat() const
 {
 	return defense;
+}
+int PlayerStats::GetLevel() const
+{
+	return level;
 }
 
 void PlayerStats::PrintStats()
@@ -229,6 +216,7 @@ void PlayerStats::LevelUpStats()
 	defense = defense + 1;
 
 	battleHP = healthPoints;
+	battleMP = magicPoints;
 }
 
 void PlayerStats::LevelUp(int experiencePoints)

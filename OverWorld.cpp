@@ -210,9 +210,8 @@ void OverWorld::IfBattleEncounted()
         mapsInput.StepCountReset();
         Sleep(150);
         playerStats.LevelUp(userEXP);
-        playerStats.TransferPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-            userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-    }
+        SetStats();
+         }
 }
 
 void OverWorld::SetUpMap()
@@ -663,6 +662,8 @@ void OverWorld::SetStats()
     
     userBattleMP = playerStats.GetPlayerBattleMP();
 
+    userMagicPoints = playerStats.GetPlayerMP();
+
     userPower = playerStats.GetPowStat();
     
     userJump = playerStats.GetJmpStat();
@@ -672,6 +673,8 @@ void OverWorld::SetStats()
     userSpeed = playerStats.GetSpdStat();
 
     userDefense = playerStats.GetDefStat();
+
+    userLevel = playerStats.GetLevel();
  
 }
 
@@ -921,8 +924,7 @@ void OverWorld::CollisonLogic()
             xCoordinate = prevXCoordinate;
             yCoordinate = prevYCoordinate;
             playerStats.LevelUp(userEXP);
-            playerStats.TransferPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+            SetStats();
     }
 
     else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )
