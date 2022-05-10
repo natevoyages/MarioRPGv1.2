@@ -71,7 +71,7 @@ void StartMenu::PrintStartMenu()
 }
 
 
-void StartMenu::TitleMenu(bool& play, bool& startNewGame)
+void StartMenu::TitleMenu(bool& play, bool& startNewGame, bool& programRunning)
 {
     while (titleMenu)
     {
@@ -87,12 +87,13 @@ void StartMenu::TitleMenu(bool& play, bool& startNewGame)
         else if (yMenu == 1 && select) 
         {
             play = false;
+            programRunning = false;
         }
 
     }
 }
 
-void StartMenu::TitleMenu(bool& play, bool& startNewGame, bool& resumeGame)
+void StartMenu::TitleMenu(bool& play, bool& startNewGame, bool& resumeGame, bool& programRunning)
 {
     while (titleMenu)
     {
@@ -112,6 +113,7 @@ void StartMenu::TitleMenu(bool& play, bool& startNewGame, bool& resumeGame)
         else if (yMenu == 2 && select)
         {
             play = false;
+            programRunning = false;
         }
     }
 }

@@ -119,6 +119,7 @@ private:
 
 	bool menuToggled;
 	bool notGameOver;
+
 	char userCharacter;
 	string stringCharacter;
 	int userLevel;

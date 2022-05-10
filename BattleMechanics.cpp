@@ -51,7 +51,6 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 	int layerOneBattleMP = userBattleMP;
 	double layerOneBattleHP = userBattleHP;
 	PlayerStats battleStats = playerStats;
-
 	BossBattleSetUp(bossesBeaten);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
 	if (!playerFirst) {
@@ -113,6 +112,7 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 	SetBattleTrigger();
 	if (!win && !escape) {
 		notGameOver = false;
+		"\n\n\n\n\n\n\n\                      GAME OVER!\n\n";
 	}
 	else if (win)
 	{// 7 and 10 are xp and coins respectfully
@@ -276,6 +276,13 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		userBattleMP = layerTwoBattleMP;
 
 	}
+	else {
+		userBattleHP = layerTwoBattleHP;
+		userBattleMP = layerTwoBattleMP;
+		system("cls");
+		PrintEnemyIdle();
+		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
+	}
 }
 
 void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower,
@@ -432,6 +439,9 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 	}
 	else {
 		playerTurnOver = true;
+		system("cls");
+		PrintEnemyIdle();
+		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 	}
 	
 	userBattleHP = layerTwoBattleHP;

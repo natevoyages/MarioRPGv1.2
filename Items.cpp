@@ -141,13 +141,13 @@ void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double&
 		{
 			cout << "	    	   You posses ZERO of this item\n\n";
 			selectedItem = false;
-			yItemMenu == 1;
+			yItemMenu = 1;
 		}
 		else if (battleHP == userHP)
 		{
 			cout << "	    	   HP FULL\n\n";
 			selectedItem = false;
-			yItemMenu == 1;
+			yItemMenu = 1;
 		}
 		else
 		{
@@ -164,13 +164,13 @@ void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double&
 		{
 			cout << "	    	   You posses ZERO of this item\n\n";
 			selectedItem = false;
-			yItemMenu == 2;
+			yItemMenu = 2;
 		}
 		else if (battleMP == userMP)
 		{
 			cout << "	    	   MP FULL\n\n";
 			selectedItem = false;
-			yItemMenu == 2;
+			yItemMenu = 2;
 		}
 		else
 		{
@@ -188,7 +188,7 @@ void Items::PrintBattleItemMenuLogic(int& yItemMenu, bool& selectedItem, double&
 		{
 			cout << "	    	   You posses ZERO of this item\n\n";
 			selectedItem = false;
-			yItemMenu == 3;
+			yItemMenu = 3;
 		}
 		else
 		{
@@ -517,8 +517,8 @@ void Items::UseMegaRedMushroom(double& battleHP, int healthPoints)
 void Items::UseStarDust(int& battleMP, int magicPoints)
 {
 	
-	if ((magicPoints - battleMP) >= 15) {
-		battleMP == battleMP + 10;
+	if ((magicPoints - battleMP) >= 10) {
+		battleMP = battleMP + 10;
 		starDust--;
 	}
 	else

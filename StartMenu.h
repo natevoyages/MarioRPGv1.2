@@ -20,9 +20,10 @@ public:
 
 	void TitleScreen();
 
-	void TitleMenu(bool& play, bool& startNewGame);
 
-	void TitleMenu(bool& play, bool& startNewGame, bool& resumeGame);
+	void TitleMenu(bool& play, bool& startNewGame, bool& programRunning);
+
+	void TitleMenu(bool& play, bool& startNewGame, bool& resumeGame, bool& programRunning);
 
 	void SetResumeStartMenu();
 

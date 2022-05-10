@@ -193,7 +193,7 @@ void PlayerStats::UseMegaRedMushroom(int& megaRedMushroom)
 void PlayerStats::UseStarDust(int& starDust)
 {
 	starDust--;
-	if ((magicPoints - battleMP) >= 15) {
+	if ((magicPoints - battleMP) >= 10){
 		battleMP += 10;
 	}
 	else

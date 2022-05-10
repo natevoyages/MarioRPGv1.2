@@ -125,9 +125,11 @@ void InGameMenu::PrintInGameMenu(bool& open, bool& notGameOver, bool& newMap , P
 		cout << "_/        _/_/    _/            _/        _/    _/_/_/    _/_/_/  _/  _/    _/    _/_/_/  _/    \n";
 		cout << "                                                             _/                      _/         \n";
 		cout << "                                                        _/_/                    _/_/            \n";
+		Sleep(1500);
 		notGameOver = false;
 		newMap = true;
 		open = false;
+
 	
 	}
 	stepCounter = menuStep;
