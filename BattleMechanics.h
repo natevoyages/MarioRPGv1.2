@@ -20,7 +20,7 @@ public:
 	int GetBattleTrigger();
 
 
-	void BattleSetUp(int map, int& bossesBeaten);
+	void BattleSetUp(int map, int bossesBeaten);
 
 
 	void UserAttackAnimation(char userChar, double damage, double userBattleHP, int userBattleMP, int userHP, int userMP);
@@ -31,7 +31,7 @@ public:
 		int userLevel, char userChar, int userHP, int userMP, Items& battleItems, bool& playerTurnOver, bool& escape);
 
 	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, 
-		int userDefense, double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int& bossesBeaten);
+		int userDefense, double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int bossesBeaten);
 
 	
 	void CritChance(double& critSucess, bool success);

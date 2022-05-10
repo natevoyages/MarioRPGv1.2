@@ -142,7 +142,7 @@ void OverWorld::characterTracker()
         !(xCoordinate == shopKeepXCoordinate && yCoordinate == shopKeepYCoordinate) &&
         !(xCoordinate == bedXCoordinate && yCoordinate == bedYCoordinate) && 
         !(xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) &&
-        !((xCoordinate == bossXCoordinate + 1) && yCoordinate == bossYCoordinate))
+        !((xCoordinate == bossXCoordinate - 1) && yCoordinate == bossYCoordinate))
     {
         prevXCoordinate = xCoordinate;
         prevYCoordinate = yCoordinate;
@@ -201,8 +201,9 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
 void OverWorld::IfBattleEncounted()
 {
     bool battleState = false;
-
-     if (stepCounter >= battle.GetBattleTrigger())
+    if (map != 3 && map != 7 && map != 10) // fix me
+    {
+        if (stepCounter >= battle.GetBattleTrigger())
         {
             Sleep(150);
             battleState = true;
@@ -219,42 +220,44 @@ void OverWorld::IfBattleEncounted()
             playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                 userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
         }
-     if (userBattleHP == 0)
-        {
-            PrintGameOver();
-            notGameOver = false;
-            exitMap = true;
-        }
-  
-    else if (bossTriggered)
-    {
-
-        battleState = true;
-        while (battleState)
-        {
-            battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats, bossesBeaten);
-        }
-
-        mapsInput.StepCountReset();
-        Sleep(150);
-        playerStats.LevelUp(userEXP);
-        SetStats();
-        playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-            userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-
         if (userBattleHP == 0)
         {
             PrintGameOver();
             notGameOver = false;
             exitMap = true;
         }
-        bossesBeaten++;
-        xCoordinate = width / 2;
-        yCoordinate =  -1;
+    }
+    else
+    {
+        if (bossTriggered) 
+        {
+            battleState = true;
+            while (battleState)
+            {
+                battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats, bossesBeaten);
+            }
 
+            mapsInput.StepCountReset();
+            Sleep(150);
+            playerStats.LevelUp(userEXP);
+            SetStats();
+            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+        }
+        if (userBattleHP == 0)
+        {
+            PrintGameOver();
+            notGameOver = false;
+            exitMap = true;
+        }
+        else
+        {
+            bossesBeaten++;
+        }
     }
     bossTriggered = false;
+
 }
 
 void OverWorld::SetUpMap()
@@ -962,10 +965,9 @@ void OverWorld::CollisonLogic()
         BedRest();
     }
 
-    else if ((xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) ||  (xCoordinate == (bossXCoordinate + 1) && yCoordinate == bossYCoordinate) )// add second set of coordinates
+    else if ((xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) || (xCoordinate == (bossXCoordinate + 1) && yCoordinate == bossYCoordinate))// add second set of coordinates
     {
         bossTriggered = true;
-        IfBattleEncounted();
     }
     else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )
     {

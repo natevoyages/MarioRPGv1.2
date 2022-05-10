@@ -22,7 +22,7 @@ int BattleMechanics::GetBattleTrigger()
 
 
 
-void BattleMechanics::BattleSetUp(int map, int& bossesBeaten)
+void BattleMechanics::BattleSetUp(int map, int bossesBeaten)
 {
 	if (map == 1 || map == 2)
 	{
@@ -45,8 +45,11 @@ void BattleMechanics::BattleSetUp(int map, int& bossesBeaten)
 	}
 	else if (map == 3)
 	{
-		LoadBirdo();
-		enemySignature = 8;
+		if (bossesBeaten == 0)
+		{
+			LoadBirdo();
+			enemySignature = 8;
+		}
 	}
 
 	else if( map == 5 || map == 6)
@@ -66,10 +69,11 @@ void BattleMechanics::BattleSetUp(int map, int& bossesBeaten)
 	
 	else if (map == 7)
 	{
-
-		LoadMechaBlooper();
-		enemySignature = 9;
-
+		if (bossesBeaten == 1)
+		{
+			LoadMechaBlooper();
+			enemySignature = 9;
+		}
 	}
 
 	else if (map == 9 || map == 10)
@@ -93,10 +97,11 @@ void BattleMechanics::BattleSetUp(int map, int& bossesBeaten)
 	}
 	else if(map == 11)
 	{
-
+		if (bossesBeaten == 2)
+		{
 			LoadKingBoo();
 			enemySignature = 10;
-
+		}
 	}
 	enemyNum = -1;
 }
@@ -111,19 +116,18 @@ void BattleMechanics::UserAttackAnimation(char userChar,double damage, double us
 	system("cls");
 	PrintEnemyAttacked();
 	PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
-	if (userSuccessHit && userSuccessCrit) {
+	if (userSuccessHit) {
+		if (userSuccessCrit)
+		{
+			cout << fixed << setprecision(2) << "\n         " << damage << " CRITICAL DAMAGE DEALT !\n";
+		}
 
-		cout << "\n         CRIT!";
-		Sleep(400);
-		cout << fixed << setprecision(2) << "\n         " << critDamage << " DAMAGE DEALT !\n";
+		else 
+		{
+			cout << fixed << setprecision(2) << "\n         " << critDamage << " DAMAGE DEALT !\n";
+		}
 	}
-	else if (userSuccessHit && !userSuccessCrit)
-	{
-		cout << fixed << setprecision(2) << "\n         " << damage << " DAMAGE DEALT !\n";
-	}
-
-	else
-	{
+	else{
 		cout << fixed << setprecision(2) << "\n         MISSED! NO DAMAGE DEALT !\n";
 	}
 }
@@ -373,7 +377,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 }
 
 void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int& bossesBeaten)
+	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int bossesBeaten)
 {
 	Items battleItems = items;
 	bool playerFirst = false;
