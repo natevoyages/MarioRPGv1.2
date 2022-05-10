@@ -140,7 +140,8 @@ void OverWorld::characterTracker()
     if (!(xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate) && 
         !(xCoordinate == shopKeepXCoordinate && yCoordinate == shopKeepYCoordinate) &&
         !(xCoordinate == bedXCoordinate && yCoordinate == bedYCoordinate) && 
-        !(xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate))
+        !(xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) &&
+        !((xCoordinate == bossXCoordinate - 1) && yCoordinate == bossYCoordinate))
     {
         prevXCoordinate = xCoordinate;
         prevYCoordinate = yCoordinate;
@@ -217,6 +218,12 @@ void OverWorld::IfBattleEncounted()
         playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
             userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
          }
+    if (userBattleHP == 0)
+    {
+        PrintGameOver();
+        notGameOver = false;
+        exitMap = false;
+    }
 }
 
 void OverWorld::SetUpMap()
@@ -925,7 +932,6 @@ void OverWorld::CollisonLogic()
 
     else if ((xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) || (xCoordinate == (bossXCoordinate + 1) && yCoordinate == bossYCoordinate))// add second set of coordinates
     {
-        bool battleState = true;
 
             while (battleState)
             {
@@ -942,7 +948,16 @@ void OverWorld::CollisonLogic()
             SetStats();
             playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
                 userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-
+            if (userBattleHP == 0)
+            {
+                PrintGameOver();
+                notGameOver = false;
+                exitMap = false;
+            }
+            else if (userBattleHP > 0)
+            {
+                battleState = false;
+            }
     }
 
     else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )
@@ -1561,4 +1576,56 @@ void OverWorld::PrintGameWin()
     cout << "                                                          .,:ccccccldKWMMMMWWXxllcccc::;.            \n";                                                                        
     cout << "                                                         ..,;:::::::cxO00000Okl;;::::::;.            \n";
     
+}
+
+void OverWorld::PrintGameOver() {
+
+    system("cls");
+    cout << "               _/_/_/    _/_/    _/      _/  _/_/_/_/       \n";
+    cout << "            _/        _/    _/  _/_/  _/_/  _/              \n";
+    cout << "           _/  _/_/  _/_/_/_/  _/  _/  _/  _/_/_/           \n";
+    cout << "          _/    _/  _/    _/  _/      _/  _/                \n";
+    cout << "           _/_/_/  _/    _/  _/      _/  _/_/_/_/       \n\n\n";
+
+
+    cout << "                    ....   .....    ....                    \n";
+    cout << "                   ..'..   ..''...  .'.. .                  \n";
+    cout << " .'..           .........'...............'.            .'.  \n";
+    cout << "  ......     ..................................    .......  \n";
+    cout << " .........................................................  \n";
+    cout << " .........'..............'..............................'.  \n";
+    cout << "     .'.......'.    .'.......''......'..   ..'......'..     \n";
+    cout << "     .....'. ..      ....'........'. .       . .''....      \n";
+    cout << "     .'.....             ....'.....             ....'.      \n";
+    cout << "     .......                ....               .......      \n";
+    cout << "         .......            ....            .......         \n";
+    cout << "         .....'....     .....''....     .....'.....         \n";
+    cout << "      ....'......... ....'........'.... .'.......'. ..      \n";
+    cout << "     .'.......'......'.......''......'.......'......'..     \n";
+    cout << " .'.......'..............'...............'..............'.  \n";
+    cout << "  ........................................................  \n";
+    cout << " .......     ..................................    .......  \n";
+    cout << "  ....'.         ....'..            .'.....        .'.....  \n";
+    cout << " .'.....        .'.....             .....'.        .....'.  \n";
+    cout << "  ....'..        ....'.             .......        .......  \n";
+    cout << "     .......        ...             ...        .......      \n";
+    cout << "     ...........                            ..........      \n";
+    cout << "     .'.......'.                            .'.........     \n";
+    cout << "         .'.....     ..              ..     .....'.         \n";
+    cout << "          . ..'.    .'..            .'..   ..'. ..          \n";
+    cout << "             ..........             .....'.....             \n";
+    cout << "             ..........     ....    ...........             \n";
+    cout << "         .........................................          \n";
+    cout << "         .'..............................'.........         \n";
+    cout << "            ..'......'.......''......'.......'.             \n";
+    cout << "             ....''......'.......''......'.....             \n";
+    cout << "                 ..     ...      ..     ...             \n\n\n";
+
+
+    cout << "               _/_/    _/      _/  _/_/_/_/  _/_/_/    \n";
+    cout << "            _/    _/  _/      _/  _/        _/    _/   \n";
+    cout << "           _/    _/  _/      _/  _/_/_/    _/_/_/      \n";
+    cout << "          _/    _/    _/  _/    _/        _/    _/     \n";
+    cout << "           _/_/        _/      _/_/_/_/  _/    _/      \n";
+    Sleep(1800);
 }

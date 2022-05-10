@@ -66,7 +66,6 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 			}
 			if (layerOneBattleHP == 0)
 			{
-				win = false;
 				battleState = false;
 			}
 			else if (stats[1] == 0)
@@ -110,9 +109,13 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 		}
 	}
 	SetBattleTrigger();
-	if (!win && !escape) {
-		notGameOver = false;
-		"\n\n\n\n\n\n\n\                      GAME OVER!\n\n";
+	if (!win && !escape && !battleState) 
+	{
+		cout << "\n\n\n\n\n\n\n\                      YOU LOST !\n\n";
+		battleState = false;
+
+		Sleep(800);
+
 	}
 	else if (win)
 	{// 7 and 10 are xp and coins respectfully
@@ -218,13 +221,13 @@ void BattleMechanics::UserAttackAnimation(char userChar,double damage, double us
 }
 
 
-void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense,char userChar, int userBattleMP, int userHP, int userMP, bool& escape)
+void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense, char userChar, int userBattleMP, int userHP, int userMP, bool& escape)
 {
 	bool successHit = false;
 	bool successCrit = false;
 	double layerTwoBattleHP = userBattleHP;
 	int layerTwoBattleMP = userBattleMP;
-	if ((layerTwoBattleHP !=0  && stats[1] != 0) && !escape) {
+	if ((layerTwoBattleHP != 0 && stats[1] != 0) && !escape) {
 		system("cls");
 		EnemyBattleMechanics(userJump, userSpeed, userDefense);
 		HitChance(hitSuccess, successHit);
@@ -262,7 +265,7 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		{
 			cout << fixed << setprecision(2) << "\n        " << damage << " CRITICAL DAMAGE TAKEN !\n";
 		}
-		else if(!successHit)
+		else if (!successHit)
 		{
 			cout << "\n         ATTACK MISSED!\n";
 		}
@@ -271,19 +274,20 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		}
 		Sleep(350);
 		layerTwoBattleHP = layerTwoBattleHP - damage;
+		if (layerTwoBattleHP < 0)
+		{
+			layerTwoBattleHP = 0;
+		}
 
-		userBattleHP = layerTwoBattleHP;
-		userBattleMP = layerTwoBattleMP;
-
-	}
-	else {
 		userBattleHP = layerTwoBattleHP;
 		userBattleMP = layerTwoBattleMP;
 		system("cls");
 		PrintEnemyIdle();
 		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
+
 	}
 }
+
 
 void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower,
 	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP, Items& battleItems ,bool& playerTurnOver,bool& escape)
@@ -418,22 +422,33 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 		
 		if (runSelected)
 		{
-			bool runAway = false;
-			RunAwayChance(escapeSucess, runAway);
-			system("cls");
-			PrintEnemyIdle();
-			PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
-			if (runAway)
+			if(enemySignature == 8 || enemySignature == 9 || enemySignature == 10)
 			{
-				cout << "\n         YOU RAN AWAY!\n";
+				playerTurnOver = false;
+				cout << "\n         CANNOT RUN FROM BOSS\n";
+				Sleep(750);
+			
 			}
-			else
-			{
-				cout << "\n         OH NO! RUN FAILED!\n";
-			}
+			else {
 
-			playerTurnOver = true;
-			escape = true;
+				bool runAway = false;
+				RunAwayChance(escapeSucess, runAway);
+				system("cls");
+				PrintEnemyIdle();
+				PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
+				if (runAway)
+				{
+					cout << "\n         YOU RAN AWAY!\n";
+					escape = true;
+				}
+				else
+				{
+					cout << "\n         OH NO! RUN FAILED!\n";
+				}
+
+				playerTurnOver = true;
+				
+			}
 		}
 		
 	}
@@ -455,6 +470,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	bool playerFirst = false;
 	bool win = false;
 	bool escape = false;
+	bool battleStateLayer = true;
 	int layerOneBattleMP = userBattleMP;
 	double layerOneBattleHP = userBattleHP;
 	PlayerStats battleStats = playerStats;
@@ -462,7 +478,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	BattleSetUp(map);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
 	if (!playerFirst) {
-		while (battleState)
+		while (battleStateLayer)
 		{
 			bool playerTurnOver = false;
 			Sleep(500);
@@ -476,22 +492,22 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 			if (layerOneBattleHP <= 0)
 			{
 				win = false;
-				battleState = false;
+				battleStateLayer = false;
 			}
 			else if (stats[1] == 0)
 			{
 				win = true;
-				battleState = false;
+				battleStateLayer = false;
 			}
 			else if (escape)
 			{
-				battleState = false;
+				battleStateLayer = false;
 			}
 		}
 	}
 	else
 	{
-		while (battleState)
+		while (battleStateLayer)
 		{
 			bool playerTurnOver = false;
 			Sleep(500);
@@ -502,25 +518,26 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 			Sleep(500);
 			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
-			if(layerOneBattleHP <= 0)
+			if(layerOneBattleHP == 0)
 			{
-				win = false;
-				battleState = false;
+				battleStateLayer = false;
 			}
 			else if (stats[1] == 0)
 			{
 				win = true;
-				battleState = false;
+				battleStateLayer = false;
 			}
 			else if (escape)
 			{
-				battleState = false;
+				battleStateLayer = false;
 			}
 		}
 	}
 	SetBattleTrigger();
 	if (!win && !escape) {
-		notGameOver = false;
+		cout << "\n\n\n\n\n\n\n\                      YOU LOST !\n\n";
+		battleState = battleStateLayer;
+		Sleep(800);
 	}
 	else if (win)
 	{// 7 and 10 are xp and coins respectfully
@@ -533,7 +550,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		Sleep(5000);
 		
 	}
-
+	battleState = battleStateLayer;
 	battleStats.SetPlayer(layerOneBattleHP, layerOneBattleMP);
 	items = battleItems;
 	userBattleHP = layerOneBattleHP;

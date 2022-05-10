@@ -89,6 +89,8 @@ public:
 
 	void PrintUserIdle(char userChar, int battleMP, int userHP, int userMP, double userBattleHP);
 
+	void PrintGameOver();
+
 	
 
 private:

@@ -78,6 +78,8 @@ public:
 
 	void PrintGameWin();
 
+	void PrintGameOver();
+
 private:
 	InputConfig mapsInput;
 	InGameMenu inGame;
@@ -116,7 +118,7 @@ private:
 	bool southOpen;
 	bool eastOpen;
 	bool westOpen;
-
+	bool battleState;
 	bool menuToggled;
 	bool notGameOver;
 

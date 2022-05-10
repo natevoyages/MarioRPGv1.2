@@ -36,6 +36,8 @@ int main()
 				while (notGameOver) 
 				{
 					overWorld.PrintOverWorld(newGame.GetCharacterChar(), play, notGameOver);
+					play = overWorld.GetNotGameOver();
+					notGameOver = overWorld.GetNotGameOver();
 				}
 			}
 		}
@@ -57,6 +59,8 @@ int main()
 				while (notGameOver)
 				{
 					overWorld.PrintOverWorld(newGame.GetCharacterChar(), play, notGameOver);
+					play = overWorld.GetNotGameOver();
+					notGameOver = overWorld.GetNotGameOver();
 				}
 			}
 			else if (resumeGame)
