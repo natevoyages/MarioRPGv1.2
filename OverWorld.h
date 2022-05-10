@@ -118,7 +118,6 @@ private:
 	bool southOpen;
 	bool eastOpen;
 	bool westOpen;
-	bool battleState;
 	bool menuToggled;
 	bool notGameOver;
 
@@ -137,6 +136,8 @@ private:
 	int userStatPts;
 	double userBattleHP;
 	int userBattleMP;
+
+	bool bossTriggered;
 
 	int bossesBeaten;
 

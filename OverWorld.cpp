@@ -4,6 +4,7 @@
 
 OverWorld::OverWorld()
 {
+    bossTriggered = false;
     exitMap = false;
     menuToggled = false;
     notGameOver = true;
@@ -108,7 +109,7 @@ void OverWorld::SaveGame()
     save.open("save.dat");
     save << bossesBeaten << " " << map << " " << userCharacter << " " << stringCharacter << " " << prevXCoordinate << " " << prevYCoordinate
         << " " << userLevel << " " << userHealthPoints << " " << userPower << " " << userJump << " " << userFlowerPower << " "
-        <<  userSpeed << " " << userDefense << " " << userEXP << " " << userCoins << " " << userStatPts << " " << userBattleHP << " " << userBattleMP << " " << userMagicPoints;
+        << userSpeed << " " << userDefense << " " << userEXP << " " << userCoins << " " << userStatPts << " " << userBattleHP << " " << userBattleMP << " " << userMagicPoints;
     save.close();
     for (int i = 0; i < 9; i++) 
     {
@@ -200,30 +201,63 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
 void OverWorld::IfBattleEncounted()
 {
     bool battleState = false;
-
-    if (stepCounter >= battle.GetBattleTrigger())
+    if (map != 3 && map != 7 && map != 10) // fix me
     {
-        Sleep(150);
-        battleState = true;
-        while (battleState)
+        if (stepCounter >= battle.GetBattleTrigger())
         {
-            battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats);
+            Sleep(150);
+            battleState = true;
+            while (battleState)
+            {
+                battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats, bossesBeaten);
+            }
+
+            mapsInput.StepCountReset();
+            Sleep(150);
+            playerStats.LevelUp(userEXP);
+            SetStats();
+            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
         }
-   
-        mapsInput.StepCountReset();
-        Sleep(150);
-        playerStats.LevelUp(userEXP);
-        SetStats();
-        playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-            userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-         }
-    if (userBattleHP == 0)
-    {
-        PrintGameOver();
-        notGameOver = false;
-        exitMap = false;
+        if (userBattleHP == 0)
+        {
+            PrintGameOver();
+            notGameOver = false;
+            exitMap = true;
+        }
     }
+    else
+    {
+        if (bossTriggered) 
+        {
+            battleState = true;
+            while (battleState)
+            {
+                battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats, bossesBeaten);
+            }
+
+            mapsInput.StepCountReset();
+            Sleep(150);
+            playerStats.LevelUp(userEXP);
+            SetStats();
+            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+        }
+        if (userBattleHP == 0)
+        {
+            PrintGameOver();
+            notGameOver = false;
+            exitMap = true;
+        }
+        else
+        {
+            bossesBeaten++;
+        }
+    }
+    bossTriggered = false;
+
 }
 
 void OverWorld::SetUpMap()
@@ -496,6 +530,7 @@ void OverWorld::SetUpMap()
                stepCounter = 0;
            }
            OverWorldPrintLogic();
+           IfBattleEncounted();
            mapsInput.UserInput(menuToggled);
            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
            characterTracker();
@@ -932,34 +967,8 @@ void OverWorld::CollisonLogic()
 
     else if ((xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) || (xCoordinate == (bossXCoordinate + 1) && yCoordinate == bossYCoordinate))// add second set of coordinates
     {
-
-            while (battleState)
-            {
-                battle.BossBattleTriggered(bossesBeaten, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState,items, playerStats);
-            }
-            bossXCoordinate = 0;
-            bossYCoordinate = -1;
-            saveXCoordinate = width / 2;
-            saveYCoordinate = height / 2;
-            xCoordinate = prevXCoordinate;
-            yCoordinate = prevYCoordinate;
-            playerStats.LevelUp(userEXP);
-            SetStats();
-            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-            if (userBattleHP == 0)
-            {
-                PrintGameOver();
-                notGameOver = false;
-                exitMap = false;
-            }
-            else if (userBattleHP > 0)
-            {
-                battleState = false;
-            }
+        bossTriggered = true;
     }
-
     else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )
     {
         exitMap = true;

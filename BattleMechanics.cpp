@@ -5,7 +5,6 @@ BattleMechanics::BattleMechanics()
 	enemyNum = -1;
 	stepTrigger = -1;
 	enemySignature = -1;
-	battleState = false;
 	enemyPowAttack = false;
 }
 
@@ -21,123 +20,9 @@ int BattleMechanics::GetBattleTrigger()
 	return stepTrigger;
 }
 
-void BattleMechanics::BossBattleSetUp(int& bossesBeaten)
-{
-	if (bossesBeaten == 0)
-	{
-		LoadBirdo();
-		enemySignature = 8;
-	}
-	else if (bossesBeaten == 1)
-	{
-		LoadMechaBlooper();
-		enemySignature = 9;
-	}
-	else if (bossesBeaten == 2)
-	{
-		LoadKingBoo();
-		enemySignature = 10;
-	}
 
-	
-}
-void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats)
-{
-	Items battleItems = items;
-	bool playerFirst = false;
-	bool win = false;
-	bool escape = false;
-	int layerOneBattleMP = userBattleMP;
-	double layerOneBattleHP = userBattleHP;
-	PlayerStats battleStats = playerStats;
-	BossBattleSetUp(bossesBeaten);
-	SpeedsterGoesFirst(userSpeed, playerFirst);
-	if (!playerFirst) {
-		while (battleState)
-		{
-			bool playerTurnOver = false;
-			Sleep(500);
-			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
-			Sleep(500);
-			while (!playerTurnOver) {
-				PlayerTurn(layerOneBattleHP, layerOneBattleMP, userPower,
-					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
-			}
-			if (layerOneBattleHP == 0)
-			{
-				battleState = false;
-			}
-			else if (stats[1] == 0)
-			{
-				win = true;
-				battleState = false;
-			}
-			else if (escape)
-			{
-				battleState = false;
-			}
-		}
-	}
-	else
-	{
-		while (battleState)
-		{
-			bool playerTurnOver = false;
-			Sleep(500);
-			while (!playerTurnOver) {
-				PlayerTurn(layerOneBattleHP, layerOneBattleMP, userPower,
-					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, layerOneBattleMP, battleItems, playerTurnOver, escape);
-			}
-			Sleep(500);
-			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
-			Sleep(500);
-			if (userBattleHP == 0)
-			{
-				win = false;
-				battleState = false;
-			}
-			else if (stats[1] == 0)
-			{
-				win = true;
-				battleState = false;
-			}
-			else if (escape)
-			{
-				battleState = false;
-			}
-		}
-	}
-	SetBattleTrigger();
-	if (!win && !escape && !battleState) 
-	{
-		cout << "\n\n\n\n\n\n\n\                      YOU LOST !\n\n";
-		battleState = false;
 
-		Sleep(800);
-
-	}
-	else if (win)
-	{// 7 and 10 are xp and coins respectfully
-		userXP = userXP + static_cast<int>(stats[7]);
-		userCoins = userCoins + static_cast<int>(stats[10]);
-		bossesBeaten++;
-		cout << "\n\n\n\n\n\n\n\                        YOU WIN !\n\n";
-		cout << "                        Gained :\n";
-		cout << "                        " << static_cast<int>(stats[7]) << " XP \n";
-		cout << "                        " << static_cast<int>(stats[10]) << " Coins\n";
-		Sleep(5000);
-	}
-	battleStats.SetPlayer(layerOneBattleHP, layerOneBattleMP);
-	items = battleItems;
-	userBattleMP = layerOneBattleMP;
-	userBattleHP = layerOneBattleHP;
-	playerStats = battleStats;
-		
-
-}
-
-void BattleMechanics::BattleSetUp(int map)
+void BattleMechanics::BattleSetUp(int map, int bossesBeaten)
 {
 	if (map == 1 || map == 2)
 	{
@@ -158,6 +43,15 @@ void BattleMechanics::BattleSetUp(int map)
 			enemySignature = 2;
 		}
 	}
+	else if (map == 3)
+	{
+		if (bossesBeaten == 0)
+		{
+			LoadBirdo();
+			enemySignature = 8;
+		}
+	}
+
 	else if( map == 5 || map == 6)
 	{
 		enemyNum = rand() % 2;
@@ -172,6 +66,16 @@ void BattleMechanics::BattleSetUp(int map)
 			enemySignature = 4;
 		}
 	}
+	
+	else if (map == 7)
+	{
+		if (bossesBeaten == 1)
+		{
+			LoadMechaBlooper();
+			enemySignature = 9;
+		}
+	}
+
 	else if (map == 9 || map == 10)
 	{
 		enemyNum = rand() % 3;
@@ -189,6 +93,14 @@ void BattleMechanics::BattleSetUp(int map)
 		{
 			LoadBoo();
 			enemySignature = 7;
+		}
+	}
+	else if(map == 11)
+	{
+		if (bossesBeaten == 2)
+		{
+			LoadKingBoo();
+			enemySignature = 10;
 		}
 	}
 	enemyNum = -1;
@@ -229,6 +141,7 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 	int layerTwoBattleMP = userBattleMP;
 	if ((layerTwoBattleHP != 0 && stats[1] != 0) && !escape) {
 		system("cls");
+
 		EnemyBattleMechanics(userJump, userSpeed, userDefense);
 		HitChance(hitSuccess, successHit);
 		if (!successHit)
@@ -243,12 +156,12 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 			{
 				damage = critDamage;
 				specialDamage = specialCrit;
+				EnemyBattleLogic();
+				if (!enemyPowAttack)
+				{
+					damage = specialDamage;
+				}
 			}
-		}
-		EnemyBattleLogic();
-		if (!enemyPowAttack)
-		{
-			damage = specialDamage;
 		}
 		PrintEnemyIdle();
 		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
@@ -464,7 +377,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 }
 
 void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats)
+	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int bossesBeaten)
 {
 	Items battleItems = items;
 	bool playerFirst = false;
@@ -475,7 +388,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	double layerOneBattleHP = userBattleHP;
 	PlayerStats battleStats = playerStats;
 
-	BattleSetUp(map);
+	BattleSetUp(map , bossesBeaten);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
 	if (!playerFirst) {
 		while (battleStateLayer)

@@ -19,12 +19,9 @@ public:
 
 	int GetBattleTrigger();
 
-	void BossBattleSetUp(int& bossesBeaten);
 
-	void BossBattleTriggered(int& bossesBeaten, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-		double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats);
+	void BattleSetUp(int map, int bossesBeaten);
 
-	void BattleSetUp(int map);
 
 	void UserAttackAnimation(char userChar, double damage, double userBattleHP, int userBattleMP, int userHP, int userMP);
 
@@ -33,11 +30,10 @@ public:
 	void PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed, double userDefense,
 		int userLevel, char userChar, int userHP, int userMP, Items& battleItems, bool& playerTurnOver, bool& escape);
 
+	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, 
+		int userDefense, double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int bossesBeaten);
+
 	
-
-	void BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlwrPwr, int userSpeed, int userDefense,
-		double& battleHP, int& battleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats);
-
 	void CritChance(double& critSucess, bool success);
 
 
@@ -89,7 +85,6 @@ public:
 
 	void PrintUserIdle(char userChar, int battleMP, int userHP, int userMP, double userBattleHP);
 
-	void PrintGameOver();
 
 	
 
@@ -140,8 +135,6 @@ private:
 	int stepTrigger;
 
 	int enemyNum;
-
-	bool battleState;
 
 	bool enemyPowAttack;
 
