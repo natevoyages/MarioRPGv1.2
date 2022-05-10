@@ -87,7 +87,7 @@ void BattleMechanics::BossBattleTriggered(int& bossesBeaten, bool& notGameOver, 
 			Sleep(500);
 			while (!playerTurnOver) {
 				PlayerTurn(layerOneBattleHP, layerOneBattleMP, userPower,
-					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
+					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, layerOneBattleMP, battleItems, playerTurnOver, escape);
 			}
 			Sleep(500);
 			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
