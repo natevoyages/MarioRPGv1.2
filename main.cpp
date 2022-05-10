@@ -25,7 +25,6 @@ int main()
 	if (load.fail()) {
 		while (play)
 		{
-			PlaySound(TEXT("titlScreen.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			start.TitleScreen();
 			start.TitleMenu(play, startNewGame, programRunning);
 			if (startNewGame)
@@ -48,7 +47,6 @@ int main()
 		load.close();
 		while (play)
 		{
-			PlaySound(TEXT("titlScreen.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			start.SetResumeStartMenu();
 			start.TitleScreen();
 			start.TitleMenu(play, startNewGame, resumeGame, programRunning);
