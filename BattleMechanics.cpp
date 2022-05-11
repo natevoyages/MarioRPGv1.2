@@ -22,7 +22,7 @@ int BattleMechanics::GetBattleTrigger()
 
 
 
-void BattleMechanics::BattleSetUp(int map, int bossesBeaten)
+void BattleMechanics::BattleSetUp(int map, int& bossesBeaten)
 {
 	if (map == 1 || map == 2)
 	{
@@ -45,14 +45,11 @@ void BattleMechanics::BattleSetUp(int map, int bossesBeaten)
 	}
 	else if (map == 3)
 	{
-		if (bossesBeaten == 0)
-		{
-			LoadBirdo();
-			enemySignature = 8;
-		}
+		LoadBirdo();
+		enemySignature = 8;
 	}
 
-	else if( map == 5 || map == 6)
+	else if (map == 5 || map == 6)
 	{
 		enemyNum = rand() % 2;
 		if (enemyNum == 0)
@@ -66,14 +63,13 @@ void BattleMechanics::BattleSetUp(int map, int bossesBeaten)
 			enemySignature = 4;
 		}
 	}
-	
+
 	else if (map == 7)
 	{
-		if (bossesBeaten == 1)
-		{
-			LoadMechaBlooper();
-			enemySignature = 9;
-		}
+
+		LoadMechaBlooper();
+		enemySignature = 9;
+
 	}
 
 	else if (map == 9 || map == 10)
@@ -95,19 +91,18 @@ void BattleMechanics::BattleSetUp(int map, int bossesBeaten)
 			enemySignature = 7;
 		}
 	}
-	else if(map == 11)
+	else if (map == 11)
 	{
-		if (bossesBeaten == 2)
-		{
-			LoadKingBoo();
-			enemySignature = 10;
-		}
+
+		LoadKingBoo();
+		enemySignature = 10;
+
 	}
 	enemyNum = -1;
 }
 
 
-void BattleMechanics::UserAttackAnimation(char userChar,double damage, double userBattleHP, int userBattleMP, int userHP, int userMP)
+void BattleMechanics::UserAttackAnimation(char userChar, double damage, double userBattleHP, int userBattleMP, int userHP, int userMP)
 {
 	system("cls");
 	PrintEnemyIdle();
@@ -116,18 +111,19 @@ void BattleMechanics::UserAttackAnimation(char userChar,double damage, double us
 	system("cls");
 	PrintEnemyAttacked();
 	PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
-	if (userSuccessHit) {
-		if (userSuccessCrit)
-		{
-			cout << fixed << setprecision(2) << "\n         " << damage << " CRITICAL DAMAGE DEALT !\n";
-		}
+	if (userSuccessHit && userSuccessCrit) {
 
-		else 
-		{
-			cout << fixed << setprecision(2) << "\n         " << critDamage << " DAMAGE DEALT !\n";
-		}
+		cout << "\n         CRIT!";
+		Sleep(400);
+		cout << fixed << setprecision(2) << "\n         " << critDamage << " DAMAGE DEALT !\n";
 	}
-	else{
+	else if (userSuccessHit && !userSuccessCrit)
+	{
+		cout << fixed << setprecision(2) << "\n         " << damage << " DAMAGE DEALT !\n";
+	}
+
+	else
+	{
 		cout << fixed << setprecision(2) << "\n         MISSED! NO DAMAGE DEALT !\n";
 	}
 }
@@ -203,7 +199,7 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 
 
 void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower,
-	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar,  int userHP, int userMP, Items& battleItems ,bool& playerTurnOver,bool& escape)
+	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar, int userHP, int userMP, Items& battleItems, bool& playerTurnOver, bool& escape)
 {
 	bool optionSelected = false;
 	double layerTwoBattleHP = userBattleHP;
@@ -212,7 +208,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 	if ((userBattleHP != 0 && stats[1] != 0) && !escape)   // int battleMP, int userHP, int userMP, double& userBattleHP
 	{
 		menu.SetUpMenu();
-		while (!optionSelected) 
+		while (!optionSelected)
 		{
 			Sleep(300);
 			system("cls");
@@ -242,10 +238,10 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 					damage = critDamage;
 				}
 			}
-			UserAttackAnimation(userChar, damage, layerTwoBattleHP, layerTwoBattleMP,  userHP,  userMP);
+			UserAttackAnimation(userChar, damage, layerTwoBattleHP, layerTwoBattleMP, userHP, userMP);
 			stats[1] = stats[1] - damage;
 
-			if(stats[1] < 0)
+			if (stats[1] < 0)
 			{
 				stats[1] = 0;
 			}
@@ -332,15 +328,15 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 
 		}
 
-		
+
 		if (runSelected)
 		{
-			if(enemySignature == 8 || enemySignature == 9 || enemySignature == 10)
+			if (enemySignature == 8 || enemySignature == 9 || enemySignature == 10)
 			{
 				playerTurnOver = false;
 				cout << "\n         CANNOT RUN FROM BOSS\n";
 				Sleep(750);
-			
+
 			}
 			else {
 
@@ -360,10 +356,10 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 				}
 
 				playerTurnOver = true;
-				
+
 			}
 		}
-		
+
 	}
 	else {
 		playerTurnOver = true;
@@ -371,13 +367,13 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 		PrintEnemyIdle();
 		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 	}
-	
+
 	userBattleHP = layerTwoBattleHP;
 	userBattleMP = layerTwoBattleMP;
 }
 
 void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
-	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int bossesBeaten)
+	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int& bossesBeaten)
 {
 	Items battleItems = items;
 	bool playerFirst = false;
@@ -388,7 +384,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	double layerOneBattleHP = userBattleHP;
 	PlayerStats battleStats = playerStats;
 
-	BattleSetUp(map , bossesBeaten);
+	BattleSetUp(map, bossesBeaten);
 	SpeedsterGoesFirst(userSpeed, playerFirst);
 	if (!playerFirst) {
 		while (battleStateLayer)
@@ -401,7 +397,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 				PlayerTurn(layerOneBattleHP, layerOneBattleMP, userPower,
 					userJump, userFlowerPower, userSpeed, userDefense, userLevel, userChar, userHealthPoints, userMagicPoints, battleItems, playerTurnOver, escape);
 			}
-		
+
 			if (layerOneBattleHP <= 0)
 			{
 				win = false;
@@ -431,7 +427,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 			Sleep(500);
 			EnemyTurn(layerOneBattleHP, userJump, userSpeed, userDefense, userChar, layerOneBattleMP, userHealthPoints, userMagicPoints, escape);
 			Sleep(500);
-			if(layerOneBattleHP == 0)
+			if (layerOneBattleHP == 0)
 			{
 				battleStateLayer = false;
 			}
@@ -461,7 +457,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 		cout << "                        " << static_cast<int>(stats[7]) << " XP \n";
 		cout << "                        " << static_cast<int>(stats[10]) << " Coins\n";
 		Sleep(5000);
-		
+
 	}
 	battleState = battleStateLayer;
 	battleStats.SetPlayer(layerOneBattleHP, layerOneBattleMP);
@@ -471,7 +467,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	playerStats = battleStats;
 }
 
-void BattleMechanics::CritChance(double& critSucess, bool success) 
+void BattleMechanics::CritChance(double& critSucess, bool success)
 {
 	if ((rand() % 100) < critSucess)
 	{
@@ -479,7 +475,7 @@ void BattleMechanics::CritChance(double& critSucess, bool success)
 	}
 }
 
-void BattleMechanics::HitChance(double& hitSuccess, bool& success) 
+void BattleMechanics::HitChance(double& hitSuccess, bool& success)
 {
 	if ((rand() % 100) < hitSuccess)
 	{
@@ -489,7 +485,7 @@ void BattleMechanics::HitChance(double& hitSuccess, bool& success)
 
 void BattleMechanics::RunAwayChance(double& escapeSuccess, bool& success)
 {
-	if((rand() % 100) < escapeSuccess)
+	if ((rand() % 100) < escapeSuccess)
 	{
 		success = true;
 	}
@@ -523,7 +519,7 @@ void BattleMechanics::SpeedsterGoesFirst(int userSpeed, bool& playerFirst)
 void BattleMechanics::UserBattleLogic(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed, double userDefense, int level)
 {
 	//jp = 3, spd = 5, def = 6;
-	damage = userPower * (15.5 / (15 +  stats[6]));
+	damage = userPower * (15.5 / (15 + stats[6]));
 	specialDamage = userFlowerPower * (19.2 / (15 + stats[6]));
 	critDamage = 1.5 * damage;
 	specialCrit = 1.5 * specialDamage;
@@ -546,14 +542,14 @@ void BattleMechanics::EnemyBattleLogic()
 {
 	int coinFlip = -1;
 	coinFlip = rand() % 2;
-		if (coinFlip == 0)
-		{
-			enemyPowAttack = true;
-		}
-		else if (coinFlip == 1)
-		{
-			enemyPowAttack = false;
-		}
+	if (coinFlip == 0)
+	{
+		enemyPowAttack = true;
+	}
+	else if (coinFlip == 1)
+	{
+		enemyPowAttack = false;
+	}
 }
 
 void BattleMechanics::LoadShyGuy()
@@ -564,7 +560,7 @@ void BattleMechanics::LoadShyGuy()
 	}
 }
 
-void BattleMechanics::LoadDesertGoomba( )
+void BattleMechanics::LoadDesertGoomba()
 {
 	for (int i = 0; i < 11; i++)
 	{
@@ -685,7 +681,7 @@ void BattleMechanics::PrintEnemyAttack()
 	}
 	else if (enemySignature == 2)
 	{          //"               " space to take out and add
- 		cout << "                                                    .                     \n";
+		cout << "                                                    .                     \n";
 		cout << "                                                   ....                   \n";
 		cout << "                                        .          .....                  \n";
 		cout << "                                        ....      ...''.      ....        \n";
@@ -705,7 +701,7 @@ void BattleMechanics::PrintEnemyAttack()
 
 	}
 	else if (enemySignature == 3)
-	{          
+	{
 		cout << "                                             ........                     \n";
 		cout << "                                             .cxOOOOOc''..                \n";
 		cout << "                                              .:xxxxxxxxxd:'.             \n";
@@ -727,7 +723,7 @@ void BattleMechanics::PrintEnemyAttack()
 
 	}
 	else if (enemySignature == 4)
-	{           
+	{
 		cout << "                                                .lkkkkkkkkkkl.              \n";
 		cout << "                                               .l0WMMMMMMMMMMW0l.           \n";
 		cout << "                                             .c0MMMMMMMMMMMMMMMM0c.         \n";
@@ -750,7 +746,7 @@ void BattleMechanics::PrintEnemyAttack()
 		cout << fixed << setprecision(2) << "                                                      Lvl: 4 BLOOPER HP:  " << stats[1] << "\n";
 	}
 	else if (enemySignature == 5)
-	{           
+	{
 		cout << "                                                     ..        ..                                  \n";
 		cout << "                                                ..  .'c;  ;::cc:'   ..                             \n";
 		cout << "                                              ...    .:cc:  coc;.                                  \n";
@@ -774,7 +770,7 @@ void BattleMechanics::PrintEnemyAttack()
 	}
 	else if (enemySignature == 6)
 	{
-	         // "             /                         "
+		// "             /                         "
 		cout << "                                         ,kOl.                             \n";
 		cout << "                                        'xNMk.                             \n";
 		cout << "                                       .:OWMk.',                           \n";
@@ -846,7 +842,7 @@ void BattleMechanics::PrintEnemyAttack()
 
 	}
 	else if (enemySignature == 9)
-	{  
+	{
 		cout << "                                                                                      .,;,,;;,.          \n";
 		cout << "                                                                                  .,cdkO0KXXK0d.         \n";
 		cout << "                                                                              .':ok00KKKXNNNXKOo.        \n";
@@ -880,7 +876,7 @@ void BattleMechanics::PrintEnemyAttack()
 	}
 	else if (enemySignature == 10)
 	{
-			
+
 		cout << "                                               .,'.      .lkc.       .',.                       \n";
 		cout << "                                                ..:l;. 'lllclod,   :dc..                        \n";
 		cout << "                                                 .o0x:;d0Ol,lKXx::ckXx.                         \n";
@@ -979,7 +975,7 @@ void BattleMechanics::PrintEnemyAttacked()
 
 	}
 	else if (enemySignature == 3) {
-		      //"                                                                      " 
+		//"                                                                      " 
 		cout << "                                                                            ........                     \n";
 		cout << "                                                                            .cxOOOOOc''..                \n";
 		cout << "                                                                             .:xxxxxxxxxd:'.             \n";
@@ -1114,8 +1110,8 @@ void BattleMechanics::PrintEnemyAttacked()
 		cout << fixed << setprecision(2) << "                                                       Lvl: 5 BIRDO      HP:  " << stats[1] << "\n";
 	}
 	else if (enemySignature == 9)
-    {           
-                                                       
+	{
+
 		cout << "                                                                                                                      .,;,,;;,.          \n";
 		cout << "                                                                                                                  .,cdkO0KXXK0d.         \n";
 		cout << "                                                                                                              .':ok00KKKXNNNXKOo.        \n";
@@ -1147,8 +1143,8 @@ void BattleMechanics::PrintEnemyAttacked()
 		cout << fixed << setprecision(2) << "                                                   Lvl: 8 MECHA BLOOPER HP:  " << stats[1] << "\n";
 
 	}
-	else if (enemySignature == 10) 
-    {           
+	else if (enemySignature == 10)
+	{
 		cout << "                                                                            .,'.      .lkc.       .',.                       \n";
 		cout << "                                                                             ..:l;. 'lllclod,   :dc..                        \n";
 		cout << "                                                                              .o0x:;d0Ol,lKXx::ckXx.                         \n";
@@ -1177,9 +1173,9 @@ void BattleMechanics::PrintEnemyAttacked()
 		cout << "                                                                       .';,;,;'                                              \n";
 		cout << "                                                                         .....                                               \n";
 		cout << fixed << setprecision(2) << "                                                       Lvl: 11 KING BOO  HP:  " << stats[1] << "\n";
-    
-	   
-    }
+
+
+	}
 
 
 
@@ -1232,8 +1228,8 @@ void BattleMechanics::PrintEnemyIdle()
 
 	}
 	else if (enemySignature == 2)
-	{           
- 		cout << "                                                                    .                     \n";
+	{
+		cout << "                                                                    .                     \n";
 		cout << "                                                                   ....                   \n";
 		cout << "                                                        .          .....                  \n";
 		cout << "                                                        ....      ...''.      ....        \n";
@@ -1253,7 +1249,7 @@ void BattleMechanics::PrintEnemyIdle()
 
 	}
 	else if (enemySignature == 3)
-	{           
+	{
 		cout << "                                                              ........                     \n";
 		cout << "                                                              .cxOOOOOc''..                \n";
 		cout << "                                                               .:xxxxxxxxxd:'.             \n";
@@ -1299,7 +1295,7 @@ void BattleMechanics::PrintEnemyIdle()
 
 	}
 	else if (enemySignature == 5)
-	{           
+	{
 		cout << "                                                                     ..        ..                                  \n";
 		cout << "                                                                ..  .'c;  ;::cc:'   ..                             \n";
 		cout << "                                                              ...    .:cc:  coc;.                                  \n";
@@ -1323,7 +1319,7 @@ void BattleMechanics::PrintEnemyIdle()
 
 	}
 	else if (enemySignature == 6)
-	{           
+	{
 		cout << "                                                         ,kOl.                             \n";
 		cout << "                                                        'xNMk.                             \n";
 		cout << "                                                       .:OWMk.',                           \n";
@@ -1366,7 +1362,7 @@ void BattleMechanics::PrintEnemyIdle()
 	}
 	//bosses
 	else if (enemySignature == 8)
-	{          
+	{
 		cout << "                                                                 ..                                  \n";
 		cout << "                                                                .ld;.     'cc;.                      \n";
 		cout << "                                                               .co:;;'...:dxdl,.                     \n";
@@ -1395,39 +1391,39 @@ void BattleMechanics::PrintEnemyIdle()
 	}
 	else if (enemySignature == 9)
 	{
-	cout << "                                                                                                      .,;,,;;,.          \n";
-	cout << "                                                                                                  .,cdkO0KXXK0d.         \n";
-	cout << "                                                                                              .':ok00KKKXNNNXKOo.        \n";
-	cout << "                                                                                        ..;:coO0O000KXNNWNXNNX0Oo.       \n";
-	cout << "                                                                                  .';ldkO0XXKKKK00KKXWWNXNNNNXK0kl.      \n";
-	cout << "                                                                             .,:lxOKKXXXXXXXK0OO0KXXXXNNNNNXXKKKOkl.     \n";
-	cout << "                                                                           'lkOOOOO00KK0OO00kxO0000XNNNNNXXXXKK0Oko,     \n";
-	cout << "                                                                          .lxxdlllloxkkkkkkddxO0K0KXNXXXXXXXKKK0Okxl.    \n";
-	cout << "                                                                          .lxoc;,'..',;::ccccoxkO00KKXKKKKKKK00OOkxd:.   \n";
-	cout << "                                                                           .,:;'.............';:coxkO000000000OOOkxxo.   \n";
-	cout << "                                                                             ....;oxdc'        ..';coxkOOOOOOOOkxxxdo:.  \n";
-	cout << "                                                                             .  ,dKNXk:.          ..':odxxxxxxxxxddooc.  \n";
-	cout << "                                                                            .   .;okdc'      .':c:'...,:lodddddddooool;. \n";
-	cout << "                                                                           ..    ..''..     .,dKNKd,. ..,:looooooooolll' \n";
-	cout << "                                                                         .,;,....';:;'..     'oOKOo,.   .',:cllllllllcc. \n";
-	cout << "                                                                       .,ckkd:',:llc:;'...    .','.    ..;:;;;::cccccc:. \n";
-	cout << "                                                                      .dkxddo;;cllc::;,.....         ..:oxdl:;,',,;;;,.  \n";
-	cout << "                                                                      .codxko;;locc::;,',;loc;'.....,:oOK0kdlc:,,'..     \n";
-	cout << "                                                                    .':c::cl:,':llcc:;';:ldkO0OkxddxkOK0Oxolccc::'       \n";
-	cout << "                                                             ......,;;;;;;:;,,,,:c:;;;;lddxddxxxk0K0Okkxolccllc:,        \n";
-	cout << "                                                          .,:clllllllc:::c;'.....'',:lodddddxxxxxxxxdoooooooolc'         \n";
-	cout << "                                                       .';:::c:::c:cccccclc:;,,',;;;;:cllodddooddxxxxdddoollc,.          \n";
-	cout << "                                                       ,,;:;::;;;;;:cclllllllllc::c:;'..',:codxdoollcccc:::,.            \n";
-	cout << "                                                       .'.''''''',;:::::::::ccllllllcc;,;;:;;;lxxollc:;,'..              \n";
-	cout << "                                                       ,;,,.......';;;::;;:cccllllllllc;',::,.':cllc:;'..                \n";
-	cout << "                                                       ..,;;;:,..,'.'..',;::::::;::::;'.  ..  ..,::,...                  \n";
-	cout << "                                                          ......,;;,,''''',;,;,,''''..         .''.                      \n";
-	cout << "                                                                ..,;;:;,'...                  .                          \n";
-	cout << fixed << setprecision(2) << "                                                   Lvl: 8 MECHA BLOOPER HP:  " << stats[1] << "\n";
+		cout << "                                                                                                      .,;,,;;,.          \n";
+		cout << "                                                                                                  .,cdkO0KXXK0d.         \n";
+		cout << "                                                                                              .':ok00KKKXNNNXKOo.        \n";
+		cout << "                                                                                        ..;:coO0O000KXNNWNXNNX0Oo.       \n";
+		cout << "                                                                                  .';ldkO0XXKKKK00KKXWWNXNNNNXK0kl.      \n";
+		cout << "                                                                             .,:lxOKKXXXXXXXK0OO0KXXXXNNNNNXXKKKOkl.     \n";
+		cout << "                                                                           'lkOOOOO00KK0OO00kxO0000XNNNNNXXXXKK0Oko,     \n";
+		cout << "                                                                          .lxxdlllloxkkkkkkddxO0K0KXNXXXXXXXKKK0Okxl.    \n";
+		cout << "                                                                          .lxoc;,'..',;::ccccoxkO00KKXKKKKKKK00OOkxd:.   \n";
+		cout << "                                                                           .,:;'.............';:coxkO000000000OOOkxxo.   \n";
+		cout << "                                                                             ....;oxdc'        ..';coxkOOOOOOOOkxxxdo:.  \n";
+		cout << "                                                                             .  ,dKNXk:.          ..':odxxxxxxxxxddooc.  \n";
+		cout << "                                                                            .   .;okdc'      .':c:'...,:lodddddddooool;. \n";
+		cout << "                                                                           ..    ..''..     .,dKNKd,. ..,:looooooooolll' \n";
+		cout << "                                                                         .,;,....';:;'..     'oOKOo,.   .',:cllllllllcc. \n";
+		cout << "                                                                       .,ckkd:',:llc:;'...    .','.    ..;:;;;::cccccc:. \n";
+		cout << "                                                                      .dkxddo;;cllc::;,.....         ..:oxdl:;,',,;;;,.  \n";
+		cout << "                                                                      .codxko;;locc::;,',;loc;'.....,:oOK0kdlc:,,'..     \n";
+		cout << "                                                                    .':c::cl:,':llcc:;';:ldkO0OkxddxkOK0Oxolccc::'       \n";
+		cout << "                                                             ......,;;;;;;:;,,,,:c:;;;;lddxddxxxk0K0Okkxolccllc:,        \n";
+		cout << "                                                          .,:clllllllc:::c;'.....'',:lodddddxxxxxxxxdoooooooolc'         \n";
+		cout << "                                                       .';:::c:::c:cccccclc:;,,',;;;;:cllodddooddxxxxdddoollc,.          \n";
+		cout << "                                                       ,,;:;::;;;;;:cclllllllllc::c:;'..',:codxdoollcccc:::,.            \n";
+		cout << "                                                       .'.''''''',;:::::::::ccllllllcc;,;;:;;;lxxollc:;,'..              \n";
+		cout << "                                                       ,;,,.......';;;::;;:cccllllllllc;',::,.':cllc:;'..                \n";
+		cout << "                                                       ..,;;;:,..,'.'..',;::::::;::::;'.  ..  ..,::,...                  \n";
+		cout << "                                                          ......,;;,,''''',;,;,,''''..         .''.                      \n";
+		cout << "                                                                ..,;;:;,'...                  .                          \n";
+		cout << fixed << setprecision(2) << "                                                   Lvl: 8 MECHA BLOOPER HP:  " << stats[1] << "\n";
 
 	}
 	else if (enemySignature == 10)
-	{         
+	{
 		cout << "                                                             .,'.      .lkc.       .',.                       \n";
 		cout << "                                                              ..:l;. 'lllclod,   :dc..                        \n";
 		cout << "                                                               .o0x:;d0Ol,lKXx::ckXx.                         \n";

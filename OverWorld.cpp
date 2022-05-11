@@ -18,7 +18,7 @@ OverWorld::OverWorld()
     exitMapWest = false;
     xCoordinate = width / 2;
     yCoordinate = height - 1;
-    saveXCoordinate =  0;
+    saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
@@ -30,10 +30,10 @@ OverWorld::OverWorld()
     bossesBeaten = 0;
     stepCounter = 0;
 }
- bool OverWorld::GetNotGameOver() const
- {
-     return notGameOver;
- }
+bool OverWorld::GetNotGameOver() const
+{
+    return notGameOver;
+}
 
 void OverWorld::Shop(int& coins)
 {
@@ -59,13 +59,13 @@ void OverWorld::Shop(int& coins)
 }
 
 void OverWorld::ExitMapCoordinates()
-{ 
+{
     if (exitMapNorth)
     {
         xCoordinate = width / 2;
         yCoordinate = height - 1;
     }
-    else if(exitMapSouth)
+    else if (exitMapSouth)
     {
         xCoordinate = width / 2;
         yCoordinate = 0;
@@ -81,7 +81,7 @@ void OverWorld::ExitMapCoordinates()
         xCoordinate = 1;
         yCoordinate = height / 2;
     }
-  
+
 }
 void OverWorld::LoadGame()
 {
@@ -111,7 +111,7 @@ void OverWorld::SaveGame()
         << " " << userLevel << " " << userHealthPoints << " " << userPower << " " << userJump << " " << userFlowerPower << " "
         << userSpeed << " " << userDefense << " " << userEXP << " " << userCoins << " " << userStatPts << " " << userBattleHP << " " << userBattleMP << " " << userMagicPoints;
     save.close();
-    for (int i = 0; i < 9; i++) 
+    for (int i = 0; i < 9; i++)
     {
         system("cls");
         cout << "\n\n\n\n\n\n\n\n\n\	    	  " << saving[i];
@@ -138,11 +138,11 @@ void OverWorld::BedRest()
 
 void OverWorld::characterTracker()
 {
-    if (!(xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate) && 
+    if (!(xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate) &&
         !(xCoordinate == shopKeepXCoordinate && yCoordinate == shopKeepYCoordinate) &&
-        !(xCoordinate == bedXCoordinate && yCoordinate == bedYCoordinate) && 
+        !(xCoordinate == bedXCoordinate && yCoordinate == bedYCoordinate) &&
         !(xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) &&
-        !((xCoordinate == bossXCoordinate - 1) && yCoordinate == bossYCoordinate))
+        !((xCoordinate == bossXCoordinate + 1) && yCoordinate == bossYCoordinate))
     {
         prevXCoordinate = xCoordinate;
         prevYCoordinate = yCoordinate;
@@ -150,13 +150,119 @@ void OverWorld::characterTracker()
 }
 
 
-void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER)
+void OverWorld::PrintOverWorld(char charCharacter, bool& play, bool& notGAMEOVER)
 {
     playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
         userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-            map = 0;
-            bossesBeaten = 0;
-        if (!exitMap)
+    map = 0;
+    bossesBeaten = 0;
+    if (!exitMap)
+    {
+        if (stepCounter > 0)
+        {
+            stepCounter = 0;
+        }
+        OverWorldPrintLogic();
+        mapsInput.UserInput(menuToggled);
+        mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+        characterTracker();
+        CollisonLogic();
+        inGame.SetUpMenu();
+        while (menuToggled)
+        {
+            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+            inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
+            SetStats();
+            mapsInput.SetStepCount(stepCounter);
+
+        }
+    }
+    if (exitMapSouth)
+    {
+        PrintDesert();
+        map = 1;
+    }
+    if (notGameOver && exitMap)
+    {
+        while (notGameOver)
+        {
+            exitMap = false;
+            SetUpMap();
+        }
+    }
+    if (!notGameOver)
+    {
+        notGAMEOVER = false;
+        play = false;
+    }
+}
+
+void OverWorld::IfBattleEncounted()
+{
+    bool battleState = false;
+
+    if (stepCounter >= battle.GetBattleTrigger())
+    {
+        Sleep(150);
+        battleState = true;
+        while (battleState)
+        {
+            battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats, bossesBeaten);
+        }
+
+        mapsInput.StepCountReset();
+        Sleep(150);
+        playerStats.LevelUp(userEXP);
+        SetStats();
+        playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+            userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+    }
+    if (userBattleHP == 0)
+    {
+        PrintGameOver();
+        notGameOver = false;
+        exitMap = true;
+    }
+
+    else if (bossTriggered)
+    {
+
+        battleState = true;
+        while (battleState)
+        {
+            battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
+                userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats, bossesBeaten);
+        }
+
+        mapsInput.StepCountReset();
+        Sleep(150);
+        playerStats.LevelUp(userEXP);
+        SetStats();
+        playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+            userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+
+        if (userBattleHP == 0)
+        {
+            PrintGameOver();
+            notGameOver = false;
+            exitMap = true;
+        }
+        bossesBeaten++;
+        xCoordinate = width / 2;
+        yCoordinate = -1;
+
+    }
+    bossTriggered = false;
+}
+
+void OverWorld::SetUpMap()
+{
+    if (map == 0)
+    {
+        HomeSetup();
+        while (!exitMap)
         {
             if (stepCounter > 0)
             {
@@ -183,115 +289,6 @@ void OverWorld::PrintOverWorld(char charCharacter,bool& play , bool &notGAMEOVER
             PrintDesert();
             map = 1;
         }
-        if (notGameOver && exitMap)
-        {
-            while (notGameOver)
-            {
-                exitMap = false;
-                SetUpMap();
-            }
-        }
-        if (!notGameOver)
-        {
-            notGAMEOVER = false;
-            play = false;
-        }
-}
-
-void OverWorld::IfBattleEncounted()
-{
-    bool battleState = false;
-    if (map != 3 && map != 7 && map != 10) // fix me
-    {
-        if (stepCounter >= battle.GetBattleTrigger())
-        {
-            Sleep(150);
-            battleState = true;
-            while (battleState)
-            {
-                battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats, bossesBeaten);
-            }
-
-            mapsInput.StepCountReset();
-            Sleep(150);
-            playerStats.LevelUp(userEXP);
-            SetStats();
-            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-        }
-        if (userBattleHP == 0)
-        {
-            PrintGameOver();
-            notGameOver = false;
-            exitMap = true;
-        }
-    }
-    else
-    {
-        if (bossTriggered) 
-        {
-            battleState = true;
-            while (battleState)
-            {
-                battle.BattleTriggered(map, notGameOver, userHealthPoints, userMagicPoints, userPower, userJump, userFlowerPower, userSpeed, userDefense,
-                    userBattleHP, userBattleMP, userCoins, userEXP, userLevel, userCoins, userCharacter, battleState, items, playerStats, bossesBeaten);
-            }
-
-            mapsInput.StepCountReset();
-            Sleep(150);
-            playerStats.LevelUp(userEXP);
-            SetStats();
-            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-        }
-        if (userBattleHP == 0)
-        {
-            PrintGameOver();
-            notGameOver = false;
-            exitMap = true;
-        }
-        else
-        {
-            bossesBeaten++;
-        }
-    }
-    bossTriggered = false;
-
-}
-
-void OverWorld::SetUpMap()
-{
-    if (map == 0)
-    {
-        HomeSetup();
-        while (!exitMap)
-        {
-            if (stepCounter > 0) 
-            {
-                stepCounter = 0;
-            }
-            OverWorldPrintLogic();
-            mapsInput.UserInput(menuToggled);
-            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
-            characterTracker();
-            CollisonLogic();
-            inGame.SetUpMenu();
-            while (menuToggled)
-            {
-                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
-                SetStats();
-                mapsInput.SetStepCount(stepCounter);
-
-            }
-        }
-        if (exitMapSouth) 
-        {
-            PrintDesert();
-            map = 1;
-        }
         ExitMapCoordinates();
     }
 
@@ -309,7 +306,7 @@ void OverWorld::SetUpMap()
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             characterTracker();
-            CollisonLogic(); 
+            CollisonLogic();
             inGame.SetUpMenu();
             while (menuToggled)
             {
@@ -318,7 +315,7 @@ void OverWorld::SetUpMap()
                 inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
                 SetStats();
                 mapsInput.SetStepCount(stepCounter);
-       
+
             }
         }
         if (exitMapNorth)
@@ -448,7 +445,7 @@ void OverWorld::SetUpMap()
         SeaFloorOneSetup();
         while (!exitMap)
         {
-           
+
             mapsInput.StepCounter();
             stepCounter = mapsInput.GetStepCount();
             IfBattleEncounted();
@@ -518,44 +515,44 @@ void OverWorld::SetUpMap()
         ExitMapCoordinates();
     }
 
- 
+
 
     else if (map == 7)
     {
-       SeaFloorThreeSetup();
-       while (!exitMap)
-       {
-           if (stepCounter > 0)
-           {
-               stepCounter = 0;
-           }
-           OverWorldPrintLogic();
-           IfBattleEncounted();
-           mapsInput.UserInput(menuToggled);
-           mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
-           characterTracker();
-           CollisonLogic();
-           inGame.SetUpMenu();
-           while (menuToggled)
-           {
-               playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-                   userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-              inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
-              SetStats();
-              mapsInput.SetStepCount(stepCounter);
+        SeaFloorThreeSetup();
+        while (!exitMap)
+        {
+            if (stepCounter > 0)
+            {
+                stepCounter = 0;
+            }
+            OverWorldPrintLogic();
+            IfBattleEncounted();
+            mapsInput.UserInput(menuToggled);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+            characterTracker();
+            CollisonLogic();
+            inGame.SetUpMenu();
+            while (menuToggled)
+            {
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
+                SetStats();
+                mapsInput.SetStepCount(stepCounter);
 
-           }
+            }
         }
-       if (exitMapNorth)
-       {
-           PrintCastle();
-           map = 9;
-       }
-       else if(exitMapEast)
-       {
-           map = 6;
-       }
-       ExitMapCoordinates();
+        if (exitMapNorth)
+        {
+            PrintCastle();
+            map = 9;
+        }
+        else if (exitMapEast)
+        {
+            map = 6;
+        }
+        ExitMapCoordinates();
     }
 
     else if (map == 8)
@@ -592,28 +589,28 @@ void OverWorld::SetUpMap()
 
     else if (map == 9)
     {
-       battle.SetBattleTrigger();
-       CastleOneSetup();
-       while (!exitMap)
-       {
-           mapsInput.StepCounter();
-           stepCounter = mapsInput.GetStepCount();
-           IfBattleEncounted();
-           OverWorldPrintLogic();
-           mapsInput.UserInput(menuToggled);
-           mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
-           characterTracker();
-           CollisonLogic();
-           inGame.SetUpMenu();
-           while (menuToggled)
-           {
-               playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-                   userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-               inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
-               SetStats();
-               mapsInput.SetStepCount(stepCounter);
-           }
-       }
+        battle.SetBattleTrigger();
+        CastleOneSetup();
+        while (!exitMap)
+        {
+            mapsInput.StepCounter();
+            stepCounter = mapsInput.GetStepCount();
+            IfBattleEncounted();
+            OverWorldPrintLogic();
+            mapsInput.UserInput(menuToggled);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+            characterTracker();
+            CollisonLogic();
+            inGame.SetUpMenu();
+            while (menuToggled)
+            {
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
+                SetStats();
+                mapsInput.SetStepCount(stepCounter);
+            }
+        }
 
         if (exitMapNorth)
         {
@@ -626,31 +623,31 @@ void OverWorld::SetUpMap()
         }
         ExitMapCoordinates();
     }
-    
+
     else if (map == 10)
     {
-    battle.SetBattleTrigger();
-    CastleTwoSetup();
-    while (!exitMap)
-    {
-        mapsInput.StepCounter();
-        stepCounter = mapsInput.GetStepCount();
-        IfBattleEncounted();
-        OverWorldPrintLogic();
-        mapsInput.UserInput(menuToggled);
-        mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
-        characterTracker();
-        CollisonLogic();
-        inGame.SetUpMenu();
-        while (menuToggled)
+        battle.SetBattleTrigger();
+        CastleTwoSetup();
+        while (!exitMap)
         {
-            playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
-                userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
-            inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
-            SetStats();
-            mapsInput.SetStepCount(stepCounter);
+            mapsInput.StepCounter();
+            stepCounter = mapsInput.GetStepCount();
+            IfBattleEncounted();
+            OverWorldPrintLogic();
+            mapsInput.UserInput(menuToggled);
+            mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
+            characterTracker();
+            CollisonLogic();
+            inGame.SetUpMenu();
+            while (menuToggled)
+            {
+                playerStats.SetPlayer(stringCharacter, userCharacter, userLevel, userHealthPoints, userPower, userJump,
+                    userFlowerPower, userSpeed, userDefense, userEXP, userCoins, userStatPts, userBattleHP, userBattleMP, userMagicPoints);
+                inGame.PrintInGameMenu(menuToggled, notGameOver, exitMap, playerStats, items, stepCounter);
+                SetStats();
+                mapsInput.SetStepCount(stepCounter);
+            }
         }
-    }
 
         if (exitMapNorth)
         {
@@ -661,7 +658,7 @@ void OverWorld::SetUpMap()
             map = 9;
         }
         ExitMapCoordinates();
- 
+
     }
 
     else if (map == 11)
@@ -703,9 +700,9 @@ void OverWorld::SetUpMap()
 
     else if (map == 12)
     {
-    system("cls");
-    PrintGameWin();
-    Sleep(5000);
+        system("cls");
+        PrintGameWin();
+        Sleep(5000);
 
         notGameOver = false;
     }
@@ -716,13 +713,13 @@ void OverWorld::SetStats()
     userBattleHP = playerStats.GetPlayerBattleHP();
 
     userHealthPoints = playerStats.GetPlayerHP();
-    
+
     userBattleMP = playerStats.GetPlayerBattleMP();
 
     userMagicPoints = playerStats.GetPlayerMP();
 
     userPower = playerStats.GetPowStat();
-    
+
     userJump = playerStats.GetJmpStat();
 
     userFlowerPower = playerStats.GetFpwStat();
@@ -732,7 +729,7 @@ void OverWorld::SetStats()
     userDefense = playerStats.GetDefStat();
 
     userLevel = playerStats.GetLevel();
- 
+
 }
 
 void OverWorld::OverWorldPrintLogic()
@@ -741,7 +738,7 @@ void OverWorld::OverWorldPrintLogic()
     system("cls");
     for (int i = 0; i < width; i++)
     {
-        if(northOpen)
+        if (northOpen)
         {
             if (i == width / 2 || i == (width / 2) + 1) //exit for map
             {
@@ -767,7 +764,7 @@ void OverWorld::OverWorldPrintLogic()
         {
             if (westOpen && !eastOpen)
             {
-                if (i == height /2 && j == 0) 
+                if (i == height / 2 && j == 0)
                 {
                     cout << "|";
                 }
@@ -846,7 +843,7 @@ void OverWorld::OverWorldPrintLogic()
 
             else if (westOpen && eastOpen)
             {
-                if ( (i == height / 2 && j == 0) || (i == height / 2 && j == width - 1) )
+                if ((i == height / 2 && j == 0) || (i == height / 2 && j == width - 1))
                 {
                     cout << "|";
                 }
@@ -921,15 +918,15 @@ void OverWorld::OverWorldPrintLogic()
         cout << "\n";
     }
 
-    for (int i = 0; i < width; i++) 
+    for (int i = 0; i < width; i++)
     {
-        if (southOpen) 
+        if (southOpen)
         {
             if (i == width / 2 || i == (width / 2) + 1) //exit for map
             {
                 cout << "_";
             }
-            else 
+            else
             {
                 cout << "#";
             }
@@ -941,7 +938,7 @@ void OverWorld::OverWorldPrintLogic()
     }
 
     cout << "\n\n\n\n           'w' = UP                    HOLD SHIFT + DIRECTION = RUN\n";
-    cout <<         "'a' = LEFT 's' = DOWN 'd' = RIGHT                PRESS SPACE = MENU";
+    cout << "'a' = LEFT 's' = DOWN 'd' = RIGHT                PRESS SPACE = MENU";
     cout << "\nSTEPS: " << stepCounter << "\n";   // fix me
 
 
@@ -949,7 +946,7 @@ void OverWorld::OverWorldPrintLogic()
 
 void OverWorld::CollisonLogic()
 {
-    if(xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate)
+    if (xCoordinate == saveXCoordinate && yCoordinate == saveYCoordinate)
     {
         SaveGame();
 
@@ -968,8 +965,9 @@ void OverWorld::CollisonLogic()
     else if ((xCoordinate == bossXCoordinate && yCoordinate == bossYCoordinate) || (xCoordinate == (bossXCoordinate + 1) && yCoordinate == bossYCoordinate))// add second set of coordinates
     {
         bossTriggered = true;
+        IfBattleEncounted();
     }
-    else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height) )
+    else if ((xCoordinate == width / 2 && yCoordinate == height) || ((xCoordinate == width / 2 + 1) && yCoordinate == height))
     {
         exitMap = true;
         exitMapSouth = true;
@@ -993,14 +991,14 @@ void OverWorld::CollisonLogic()
         exitMapEast = true;
     }
 }
- // Map setups
+// Map setups
 void OverWorld::NewGameHomeSetup(char charCharacter, string character, int hp, int power, int jump, int flwrPwr, int speed, int defense, double battleHP, int mp, int battleMP)  //used for newGame
 {
     exitMap = false;
     southOpen = true;
     northOpen = false;
     westOpen = false;
-    eastOpen = false;   
+    eastOpen = false;
     exitMapNorth = false;
     exitMapSouth = false;
     exitMapEast = false;
@@ -1045,8 +1043,8 @@ void OverWorld::HomeSetup()
     exitMapSouth = false;
     exitMapEast = false;
     exitMapWest = false;
-    saveXCoordinate = width / 6;      
-    saveYCoordinate = height - 7; 
+    saveXCoordinate = width / 6;
+    saveYCoordinate = height - 7;
     shopKeepXCoordinate = 0;
     shopKeepYCoordinate = -1;
     bossXCoordinate = 0;
@@ -1102,7 +1100,7 @@ void OverWorld::DesertTwoSetup()
     map = 2;
 }
 //  map 3
-void OverWorld::DesertThreeSetup() 
+void OverWorld::DesertThreeSetup()
 {
     ExitMapCoordinates();
     exitMap = false;
@@ -1220,7 +1218,7 @@ void OverWorld::SeaFloorThreeSetup()
     saveXCoordinate = 0;
     saveYCoordinate = -1;
     shopKeepXCoordinate = 0;
-    shopKeepYCoordinate = -1;    
+    shopKeepYCoordinate = -1;
     bossXCoordinate = 0;
     bossYCoordinate = -1;
     bedXCoordinate = 0;
@@ -1323,13 +1321,13 @@ void OverWorld::CastleThreeSetup()
     bedXCoordinate = 0;
     bedYCoordinate = -1;
     map = 11;
-    if(bossesBeaten == 2){
+    if (bossesBeaten == 2) {
         bossXCoordinate = width / 2;
         bossYCoordinate = 0;
     }
     else {
-        saveXCoordinate = width /2;
-        saveYCoordinate = height /2;
+        saveXCoordinate = width / 2;
+        saveYCoordinate = height / 2;
     }
 }
 
@@ -1422,61 +1420,61 @@ void OverWorld::PrintSeaFloor()
 }
 
 void OverWorld::PrintCastle() {
-        system("cls");
-        cout << "                                                ..                                                ..                                                  \n";
-        cout << "                                              .;o:.                                              'lc.                                                 \n";
-        cout << "                                              ,ddc.                     ....                     ,odc.                                                \n";
-        cout << "                                              ;ddo,                .';:llolc:;'.                .:ddc.                                                \n";
-        cout << "                                              ;ddo:.              ,ldxxdooollllc;.              'odoc.                                                \n";
-        cout << "                                              ;dddl,             .:loooooollcccc:,             .cxdoc.                                                \n";
-        cout << "                                              ,oddol,.  ,clll:;'';lodddxxxddddool:,.,;cllc;.  .:odol:.                                                \n";
-        cout << "                                              .looddl:,,oxxxxxxdooodxdddddddddddolloxxxxdol;';lddooc,.                                                \n";
-        cout << "                                              .;odddddolododddddddoodddddddddollldddddddooc:ldddool:.                                                 \n";
-        cout << "                   ,ol;..'clcc;...,;;.         .codddddlcccclooodddddoddddddolloddddooolcc:codooll:'.        .:oc,..,llc:,...;;;.                     \n";
-        cout << "                   ;dxdoodddoolcccc::'          'cllooolc:cc::cloodddodddddddoodddoolc:cc::loollc:,.         .cxxdooddooolccc:::.                     \n";
-        cout << "...                .:cccccccccc:::;;,.           .,:cccc::loc,',:clolcloddddocclllc:;;:llc:clc::;'.           ':ccccccccc::::;;'.                     \n";
-        cout << "......              ,loddddoolllcc::.              .';;;:lddl;....',',:looolc;,;;,'..'colc;;;;,..              ;ooddddoolllc::;.                      \n";
-        cout << "........            'cllllllc::::::;.                .':ldddo:'.......,:cc::;........,loolc;,..                ,clllllccc:::::,.                      \n";
-        cout << "........            .;::cc:c:::::;;'.                .codddddol:;;;;:coddooolc::;;:;:ldooolc:'.                .;cc:::::::::;;'                       \n";
-        cout << "........            .cxxkkxxxdoolc:,     .,,,;,''''';lddddoddddddddddddddddddddddddddddddooolc:;,,;,'''''..    .lxkkkxxxdollc:'                       \n";
-        cout << ".......             .cxkOkxoodoolc:,   .;dxxkxoloollccloolldddoloddddolodddooloddddolodddllllldxxkkdloollc;.   .lxOOkdlodollc:'                       \n";
-        cout << ".......             .ckOko'..;oolcc,   .dOOOOkooxxollc:ldocloodocoddodoclooodocoddodocloodocldkkkOOdodolllc,   .lkOkl. .:oolc:'                       \n";
-        cout << "..........          .cxOx,   .colc:;'',;lddddolloolcc::lxxooddxxollldxxooddxxxollodxxooodxdlcldddddlcllccc:;''';okkd'   .lolc:'                       \n";
-        cout << "............        .cxkx,    :olc:::cllcdkkxxllolllc:cxOOOOOOOOkdldOOOOOOOkkkxlok0OOkkOOOkdccdkOOkxlddoll:::clcokko.   .locc:'                       \n";
-        cout << "..............      .cxkkc'..,ldlc:;;:c:lxO00Oddkdool:cdxxxkxxkkxdlokxxxxxxxxxxllxkxxxxxkkkdclxOOOOxoxxolc:;;:::oxkx:'..;ooc::'                       \n";
-        cout << "...............   ...cxkOkkkxddolc:;;clcokOOOkddxdoooccoddoloodxxddolodddoolooolllddddoloooolokO00Okoddllc:::cc:lxkOkkxxdolc::,..   ......   .........\n";
-        cout << "....................'cxkOkxxdoollc::;clclxO0OOdoxxdoollxkOkxxkOOkOOkxxkOkkkxxxxkkkkkkkkkxxxkxdkOO00kooollc:::clcokOOkxxdollc::,.......................\n";
-        cout << "..............,lolc,'cxkkxxxdlcclc:::oddoloxOkdoxxxdoccloxkxooooxOkolooxOkdllooxOkolooxOkdloookOOO0koddlccclolccokOkxxxdlccl::,,clc:;.................\n";
-        cout << "..............:k0kdc;cdxdxOkxoccccc:cxOxoc:ldxloxxdolc;:cokxccccdkxlcccokxl::ccokxl:ccokkl:cccdkkkxdlodolcoxxoc:lxxdkOkxoccccc:cxdol:'................\n";
-        cout << "..............:k0OkxdxxxkOOkkkxxxxxxxkOkdlcloocclllcc;;cclllclxolllclddlllc:lddlllclddlllclddllddddlclllccoxkkxdxxxkOOkkkxxxxxxxxdol:'................\n";
-        cout << "..............;dxxkxxxkxkkxdxkkkkkkxxxxxdccdOkooxdool::clllloxOkdoloxOkdooodxkkdoooxkkdooodkdoxOOOOxodxolcodxkxxxxxxxxxxkkkkkkxddool:'................\n";
-        cout << "..............,coooolllloooooolloooolcllc:cdOkddxdoooc:codxxkOOOkkkOOOOOOOOOOOOOkOOOkkkOkkkkddkOOOOkdxxoc:clooolllloooooollooollloll:'................\n";
-        cout << "..............;dOOOOkxxxkOOOOkxxkkkkxxxdoccdOOddkxddoc:cldxxkkkOkkkkkOOOOOOkkkOOOkkOkxkOOkkkddkOOkkkdxdlccoxkOOxdxkOOOOOkxxkkkkxxkxo:'................\n";
-        cout << "..............;xOOOkl,,,lkOOOOOxc,,;oOOxo:cdOkdoxxxdo::clodxkxxkxxxxxxxkxkkxxxkxxxxxxxxkOkkOxdkOOOOkooolccoxkOxc,,;oOOOOOOd:,,;dOOxl;'................\n";
-        cout << "..............;oOOOx'   'xOOkkOo.   ;kOkoccxOkdoxkxdoc;clodxkxxkkkkkxkkxkkkkkkkkkxkkxolxkOOkxdkOO00kooolccldkOo.   ;kOOkkOl.  .cOOxo:'................\n";
-        cout << "..............:xOOOx;...;kOOkkOd'. .:OOxoccdxxooxxddoc;clodxkdoddoodoooodooddodddoodocldkkkOxodkkkkdoodolcoxkOd'. .:OOOkkOo....lOOkdc'................\n";
-        cout << "..............:xOOOkxollxOOOOkkkdoloxOkxdcclolcclllcc;;:lodxkdddlccllllllllllllllcodocldkOOOxllddddlclllccoxkOkdlloxOOOOkkkdolokOkxdc'................\n";
-        cout << ". ............:dxxxxxddddxxxxddddxxddxxdoccdkkooxdoll:;:clodxxkkolllllllcclllllcloxOxlcoxxxxdoxOOOOxodxolcodxxxdddddxxxxddddxxddxxdo:'................\n";
-        cout << "..............,loolllcccllllllccclllllllc:cdOkodxdoooc,,,,,;:okkolllccllcc:::lc:coxOxc;;;;;::lxOOOOkdddlccllllllcccllllllccclllclllc;'................\n";
-        cout << "..............,oxkkxdoodxxxkxdoodxxdooddl:cdOOddkddoo:':occo:;dkolllcldlc:::coo:coxOx:,lo:lo;:xOO00kddolccdxxkxdoodxxkkxdooxxxdooddl:'................\n";
-        cout << ".........   ..;x00OOOOOOOOOOOOOOOOOOOOOkdccdOOdoxxxdl;,coxdoc;lkollllllllllclllcldxOd;;ldddo:;oOOO0kdddlclk00OOOOOOOOOOOOOOOOOOOOkxo:.................\n";
-        cout << "      .....  .;x00OOkkOOOOOOOOkkkOkOOOkxoccxOkooxxdoc;',cccc,,clllllcclcc:::cll:coddc;';ccc:,,cdkO0kdxdlclk00OkkkOOOOOOOOkkkOkOOOkxo:.................\n";
-        cout << "             .;x000OOOOOOOOOOOkkkOOOOOkxdccdkxooxdcccc:lkxxkl:cc::llcldocc::cdo:clcccccdkxkxc:clldkxoddolok0O0OOOOOOOOOOOkkkOOOOOkxd:..               \n";
-        cout << "              ;x0OOOkkOOOOOOOOOOOOOOOOkxdcclolccc::c;,:d0KK0d:;;c:;ccldocc::cdo:,;cc;,lkKKKOo;,:c:clcllccok0OOOkkOOOOOOOOOOOOOOOOkxo:.                \n";
-        cout << "              ,x0OOOkkOOOOOOOOkkkOkOOOkxdccdkxoodc;;'';:cllc:;;;;;:cclolccc:coo:::::,,:ccllc:;,::lddoddolok00OOkOOOOOOOOOkkkOkOOOkxo:.                \n";
-        cout << "              ,oxxxxxdxxxxxxxxxxxxxxxxdol::lxdclol::;;cc'..,cc:cc:c::cccc:c:ccc:cllo::l:'..;c::oddxolooc:cdxxxxxxxxxdxxxxxxxxxxxxdol;.                \n";
-        cout << ",,,,,;,,,,,;,,:cccc:cc:ccccc::c::cccc::c:;:ccc::::::cccc;;;;:::c:;:::;:;;:;;;::;:::cc:cc;:;;:c::cccc::::;:cccc::c:ccccc::cc:::cc::c::;,,;,,;;,;,,,,,,;\n";
-        cout << ":::::::;:;:c:;::;;;:::;:::;:;:::;::;;;:::::::;:;:c::::;;;:::;::::::::;:;:::::::;;;:::;:::;;;:c:;::;:;:::;:::;;;:c::::;;;:::;;;::::::;:;:c:;::;;;:::;:c\n";
-        cout << "::clc;:ccc::lc:;:cc::clc;:ccc::lc:;:cc::cl:;:cc::clc:;:cc::clc::clc;:ccc::llc:;:cc::clc;:ccc::lc:;:cc::cl:;:cc::clc:;:cc::clc::clc;;:cc::lc:;:cc::clc;\n";
-        cout << "cclllcclllccllcclllcclllcclllccllcclllcclllcclllclllcclllcclllcclllcclllcclollclllcclllcclllccllcclllcclllcclllclllcclllcclllcclllcclllcclllclllcclllc\n";
-        cout << "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll\n";
-        cout << "llcccc::cccccclocc:ccc:cc::cclc::ccccccccccccc:cccccllccccccc:cccccccccccccccllccccccccccccllc::ccc::::ccll::cclccccccccccc:::cccclccccccccccccccccccc\n";
-        cout << ":;,;:;,,:::::;;:;,:::cc;,'';:cc;;;,;:;,,;;::::;,',:c:c:::,,,,;::::;,,,;;:::;::,,;;,,;::;::;;;,;:::c:;,',;cc:;;;;::,',;;::::;,';cc::::;,,,;:::::;,,,;;:\n";
-        cout << "',,,;,,',;;,,,.'',,;;;:;..',,;,,;,.',''',;;,,,;,',,,;;,;;,'',;::;,''''',,;,'',,,;;,',,;;,,'.',,;;,;:,.'',;,,;;'.,,''';;;,,;,'',,,;;,;;,',;;::;,''''',;\n";
-        cout << "..............................................................''...........................................................................''.........\n\n\n\n";
+    system("cls");
+    cout << "                                                ..                                                ..                                                  \n";
+    cout << "                                              .;o:.                                              'lc.                                                 \n";
+    cout << "                                              ,ddc.                     ....                     ,odc.                                                \n";
+    cout << "                                              ;ddo,                .';:llolc:;'.                .:ddc.                                                \n";
+    cout << "                                              ;ddo:.              ,ldxxdooollllc;.              'odoc.                                                \n";
+    cout << "                                              ;dddl,             .:loooooollcccc:,             .cxdoc.                                                \n";
+    cout << "                                              ,oddol,.  ,clll:;'';lodddxxxddddool:,.,;cllc;.  .:odol:.                                                \n";
+    cout << "                                              .looddl:,,oxxxxxxdooodxdddddddddddolloxxxxdol;';lddooc,.                                                \n";
+    cout << "                                              .;odddddolododddddddoodddddddddollldddddddooc:ldddool:.                                                 \n";
+    cout << "                   ,ol;..'clcc;...,;;.         .codddddlcccclooodddddoddddddolloddddooolcc:codooll:'.        .:oc,..,llc:,...;;;.                     \n";
+    cout << "                   ;dxdoodddoolcccc::'          'cllooolc:cc::cloodddodddddddoodddoolc:cc::loollc:,.         .cxxdooddooolccc:::.                     \n";
+    cout << "...                .:cccccccccc:::;;,.           .,:cccc::loc,',:clolcloddddocclllc:;;:llc:clc::;'.           ':ccccccccc::::;;'.                     \n";
+    cout << "......              ,loddddoolllcc::.              .';;;:lddl;....',',:looolc;,;;,'..'colc;;;;,..              ;ooddddoolllc::;.                      \n";
+    cout << "........            'cllllllc::::::;.                .':ldddo:'.......,:cc::;........,loolc;,..                ,clllllccc:::::,.                      \n";
+    cout << "........            .;::cc:c:::::;;'.                .codddddol:;;;;:coddooolc::;;:;:ldooolc:'.                .;cc:::::::::;;'                       \n";
+    cout << "........            .cxxkkxxxdoolc:,     .,,,;,''''';lddddoddddddddddddddddddddddddddddddooolc:;,,;,'''''..    .lxkkkxxxdollc:'                       \n";
+    cout << ".......             .cxkOkxoodoolc:,   .;dxxkxoloollccloolldddoloddddolodddooloddddolodddllllldxxkkdloollc;.   .lxOOkdlodollc:'                       \n";
+    cout << ".......             .ckOko'..;oolcc,   .dOOOOkooxxollc:ldocloodocoddodoclooodocoddodocloodocldkkkOOdodolllc,   .lkOkl. .:oolc:'                       \n";
+    cout << "..........          .cxOx,   .colc:;'',;lddddolloolcc::lxxooddxxollldxxooddxxxollodxxooodxdlcldddddlcllccc:;''';okkd'   .lolc:'                       \n";
+    cout << "............        .cxkx,    :olc:::cllcdkkxxllolllc:cxOOOOOOOOkdldOOOOOOOkkkxlok0OOkkOOOkdccdkOOkxlddoll:::clcokko.   .locc:'                       \n";
+    cout << "..............      .cxkkc'..,ldlc:;;:c:lxO00Oddkdool:cdxxxkxxkkxdlokxxxxxxxxxxllxkxxxxxkkkdclxOOOOxoxxolc:;;:::oxkx:'..;ooc::'                       \n";
+    cout << "...............   ...cxkOkkkxddolc:;;clcokOOOkddxdoooccoddoloodxxddolodddoolooolllddddoloooolokO00Okoddllc:::cc:lxkOkkxxdolc::,..   ......   .........\n";
+    cout << "....................'cxkOkxxdoollc::;clclxO0OOdoxxdoollxkOkxxkOOkOOkxxkOkkkxxxxkkkkkkkkkxxxkxdkOO00kooollc:::clcokOOkxxdollc::,.......................\n";
+    cout << "..............,lolc,'cxkkxxxdlcclc:::oddoloxOkdoxxxdoccloxkxooooxOkolooxOkdllooxOkolooxOkdloookOOO0koddlccclolccokOkxxxdlccl::,,clc:;.................\n";
+    cout << "..............:k0kdc;cdxdxOkxoccccc:cxOxoc:ldxloxxdolc;:cokxccccdkxlcccokxl::ccokxl:ccokkl:cccdkkkxdlodolcoxxoc:lxxdkOkxoccccc:cxdol:'................\n";
+    cout << "..............:k0OkxdxxxkOOkkkxxxxxxxkOkdlcloocclllcc;;cclllclxolllclddlllc:lddlllclddlllclddllddddlclllccoxkkxdxxxkOOkkkxxxxxxxxdol:'................\n";
+    cout << "..............;dxxkxxxkxkkxdxkkkkkkxxxxxdccdOkooxdool::clllloxOkdoloxOkdooodxkkdoooxkkdooodkdoxOOOOxodxolcodxkxxxxxxxxxxkkkkkkxddool:'................\n";
+    cout << "..............,coooolllloooooolloooolcllc:cdOkddxdoooc:codxxkOOOkkkOOOOOOOOOOOOOkOOOkkkOkkkkddkOOOOkdxxoc:clooolllloooooollooollloll:'................\n";
+    cout << "..............;dOOOOkxxxkOOOOkxxkkkkxxxdoccdOOddkxddoc:cldxxkkkOkkkkkOOOOOOkkkOOOkkOkxkOOkkkddkOOkkkdxdlccoxkOOxdxkOOOOOkxxkkkkxxkxo:'................\n";
+    cout << "..............;xOOOkl,,,lkOOOOOxc,,;oOOxo:cdOkdoxxxdo::clodxkxxkxxxxxxxkxkkxxxkxxxxxxxxkOkkOxdkOOOOkooolccoxkOxc,,;oOOOOOOd:,,;dOOxl;'................\n";
+    cout << "..............;oOOOx'   'xOOkkOo.   ;kOkoccxOkdoxkxdoc;clodxkxxkkkkkxkkxkkkkkkkkkxkkxolxkOOkxdkOO00kooolccldkOo.   ;kOOkkOl.  .cOOxo:'................\n";
+    cout << "..............:xOOOx;...;kOOkkOd'. .:OOxoccdxxooxxddoc;clodxkdoddoodoooodooddodddoodocldkkkOxodkkkkdoodolcoxkOd'. .:OOOkkOo....lOOkdc'................\n";
+    cout << "..............:xOOOkxollxOOOOkkkdoloxOkxdcclolcclllcc;;:lodxkdddlccllllllllllllllcodocldkOOOxllddddlclllccoxkOkdlloxOOOOkkkdolokOkxdc'................\n";
+    cout << ". ............:dxxxxxddddxxxxddddxxddxxdoccdkkooxdoll:;:clodxxkkolllllllcclllllcloxOxlcoxxxxdoxOOOOxodxolcodxxxdddddxxxxddddxxddxxdo:'................\n";
+    cout << "..............,loolllcccllllllccclllllllc:cdOkodxdoooc,,,,,;:okkolllccllcc:::lc:coxOxc;;;;;::lxOOOOkdddlccllllllcccllllllccclllclllc;'................\n";
+    cout << "..............,oxkkxdoodxxxkxdoodxxdooddl:cdOOddkddoo:':occo:;dkolllcldlc:::coo:coxOx:,lo:lo;:xOO00kddolccdxxkxdoodxxkkxdooxxxdooddl:'................\n";
+    cout << ".........   ..;x00OOOOOOOOOOOOOOOOOOOOOkdccdOOdoxxxdl;,coxdoc;lkollllllllllclllcldxOd;;ldddo:;oOOO0kdddlclk00OOOOOOOOOOOOOOOOOOOOkxo:.................\n";
+    cout << "      .....  .;x00OOkkOOOOOOOOkkkOkOOOkxoccxOkooxxdoc;',cccc,,clllllcclcc:::cll:coddc;';ccc:,,cdkO0kdxdlclk00OkkkOOOOOOOOkkkOkOOOkxo:.................\n";
+    cout << "             .;x000OOOOOOOOOOOkkkOOOOOkxdccdkxooxdcccc:lkxxkl:cc::llcldocc::cdo:clcccccdkxkxc:clldkxoddolok0O0OOOOOOOOOOOkkkOOOOOkxd:..               \n";
+    cout << "              ;x0OOOkkOOOOOOOOOOOOOOOOkxdcclolccc::c;,:d0KK0d:;;c:;ccldocc::cdo:,;cc;,lkKKKOo;,:c:clcllccok0OOOkkOOOOOOOOOOOOOOOOkxo:.                \n";
+    cout << "              ,x0OOOkkOOOOOOOOkkkOkOOOkxdccdkxoodc;;'';:cllc:;;;;;:cclolccc:coo:::::,,:ccllc:;,::lddoddolok00OOkOOOOOOOOOkkkOkOOOkxo:.                \n";
+    cout << "              ,oxxxxxdxxxxxxxxxxxxxxxxdol::lxdclol::;;cc'..,cc:cc:c::cccc:c:ccc:cllo::l:'..;c::oddxolooc:cdxxxxxxxxxdxxxxxxxxxxxxdol;.                \n";
+    cout << ",,,,,;,,,,,;,,:cccc:cc:ccccc::c::cccc::c:;:ccc::::::cccc;;;;:::c:;:::;:;;:;;;::;:::cc:cc;:;;:c::cccc::::;:cccc::c:ccccc::cc:::cc::c::;,,;,,;;,;,,,,,,;\n";
+    cout << ":::::::;:;:c:;::;;;:::;:::;:;:::;::;;;:::::::;:;:c::::;;;:::;::::::::;:;:::::::;;;:::;:::;;;:c:;::;:;:::;:::;;;:c::::;;;:::;;;::::::;:;:c:;::;;;:::;:c\n";
+    cout << "::clc;:ccc::lc:;:cc::clc;:ccc::lc:;:cc::cl:;:cc::clc:;:cc::clc::clc;:ccc::llc:;:cc::clc;:ccc::lc:;:cc::cl:;:cc::clc:;:cc::clc::clc;;:cc::lc:;:cc::clc;\n";
+    cout << "cclllcclllccllcclllcclllcclllccllcclllcclllcclllclllcclllcclllcclllcclllcclollclllcclllcclllccllcclllcclllcclllclllcclllcclllcclllcclllcclllclllcclllc\n";
+    cout << "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll\n";
+    cout << "llcccc::cccccclocc:ccc:cc::cclc::ccccccccccccc:cccccllccccccc:cccccccccccccccllccccccccccccllc::ccc::::ccll::cclccccccccccc:::cccclccccccccccccccccccc\n";
+    cout << ":;,;:;,,:::::;;:;,:::cc;,'';:cc;;;,;:;,,;;::::;,',:c:c:::,,,,;::::;,,,;;:::;::,,;;,,;::;::;;;,;:::c:;,',;cc:;;;;::,',;;::::;,';cc::::;,,,;:::::;,,,;;:\n";
+    cout << "',,,;,,',;;,,,.'',,;;;:;..',,;,,;,.',''',;;,,,;,',,,;;,;;,'',;::;,''''',,;,'',,,;;,',,;;,,'.',,;;,;:,.'',;,,;;'.,,''';;;,,;,'',,,;;,;;,',;;::;,''''',;\n";
+    cout << "..............................................................''...........................................................................''.........\n\n\n\n";
 
-        cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * C A S T L E   Z O N E * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ";
-        Sleep(2700);
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * C A S T L E   Z O N E * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ";
+    Sleep(2700);
 }
 
 void OverWorld::PrintShopKeep()
@@ -1564,27 +1562,27 @@ void OverWorld::PrintGameWin()
     cout << "                                          _|        _|    _|        _|      _|      _|        _|                \n";
     cout << "                                            _|_|_|  _|    _|  _|_|_|        _|      _|_|_|_|  _|_|_|_|      _|  \n\n";
 
-    cout << "                                                                    ........                         \n";                                                                        
-    cout << "                                                                .',ck000000Ol,,'.                    \n";                                                                        
-    cout << "                                                           .:OKxccoxKXOxk0KXkolcoKXx,                \n";                                                                      
-    cout << "                                                           .dNXOox0X0dlcclokKKkoxXWXo.               \n";                                                                        
-    cout << "                                                          .;lkKXXNNXkccccccoKNNNNXKkc;.              \n";                                                                        
-    cout << "                                                          'cclokNWWN0xlccldOXWWWXkolc:.              \n";                                                                       
-    cout << "                                                          'ccclxXWWWWN0kOOKNWWWWKdlcc:.              \n";                                                                        
-    cout << "                                                          ':lxOKNX0xd0KKKK0xdOKNNKOdc:.              \n";                                                                        
-    cout << "                                                           .oKKK0Ox;,dOOOOk:,oO000K0l.               \n";                                                                        
-    cout << "                                                           .oxc',okxdxdoddxxdkk:''ckl.               \n";                                                                        
-    cout << "                                                          ;dkkxl,:dxkxc;:cdkkxd,,lxkkd;              \n";                                                                        
-    cout << "                                                          .ckOOOx::ccoddoddddlcc;:xOOOk:.            \n";                                                                        
-    cout << "                                                          .;:coolccclddddddolccclooc:;.              \n";                                                                        
-    cout << "                                                             .;cccldkkOOOOOkxdcccc,.                 \n";                                                                        
-    cout << "                                                              .'codxOOkxxxxxkOOxddc'                 \n";                                                                        
-    cout << "                                                              .cKNNN0xoooookXNNNXl.                  \n";                                                                        
-    cout << "                                                            ...ckKNWNNNXXXXNWWWXOl'..                \n";                                                                        
-    cout << "                                                           ..,:cccd0XNWWMMWWWWXKklccc;..             \n";                                                                        
-    cout << "                                                          .,:ccccccldKWMMMMWWXxllcccc::;.            \n";                                                                        
+    cout << "                                                                    ........                         \n";
+    cout << "                                                                .',ck000000Ol,,'.                    \n";
+    cout << "                                                           .:OKxccoxKXOxk0KXkolcoKXx,                \n";
+    cout << "                                                           .dNXOox0X0dlcclokKKkoxXWXo.               \n";
+    cout << "                                                          .;lkKXXNNXkccccccoKNNNNXKkc;.              \n";
+    cout << "                                                          'cclokNWWN0xlccldOXWWWXkolc:.              \n";
+    cout << "                                                          'ccclxXWWWWN0kOOKNWWWWKdlcc:.              \n";
+    cout << "                                                          ':lxOKNX0xd0KKKK0xdOKNNKOdc:.              \n";
+    cout << "                                                           .oKKK0Ox;,dOOOOk:,oO000K0l.               \n";
+    cout << "                                                           .oxc',okxdxdoddxxdkk:''ckl.               \n";
+    cout << "                                                          ;dkkxl,:dxkxc;:cdkkxd,,lxkkd;              \n";
+    cout << "                                                          .ckOOOx::ccoddoddddlcc;:xOOOk:.            \n";
+    cout << "                                                          .;:coolccclddddddolccclooc:;.              \n";
+    cout << "                                                             .;cccldkkOOOOOkxdcccc,.                 \n";
+    cout << "                                                              .'codxOOkxxxxxkOOxddc'                 \n";
+    cout << "                                                              .cKNNN0xoooookXNNNXl.                  \n";
+    cout << "                                                            ...ckKNWNNNXXXXNWWWXOl'..                \n";
+    cout << "                                                           ..,:cccd0XNWWMMWWWWXKklccc;..             \n";
+    cout << "                                                          .,:ccccccldKWMMMMWWXxllcccc::;.            \n";
     cout << "                                                         ..,;:::::::cxO00000Okl;;::::::;.            \n";
-    
+
 }
 
 void OverWorld::PrintGameOver() {
