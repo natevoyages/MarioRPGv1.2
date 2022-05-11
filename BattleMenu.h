@@ -14,15 +14,20 @@ public:
 	BattleMenu();
 
 	void SetUpMenu();
+	// sets variable need for start of battle menu
+
 
 	void PrintBattleMenu(bool& attackSelected, bool& spAttackSelected, bool& itemSelected, bool& runSelected);
+	// prints battleMenu in a loop based on player input
 
 	bool GetIfSelected();
+	//return bool if option was selected
+
 private:
 	InputConfig menuInput;
 	bool select;
-	bool itemTabOpen;
-	int yMenu;
+	bool itemTabOpen;            // keeps loop going for battle items
+	int yMenu;                  //position in menu
 	int numBattleOptions;
 	string battleOptions[4];
 };
