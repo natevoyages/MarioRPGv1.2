@@ -111,10 +111,11 @@ void BattleMechanics::UserAttackAnimation(char userChar, double damage, double u
 	system("cls");
 	PrintEnemyAttacked();
 	PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
-	if (userSuccessHit && userSuccessCrit) {
+	if (userSuccessCrit) {
 
-
-		cout << fixed << setprecision(2) << "\n         " << critDamage << " DAMAGE DEALT !\n";
+		cout << "\n         CRIT!";
+		Sleep(400);
+		cout << fixed << setprecision(2) << "\n         " << damage << " DAMAGE DEALT !\n";
 	}
 	else if (userSuccessHit && !userSuccessCrit)
 	{
@@ -146,7 +147,7 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		else
 		{
 
-			CritChance(hitSuccess, successHit);
+			CritChance(hitSuccess, successCrit);
 			if (successHit)
 			{
 				damage = critDamage;
@@ -169,9 +170,11 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		PrintEnemyIdle();
 		PrintUserAttacked(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 
-		if (successHit && successCrit)
+		if (successCrit)
 		{
-			cout << fixed << setprecision(2) << "\n        " << damage << " CRITICAL DAMAGE TAKEN !\n";
+			cout << "\n         CRIT!";
+			Sleep(400);
+			cout << fixed << setprecision(2) << "\n         " << damage << " DAMAGE TAKEN !\n";
 		}
 		else if (!successHit)
 		{
@@ -193,6 +196,13 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		PrintEnemyIdle();
 		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 
+	}
+	else
+	{
+
+		system("cls");
+		PrintEnemyIdle();
+		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 	}
 }
 
@@ -231,7 +241,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 			else
 			{
 				damage = damage;
-				CritChance(critSuccess, userSuccessHit);
+				CritChance(critSuccess, userSuccessCrit);
 				if (userSuccessCrit)
 				{
 					damage = critDamage;
@@ -466,8 +476,9 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	playerStats = battleStats;
 }
 
-void BattleMechanics::CritChance(double& critSucess, bool success)
+void BattleMechanics::CritChance(double& critSucess, bool& success)
 {
+
 	if ((rand() % 100) < critSucess)
 	{
 		success = true;

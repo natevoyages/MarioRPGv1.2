@@ -51,7 +51,7 @@ public:
 	// add boss beaten if player successfully beat a boss
 
 
-	void CritChance(double& critSucess, bool success);
+	void CritChance(double& critSucess, bool& success);
 	// sets if a crit is successfully set for battle
 
 
