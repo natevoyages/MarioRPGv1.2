@@ -16,6 +16,7 @@ public:
 	BattleMechanics();
 
 	void SetBattleTrigger();
+	// set seed for random function
 	//sets the steps needed to start a battle encounter
 
 	int GetBattleTrigger();

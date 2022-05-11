@@ -1,3 +1,15 @@
+//File: MarioRPGv1.2.exe
+//Name: Allan Romo & Jaime Pereda
+//Date: 05/11/2022
+//Course: CompSci 1
+//Description:   Proof of concept for a mario RPG game on the comand line
+//               Players choose a character and go through the overworld fighting enemies
+//               fighting bosses and buying items
+//               if the player battle hp is 0 the player is issued a game over and returns to the title screen
+//               either to choose a new game, continue, or quit depending if game was save
+// 
+//Usage:  Entertainment value for average gamer and mario fan alike
+//        
 #include "StartMenu.h"
 #include "OverWorld.h"
 #include "NewGAme.h"
