@@ -113,8 +113,7 @@ void BattleMechanics::UserAttackAnimation(char userChar, double damage, double u
 	PrintUserIdle(userChar, userBattleMP, userHP, userMP, userBattleHP);
 	if (userSuccessHit && userSuccessCrit) {
 
-		cout << "\n         CRIT!";
-		Sleep(400);
+
 		cout << fixed << setprecision(2) << "\n         " << critDamage << " DAMAGE DEALT !\n";
 	}
 	else if (userSuccessHit && !userSuccessCrit)
@@ -523,9 +522,9 @@ void BattleMechanics::UserBattleLogic(double userBattleHP, int userBattleMP, dou
 	specialDamage = userFlowerPower * (19.2 / (15 + stats[6]));
 	critDamage = 1.5 * damage;
 	specialCrit = 1.5 * specialDamage;
-	hitSuccess = 85 + (userSpeed - stats[5]);   // 85 is the hit rate for users
-	critSuccess = 45 + (userJump - stats[3]); //45 is the crit rate for users
-	escapeSucess = (userSpeed - stats[5]) + 65;
+	hitSuccess = 85 + (userSpeed - stats[5]);   // 85  perscent chance for hit base rate
+	critSuccess = 45 + (userJump - stats[3]); //45  perscent chance for crit base rate
+	escapeSucess = (userSpeed - stats[5]) + 65; // 65 perscent chance for escape base rate
 }
 
 void BattleMechanics::EnemyBattleMechanics(double userJump, double userSpeed, double userDefense)

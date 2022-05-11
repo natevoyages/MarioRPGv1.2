@@ -15,17 +15,22 @@ public:
 	StartMenu();
 
 	void TitlePrint();
+	//Prints title screen banner
 
 	void PrintStartMenu();
+	//Print start Menu
 
 	void TitleScreen();
-
+	// holds loop condition for titlescreen to be displayed
 
 	void TitleMenu(bool& play, bool& startNewGame, bool& programRunning);
+	//if no save data titlemenu
 
 	void TitleMenu(bool& play, bool& startNewGame, bool& resumeGame, bool& programRunning);
+	//save data is true, title menu
 
 	void SetResumeStartMenu();
+	//sets menu variables to display resume correctly
 
 private:
 	int yMenu;

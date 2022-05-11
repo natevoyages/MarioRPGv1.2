@@ -79,6 +79,10 @@ public:
 	void EnemyBattleLogic();
 	//determines by coin flip if enemy will use regular attack or special attack
 
+
+	             // Loaded enemies are read from an array of elements for stats set to 
+	             //a for loop based on the num of elements
+
 	void LoadShyGuy();
 	// Loads ShyGuy stats
 
@@ -113,6 +117,9 @@ public:
 
 	void LoadKingBoo();
 	// Loads Boss: KingBoo stats and enemy signature
+	
+
+	                              //frames for battles
 
 	void PrintEnemyAttack();
 	//Prints Enemy lunging forward
