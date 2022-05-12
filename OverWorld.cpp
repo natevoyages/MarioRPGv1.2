@@ -527,7 +527,7 @@ void OverWorld::SetUpMap()
                 stepCounter = 0;
             }
             OverWorldPrintLogic();
-            IfBattleEncounted();
+             // fix me?
             mapsInput.UserInput(menuToggled);
             mapsInput.OverWorldInputLogic(xCoordinate, yCoordinate, width, height, northOpen, southOpen, eastOpen, westOpen);
             characterTracker();

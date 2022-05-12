@@ -20,7 +20,7 @@ int BattleMechanics::GetBattleTrigger()
 	return stepTrigger;
 }
 
-
+// sets up battle depending on map
 
 void BattleMechanics::BattleSetUp(int map, int& bossesBeaten)
 {
@@ -127,7 +127,7 @@ void BattleMechanics::UserAttackAnimation(char userChar, double damage, double u
 		cout << fixed << setprecision(2) << "\n         MISSED! NO DAMAGE DEALT !\n";
 	}
 }
-
+         // enemy turn uses most of the same mechanics but with  random chance to decide attack type
 
 void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double userSpeed, double userDefense, char userChar, int userBattleMP, int userHP, int userMP, bool& escape)
 {
@@ -205,7 +205,7 @@ void BattleMechanics::EnemyTurn(double& userBattleHP, double userJump, double us
 		PrintUserIdle(userChar, layerTwoBattleMP, userHP, userMP, layerTwoBattleHP);
 	}
 }
-
+      // player choices that linkt to the battle menu
 
 void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double userPower,
 	double userJump, double userFlowerPower, double userSpeed, double userDefense, int userLevel, char userChar, int userHP, int userMP, Items& battleItems, bool& playerTurnOver, bool& escape)
@@ -380,7 +380,7 @@ void BattleMechanics::PlayerTurn(double& userBattleHP, int& userBattleMP, double
 	userBattleHP = layerTwoBattleHP;
 	userBattleMP = layerTwoBattleMP;
 }
-
+              // battle loop
 void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealthPoints, int userMagicPoints, int userPower, int userJump, int userFlowerPower, int userSpeed, int userDefense,
 	double& userBattleHP, int& userBattleMP, int& usercoins, int& userXP, int& userLevel, int& userCoins, char userChar, bool& battleState, Items& items, PlayerStats& playerStats, int& bossesBeaten)
 {
@@ -475,7 +475,7 @@ void BattleMechanics::BattleTriggered(int map, bool& notGameOver, int userHealth
 	userBattleMP = layerOneBattleMP;
 	playerStats = battleStats;
 }
-
+                    // chance mechanics
 void BattleMechanics::CritChance(double& critSucess, bool& success)
 {
 
@@ -525,7 +525,7 @@ void BattleMechanics::SpeedsterGoesFirst(int userSpeed, bool& playerFirst)
 		}
 	}
 }
-
+                  //  battle stats
 void BattleMechanics::UserBattleLogic(double userBattleHP, int userBattleMP, double userPower, double userJump, double userFlowerPower, double userSpeed, double userDefense, int level)
 {
 	//jp = 3, spd = 5, def = 6;
@@ -561,6 +561,7 @@ void BattleMechanics::EnemyBattleLogic()
 		enemyPowAttack = false;
 	}
 }
+//loads enemies
 
 void BattleMechanics::LoadShyGuy()
 {
@@ -643,7 +644,7 @@ void BattleMechanics::LoadKingBoo()
 		stats[i] = kingBooStats[i];
 	}
 }
-
+                      // Print enemies with sprites
 
 void BattleMechanics::PrintEnemyAttack()
 {

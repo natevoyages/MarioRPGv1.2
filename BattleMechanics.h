@@ -2,7 +2,6 @@
 #define BATTLEMECHANICS_H
 
 #include <iostream>
-#include <vector>
 #include <windows.h>
 #include <iomanip>
 #include "BattleMenu.h"

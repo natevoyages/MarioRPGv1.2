@@ -692,7 +692,7 @@ void InputConfig::BattleInputLogic( int& yMenu, int numMenuOptions, bool& select
     }
 }
 
-// fix this
+
 void InputConfig::BattleItemMenuLogic(int& yMenu, int numItemOptions, bool& select, bool& itemTabOpen)
 {
     select = false;
